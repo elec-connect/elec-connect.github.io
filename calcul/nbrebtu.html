@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Climatisation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00a0e1;
+            --secondary-color: #0077b6;
+            --accent-color: #ff6b6b;
+            --light-bg: #f0f8ff;
+            --dark-text: #2d3436;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .header i {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.2rem;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        button {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 160, 225, 0.3);
+        }
+        .result {
+            grid-column: span 2;
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+            display: none;
+        }
+        .result-title {
+            color: var(--secondary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btu-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+        .details {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .calculator {
+                grid-template-columns: 1fr;
+            }
+            button, .result {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-fan"></i>
+            <h1>Calculateur de BTU</h1>
+            <p class="subtitle">Déterminez la puissance idéale pour votre climatiseur</p>
+        </div>
+        
+        <div class="calculator">
+            <div class="form-group">
+                <label for="length"><i class="fas fa-ruler"></i> Longueur (m)</label>
+                <input type="number" id="length" min="1" step="0.1" value="4">
+            </div>
+            
+            <div class="form-group">
+                <label for="width"><i class="fas fa-ruler"></i> Largeur (m)</label>
+                <input type="number" id="width" min="1" step="0.1" value="5">
+            </div>
+            
+            <div class="form-group">
+                <label for="height"><i class="fas fa-ruler-vertical"></i> Hauteur (m)</label>
+                <input type="number" id="height" min="1" step="0.1" value="2.5">
+            </div>
+            
+            <div class="form-group">
+                <label for="occupants"><i class="fas fa-users"></i> Nombre de personnes</label>
+                <input type="number" id="occupants" min="1" value="2">
+            </div>
+            
+            <div class="form-group">
+                <label for="sunlight"><i class="fas fa-sun"></i> Exposition au soleil</label>
+                <select id="sunlight">
+                    <option value="1.0">Peu ensoleillée</option>
+                    <option value="1.1" selected>Normalement ensoleillée</option>
+                    <option value="1.2">Très ensoleillée</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="insulation"><i class="fas fa-home"></i> Isolation</label>
+                <select id="insulation">
+                    <option value="1.0">Bonne isolation</option>
+                    <option value="1.1" selected>Isolation moyenne</option>
+                    <option value="1.2">Mauvaise isolation</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="appliances"><i class="fas fa-plug"></i> Appareils électriques</label>
+                <select id="appliances">
+                    <option value="400">Peu d'appareils</option>
+                    <option value="600" selected>Moyen</option>
+                    <option value="800">Beaucoup d'appareils</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="room-type"><i class="fas fa-door-open"></i> Type de pièce</label>
+                <select id="room-type">
+                    <option value="1.0">Chambre</option>
+                    <option value="1.1" selected>Salon/Salle à manger</option>
+                    <option value="1.2">Cuisine</option>
+                    <option value="1.3">Bureau</option>
+                </select>
+            </div>
+            
+            <button onclick="calculateBTU()">
+                <i class="fas fa-calculator"></i> Calculer les BTU nécessaires
+            </button>
+            
+            <div id="result" class="result">
+                <h3 class="result-title"><i class="fas fa-clipboard-check"></i> Résultats du calcul</h3>
+                
+                <div class="btu-value">
+                    <span id="total-btu">0</span> BTU/h
+                </div>
+                
+                <div class="details">
+                    <p><strong>Volume de la pièce:</strong> <span id="volume">0</span> m³</p>
+                    <p><strong>BTU de base:</strong> <span id="base-btu">0</span> BTU/h</p>
+                    <p><strong>Facteurs appliqués:</strong></p>
+                    <ul>
+                        <li>Personnes: +<span id="occupants-btu">0</span> BTU/h</li>
+                        <li>Appareils: +<span id="appliances-btu">0</span> BTU/h</li>
+                        <li>Exposition: ×<span id="sunlight-factor">1.0</span></li>
+                        <li>Isolation: ×<span id="insulation-factor">1.0</span></li>
+                        <li>Type de pièce: ×<span id="room-factor">1.0</span></li>
+                    </ul>
+                </div>
+                
+                <h4><i class="fas fa-info-circle"></i> Guide des capacités</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>BTU/h</th>
+                            <th>Surface</th>
+                            <th>Type de climatiseur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5,000 - 7,000</td>
+                            <td>15-25 m²</td>
+                            <td>Petite pièce</td>
+                        </tr>
+                        <tr>
+                            <td>8,000 - 12,000</td>
+                            <td>25-50 m²</td>
+                            <td>Pièce moyenne</td>
+                        </tr>
+                        <tr>
+                            <td>14,000 - 18,000</td>
+                            <td>50-70 m²</td>
+                            <td>Grande pièce</td>
+                        </tr>
+                        <tr>
+                            <td>20,000+</td>
+                            <td>70+ m²</td>
+                            <td>Très grande pièce</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateBTU() {
+            // Récupération des valeurs
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const occupants = parseInt(document.getElementById('occupants').value);
+            const sunlightFactor = parseFloat(document.getElementById('sunlight').value);
+            const insulationFactor = parseFloat(document.getElementById('insulation').value);
+            const appliancesWattage = parseInt(document.getElementById('appliances').value);
+            const roomFactor = parseFloat(document.getElementById('room-type').value);
+            
+            // Calcul du volume
+            const volume = length * width * height;
+            
+            // Calcul des BTU de base (35 BTU/h par m³)
+            const baseBTU = Math.round(volume * 35);
+            
+            // Facteurs supplémentaires
+            const occupantsBTU = occupants * 600; // 600 BTU/h par personne
+            const appliancesBTU = Math.round(appliancesWattage * 3.412); // Conversion W en BTU/h
+            
+            // Calcul total avec tous les facteurs
+            let totalBTU = baseBTU;
+            totalBTU += occupantsBTU;
+            totalBTU += appliancesBTU;
+            totalBTU = Math.round(totalBTU * sunlightFactor * insulationFactor * roomFactor);
+            
+            // Arrondir à la valeur standard la plus proche
+            const standardBTUs = [5000, 7000, 9000, 12000, 18000, 24000, 30000];
+            let recommendedBTU = standardBTUs[0];
+            
+            for (const btu of standardBTUs) {
+                if (totalBTU > btu) {
+                    recommendedBTU = btu;
+                } else {
+                    recommendedBTU = btu;
+                    break;
+                }
+            }
+            
+            // Affichage des résultats
+            document.getElementById('volume').textContent = volume.toFixed(1);
+            document.getElementById('base-btu').textContent = baseBTU.toLocaleString();
+            document.getElementById('occupants-btu').textContent = occupantsBTU.toLocaleString();
+            document.getElementById('appliances-btu').textContent = appliancesBTU.toLocaleString();
+            document.getElementById('sunlight-factor').textContent = sunlightFactor;
+            document.getElementById('insulation-factor').textContent = insulationFactor;
+            document.getElementById('room-factor').textContent = roomFactor;
+            document.getElementById('total-btu').textContent = recommendedBTU.toLocaleString();
+            
+            // Afficher les résultats
+            document.getElementById('result').style.display = 'block';
+            
+            // Faire défiler jusqu'aux résultats
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

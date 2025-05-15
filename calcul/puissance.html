@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Puissance Électrique Domestique</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .calculator {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4fc;
+            border-radius: 4px;
+            display: none;
+        }
+        .appliance-list {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .recommendation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f8f0;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculateur de Puissance Électrique Domestique</h1>
+    
+    <div class="calculator">
+        <div class="form-group">
+            <h2>Points Lumineux</h2>
+            <label for="lamps">Nombre d'ampoules LED (10W par ampoule):</label>
+            <input type="number" id="lamps" min="0" value="0">
+            
+            <label for="halogens">Nombre de spots halogènes (50W par spot):</label>
+            <input type="number" id="halogens" min="0" value="0">
+        </div>
+        
+        <div class="form-group">
+            <h2>Appareils Électroniques</h2>
+            <label for="tvs">Nombre de téléviseurs (100W par TV):</label>
+            <input type="number" id="tvs" min="0" value="0">
+            
+            <label for="computers">Nombre d'ordinateurs (150W par unité):</label>
+            <input type="number" id="computers" min="0" value="0">
+        </div>
+        
+        <div class="form-group">
+            <h2>Électroménager</h2>
+            <label for="fridges">Nombre de réfrigérateurs (200W par unité):</label>
+            <input type="number" id="fridges" min="0" value="0">
+            
+            <label for="washing">Machines à laver (2500W par unité):</label>
+            <input type="number" id="washing" min="0" value="0">
+            
+            <label for="ovens">Fours électriques (3000W par unité):</label>
+            <input type="number" id="ovens" min="0" value="0">
+            
+            <label for="ac">Climatiseurs (2000W par unité):</label>
+            <input type="number" id="ac" min="0" value="0">
+        </div>
+        
+        <div class="form-group">
+            <h2>Autres Appareils</h2>
+            <label for="others">Autres appareils (préciser la puissance totale en watts):</label>
+            <input type="number" id="others" min="0" value="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="coeff">Coefficient de simultanéité (0.1 à 1.0):</label>
+            <input type="number" id="coeff" min="0.1" max="1.0" step="0.1" value="0.7">
+            <small>Ce coefficient représente la probabilité que tous les appareils fonctionnent en même temps.</small>
+        </div>
+        
+        <button onclick="calculatePower()">Calculer la Puissance Requise</button>
+        
+        <div id="result" class="result">
+            <h3>Résultats du Calcul</h3>
+            <p>Puissance totale installée: <span id="total-power">0</span> W</p>
+            <p>Puissance simultanée estimée: <span id="simul-power">0</span> W</p>
+            <p>Puissance en kilowatts: <span id="kw-power">0</span> kW</p>
+        </div>
+        
+        <div id="recommendation" class="recommendation">
+            <h3>Recommandation d'Abonnement</h3>
+            <p>Votre puissance estimée est de <span id="rec-power">0</span> kW.</p>
+            <p>Nous recommandons un abonnement d'au moins <strong><span id="subscription">6</span> kVA</strong>.</p>
+        </div>
+        
+        <div class="appliance-list">
+            <h3>Répartition de la Puissance</h3>
+            <table id="power-table">
+                <thead>
+                    <tr>
+                        <th>Appareil</th>
+                        <th>Quantité</th>
+                        <th>Puissance unitaire (W)</th>
+                        <th>Puissance totale (W)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rempli par JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+            <a href="../calcul/calculateurs.html" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Retour aux calculataur
+            </a>
+    <script>
+        function calculatePower() {
+            // Récupération des valeurs
+            const lamps = parseInt(document.getElementById('lamps').value) || 0;
+            const halogens = parseInt(document.getElementById('halogens').value) || 0;
+            const tvs = parseInt(document.getElementById('tvs').value) || 0;
+            const computers = parseInt(document.getElementById('computers').value) || 0;
+            const fridges = parseInt(document.getElementById('fridges').value) || 0;
+            const washing = parseInt(document.getElementById('washing').value) || 0;
+            const ovens = parseInt(document.getElementById('ovens').value) || 0;
+            const ac = parseInt(document.getElementById('ac').value) || 0;
+            const others = parseInt(document.getElementById('others').value) || 0;
+            const coeff = parseFloat(document.getElementById('coeff').value) || 0.7;
+            
+            // Calcul des puissances
+            const lampPower = lamps * 10;
+            const halogenPower = halogens * 50;
+            const tvPower = tvs * 100;
+            const computerPower = computers * 150;
+            const fridgePower = fridges * 200;
+            const washingPower = washing * 2500;
+            const ovenPower = ovens * 3000;
+            const acPower = ac * 2000;
+            const otherPower = others;
+            
+            // Puissance totale installée
+            const totalPower = lampPower + halogenPower + tvPower + computerPower + 
+                              fridgePower + washingPower + ovenPower + acPower + otherPower;
+            
+            // Puissance simultanée (avec coefficient)
+            const simulPower = Math.round(totalPower * coeff);
+            
+            // Affichage des résultats
+            document.getElementById('total-power').textContent = totalPower;
+            document.getElementById('simul-power').textContent = simulPower;
+            document.getElementById('kw-power').textContent = (simulPower / 1000).toFixed(2);
+            
+            // Recommandation d'abonnement
+            const kwPower = simulPower / 1000;
+            document.getElementById('rec-power').textContent = kwPower.toFixed(2);
+            
+            let subscription = 6; // kVA
+            if (kwPower > 12) subscription = 15;
+            else if (kwPower > 9) subscription = 12;
+            else if (kwPower > 6) subscription = 9;
+            
+            document.getElementById('subscription').textContent = subscription;
+            
+            // Affichage des résultats
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('recommendation').style.display = 'block';
+            
+            // Mise à jour du tableau
+            updatePowerTable({
+                lamps, halogens, tvs, computers, fridges, washing, ovens, ac, others,
+                lampPower, halogenPower, tvPower, computerPower, fridgePower, 
+                washingPower, ovenPower, acPower, otherPower
+            });
+        }
+        
+        function updatePowerTable(data) {
+            const tableBody = document.querySelector('#power-table tbody');
+            tableBody.innerHTML = '';
+            
+            const appliances = [
+                { name: 'Ampoules LED', qty: data.lamps, unitPower: 10, totalPower: data.lampPower },
+                { name: 'Spots halogènes', qty: data.halogens, unitPower: 50, totalPower: data.halogenPower },
+                { name: 'Téléviseurs', qty: data.tvs, unitPower: 100, totalPower: data.tvPower },
+                { name: 'Ordinateurs', qty: data.computers, unitPower: 150, totalPower: data.computerPower },
+                { name: 'Réfrigérateurs', qty: data.fridges, unitPower: 200, totalPower: data.fridgePower },
+                { name: 'Machines à laver', qty: data.washing, unitPower: 2500, totalPower: data.washingPower },
+                { name: 'Fours électriques', qty: data.ovens, unitPower: 3000, totalPower: data.ovenPower },
+                { name: 'Climatiseurs', qty: data.ac, unitPower: 2000, totalPower: data.acPower },
+                { name: 'Autres appareils', qty: data.others > 0 ? 1 : 0, unitPower: data.others, totalPower: data.otherPower }
+            ];
+            
+            appliances.forEach(appliance => {
+                if (appliance.qty > 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${appliance.name}</td>
+                        <td>${appliance.qty}</td>
+                        <td>${appliance.unitPower}</td>
+                        <td>${appliance.totalPower}</td>
+                    `;
+                    tableBody.appendChild(row);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
