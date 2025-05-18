@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Services - Électricité Connectée</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/services.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header cohérent avec index.html -->
+    <header>
+        <nav>
+            <div class="menu-btn">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html" class="active">Services</a></li> 
+                <li><a href="realisations/realisations.html">Réalisations</a></li>
+                <li><a href="contact/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="services-main">
+        <div class="back-to-home">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Retour à l'accueil
+            </a>
+        </div>
+
+        <h1>Nos Solutions Expertes</h1>
+        
+        <div class="services-container">
+            <!-- Service 1 - Installation Résidentielle -->
+            <a href="services/installation.html" class="service-card">
+                <article>
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h2>Installation Résidentielle</h2>
+                    <ul>
+                        <li>Tableau électrique aux normes</li>
+                        <li>Câblage sécurisé</li>
+                        <li>Certification CONSUEL</li>
+                    </ul>
+                    <div class="service-details">
+                        <p>Nos techniciens certifiés réalisent une installation 100% conforme à la NF C 15-100.</p>
+                        <span class="btn">Voir détails</span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Service 2 - Domotique Intelligente -->
+            <a href="services/domotique.html" class="service-card">
+                <article>
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h2>Domotique Intelligente</h2>
+                    <ul>
+                        <li>Pilotage vocal</li>
+                        <li>Scénarios personnalisés</li>
+                        <li>Protocole KNX</li>
+                    </ul>
+                    <div class="service-details">
+                        <p>Transformez votre habitat en maison connectée avec nos solutions évolutives.</p>
+                        <span class="btn">Voir détails</span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Service 3 - Sécurité Electronique -->
+            <a href="services/securite.html" class="service-card">
+                <article>
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h2>Sécurité Electronique</h2>
+                    <ul>
+                        <li>Surveillance Connectée</li>
+                        <li>Visionnage à distance</li>
+                        <li>Alarmes intelligentes</li>
+                    </ul>
+                    <div class="service-details">
+                        <p>Systèmes de sécurité intégrés avec monitoring 24/7.</p>
+                        <span class="btn">Voir détails</span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Service 4 - Installation Industrielle -->
+            <a href="services/industriel.html" class="service-card">
+                <article>
+                    <div class="service-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h2>Solutions Industrielles</h2>
+                    <ul>
+                        <li>Installation sécurisée</li>
+                        <li>Maintenance préventive</li>
+                        <li>Automatisation</li>
+                    </ul>
+                    <div class="service-details">
+                        <p>Optimisez vos processus avec notre expertise industrielle.</p>
+                        <span class="btn">Voir détails</span>
+                    </div>
+                </article>
+            </a>
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Script pour animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animation au scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.service-card').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Transition entre pages
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (!e.target.closest('a')) {
+                        e.preventDefault();
+                        document.body.style.opacity = '0';
+                        setTimeout(() => {
+                            window.location = card.href;
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+<p></p>
+<footer class="site-footer">
+           
+        <div class="copyright">
+            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+        </div>
+        
+    
+</footer>
+</html>
