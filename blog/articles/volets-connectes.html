@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide des Volets Connectés | Électricité Connectée</title>
+    <meta name="description" content="Tout savoir sur les volets roulants connectés : avantages, installation et comparaison des meilleurs systèmes">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/blog-article.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Styles spécifiques */
+        .article-hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('../../../assets/img/blog/volets-connectes-hero.jpg') center/cover no-repeat;
+            height: 50vh;
+            max-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .product-badge {
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .benefit-icon {
+            font-size: 2rem;
+            color: #3498db;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        
+        .comparison-table th, 
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .product-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .product-card-body {
+            padding: 15px;
+        }
+        
+        .product-card h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .article-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .article-img-medium {
+            max-width: 70%;
+        }
+        
+        @media (max-width: 768px) {
+            .benefit-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .article-img-medium {
+                max-width: 100%;
+            }
+            
+            .article-hero {
+                height: 40vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="menu-btn">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Accueil</a></li>
+                <li><a href="../../../services.html">Services</a></li> 
+                <li><a href="../../../realisations/maison1.html">Réalisations</a></li>
+                <li><a href="../../../blog.html" class="active">Blog</a></li>
+                <li><a href="../../../contact/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Bannière de l'article -->
+    <section class="article-hero">
+        <div class="article-hero-content">
+            <span class="product-badge">Domotique</span>
+            <h1>Guide Complet des Volets Connectés</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Par Sahnoun</span>
+                <span><i class="far fa-calendar-alt"></i> 5 Oct. 2023</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenu principal -->
+    <main class="article-container">
+        <article>
+            <!-- Introduction -->
+            <section class="article-section">
+                <p class="lead">Les volets roulants connectés ne sont plus un luxe mais une solution pratique et économe en énergie. Découvrez comment ils peuvent transformer votre quotidien et quels modèles choisir.</p>
+                
+                <img src="../../../assets/img/blog/volets-connectes-exemple.jpg" alt="Volets connectés en action" class="article-img-medium" loading="lazy">
+            </section>
+
+            <!-- Section 1 -->
+            <section class="article-section">
+                <h2><i class="fas fa-home"></i> Pourquoi choisir des volets connectés ?</h2>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3>Confort au quotidien</h3>
+                        <p>Programmez l'ouverture/fermeture selon vos horaires ou via une application. Plus besoin de vous lever pour ajuster vos volets.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h3>Économies d'énergie</h3>
+                        <p>Jusqu'à 15% de réduction sur votre facture de chauffage/climatisation grâce à une gestion optimale de l'ensoleillement.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h3>Sécurité renforcée</h3>
+                        <p>Simulez une présence lors de vos absences avec des scénarios aléatoires d'ouverture/fermeture.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="article-section">
+                <h2><i class="fas fa-wrench"></i> Options d'installation</h2>
+                
+                <img src="../../../assets/img/blog/installation-volets.jpg" alt="Installation de volets connectés" class="article-img" loading="lazy">
+                
+                <h3>1. Neuf ou rénovation</h3>
+                <p>Nous proposons des solutions adaptées à tous les cas :</p>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>Type</th>
+                        <th>Avantages</th>
+                        <th>Coût moyen</th>
+                    </tr>
+                    <tr>
+                        <td>Installation neuve</td>
+                        <td>Intégration parfaite, choix complet des modèles</td>
+                        <td>250-350 DT</td>
+                    </tr>
+                    <tr>
+                        <td>Motorisation existant</td>
+                        <td>Solution économique, pas de gros travaux</td>
+                        <td>200-250 DT</td>
+                    </tr>
+                </table>
+                
+                <h3>2. Protocoles disponibles</h3>
+                <p>Nous travaillons avec les principales technologies :</p>
+                <ul>
+                    <li><strong>Sonoff</strong> : Solution filaire fiable</li>
+                    <li><strong>Zigbee</strong> : Sans fil à faible consommation</li>
+                    <li><strong>WiFi</strong> : Directement connecté à votre box</li>
+                    <li><strong>KNX</strong> : Pour les installations haut de gamme</li>
+                </ul>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="article-section">
+                <h2><i class="fas fa-star"></i> Comparatif des meilleurs modèles 2023</h2>
+                
+                <div class="product-showcase">
+                    <div class="product-card">
+                        <img src="../../../assets/img/blog/volet-somfy.jpg" alt="Volet Somfy" loading="lazy">
+                        <div class="product-card-body">
+                            <h4>Micro Récepteur IZYMO IO</h4>
+                            <p>Pour piloter à distance votre moteur de volets roulants filaires avec les box domotiques Conexoon ou Tahoma de Somfy</p>
+                            <p><strong></strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="../../../assets/img/blog/volet-sonoff.jpg" alt="Volet Sonoff" loading="lazy">
+                        <div class="product-card-body">
+                            <h4>Sonoff DUAL R3 </h4>
+                            <p>Sonoff Dual R3  Wifi pour  Volet roulant Interrupteur Surveiller le courant et la tension</p>
+                            <p><strong></strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="../../../assets/img/blog/volet-knx.jpg" alt="Volet KNX" loading="lazy">
+                        <div class="product-card-body">
+                            <h4>actionneur KNX</h4>
+                            <p>Les actionneurs à encastrer KNX se présentent sous plusieurs formes</p>
+                            <p><strong></strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="article-section">
+                <h2><i class="fas fa-cogs"></i> Fonctionnalités avancées</h2>
+                
+                <img src="../../../assets/img/blog/scenario-volets.jpg" alt="Scénarios domotiques" class="article-img-medium" loading="lazy">
+                
+                <h3>Scénarios intelligents</h3>
+                <p>Quelques exemples de ce que nous configurons pour nos clients :</p>
+                
+                <ul>
+                    <li><strong>Mode "Réveil"</strong> : Ouverture progressive à l'heure choisie</li>
+                    <li><strong>Protection solaire</strong> : Fermeture automatique en cas de fort ensoleillement</li>
+                    <li><strong>Optimisation thermique</strong> : Ajustement selon la température intérieure/extérieure</li>
+                    <li><strong>Absence prolongée</strong> : Mouvements aléatoires pour simuler une présence</li>
+                </ul>
+            </section>
+
+            <!-- CTA -->
+            <section class="cta-section">
+                <h3>Prêt à automatiser vos volets ?</h3>
+                <div class="cta-buttons">
+                    <a href="../../../contact/contact.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i> Demander un devis
+                    </a>
+                    <a href="tel:+21629328870" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> 00216 29 328 870
+                    </a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+       <style>
+        /* Styles complémentaires */
+        .article-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .article-section {
+            margin-bottom: 50px;
+        }
+        
+        .lead {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-outline {
+            border: 2px solid #3498db;
+            color: #3498db;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary, .btn-outline {
+                justify-content: center;
+            }
+        }
+       
+    </style>
+</body>
+<p></p>
+<footer class="site-footer">
+           
+        <div class="copyright">
+            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+        </div>
+        
+    
+</footer>
+</html>

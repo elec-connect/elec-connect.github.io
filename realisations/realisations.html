@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Réalisations à Jemmel | Électricité Connectée</title>
+    <meta name="description" content="Découvrez nos dernières réalisations électriques et domotiques à Jemmel en vidéo">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .realisations-header {
+            text-align: center;
+            margin: 40px 0;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #4a6fa5;
+        }
+        
+        .realisations-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        /* Grille des réalisations */
+        .realisations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .realisation-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .realisation-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Conteneur média (image + vidéo) */
+        .media-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .realisation-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Style des vidéos */
+        .realisation-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .video-active .realisation-video {
+            display: block;
+        }
+        
+        .video-active .realisation-img {
+            display: none;
+        }
+        
+        /* Bouton de lecture */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(74, 111, 165, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        
+        .play-button:hover {
+            background: rgba(74, 111, 165, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .play-button i {
+            color: white;
+            font-size: 24px;
+            margin-left: 5px;
+        }
+        
+        /* Contenu texte */
+        .realisation-content {
+            padding: 20px;
+        }
+        
+        .realisation-content h2 {
+            color: #4a6fa5;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .realisation-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* Boutons */
+        .btn {
+            display: inline-block;
+            background: #4a6fa5;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: #3a5a80;
+        }
+        
+        .btn-video {
+            background: #2c3e50;
+            margin-right: 10px;
+        }
+        
+        .btn-video:hover {
+            background: #1a2635;
+        }
+        
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 200px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .realisations-header h1 {
+                font-size: 2rem;
+            }
+            
+            .realisations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .media-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="realisations-header">
+        <h1>Nos Réalisations à Jemmel</h1>
+        <p>Découvrez en vidéo nos projets d'électricité et domotique</p>
+    </header>
+
+    <main>
+        <div class="realisations-grid">
+            <!-- Réalisation 1 -->
+            <article class="realisation-card">
+                <div class="media-container" id="media1">
+                    <img src="../assets/img/realisations/maison1.jpg" 
+                         alt="Villa moderne à Jemmel" 
+                         class="realisation-img"
+                         loading="lazy">
+                    <video class="realisation-video" loop muted playsinline>
+                        <source src="../assets/videos/realisation1.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="play-button" onclick="toggleVideo('media1')">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="realisation-content">
+                    <h2>Villa Moderne</h2>
+                    <p>Installation électrique complète avec système Intelligent SONOFF pour cette villa de 250m² à Jemmel.</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-video" onclick="toggleVideo('media1')">
+                            <i class="fas fa-video"></i> Voir la vidéo
+                        </button>
+                        <a href="realisation1-details.html" class="btn">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Réalisation 2 -->
+            <article class="realisation-card">
+                <div class="media-container" id="media2">
+                    <img src="../assets/img/realisations/maison2.jpg" 
+                         alt="Appartement contemporain" 
+                         class="realisation-img"
+                         loading="lazy">
+                    <video class="realisation-video" loop muted playsinline>
+                        <source src="../assets/videos/realisation2.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="play-button" onclick="toggleVideo('media2')">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="realisation-content">
+                    <h2>Appartement Contemporain</h2>
+                    <p>Rénovation électrique avec éclairage connecté et volets roulants automatisés.</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-video" onclick="toggleVideo('media2')">
+                            <i class="fas fa-video"></i> Voir la vidéo
+                        </button>
+                        <a href="realisation2-details.html" class="btn">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Réalisation 3 -->
+            <article class="realisation-card">
+                <div class="media-container" id="media3">
+                    <img src="../assets/img/realisations/maison3.jpg" 
+                         alt="Maison traditionnelle" 
+                         class="realisation-img"
+                         loading="lazy">
+                    <video class="realisation-video" loop muted playsinline>
+                        <source src="../assets/videos/realisation3.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="play-button" onclick="toggleVideo('media3')">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="realisation-content">
+                    <h2>Maison Traditionnelle</h2>
+                    <p>Mise aux normes et installation d'un système de sécurité intégré.</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-video" onclick="toggleVideo('media3')">
+                            <i class="fas fa-video"></i> Voir la vidéo
+                        </button>
+                        <a href="realisation3-details.html" class="btn">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Réalisation 4 -->
+            <article class="realisation-card">
+                <div class="media-container" id="media4">
+                    <img src="../assets/img/realisations/maison4.jpg" 
+                         alt="Bureau équipé" 
+                         class="realisation-img"
+                         loading="lazy">
+                    <video class="realisation-video" loop muted playsinline>
+                        <source src="../assets/videos/realisation4.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="play-button" onclick="toggleVideo('media4')">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="realisation-content">
+                    <h2>Bureau Équipé</h2>
+                    <p>Installation électrique sur mesure pour cet espace de travail à Jemmel.</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-video" onclick="toggleVideo('media4')">
+                            <i class="fas fa-video"></i> Voir la vidéo
+                        </button>
+                        <a href="realisation4-details.html" class="btn">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Réalisation 5 -->
+            <article class="realisation-card">
+                <div class="media-container" id="media5">
+                    <img src="../assets/img/realisations/maison5.jpg" 
+                         alt="Commerce équipé" 
+                         class="realisation-img"
+                         loading="lazy">
+                    <video class="realisation-video" loop muted playsinline>
+                        <source src="../assets/videos/realisation5.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="play-button" onclick="toggleVideo('media5')">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="realisation-content">
+                    <h2>Commerce Moderne</h2>
+                    <p>Éclairage professionnel et système de gestion énergétique pour ce local commercial.</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-video" onclick="toggleVideo('media5')">
+                            <i class="fas fa-video"></i> Voir la vidéo
+                        </button>
+                        <a href="realisation5-details.html" class="btn">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <a href="../index.html" class="btn back-btn">
+            <i class="fas fa-arrow-left"></i> Retour à l'accueil
+        </a>
+    </main>
+
+    <p></p>
+<footer class="site-footer">
+           
+        <div class="copyright">
+            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+        </div>
+        
+    
+</footer>
+
+    <script>
+        // Fonction pour activer/désactiver la vidéo
+        function toggleVideo(containerId) {
+            const container = document.getElementById(containerId);
+            const video = container.querySelector('.realisation-video');
+            
+            container.classList.toggle('video-active');
+            
+            if (container.classList.contains('video-active')) {
+                video.play();
+                container.querySelector('.play-button i').className = 'fas fa-pause';
+            } else {
+                video.pause();
+                container.querySelector('.play-button i').className = 'fas fa-play';
+            }
+        }
+        
+        // Pause toutes les vidéos lorsqu'une nouvelle commence
+        document.querySelectorAll('.realisation-video').forEach(video => {
+            video.addEventListener('play', function() {
+                document.querySelectorAll('.realisation-video').forEach(otherVideo => {
+                    if (otherVideo !== video && !otherVideo.paused) {
+                        otherVideo.pause();
+                        const container = otherVideo.closest('.media-container');
+                        if (container.classList.contains('video-active')) {
+                            container.classList.remove('video-active');
+                            container.querySelector('.play-button i').className = 'fas fa-play';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
