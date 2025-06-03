@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur d'Éclairage LED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-bg: #f5f5f5;
+            --dark-text: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+        
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .recommendation {
+            margin-top: 20px;
+            padding: 25px;
+            background-color: #e8f8f0;
+            border-radius: 8px;
+            border-left: 5px solid #2ecc71;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .color-sample {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: background 0.3s, transform 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-back:hover {
+            background: var(--secondary-color);
+            transform: translateX(-3px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .calculator {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../calcul/calculateurs.html" class="btn btn-back">
+        <i class="fas fa-arrow-left"></i> Retour aux calculateurs
+    </a>
+    
+    <h1><i class="fas fa-lightbulb"></i> Calculateur d'Éclairage LED</h1>
+    
+    <div class="calculator">
+        <div class="form-group">
+            <h2><i class="fas fa-ruler-combined"></i> Dimensions de l'Espace</h2>
+            <label for="length">Longueur de la pièce (m):</label>
+            <input type="number" id="length" min="1" step="0.1" value="5" required>
+            
+            <label for="width">Largeur de la pièce (m):</label>
+            <input type="number" id="width" min="1" step="0.1" value="4" required>
+            
+            <label for="height">Hauteur sous plafond (m):</label>
+            <input type="number" id="height" min="2" step="0.1" value="2.5" required>
+        </div>
+        
+        <div class="form-group">
+            <h2><i class="fas fa-door-open"></i> Type d'Espace</h2>
+            <label for="room-type">Sélectionnez le type d'espace:</label>
+            <select id="room-type">
+                <option value="100">Couloir (100 lux)</option>
+                <option value="150">Chambre (150 lux)</option>
+                <option value="200">Salle à manger (200 lux)</option>
+                <option value="300">Bureau (300 lux)</option>
+                <option value="500">Cuisine (500 lux)</option>
+                <option value="750">Salle de bain (750 lux)</option>
+                <option value="custom">Personnalisé</option>
+            </select>
+            
+            <div id="custom-lux-container" style="display: none;">
+                <label for="custom-lux">Niveau d'éclairement souhaité (lux):</label>
+                <input type="number" id="custom-lux" min="50" step="50" value="300">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <h2><i class="fas fa-lightbulb"></i> Caractéristiques des Spots LED</h2>
+            <label for="kelvin">Température de couleur:</label>
+            <select id="kelvin">
+                <option value="2700">2700K (Blanc chaud)</option>
+                <option value="3000">3000K (Blanc doux)</option>
+                <option value="4000" selected>4000K (Blanc neutre)</option>
+                <option value="5000">5000K (Blanc froid)</option>
+                <option value="6500">6500K (Lumière du jour)</option>
+            </select>
+            <div id="color-display" class="color-sample"></div>
+            
+            <label for="lumen">Flux lumineux par spot (lumens):</label>
+            <input type="number" id="lumen" min="100" step="50" value="800" required>
+            
+            <label for="angle">Angle d'ouverture du spot:</label>
+            <select id="angle">
+                <option value="30">30° (Focalisé)</option>
+                <option value="60" selected>60° (Standard)</option>
+                <option value="90">90° (Large)</option>
+                <option value="120">120° (Très large)</option>
+            </select>
+        </div>
+        
+        <button onclick="calculateLighting()">
+            <i class="fas fa-calculator"></i> Calculer l'Éclairage
+        </button>
+        
+        <div id="result" class="result">
+            <h3><i class="fas fa-clipboard-list"></i> Résultats du Calcul</h3>
+            <p><strong>Surface de la pièce:</strong> <span id="area">0</span> m²</p>
+            <p><strong>Volume de la pièce:</strong> <span id="volume">0</span> m³</p>
+            <p><strong>Niveau d'éclairement souhaité:</strong> <span id="target-lux">0</span> lux</p>
+            <p><strong>Flux lumineux total nécessaire:</strong> <span id="total-lumen">0</span> lumens</p>
+        </div>
+        
+        <div id="recommendation" class="recommendation">
+            <h3><i class="fas fa-lightbulb"></i> Recommandation d'Éclairage</h3>
+            <p><strong>Nombre de spots LED nécessaires:</strong> <span id="spot-count">0</span></p>
+            <p><strong>Configuration recommandée:</strong> <span id="spot-config"></span></p>
+            <p><strong>Couleur de lumière:</strong> <span id="kelvin-desc"></span> <span id="color-sample-result" class="color-sample"></span></p>
+            <p><strong>Espacement recommandé entre spots:</strong> <span id="spacing"></span> m</p>
+        </div>
+        
+        <h3><i class="fas fa-info-circle"></i> Guide des Températures de Couleur</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Température (K)</th>
+                    <th>Description</th>
+                    <th>Utilisation recommandée</th>
+                    <th>Ambiance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2700K</td>
+                    <td>Blanc chaud</td>
+                    <td>Salons, chambres</td>
+                    <td>Chaleureuse et intime</td>
+                </tr>
+                <tr>
+                    <td>3000K</td>
+                    <td>Blanc doux</td>
+                    <td>Cuisines, salles à manger</td>
+                    <td>Conviviale</td>
+                </tr>
+                <tr>
+                    <td>4000K</td>
+                    <td>Blanc neutre</td>
+                    <td>Bureaux, salles de bain</td>
+                    <td>Neutre et fonctionnelle</td>
+                </tr>
+                <tr>
+                    <td>5000K</td>
+                    <td>Blanc froid</td>
+                    <td>Garages, ateliers</td>
+                    <td>Stimulante</td>
+                </tr>
+                <tr>
+                    <td>6500K</td>
+                    <td>Lumière du jour</td>
+                    <td>Commerces, espaces techniques</td>
+                    <td>Clinique et intense</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Afficher la couleur sélectionnée
+        function updateColorDisplay() {
+            const kelvin = document.getElementById('kelvin').value;
+            const colorDisplay = document.getElementById('color-display');
+            const color = kelvinToRGB(kelvin);
+            colorDisplay.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+        }
+        
+        // Conversion Kelvin vers RGB (approximation)
+        function kelvinToRGB(kelvin) {
+            kelvin = parseInt(kelvin);
+            let temp = kelvin / 100;
+            let r, g, b;
+            
+            if (temp <= 66) {
+                r = 255;
+                g = temp - 2;
+                g = 99.4708025861 * Math.log(g) - 161.1195681661;
+                if (temp <= 19) {
+                    b = 0;
+                } else {
+                    b = temp - 10;
+                    b = 138.5177312231 * Math.log(b) - 305.0447927307;
+                }
+            } else {
+                r = temp - 60;
+                r = 329.698727446 * Math.pow(r, -0.1332047592);
+                g = temp - 60;
+                g = 288.1221695283 * Math.pow(g, -0.0755148492);
+                b = 255;
+            }
+            
+            return {
+                r: Math.round(clamp(r, 0, 255)),
+                g: Math.round(clamp(g, 0, 255)),
+                b: Math.round(clamp(b, 0, 255))
+            };
+        }
+        
+        function clamp(x, min, max) {
+            return x < min ? min : x > max ? max : x;
+        }
+        
+        // Gestion du type d'espace personnalisé
+        document.getElementById('room-type').addEventListener('change', function() {
+            const customContainer = document.getElementById('custom-lux-container');
+            if (this.value === 'custom') {
+                customContainer.style.display = 'block';
+            } else {
+                customContainer.style.display = 'none';
+            }
+        });
+        
+        // Mise à jour de l'affichage de couleur
+        document.getElementById('kelvin').addEventListener('change', updateColorDisplay);
+        updateColorDisplay();
+        
+        // Calcul principal
+        function calculateLighting() {
+            // Validation des entrées
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const height = parseFloat(document.getElementById('height').value);
+            
+            if (length <= 0 || width <= 0 || height < 2) {
+                alert("Veuillez entrer des dimensions valides (longueur et largeur > 0, hauteur ≥ 2m)");
+                return;
+            }
+            
+            // Calcul surface et volume
+            const area = length * width;
+            const volume = area * height;
+            
+            // Niveau d'éclairement souhaité
+            let targetLux;
+            const roomType = document.getElementById('room-type').value;
+            if (roomType === 'custom') {
+                targetLux = parseFloat(document.getElementById('custom-lux').value);
+                if (targetLux < 50) {
+                    alert("Le niveau d'éclairement doit être d'au moins 50 lux");
+                    return;
+                }
+            } else {
+                targetLux = parseFloat(roomType);
+            }
+            
+            // Caractéristiques des spots
+            const kelvin = document.getElementById('kelvin').value;
+            const lumenPerSpot = parseFloat(document.getElementById('lumen').value);
+            const angle = parseFloat(document.getElementById('angle').value);
+            
+            if (lumenPerSpot < 100) {
+                alert("Le flux lumineux par spot doit être d'au moins 100 lumens");
+                return;
+            }
+            
+            // Calcul du flux lumineux total nécessaire
+            const heightFactor = Math.max(1, height / 2.5); // Correction pour hauteur > 2.5m
+            const angleFactor = 1 + (angle / 180); // Correction pour l'angle d'ouverture
+            
+            // Facteur d'absorption (environ 30% de perte pour les murs sombres, etc.)
+            const absorptionFactor = 1.3;
+            
+            const totalLumen = area * targetLux * heightFactor * angleFactor * absorptionFactor;
+            
+            // Nombre de spots nécessaires
+            let spotCount = Math.ceil(totalLumen / lumenPerSpot);
+            
+            // Configuration recommandée (répartition)
+            const optimalRows = Math.max(1, Math.round(Math.sqrt(spotCount * (length/width))));
+            const optimalCols = Math.max(1, Math.round(spotCount / optimalRows));
+            spotCount = optimalRows * optimalCols; // Ajustement pour avoir une grille régulière
+            
+            // Calcul de l'espacement entre spots
+            const rowSpacing = (length / optimalRows).toFixed(2);
+            const colSpacing = (width / optimalCols).toFixed(2);
+            
+            // Affichage des résultats
+            document.getElementById('area').textContent = area.toFixed(1);
+            document.getElementById('volume').textContent = volume.toFixed(1);
+            document.getElementById('target-lux').textContent = targetLux;
+            document.getElementById('total-lumen').textContent = Math.round(totalLumen);
+            document.getElementById('spot-count').textContent = spotCount;
+            document.getElementById('spot-config').textContent = `${optimalRows} rangées × ${optimalCols} spots`;
+            document.getElementById('spacing').textContent = `${rowSpacing}m × ${colSpacing}m`;
+            
+            // Description de la température de couleur
+            const kelvinDesc = document.getElementById('kelvin').options[document.getElementById('kelvin').selectedIndex].text;
+            document.getElementById('kelvin-desc').textContent = kelvinDesc;
+            
+            // Affichage de la couleur
+            const color = kelvinToRGB(kelvin);
+            const colorSample = document.getElementById('color-sample-result');
+            colorSample.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+            
+            // Afficher les résultats avec animation
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('recommendation').style.display = 'block';
+            
+            // Faire défiler jusqu'aux résultats
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

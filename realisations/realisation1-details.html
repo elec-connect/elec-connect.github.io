@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Moderne à Jemmel | Électricité Connectée</title>
+    <meta name="description" content="Découvrez notre réalisation d'électricité et domotique pour une villa moderne à Jemmel">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles spécifiques à la page de réalisation */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .project-header {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .project-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f5f7fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        /* Conteneur principal */
+        .project-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        @media (min-width: 992px) {
+            .project-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Vidéo principale */
+        .main-video {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .main-video video {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Galerie d'images */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+        
+        /* Détails techniques */
+        .tech-specs {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .tech-specs h3 {
+            color: #4a6fa5;
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .spec-item {
+            margin-bottom: 15px;
+        }
+        
+        .spec-item strong {
+            color: #2c3e50;
+        }
+        
+        /* Sidebar */
+        .project-sidebar {
+            background: #f5f7fa;
+            padding: 25px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+        
+        .client-testimonial {
+            font-style: italic;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .client-testimonial::before {
+            content: '"';
+            font-size: 60px;
+            color: #4a6fa5;
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            left: 5px;
+        }
+        
+        /* Boutons */
+        .btn {
+            display: inline-block;
+            background: #4a6fa5;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: #3a5a80;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2c3e50;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-header h1 {
+                font-size: 2rem;
+            }
+            
+            .project-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="project-header">
+        <h1>Villa Moderne à Jemmel</h1>
+        <div class="project-meta">
+            <span class="meta-item">
+                <i class="fas fa-map-marker-alt"></i> Jemmel, Tunisie
+            </span>
+            <span class="meta-item">
+                <i class="fas fa-calendar-alt"></i> Janvier 2024
+            </span>
+            <span class="meta-item">
+                <i class="fas fa-expand"></i> 300 m²
+            </span>
+            <span class="meta-item">
+                <i class="fas fa-clock"></i> 6 semaines
+            </span>
+        </div>
+    </header>
+
+    <main class="project-container">
+        <div class="project-content">
+            <!-- Vidéo principale -->
+            <div class="main-video">
+                <video controls poster="../assets/img/realisations/villa-poster.jpg">
+                    <source src="../assets/videos/blog9.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+            </div>
+            
+            <!-- Description du projet -->
+            <section>
+                <h2>Projet complet d'électricité et domotique</h2>
+                <p>Cette villa moderne de 300m² à Jemmel a été équipée d'une installation électrique complète avec système intelligent Sonoff. Le projet comprenait l'installation de 80 points lumineux, 15 prises intelligentes et la gestion centralisée du chauffage, de la climatisation et des volets roulants.</p>
+                
+                <h3>Solutions techniques</h3>
+                <ul>
+                    <li>Système intelligent Sonoff avec interface tactile et contrôle vocal</li>
+                    <li>Éclairage LED intelligent avec réglage de température de couleur</li>
+                    <li>Gestion énergétique avec monitoring en temps réel</li>
+                    <li>Système de sécurité intégré avec caméras de surveillance</li>
+                    <li>Installation électrique aux normes NFC 15-100 </li>
+                </ul>
+            </section>
+            
+            <!-- Galerie d'images -->
+            <section>
+                <h3>Galerie du projet</h3>
+                <div class="gallery">
+                    <img src="../assets/img/realisations/villa1.jpg" 
+                         alt="Tableau électrique moderne"
+                         loading="lazy">
+                    <img src="../assets/img/realisations/villa2.jpg" 
+                         alt="Éclairage LED encastré"
+                         loading="lazy">
+                    <img src="../assets/img/realisations/villa3.jpg" 
+                         alt="Interface de contrôle domotique"
+                         loading="lazy">
+                    <img src="../assets/img/realisations/villa4.jpg" 
+                         alt="Installation des gaines"
+                         loading="lazy">
+                     <img src="../assets/img/realisations/villa5.jpg" 
+                         alt="sécurité electronique"
+                         loading="lazy">
+                    <img src="../assets/img/realisations/villa6.jpg" 
+                         alt="video phone"
+                         loading="lazy">
+                </div>
+            </section>
+            
+            <!-- Spécifications techniques -->
+            <section class="tech-specs">
+                <h3>Spécifications techniques</h3>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <strong>Système intelligent:</strong> Sonoff
+                    </div>
+                    <div class="spec-item">
+                        <strong>Tableau électrique:</strong> 48 modules Hager
+                    </div>
+                    <div class="spec-item">
+                        <strong>Éclairage:</strong> 80 points LED
+                    </div>
+                    <div class="spec-item">
+                        <strong>Prises:</strong> 15 prises intelligentes
+                    </div>
+                    <div class="spec-item">
+                        <strong>Volets roulants:</strong> 11 moteurs Somfy
+                    </div>
+                    <div class="spec-item">
+                        <strong>Sécurité:</strong> 4 caméras Dahua 4K
+                    </div>
+                    <div class="spec-item">
+                        <strong>Climatisation:</strong> Système multi-split Daikin
+                    </div>
+                    <div class="spec-item">
+                        <strong>Réseau:</strong> Câblage Cat6a
+                    </div>
+                </div>
+            </section>
+            
+            <a href="../realisations/realisations.html" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Retour aux réalisations
+            </a>
+        </div>
+        
+        <!-- Sidebar -->
+        <aside class="project-sidebar">
+            <h3>Détails du projet</h3>
+            <ul>
+                <li><strong>Client:</strong> Famille Moncef BAHRI</li>
+                <li><strong>Architecte:</strong> Kouira</li>
+                <li><strong>Durée:</strong> 6 semaines</li>
+                <li><strong>Budget:</strong> Sur demande</li>
+                <li><strong>Équipe:</strong> 3 électriciens</li>
+            </ul>
+            
+            <div class="client-testimonial">
+                <p>"L'équipe d'Électricité Connectée a réalisé un travail exceptionnel. La domotique fonctionne parfaitement et a considérablement amélioré notre confort quotidien."</p>
+                <p><strong>M. Moncef</strong>, propriétaire</p>
+            </div>
+            
+            <h3>Technologies utilisées</h3>
+            <div class="tech-badges">
+                <span class="tech-badge">Sonoff</span>
+                <span class="tech-badge">Hager</span>
+                <span class="tech-badge">Somfy</span>
+                <span class="tech-badge">Daikin</span>
+                <span class="tech-badge">Dahua</span>
+            </div>
+            
+            <a href="../contact/contact.html" class="btn">
+                <i class="fas fa-envelope"></i> Demander un devis similaire
+            </a>
+        </aside>
+    </main>
+
+    <p></p>
+<footer class="site-footer">
+           
+        <div class="copyright">
+            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+        </div>
+        
+    
+</footer>
+
+    <script>
+        // Script pour la galerie (peut être amélioré avec une lightbox)
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', function() {
+                // Ici vous pourriez implémenter une lightbox
+                console.log('Ouvrir image en grand:', this.src);
+            });
+        });
+        
+        // Optimisation vidéo - préchargement
+        const video = document.querySelector('.main-video video');
+        video.addEventListener('mouseover', function() {
+            if (video.readyState < 3) {
+                video.preload = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

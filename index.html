@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Connectée - Électricité Intelligente</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles supplémentaires pour l'horloge */
+        .horloge-connectee {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .horloge-content .pays {
+            font-size: 1em;
+            color: #f1c40f;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .heure-digital {
+            font-size: 1.8em;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .date-connectee {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nouvel en-tête animé -->
+    <header class="hero animated-header">
+        <!-- Horloge Tunisienne -->
+        <div class="horloge-connectee">
+            <div class="horloge-content">
+                <div class="pays"><i class="fas fa-bolt"></i> Tunisie</div>
+                <div class="heure-digital" id="heure-tunisie"></div>
+                <div class="date-connectee" id="date-tunisie"></div>
+            </div>
+        </div>
+       
+        <!-- Contrôles en haut à droite -->
+        <div class="header-controls">                    
+            <!-- Bouton blog -->
+            <div class="blog-link" style="position: relative;">
+                <a href="blog.html">
+                    <i class="fas fa-blog fa-2x"></i>
+                    <span class="badge" style="position: absolute; top: -5px; right: -5px; background: #e74c3c; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 0.7rem; display: flex; align-items: center; justify-content: center;">3</span>
+                </a>
+            </div>
+
+            <!-- Bouton Réalisations -->
+            <a href="realisations/realisations.html" class="control-btn" aria-label="Voir nos réalisations">
+                <i class="fas fa-photo-video"></i>
+            </a>
+            <!-- Bouton calcul -->
+            <a href="calcul/calculateurs.html" class="calcul-btn" aria-label="Voir nos réalisations">
+                <i class="fas fa-square-root-alt math-icon"></i>
+            </a>
+            
+            <!-- Bouton Son -->
+            <button id="musicToggle" class="control-btn" aria-label="Contrôle musical">
+                <i class="fas fa-music"></i>
+            </button>
+            <!--logo-->
+            <a href="#" class="logo-badge">
+                <i class="fas fa-bolt"></i>
+                <span class="elec">Elec</span>
+                <span class="divider">-</span>
+                <span class="connect">Connect</span>
+            </a>
+        </div>
+
+        <!-- Section Vidéo Domotique -->
+        <section class="video-section">
+            <h2><i class="fas fa-video"></i> Démonstrations en vidéo</h2>
+            <div class="video-container">
+                <video id="domotiqueVideo" controls width="100%" poster="../../../assets/img/blog/video-poster-800.jpg">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+                <div class="video-playlist">
+                    <button class="playlist-btn active" data-video="domotique.mp4">Présentation</button>
+                    <button class="playlist-btn" data-video="domotique2.mp4">Installation</button>
+                    <button class="playlist-btn" data-video="domotique3.mp4">Fonctionnalités</button>
+                    <button class="playlist-btn" data-video="domotique4.mp4">Témoignage</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Particules et contenu... -->
+        <div class="particles" id="particles"></div>
+        
+        <div class="hero-content">
+            <h1>Électricité Connectée</h1>
+            <p>Transformez votre habitat en maison intelligente avec nos solutions certifiées</p>
+            <div class="hero-btns">
+                <a href="tel:+21629328870" class="btn btn-primary">
+                    <i class="fas fa-phone"></i> 00216 29 328 870
+                </a>
+                <a href="services.html" class="btn btn-outline">
+                    <i class="fas fa-star"></i> Nos services
+                </a>
+                <a href="realisations/realisations.html" class="btn btn-outline">
+                    <i class="fas fa-images"></i> Réalisations
+                </a>
+                <a href="contact/contact.html" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> contact
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Lecteur audio caché -->
+    <audio id="backgroundMusic" loop>
+        <source src="assets/audio/ambiance.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Contrôle musical
+        const musicToggle = document.getElementById('musicToggle');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        
+        musicToggle.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                this.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                backgroundMusic.pause();
+                this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+        });
+        
+        // Désactiver l'autoplay et attendre l'interaction utilisateur
+        document.addEventListener('click', function firstInteraction() {
+            backgroundMusic.volume = 0.3; // Volume modéré
+            document.removeEventListener('click', firstInteraction);
+        }, { once: true });
+        
+        // Gestion des vidéos
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoPlayer = document.getElementById('domotiqueVideo');
+            const playlistButtons = document.querySelectorAll('.playlist-btn');
+            const videoBasePath = '../../../assets/videos/';
+            const videoSources = [
+                { file: 'domotique.mp4', name: 'Présentation' },
+                { file: 'domotique2.mp4', name: 'Installation' },
+                { file: 'domotique3.mp4', name: 'Fonctionnalités' },
+                { file: 'domotique4.mp4', name: 'Témoignage' }
+            ];
+            
+            let currentVideoIndex = 0;
+
+            function loadAndPlayVideo(index) {
+                currentVideoIndex = index;
+                const videoSource = videoBasePath + videoSources[index].file;
+                
+                if (videoPlayer.src !== videoSource) {
+                    videoPlayer.src = videoSource;
+                    videoPlayer.load();
+                }
+                
+                videoPlayer.play().catch(e => console.log("Auto-play prevented: ", e));
+                
+                playlistButtons.forEach((btn, i) => {
+                    btn.classList.toggle('active', i === index);
+                    btn.setAttribute('aria-label', `Lire ${videoSources[i].name}`);
+                });
+            }
+
+            videoPlayer.addEventListener('ended', function() {
+                const nextIndex = (currentVideoIndex + 1) % videoSources.length;
+                loadAndPlayVideo(nextIndex);
+            });
+
+            playlistButtons.forEach((btn, index) => {
+                btn.addEventListener('click', () => loadAndPlayVideo(index));
+            });
+
+            loadAndPlayVideo(0);
+
+            videoPlayer.addEventListener('playing', function() {
+                const nextIndex = (currentVideoIndex + 1) % videoSources.length;
+                const nextVideo = document.createElement('link');
+                nextVideo.rel = 'prefetch';
+                nextVideo.href = videoBasePath + videoSources[nextIndex].file;
+                document.head.appendChild(nextVideo);
+            });
+        });
+
+        // Horloge Tunisie
+        function mettreAJourHorloge() {
+            const options = {
+                timeZone: 'Africa/Tunis',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            const dateOptions = {
+                timeZone: 'Africa/Tunis',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+
+            const maintenant = new Date();
+            const heure = maintenant.toLocaleTimeString('fr-FR', options);
+            const date = maintenant.toLocaleDateString('fr-FR', dateOptions);
+
+            document.getElementById('heure-tunisie').textContent = heure;
+            document.getElementById('date-tunisie').textContent = date;
+        }
+
+        setInterval(mettreAJourHorloge, 1000);
+        mettreAJourHorloge(); // Initialisation
+    </script>
+  
+</body>
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Section Contact -->
+        <div class="footer-section">
+            <h3>Contactez-nous</h3>
+            <ul class="contact-info">
+                <li><i class="fas fa-map-marker-alt"></i> 01, Rue Manfalouti JEMMEL 5020</li>
+                <li><i class="fas fa-phone"></i> <a href="tel:+21629328870">00216 29 328 870</a></li>
+                <li><i class="fas fa-envelope"></i> <a href="mailto:Iot.sahnoun@gmail.com">Iot.sahnoun@gmail.com</a></li>
+            </ul>
+        </div>
+
+        <!-- Section Liens rapides -->
+        <div class="footer-section">
+            <h3>Liens rapides</h3>
+            <ul class="quick-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="realisations/realisations.html">Réalisations</a></li>
+                <li><a href="contact/contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </div>
+
+        <!-- Section Réseaux sociaux -->
+        <div class="footer-section">
+            <h3>Suivez-nous</h3>
+            <div class="social-logos">
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <!-- Section Logos partenaires -->
+        <div class="footer-section">
+            <h3>Nos partenaires</h3>
+            <div class="partner-logos">
+                <img src="assets/img/schneider-logo.png" alt="Schneider Electric" loading="lazy">
+                <img src="assets/img/legrand-logo.png" alt="Legrand" loading="lazy">
+                <img src="assets/img/sonoff-logo.png" alt="sonoff" loading="lazy">
+                <img src="assets/img/somfy-logo.png" alt="Somfy" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright et certifications -->
+    <div class="footer-bottom">
+        <div class="certifications">
+            <!--<img src="assets/img/certif-iso.png" alt="Certification ISO 9001" loading="lazy">-->
+            <!--<img src="assets/img/certif-qualibat.png" alt="Certification Qualibat" loading="lazy">-->
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+        </div>
+    </div>
+</footer>
+</html>

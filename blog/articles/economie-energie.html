@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réduire sa facture énergétique de 40% | Électricité Connectée</title>
+    <meta name="description" content="Solutions connectées pour optimiser votre consommation électrique">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/blog-article.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        /* Structure améliorée */
+        .article-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .article-hero {
+            height: 50vh;
+            max-height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('../../../assets/img/blog/economie-energie.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        /* Images mieux dimensionnées */
+        .article-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: block;
+        }
+        
+        .article-img-small {
+            max-width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .img-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .img-group img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        /* Meilleure organisation du contenu */
+        .article-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-section:last-child {
+            border-bottom: none;
+        }
+        
+        /* Styles pour les éléments spéciaux */
+        .energy-badge {
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .tip-box {
+            background: #e1cf07;
+            padding: 15px;
+            border-left: 4px solid #27ae60;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #52d187;
+        }
+        
+        .comparison-table th {
+            background-color: #08f744;
+        }
+        
+        @media (max-width: 768px) {
+            .img-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-img-small {
+                max-width: 100%;
+            }
+            
+            .article-hero {
+                height: 40vh;
+            }
+        }
+		.savings-meter {
+            background: #69d4a6;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .meter-graphic {
+            height: 30px;
+            background: linear-gradient(to right, #e74c3c, #f39c12, #27ae60);
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .meter-pointer {
+            position: absolute;
+            top: -10px;
+            left: 66%;
+            width: 3px;
+            height: 50px;
+            background: #2c3e50;
+        }
+         .article-container {
+            
+            background: #ffffff;
+        }
+        
+        .meter-pointer::after {
+            content: '40%';
+            position: absolute;
+            top: -30px;
+            left: -10px;
+            background: #2c3e50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .meter-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+         .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            background: #96e0c6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="menu-btn">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Accueil</a></li>
+                <li><a href="../../../services.html">Services</a></li> 
+                <li><a href="../../../realisations/maison1.html">Réalisations</a></li>
+                <li><a href="../../../blog.html" class="active">Blog</a></li>
+                <li><a href="../../../contact/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Introduction -->
+            <section class="article-intro">
+                <p class="lead"></p>
+                
+                <div class="savings-meter">
+                    <h3>Potentiel d'économie moyen constaté</h3>
+                    <div class="meter-graphic">
+                        <div class="meter-pointer"></div>
+                    </div>
+                    <div class="meter-labels">
+                        <span>0%</span>
+                        <span>20%</span>
+                        <span>40%</span>
+                        <span>60%</span>
+                    </div>
+                </div>
+            </section>
+
+    <!-- Contenu principal -->
+    <main class="article-container">
+        <article>
+            <!-- Introduction -->
+            <section class="article-section">
+                <p class="lead">Nos clients économisent en moyenne <strong>40%</strong> sur leur facture énergétique grâce à nos solutions domotiques intelligentes. Découvrez comment y parvenir en 5 étapes claires.</p>
+                
+                <img src="../../../assets/img/blog/energy-comparison.jpg" alt="Comparaison économies" class="article-img" loading="lazy">
+            </section>
+
+            <!-- Section 1 -->
+            <section class="article-section">
+                <h2><i class="fas fa-thermometer-half"></i> 1. Optimisation du chauffage</h2>
+                
+                <img src="../../../assets/img/blog/thermostat-intelligent.jpg" alt="Thermostat intelligent" class="article-img-small" loading="lazy">
+                
+                <p>Le chauffage représente <strong>60% de la consommation énergétique</strong> d'un foyer. Nos solutions :</p>
+                
+                <ul>
+                    <li>Thermostats intelligents avec zonage</li>
+                    <li>Détection de présence et fenêtres ouvertes</li>
+                    <li>Programmation adaptative</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb"></i> Astuce Pro</h4>
+                    <p>1°C de moins = 7% d'économie. Nos systèmes maintiennent le confort optimal.</p>
+                </div>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>Solution</th>
+                        <th>Économie</th>
+                        <th>Amortissement</th>
+                    </tr>
+                    <tr>
+                        <td>Thermostat standard</td>
+                        <td>10-15%</td>
+                        <td>2 ans</td>
+                    </tr>
+                    <tr>
+                        <td>Notre solution</td>
+                        <td>25-30%</td>
+                        <td>10 mois</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="article-section">
+                <h2><i class="fas fa-lightbulb"></i> 2. Éclairage intelligent</h2>
+                
+                <div class="img-group">
+                    <img src="../../../assets/img/blog/eclairage-connecte.jpg" alt="Éclairage connecté" loading="lazy">
+                    <img src="../../../assets/img/blog/detecteur-presence.jpg" alt="Détecteur de présence" loading="lazy">
+                </div>
+                
+                <p>Jusqu'à <strong>75% d'économie</strong> sur l'éclairage :</p>
+                
+                <ol>
+                    <li>Ampoules LED connectées</li>
+                    <li>Détection de présence</li>
+                    <li>Scénarios automatisés</li>
+                </ol>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="article-section">
+                <h2><i class="fas fa-plug"></i> 3. Gestion des appareils</h2>
+                
+                <img src="../../../assets/img/blog/prise-connectee.jpg" alt="Prise connectée" class="article-img-small" loading="lazy">
+                
+                <p>Éliminez les <strong>15% de gaspillage</strong> des appareils en veille :</p>
+                
+                <ul>
+                    <li>Prises connectées programmables</li>
+                    <li>Coupe-veille automatique</li>
+                    <li>Alertes de surconsommation</li>
+                </ul>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="article-section">
+                <h2><i class="fas fa-solar-panel"></i> 4. Énergies renouvelables</h2>
+                
+                <div class="img-group">
+                    <img src="../../../assets/img/blog/panneau-solaire.jpg" alt="Panneaux solaires" loading="lazy">
+                    <img src="../../../assets/img/blog/batterie-domestique.jpg" alt="Batterie domestique" loading="lazy">
+                </div>
+                
+                <p>Optimisez votre production d'énergie :</p>
+                
+                <ul>
+                    <li>Gestion intelligente des panneaux solaires</li>
+                    <li>Stockage dans batteries</li>
+                    <li>Revente du surplus automatisée</li>
+                </ul>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="article-section">
+                <h2><i class="fas fa-chart-line"></i> 5. Suivi et analyse</h2>
+                
+                <img src="../../../assets/img/blog/tableau-de-bord.jpg" alt="Tableau de bord énergie" class="article-img" loading="lazy">
+                
+                <p>Notre application vous permet de :</p>
+                
+                <ul>
+                    <li>Visualiser votre consommation en temps réel</li>
+                    <li>Recevoir des recommandations</li>
+                    <li>Comparer avec des foyers similaires</li>
+                </ul>
+            </section>
+			<div class="sidebar-widget">
+                <h4>Calculateur d'économies</h4>
+                <div class="calculator">
+                    <label>Votre consommation actuelle (DT/mois):</label>
+                    <input type="number" id="current-bill" placeholder="Ex: 200">
+                    
+                    <label>Type de logement :</label>
+                    <select id="home-type">
+                        <option value="1">Appartement (< 80m²)</option>
+                        <option value="2">Maison (80-120m²)</option>
+                        <option value="3">Grande maison (>120m²)</option>
+                    </select>
+                    
+                    <button id="calculate-btn">Calculer mes économies</button>
+                    
+                    <div id="result" style="display: none; margin-top: 15px; padding: 10px; background: #e8f5e9; border-radius: 5px; text-align: center;">
+                        <h5>Économie estimée :</h5>
+                        <p id="savings-amount"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <section class="cta-section">
+                <h3>Prêt à faire des économies ?</h3>
+                <a href="../../../contact/contact.html" class="btn">
+                      <div class="cta-buttons">
+                    <a href="../../../contact/contact.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i> Demander un devis
+                    </a>
+                    <a href="tel:+21629328870" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> 00216 29 328 870
+                    </a>
+                </div>
+                </a>
+            </section>
+        </article>
+    </main>
+
+   	<script>
+        // Calculateur d'économies
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const currentBill = parseFloat(document.getElementById('current-bill').value);
+            const homeType = document.getElementById('home-type').value;
+            
+            if (isNaN(currentBill) || currentBill <= 0) {
+                alert('Veuillez entrer une consommation valide');
+                return;
+            }
+            
+            let savingsPercentage;
+            switch(homeType) {
+                case '1': savingsPercentage = 0.35; break;
+                case '2': savingsPercentage = 0.40; break;
+                case '3': savingsPercentage = 0.45; break;
+                default: savingsPercentage = 0.40;
+            }
+            
+            const yearlySavings = (currentBill * savingsPercentage * 12).toFixed(2);
+            const monthlySavings = (currentBill * savingsPercentage).toFixed(2);
+            
+            document.getElementById('savings-amount').innerHTML = 
+                `${monthlySavings}DT/mois<br>${yearlySavings}DT/an`;
+                
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+
+</body>
+<p></p>
+<footer class="site-footer">
+           
+        <div class="copyright">
+            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+        </div>
+    
+</footer>
+</html>

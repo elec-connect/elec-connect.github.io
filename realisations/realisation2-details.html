@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rénovation Électrique Intelligente | Éclairage Connecté & Volets Automatisés</title>
+    <meta name="description" content="Transformez votre habitat avec notre solution complète de rénovation électrique intelligente incluant éclairage connecté et volets roulants automatisés">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css"> 
+
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #4a6fa5;
+            --accent: #e74c3c;
+            --light: #f5f7fa;
+            --dark: #333;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .project-header {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .project-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        /* Conteneur principal */
+        .project-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        @media (min-width: 992px) {
+            .project-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Vidéo principale */
+        .main-video {
+            width: 100%;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .main-video video {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Galerie d'images */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+            height: 200px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item:hover::after {
+            content: '+';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Sections de contenu */
+        .project-section {
+            margin-bottom: 40px;
+        }
+        
+        .project-section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .project-section h3 {
+            color: var(--secondary);
+            margin: 25px 0 15px;
+        }
+        
+        /* Spécifications techniques */
+        .tech-specs {
+            background: var(--light);
+            padding: 25px;
+            border-radius: var(--radius);
+            margin-top: 30px;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .spec-item {
+            margin-bottom: 15px;
+        }
+        
+        .spec-item strong {
+            color: var(--primary);
+        }
+        
+        /* Sidebar */
+        .project-sidebar {
+            background: var(--light);
+            padding: 25px;
+            border-radius: var(--radius);
+            height: fit-content;
+        }
+        
+        .client-testimonial {
+            font-style: italic;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        
+        .client-testimonial::before {
+            content: '"';
+            font-size: 60px;
+            color: var(--secondary);
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            left: 5px;
+        }
+        
+        /* Badges technologies */
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-badge {
+            background: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Boutons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 20px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-back {
+            background: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-header h1 {
+                font-size: 2rem;
+            }
+            
+            .project-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="project-header">
+        <h1>Rénovation Électrique Intelligente</h1>
+        <h2>Éclairage Connecté & Volets Automatisés</h2>
+        <div class="project-meta">
+            <span class="meta-item">
+                <i class="fas fa-home"></i> Maison individuelle
+            </span>
+            <span class="meta-item">
+                <i class="fas fa-expand"></i> 150 m²
+            </span>
+            <span class="meta-item">
+                <i class="fas fa-clock"></i> 4 semaines
+            </span>
+            <span class="meta-item">
+                <i class="fas fa-microchip"></i> Domotique complète
+            </span>
+        </div>
+    </header>
+
+    <main class="project-container">
+        <div class="project-content">
+            <!-- Vidéo principale -->
+            <div class="main-video">
+                <video controls poster="../assets/img/realisations/villa-poster.jpg">
+                    <source src="../assets/videos/blog3.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+            </div>
+            
+            <!-- Description du projet -->
+            <section class="project-section">
+                <h2>Projet de Rénovation Complète</h2>
+                <p>Cette rénovation électrique complète a transformé une maison traditionnelle en un habitat moderne et intelligent. Le projet comprenait la mise aux normes de l'installation électrique, l'ajout d'un système domotique complet et l'automatisation des volets roulants.</p>
+                
+                <h3>Solutions techniques</h3>
+                <ul>
+                    <li>Tableau électrique neuf avec modules intelligents</li>
+                    <li>Éclairage LED connecté avec gradation et changement de couleur</li>
+                    <li>Prises connectées pour une gestion énergétique optimale</li>
+                    <li>Moteurs de volets roulants silencieux avec programmation horaire</li>
+                    <li>Interface de contrôle centralisée via smartphone et tablette</li>
+                </ul>
+            </section>
+            
+            <!-- Galerie d'images -->
+            <section class="project-section">
+                <h3>Galerie du projet</h3>
+                <div class="gallery" id="lightgallery">
+                    <a href="before-after.jpg" class="gallery-item">
+                        <img src="before-after-thumb.jpg" alt="Avant/Après la rénovation" loading="lazy">
+                    </a>
+                    <a href="tableau-electrique.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/tab2.jpg" alt="Tableau électrique moderne" loading="lazy">
+                    </a>
+                    <a href="eclairage-connecte.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/eclairage2.jpg" alt="Éclairage connecté" loading="lazy">
+                    </a>
+                    <a href="volets-automatises.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/volets2.jpg" alt="Volets automatisés" loading="lazy">
+                    </a>
+                    <a href="piscine.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/piscine.jpg" alt="piscine" loading="lazy">
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Spécifications techniques -->
+            <section class="tech-specs">
+                <h3>Spécifications techniques</h3>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <strong>Système domotique:</strong> Sonoff/Tasmota
+                    </div>
+                    <div class="spec-item">
+                        <strong>Tableau électrique:</strong> 36 modules Hager
+                    </div>
+                    <div class="spec-item">
+                        <strong>Éclairage:</strong> 45 points LED connectés
+                    </div>
+                    <div class="spec-item">
+                        <strong>Prises:</strong> 12 prises intelligentes
+                    </div>
+                    <div class="spec-item">
+                        <strong>Volets roulants:</strong> 8 moteurs Somfy
+                    </div>
+                    <div class="spec-item">
+                        <strong>Protection:</strong> Parafoudre et différentiels haute sensibilité
+                    </div>
+                </div>
+            </section>
+            
+            <a href="../realisations/realisations.html" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Retour aux réalisations
+            </a>
+        </div>
+        
+        <!-- Sidebar -->
+        <aside class="project-sidebar">
+            <h3>Détails du projet</h3>
+            <ul>
+                <li><strong>Type:</strong> Rénovation complète</li>
+                <li><strong>Localisation:</strong> Résidence privée</li>
+                <li><strong>Durée:</strong> 4 semaines</li>
+                <li><strong>Équipe:</strong> 2 électriciens spécialisés</li>
+                <li><strong>Budget:</strong> Sur demande</li>
+            </ul>
+            
+            <div class="client-testimonial">
+                <p>"La transformation est incroyable. Nous pouvons maintenant tout contrôler depuis notre smartphone, et les économies d'énergie sont déjà visibles sur nos factures."</p>
+                <p><strong>Mr. Walid</strong>, propriétaire</p>
+            </div>
+            
+            <h3>Technologies utilisées</h3>
+            <div class="tech-badges">
+                <span class="tech-badge">Sonoff</span>
+                <span class="tech-badge">Tasmota</span>
+                <span class="tech-badge">Hager</span>
+                <span class="tech-badge">Somfy</span>
+                <span class="tech-badge">LED Connectée</span>
+                <span class="tech-badge">Home Assistant</span>
+            </div>
+            
+            <a href="../contact/contact.html" class="btn">
+                <i class="fas fa-envelope"></i> Demander un devis
+            </a>
+        </aside>
+    </main>
+
+    <footer class="site-footer">
+           
+        <div class="copyright">
+            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+        </div>
+        
+    
+</footer>
+
+    <!-- Lightgallery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+    <script>
+        // Initialisation de la lightbox
+        lightGallery(document.getElementById('lightgallery'), {
+            selector: '.gallery-item',
+            download: false,
+            counter: false
+        });
+        
+        // Préchargement vidéo
+        const video = document.querySelector('.main-video video');
+        video.addEventListener('mouseover', function() {
+            if (video.readyState < 3) {
+                video.preload = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
