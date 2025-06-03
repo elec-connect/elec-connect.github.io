@@ -1,0 +1,349 @@
+/* Structure de base */
+.service-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    color: #333;
+}
+
+.service-hero {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 8px;
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 2rem;
+    color: white;
+    max-width: 600px;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Sections de contenu */
+.service-section {
+    margin: 4rem 0;
+}
+
+.section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.reverse {
+    direction: rtl;
+}
+
+.reverse > * {
+    direction: ltr;
+}
+
+.section-content {
+    padding: 1rem;
+}
+
+.section-content h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-content p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.section-content ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.section-content li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.section-content li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.section-image {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.section-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.section-image:hover img {
+    transform: scale(1.03);
+}
+
+.image-caption {
+    text-align: center;
+    padding: 0.5rem;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Section CTA */
+.cta-section {
+    text-align: center;
+    margin: 5rem 0;
+    padding: 3rem;
+    background: var(--light-bg);
+    border-radius: 10px;
+}
+
+.cta-section h2 {
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Couleurs et effets */
+:root {
+    --primary-color: #2a5a78;
+    --primary-dark: #1e3f54;
+    --light-bg: #f8f9fa;
+}
+
+.alt-bg {
+    background-color: var(--light-bg);
+    padding: 3rem;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .reverse {
+        direction: ltr;
+    }
+    
+    .service-hero {
+        height: 300px;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+}
+/* Badges technos */
+.tech-badges {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.tech-badges img {
+    height: 50px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.tech-badges img:hover {
+    opacity: 1;
+}
+
+/* Améliorations spécifiques domotique */
+.service-section ul li strong {
+    color: var(--primary-color);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+}
+/* Section Intégration */
+.integration-section {
+    text-align: center;
+    margin: 5rem 0;
+}
+
+.section-title {
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}
+
+.integration-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.integration-card {
+    background: rgb(251, 181, 5);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(214, 217, 7, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.integration-card:hover {
+    transform: translateY(-10px);
+}
+
+.integration-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.integration-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* CTA sombre */
+.dark-cta {
+    background: linear-gradient(135deg, #2b688e 0%, #0e212f 100%);
+    color: white;
+}
+
+.dark-cta h2 {
+    color: white;
+}
+
+.btn-accent {
+    background: transparent;
+    border-color: transparent;
+}
+
+.btn-accent:hover {
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .integration-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Thème Industriel */
+.industrial-theme {
+    --primary-color: #2c3e50;
+    --primary-dark: #1a252f;
+}
+
+/* Section Certifications */
+.certification-section {
+    text-align: center;
+    margin: 4rem 0;
+    padding: 3rem 0;
+    background-color: #f8f9fa;
+}
+
+.certification-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.certification-item {
+    text-align: center;
+    max-width: 150px;
+}
+
+.certification-item img {
+    height: 80px;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+/* Boutons Industriels */
+.btn-industrial {
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-industrial:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-outline-industrial {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-industrial:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.industrial-cta {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../../assets/img/atelier-bg.jpg');
+    background-size: cover;
+    color: white;
+}
+
+.industrial-cta h2 {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .certification-grid {
+        gap: 1.5rem;
+    }
+    
+    .certification-item {
+        max-width: 100px;
+    }
+    
+    .certification-item img {
+        height: 60px;
+    }
+}
