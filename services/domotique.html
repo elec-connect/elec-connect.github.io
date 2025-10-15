@@ -3,29 +3,655 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domotique Intelligente | Électricité Connectée</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/service-detail.css">
+    <title>Domotique Intelligente - Solutions Maison Connectée | Elec-Connect</title>
+    <meta name="description" content="Expert en domotique intelligente en Tunisie. Installation KNX, Sonoff, Zigbee. Pilotage vocal, scénarios personnalisés, maison connectée clé en main.">
+    <meta name="keywords" content="domotique, maison intelligente, KNX, Sonoff, Zigbee, Alexa, Google Home, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --blue: #3498db;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --dark: #1a2c38;
+            --light: #f5f7fa;
+            --gray: #7f8c8d;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HEADER
+        ============================================ */
+        header {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* LOGO ANIMÉ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.6));
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
+
+        .logo-elec {
+            color: white;
+            animation: glow-elec 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-elec {
+            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(94, 6, 237, 0.6); }
+        }
+
+        .logo-separator {
+            color: var(--secondary);
+            font-weight: 300;
+            margin: 0 3px;
+            animation: blink-separator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink-separator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12, var(--secondary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           SERVICE DETAIL
+        ============================================ */
+        .service-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .back-button {
+            margin-bottom: 30px;
+        }
+
+        .back-button .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(94, 6, 237, 0.2);
+        }
+
+        .back-button .btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(94, 6, 237, 0.4);
+        }
+
+        /* ============================================
+           TITRE PRINCIPAL
+        ============================================ */
+        article > h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 40px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        article > h1 i {
+            font-size: 1.2em;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================
+           SERVICE HERO
+        ============================================ */
+        .service-hero {
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           SERVICE SECTIONS
+        ============================================ */
+        .service-section {
+            padding: 60px 0;
+        }
+
+        .service-section.alt-bg {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .section-grid.reverse {
+            direction: rtl;
+        }
+
+        .section-grid.reverse > * {
+            direction: ltr;
+        }
+
+        .section-content h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+
+        .section-content li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.7;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .section-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .section-content li:hover {
+            padding-left: 40px;
+            color: var(--primary);
+        }
+
+        .section-content li strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ============================================
+           SECTION IMAGE
+        ============================================ */
+        .section-image {
+            position: relative;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease;
+        }
+
+        .section-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(26, 44, 56, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        /* ============================================
+           CTA SECTION
+        ============================================ */
+        .cta-section {
+            background: var(--gradient-primary);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            box-shadow: 0 15px 40px rgba(94, 6, 237, 0.3);
+        }
+
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tech-badges img {
+            height: 50px;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+            transition: all 0.3s;
+        }
+
+        .tech-badges img:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 968px) {
+            nav {
+                gap: 30px;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-grid.reverse {
+                direction: ltr;
+            }
+
+            .tech-badges {
+                gap: 20px;
+            }
+
+            .tech-badges img {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+
+            .service-detail {
+                padding: 40px 1rem;
+            }
+
+            .service-hero {
+                height: 350px;
+            }
+
+            .service-section,
+            .service-section.alt-bg {
+                padding: 40px 20px;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-large {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            article > h1 {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .tech-badges {
+                gap: 15px;
+            }
+
+            .tech-badges img {
+                height: 35px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- HEADER -->
     <header>
         <nav>
-            <div class="menu-btn">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
             </div>
-            <ul class="nav-links">
-                <li><a href="../../index.html">Accueil</a></li>
-                <li><a href="../../services.html">Services</a></li>
-                <li><a href="../../realisations/maison1.html">Réalisations</a></li>
-                <li><a href="../../contact/contact.html">Contact</a></li>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="../../realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="service-detail">
         <div class="back-button">
             <a href="../../services.html" class="btn">
@@ -39,8 +665,8 @@
             <div class="service-hero" style="background-image: url('../../assets/img/maison-connectee-banner.jpg')">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <h2>Transformez votre habitat en maison intelligente</h2>
-                    <p>Solutions clés en main avec différent Protocoles</p>
+                    <h2>Transformez Votre Habitat en Maison Intelligente</h2>
+                    <p>Solutions clés en main avec différents protocoles (KNX, Sonoff, Zigbee, WiFi)</p>
                 </div>
             </div>
             
@@ -49,14 +675,15 @@
                 <div class="section-grid">
                     <div class="section-content">
                         <h2>La Domotique au Service de Votre Confort</h2>
-                        <p>Notre système domotique unifie la gestion de tous vos équipements :</p>
+                        <p>Notre système domotique unifie la gestion de tous vos équipements pour un contrôle centralisé et intelligent :</p>
                         <ul>
-                            <li>Éclairage intelligent avec détection de présence</li>
-                            <li>Gestion optimisée du chauffage (thermostats connectés)</li>
-                            <li>Ouverture automatisée des volets roulants</li>
-                            <li>Surveillance énergétique en temps réel</li>
+                            <li>Éclairage intelligent avec détection de présence et variation automatique</li>
+                            <li>Gestion optimisée du chauffage et climatisation (thermostats connectés)</li>
+                            <li>Ouverture automatisée des volets roulants selon l'ensoleillement</li>
+                            <li>Surveillance énergétique en temps réel avec statistiques détaillées</li>
+                            <li>Intégration de tous vos appareils électroménagers connectés</li>
                         </ul>
-                        <p>Nous utilisons des technologies ouvertes (KNX, sonoff, Zigbee) garantissant l'évolutivité de votre installation sans dépendance à un seul fabricant.</p>
+                        <p>Nous utilisons des <strong>technologies ouvertes</strong> (KNX, Sonoff, Zigbee, Matter) garantissant l'évolutivité de votre installation sans dépendance à un seul fabricant.</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/maison-intelligente.jpg" alt="Maison connectée avec contrôle centralisé" loading="lazy">
@@ -70,14 +697,15 @@
                 <div class="section-grid reverse">
                     <div class="section-content">
                         <h2>Scénarios Sur Mesure</h2>
-                        <p>Programmez des ambiances adaptées à chaque moment :</p>
+                        <p>Programmez des ambiances adaptées à chaque moment de votre journée :</p>
                         <ul>
-                            <li><strong>Mode "Réveil" :</strong> Lumière progressive + café qui se prépare</li>
-                            <li><strong>Scénario "Cinéma" :</strong> Éclairage tamisé + stores qui se ferment</li>
-                            <li><strong>Protection "Absence" :</strong> Simulation de présence aléatoire</li>
-                            <li><strong>Mode "Éco" :</strong> Optimisation énergétique automatique</li>
+                            <li><strong>Mode "Réveil Doux" :</strong> Lumière progressive + café qui se prépare + volets qui s'ouvrent</li>
+                            <li><strong>Scénario "Cinéma" :</strong> Éclairage tamisé + stores qui se ferment + son surround activé</li>
+                            <li><strong>Protection "Absence" :</strong> Simulation de présence aléatoire + alertes sécurité</li>
+                            <li><strong>Mode "Éco" :</strong> Optimisation énergétique automatique selon tarifs heures creuses</li>
+                            <li><strong>Scénario "Nuit" :</strong> Extinction progressive + verrouillage automatique + alarme activée</li>
                         </ul>
-                        <p>Notre application mobile vous permet de créer et modifier vos scénarios en quelques clics, sans compétence technique.</p>
+                        <p>Notre <strong>application mobile intuitive</strong> vous permet de créer et modifier vos scénarios en quelques clics, sans aucune compétence technique requise.</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/scenarios-domo.jpg" alt="Application de scénarios domotiques" loading="lazy">
@@ -91,18 +719,19 @@
                 <div class="section-grid">
                     <div class="section-content">
                         <h2>Contrôle Vocal Intégré</h2>
-                        <p>Interagissez naturellement avec votre habitat :</p>
+                        <p>Interagissez naturellement avec votre habitat grâce à l'intelligence artificielle :</p>
                         <ul>
-                            <li>Compatibilité avec Alexa, Google Assistant et Siri</li>
-                            <li>Commandes personnalisables ("Lumière salon 50%")</li>
-                            <li>Synergie avec vos autres appareils connectés</li>
-                            <li>Module vocal local (option sans cloud)</li>
+                            <li>Compatibilité totale avec <strong>Alexa, Google Assistant et Siri</strong></li>
+                            <li>Commandes vocales personnalisables ("Lumière salon 50%", "Active le mode cinéma")</li>
+                            <li>Synergie complète avec vos autres appareils connectés (TV, audio, électroménager)</li>
+                            <li>Module vocal local optionnel (fonctionnement sans connexion cloud)</li>
+                            <li>Reconnaissance vocale multi-utilisateurs avec profils personnalisés</li>
                         </ul>
-                        <p>Nous configurons pour vous plus de 50 commandes vocales de base et pouvons en ajouter selon vos besoins spécifiques.</p>
+                        <p>Nous configurons pour vous <strong>plus de 50 commandes vocales de base</strong> et pouvons en ajouter autant que nécessaire selon vos besoins spécifiques et votre mode de vie.</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/pilotage-vocal.jpg" alt="Pilotage vocal d'une maison connectée" loading="lazy">
-                        <div class="image-caption">Contrôle par assistant vocal</div>
+                        <div class="image-caption">Contrôle intuitif par assistant vocal</div>
                     </div>
                 </div>
             </section>
@@ -110,35 +739,69 @@
             <!-- Section CTA -->
             <section class="cta-section">
                 <div class="tech-badges">
-				    <img src="../../assets/img/sonoff-logo.png" alt="Compatibilité sonoff" loading="lazy">
+                    <img src="../../assets/img/sonoff-logo.png" alt="Compatibilité Sonoff" loading="lazy">
                     <img src="../../assets/img/knx-logo.png" alt="Certification KNX" loading="lazy">
                     <img src="../../assets/img/google-home-badge.png" alt="Compatibilité Google Home" loading="lazy">
                     <img src="../../assets/img/alexa-badge.png" alt="Compatibilité Alexa" loading="lazy">
-					<img src="../../assets/img/google-assistant.png" alt="Compatibilité Google Assistant" loading="lazy">
+                    <img src="../../assets/img/google-assistant.png" alt="Compatibilité Google Assistant" loading="lazy">
                 </div>
-                <h2>Prêt pour l'habitat du futur ?</h2>
+                <h2>🚀 Prêt pour l'Habitat du Futur ?</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.95;">Bénéficiez d'une démonstration gratuite à domicile et d'un devis personnalisé sous 24h</p>
                 <div class="cta-buttons">
-                    <a href="tel:+21629328870" class="btn btn-large">
+                    <a href="tel:+21629328870" class="btn-large">
                         <i class="fas fa-phone"></i> 00216 29 328 870
                     </a>
-                    <a href="../../contact/contact.html" class="btn btn-large btn-outline">
-                        <i class="fas fa-calendar-alt"></i> Demander une démo
+                    <a href="../../contact/contact.html" class="btn-large btn-outline">
+                        <i class="fas fa-calendar-alt"></i> Demander une Démo Gratuite
                     </a>
                 </div>
             </section>
         </article>
     </main>
 
-    <script src="../../assets/js/main.js"></script>
-</body>
-<p></p>
-<footer class="site-footer">
-           
+    <!-- FOOTER -->
+    <footer class="site-footer">
         <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> Expert Domotique Intelligente en Tunisie</p>
         </div>
-        
-    
-</footer>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // MENU MOBILE
+        // ============================================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // ============================================
+        // ANIMATIONS AU SCROLL
+        // ============================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        console.log('🤖 Page Domotique Intelligente chargée avec succès!');
+    </script>
+</body>
 </html>
