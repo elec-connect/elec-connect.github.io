@@ -85,22 +85,6 @@
             </a>
         </div>
 
-       <!-- Section Vidéo Domotique -->
-        <section class="video-section">
-            <h2><i class="fas fa-video"></i> Démonstrations en vidéo</h2>
-            <div class="video-container">
-                <video id="domotiqueVideo" controls width="100%" poster="../../../assets/img/blog/video-poster-800.jpg">
-                    Votre navigateur ne supporte pas les vidéos HTML5.
-                </video>
-                <div class="video-playlist">
-                    <button class="playlist-btn active" data-video="domotique.mp4">Présentation</button>
-                    <button class="playlist-btn" data-video="domotique2.mp4">Installation</button>
-                    <button class="playlist-btn" data-video="domotique3.mp4">Fonctionnalités</button>
-                    <button class="playlist-btn" data-video="domotique4.mp4">Témoignage</button>
-                </div>
-            </div>
-        </section>
-       
         <!-- Particules et contenu... -->
         <div class="particles" id="particles"></div>
         
@@ -149,57 +133,6 @@
             backgroundMusic.volume = 0.3; // Volume modéré
             document.removeEventListener('click', firstInteraction);
         }, { once: true });
-        
-        // Gestion des vidéos
-        document.addEventListener('DOMContentLoaded', function() {
-            const videoPlayer = document.getElementById('domotiqueVideo');
-            const playlistButtons = document.querySelectorAll('.playlist-btn');
-            const videoBasePath = '../../../assets/videos/';
-            const videoSources = [
-                { file: 'domotique.mp4', name: 'Présentation' },
-                { file: 'domotique2.mp4', name: 'Installation' },
-                { file: 'domotique3.mp4', name: 'Fonctionnalités' },
-                { file: 'domotique4.mp4', name: 'Témoignage' }
-            ];
-            
-            let currentVideoIndex = 0;
-
-            function loadAndPlayVideo(index) {
-                currentVideoIndex = index;
-                const videoSource = videoBasePath + videoSources[index].file;
-                
-                if (videoPlayer.src !== videoSource) {
-                    videoPlayer.src = videoSource;
-                    videoPlayer.load();
-                }
-                
-                videoPlayer.play().catch(e => console.log("Auto-play prevented: ", e));
-                
-                playlistButtons.forEach((btn, i) => {
-                    btn.classList.toggle('active', i === index);
-                    btn.setAttribute('aria-label', `Lire ${videoSources[i].name}`);
-                });
-            }
-
-            videoPlayer.addEventListener('ended', function() {
-                const nextIndex = (currentVideoIndex + 1) % videoSources.length;
-                loadAndPlayVideo(nextIndex);
-            });
-
-            playlistButtons.forEach((btn, index) => {
-                btn.addEventListener('click', () => loadAndPlayVideo(index));
-            });
-
-            loadAndPlayVideo(0);
-
-            videoPlayer.addEventListener('playing', function() {
-                const nextIndex = (currentVideoIndex + 1) % videoSources.length;
-                const nextVideo = document.createElement('link');
-                nextVideo.rel = 'prefetch';
-                nextVideo.href = videoBasePath + videoSources[nextIndex].file;
-                document.head.appendChild(nextVideo);
-            });
-        });
 
         // Horloge Tunisie
         function mettreAJourHorloge() {
@@ -293,4 +226,3 @@
 </footer>
 
 </html>
-
