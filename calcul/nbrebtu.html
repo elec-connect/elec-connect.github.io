@@ -3,248 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur de Climatisation</title>
+    <title>Calculateur BTU Climatisation Professionnel | Elec-Connect</title>
+    <meta name="description" content="Calculateur gratuit de BTU pour climatisation : déterminez la puissance idéale pour votre espace selon volume, isolation et exposition">
+    <meta name="keywords" content="calculateur BTU, climatisation, clim, puissance, BTU/h, climatiseur">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+    
     <style>
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
         :root {
-            --primary-color: #00a0e1;
-            --secondary-color: #0077b6;
-            --accent-color: #ff6b6b;
-            --light-bg: #f0f8ff;
-            --dark-text: #2d3436;
-            --border-radius: 10px;
-            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --blue: #3498db;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --cyan: #00a0e1;
+            --dark-cyan: #0077b6;
+            --purple: #9b59b6;
+            --dark: #1a2c38;
+            --light: #f0f8ff;
+            --gray: #7f8c8d;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-cyan: linear-gradient(135deg, #00a0e1 0%, #0077b6 100%);
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-bg);
-            color: var(--dark-text);
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
         }
-        
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+
+        /* ============================================
+           HEADER NAV
+        ============================================ */
+        header.main-nav {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+        }
+
+        .logo-elec { color: white; }
+        .logo-separator { color: var(--secondary); }
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           MAIN CONTENT
+        ============================================ */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: var(--dark);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--cyan);
+            transform: translateX(-5px);
+        }
+
+        /* ============================================
+           HEADER
+        ============================================ */
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 40px;
         }
-        
+
         .header i {
-            font-size: 50px;
-            color: var(--primary-color);
+            font-size: 4rem;
+            color: var(--cyan);
+            margin-bottom: 15px;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            background: var(--gradient-cyan);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
         }
-        
-        h1 {
-            color: var(--primary-color);
-            margin: 0;
-            font-size: 2.2rem;
-        }
-        
+
         .subtitle {
-            color: #7f8c8d;
-            margin-top: 10px;
+            color: var(--gray);
             font-size: 1.1rem;
         }
-        
+
+        /* ============================================
+           CALCULATOR FORM
+        ============================================ */
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
         .calculator {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
         }
-        
+
         .form-group {
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
         }
-        
+
         label {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--secondary-color);
+            color: var(--cyan);
         }
-        
+
         input, select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px;
             border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             font-size: 16px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            font-family: inherit;
         }
-        
+
         input:focus, select:focus {
-            border-color: var(--primary-color);
+            border-color: var(--cyan);
             outline: none;
             box-shadow: 0 0 0 3px rgba(0, 160, 225, 0.2);
         }
-        
+
+        input.invalid {
+            border-color: var(--red);
+        }
+
+        .error-message {
+            color: var(--red);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
         button {
             grid-column: span 2;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-cyan);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            font-size: 18px;
-            font-weight: 600;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(0, 160, 225, 0.3);
         }
-        
+
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 160, 225, 0.3);
+            box-shadow: 0 12px 35px rgba(0, 160, 225, 0.5);
         }
-        
+
+        /* ============================================
+           RESULTS
+        ============================================ */
         .result {
             grid-column: span 2;
             margin-top: 30px;
-            padding: 25px;
-            background-color: #f8fafc;
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--primary-color);
+            padding: 30px;
+            background: linear-gradient(135deg, #e8f4fc, #d4e9f7);
+            border-radius: 15px;
+            border-left: 5px solid var(--cyan);
             display: none;
             animation: fadeIn 0.5s ease-out;
         }
-        
+
         .result-title {
-            color: var(--secondary-color);
-            margin-top: 0;
+            color: var(--dark);
+            margin: 0 0 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
-        
+
         .btu-value {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--cyan);
             text-align: center;
-            margin: 20px 0;
-            padding: 15px;
+            margin: 25px 0;
+            padding: 20px;
             background: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 160, 225, 0.2);
         }
-        
+
         .details {
             background: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
+            padding: 25px;
+            border-radius: 15px;
             margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
+        .details p {
+            margin: 12px 0;
+            font-size: 1.05rem;
+        }
+
+        .details strong {
+            color: var(--dark);
+        }
+
         .details ul {
-            padding-left: 20px;
-            margin: 10px 0;
+            padding-left: 25px;
+            margin: 15px 0;
         }
-        
+
         .details li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: 600;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            margin: 20px 0;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .btn-back:hover {
-            background: var(--secondary-color);
-            transform: translateX(-3px);
-        }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
+        /* ============================================
+           TABLE
+        ============================================ */
+        .table-container {
+            margin-top: 30px;
+        }
+
+        .table-container h4 {
+            color: var(--cyan);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--gradient-cyan);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: #e8f4fc;
+        }
+
+        td {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
         @media (max-width: 768px) {
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
             .calculator {
                 grid-template-columns: 1fr;
             }
-            
+
             button, .result {
                 grid-column: span 1;
             }
-            
-            .container {
-                margin: 20px auto;
-                padding: 20px;
+
+            .btu-value {
+                font-size: 2.5rem;
             }
-            
-            h1 {
-                font-size: 1.8rem;
+
+            table {
+                font-size: 0.9rem;
             }
-        }
-        
-        /* Validation styles */
-        input:invalid {
-            border-color: var(--accent-color);
-        }
-        
-        .error-message {
-            color: var(--accent-color);
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: none;
+
+            th, td {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../calcul/calculateurs.html" class="btn-back">
+    <!-- HEADER NAV -->
+    <header class="main-nav">
+        <nav>
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="../realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <a href="calculateurs.html" class="btn-back">
             <i class="fas fa-arrow-left"></i> Retour aux calculateurs
         </a>
         
@@ -254,130 +491,157 @@
             <p class="subtitle">Déterminez la puissance idéale pour votre climatiseur</p>
         </div>
         
-        <div class="calculator">
-            <div class="form-group">
-                <label for="length"><i class="fas fa-ruler"></i> Longueur (m)</label>
-                <input type="number" id="length" min="1" step="0.1" value="4" required>
-                <div class="error-message" id="length-error">Veuillez entrer une valeur valide (≥ 1m)</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="width"><i class="fas fa-ruler"></i> Largeur (m)</label>
-                <input type="number" id="width" min="1" step="0.1" value="5" required>
-                <div class="error-message" id="width-error">Veuillez entrer une valeur valide (≥ 1m)</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="height"><i class="fas fa-ruler-vertical"></i> Hauteur (m)</label>
-                <input type="number" id="height" min="1" step="0.1" value="2.5" required>
-                <div class="error-message" id="height-error">Veuillez entrer une valeur valide (≥ 1m)</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="occupants"><i class="fas fa-users"></i> Nombre de personnes</label>
-                <input type="number" id="occupants" min="1" value="2" required>
-                <div class="error-message" id="occupants-error">Veuillez entrer un nombre valide (≥ 1)</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="sunlight"><i class="fas fa-sun"></i> Exposition au soleil</label>
-                <select id="sunlight">
-                    <option value="1.0">Peu ensoleillée</option>
-                    <option value="1.1" selected>Normalement ensoleillée</option>
-                    <option value="1.2">Très ensoleillée</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="insulation"><i class="fas fa-home"></i> Isolation</label>
-                <select id="insulation">
-                    <option value="1.0">Bonne isolation</option>
-                    <option value="1.1" selected>Isolation moyenne</option>
-                    <option value="1.2">Mauvaise isolation</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="appliances"><i class="fas fa-plug"></i> Appareils électriques</label>
-                <select id="appliances">
-                    <option value="400">Peu d'appareils</option>
-                    <option value="600" selected>Moyen</option>
-                    <option value="800">Beaucoup d'appareils</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="room-type"><i class="fas fa-door-open"></i> Type de pièce</label>
-                <select id="room-type">
-                    <option value="1.0">Chambre</option>
-                    <option value="1.1" selected>Salon/Salle à manger</option>
-                    <option value="1.2">Cuisine</option>
-                    <option value="1.3">Bureau</option>
-                </select>
-            </div>
-            
-            <button onclick="validateAndCalculate()">
-                <i class="fas fa-calculator"></i> Calculer les BTU nécessaires
-            </button>
-            
-            <div id="result" class="result">
-                <h3 class="result-title"><i class="fas fa-clipboard-check"></i> Résultats du calcul</h3>
-                
-                <div class="btu-value">
-                    <span id="total-btu">0</span> BTU/h
+        <div class="container">
+            <div class="calculator">
+                <!-- Longueur -->
+                <div class="form-group">
+                    <label for="length"><i class="fas fa-ruler"></i> Longueur (m)</label>
+                    <input type="number" id="length" min="1" step="0.1" value="4" required>
+                    <div class="error-message" id="length-error">Veuillez entrer une valeur valide (≥ 1m)</div>
                 </div>
                 
-                <div class="details">
-                    <p><strong>Volume de la pièce:</strong> <span id="volume">0</span> m³</p>
-                    <p><strong>BTU de base:</strong> <span id="base-btu">0</span> BTU/h</p>
-                    <p><strong>Facteurs appliqués:</strong></p>
-                    <ul>
-                        <li>Personnes: +<span id="occupants-btu">0</span> BTU/h</li>
-                        <li>Appareils: +<span id="appliances-btu">0</span> BTU/h</li>
-                        <li>Exposition: ×<span id="sunlight-factor">1.0</span></li>
-                        <li>Isolation: ×<span id="insulation-factor">1.0</span></li>
-                        <li>Type de pièce: ×<span id="room-factor">1.0</span></li>
-                    </ul>
+                <!-- Largeur -->
+                <div class="form-group">
+                    <label for="width"><i class="fas fa-ruler"></i> Largeur (m)</label>
+                    <input type="number" id="width" min="1" step="0.1" value="5" required>
+                    <div class="error-message" id="width-error">Veuillez entrer une valeur valide (≥ 1m)</div>
                 </div>
                 
-                <h4><i class="fas fa-info-circle"></i> Guide des capacités</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>BTU/h</th>
-                            <th>Surface</th>
-                            <th>Type de climatiseur</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>5,000 - 7,000</td>
-                            <td>15-25 m²</td>
-                            <td>Petite pièce</td>
-                        </tr>
-                        <tr>
-                            <td>8,000 - 12,000</td>
-                            <td>25-50 m²</td>
-                            <td>Pièce moyenne</td>
-                        </tr>
-                        <tr>
-                            <td>14,000 - 18,000</td>
-                            <td>50-70 m²</td>
-                            <td>Grande pièce</td>
-                        </tr>
-                        <tr>
-                            <td>20,000+</td>
-                            <td>70+ m²</td>
-                            <td>Très grande pièce</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- Hauteur -->
+                <div class="form-group">
+                    <label for="height"><i class="fas fa-ruler-vertical"></i> Hauteur (m)</label>
+                    <input type="number" id="height" min="1" step="0.1" value="2.5" required>
+                    <div class="error-message" id="height-error">Veuillez entrer une valeur valide (≥ 1m)</div>
+                </div>
+                
+                <!-- Occupants -->
+                <div class="form-group">
+                    <label for="occupants"><i class="fas fa-users"></i> Nombre de personnes</label>
+                    <input type="number" id="occupants" min="1" value="2" required>
+                    <div class="error-message" id="occupants-error">Veuillez entrer un nombre valide (≥ 1)</div>
+                </div>
+                
+                <!-- Exposition -->
+                <div class="form-group">
+                    <label for="sunlight"><i class="fas fa-sun"></i> Exposition au soleil</label>
+                    <select id="sunlight">
+                        <option value="1.0">Peu ensoleillée</option>
+                        <option value="1.1" selected>Normalement ensoleillée</option>
+                        <option value="1.2">Très ensoleillée</option>
+                    </select>
+                </div>
+                
+                <!-- Isolation -->
+                <div class="form-group">
+                    <label for="insulation"><i class="fas fa-home"></i> Isolation</label>
+                    <select id="insulation">
+                        <option value="1.0">Bonne isolation</option>
+                        <option value="1.1" selected>Isolation moyenne</option>
+                        <option value="1.2">Mauvaise isolation</option>
+                    </select>
+                </div>
+                
+                <!-- Appareils -->
+                <div class="form-group">
+                    <label for="appliances"><i class="fas fa-plug"></i> Appareils électriques</label>
+                    <select id="appliances">
+                        <option value="400">Peu d'appareils</option>
+                        <option value="600" selected>Moyen</option>
+                        <option value="800">Beaucoup d'appareils</option>
+                    </select>
+                </div>
+                
+                <!-- Type de pièce -->
+                <div class="form-group">
+                    <label for="room-type"><i class="fas fa-door-open"></i> Type de pièce</label>
+                    <select id="room-type">
+                        <option value="1.0">Chambre</option>
+                        <option value="1.1" selected>Salon/Salle à manger</option>
+                        <option value="1.2">Cuisine</option>
+                        <option value="1.3">Bureau</option>
+                    </select>
+                </div>
+                
+                <button onclick="validateAndCalculate()">
+                    <i class="fas fa-calculator"></i> Calculer les BTU nécessaires
+                </button>
+                
+                <!-- RÉSULTATS -->
+                <div id="result" class="result">
+                    <h3 class="result-title"><i class="fas fa-clipboard-check"></i> Résultats du Calcul</h3>
+                    
+                    <div class="btu-value">
+                        <span id="total-btu">0</span> BTU/h
+                    </div>
+                    
+                    <div class="details">
+                        <p><strong>Volume de la pièce:</strong> <span id="volume">0</span> m³</p>
+                        <p><strong>BTU de base:</strong> <span id="base-btu">0</span> BTU/h</p>
+                        <p><strong>Facteurs appliqués:</strong></p>
+                        <ul>
+                            <li>Personnes: +<span id="occupants-btu">0</span> BTU/h</li>
+                            <li>Appareils: +<span id="appliances-btu">0</span> BTU/h</li>
+                            <li>Exposition: ×<span id="sunlight-factor">1.0</span></li>
+                            <li>Isolation: ×<span id="insulation-factor">1.0</span></li>
+                            <li>Type de pièce: ×<span id="room-factor">1.0</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="table-container">
+                        <h4><i class="fas fa-info-circle"></i> Guide des Capacités</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>BTU/h</th>
+                                    <th>Surface</th>
+                                    <th>Type de climatiseur</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>5,000 - 7,000</td>
+                                    <td>15-25 m²</td>
+                                    <td>Petite pièce</td>
+                                </tr>
+                                <tr>
+                                    <td>8,000 - 12,000</td>
+                                    <td>25-50 m²</td>
+                                    <td>Pièce moyenne</td>
+                                </tr>
+                                <tr>
+                                    <td>14,000 - 18,000</td>
+                                    <td>50-70 m²</td>
+                                    <td>Grande pièce</td>
+                                </tr>
+                                <tr>
+                                    <td>20,000+</td>
+                                    <td>70+ m²</td>
+                                    <td>Très grande pièce</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
+    <!-- FOOTER -->
+    <footer>
+        <div class="copyright">
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-fan"></i> Calculateur BTU Climatisation Professionnel</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
     <script>
-        // Validation des champs
+        // Menu mobile
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Validation input
         function validateInput(inputElement, errorElement) {
             if (!inputElement.checkValidity()) {
                 errorElement.style.display = 'block';
@@ -410,7 +674,6 @@
             if (isValid) {
                 calculateBTU();
             } else {
-                // Faire défiler jusqu'au premier champ invalide
                 const firstInvalid = document.querySelector('.invalid');
                 if (firstInvalid) {
                     firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -419,9 +682,8 @@
             }
         }
         
-        // Calcul des BTU
+        // CALCUL BTU
         function calculateBTU() {
-            // Récupération des valeurs
             const length = parseFloat(document.getElementById('length').value);
             const width = parseFloat(document.getElementById('width').value);
             const height = parseFloat(document.getElementById('height').value);
@@ -431,27 +693,20 @@
             const appliancesWattage = parseInt(document.getElementById('appliances').value);
             const roomFactor = parseFloat(document.getElementById('room-type').value);
             
-            // Calcul du volume
             const volume = length * width * height;
-            
-            // Calcul des BTU de base (35 BTU/h par m³)
             const baseBTU = Math.round(volume * 35);
+            const occupantsBTU = occupants * 600;
+            const appliancesBTU = Math.round(appliancesWattage * 3.412);
             
-            // Facteurs supplémentaires
-            const occupantsBTU = occupants * 600; // 600 BTU/h par personne
-            const appliancesBTU = Math.round(appliancesWattage * 3.412); // Conversion W en BTU/h
-            
-            // Calcul total avec tous les facteurs
             let totalBTU = baseBTU;
             totalBTU += occupantsBTU;
             totalBTU += appliancesBTU;
             totalBTU = Math.round(totalBTU * sunlightFactor * insulationFactor * roomFactor);
             
-            // Arrondir à la valeur standard la plus proche
             const standardBTUs = [5000, 7000, 9000, 12000, 18000, 24000, 30000];
             let recommendedBTU = standardBTUs.find(btu => btu >= totalBTU) || standardBTUs[standardBTUs.length - 1];
             
-            // Affichage des résultats
+            // Affichage
             document.getElementById('volume').textContent = volume.toFixed(1);
             document.getElementById('base-btu').textContent = baseBTU.toLocaleString('fr-FR');
             document.getElementById('occupants-btu').textContent = occupantsBTU.toLocaleString('fr-FR');
@@ -461,14 +716,11 @@
             document.getElementById('room-factor').textContent = roomFactor;
             document.getElementById('total-btu').textContent = recommendedBTU.toLocaleString('fr-FR');
             
-            // Afficher les résultats
             document.getElementById('result').style.display = 'block';
-            
-            // Faire défiler jusqu'aux résultats
-            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         
-        // Validation en temps réel
+        // Validation temps réel
         document.querySelectorAll('input[type="number"]').forEach(input => {
             input.addEventListener('input', function() {
                 const errorId = this.id + '-error';
@@ -478,6 +730,8 @@
                 }
             });
         });
+
+        console.log('❄️ Calculateur BTU chargé!');
     </script>
 </body>
 </html>
