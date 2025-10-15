@@ -3,184 +3,740 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide des Volets Connectés | Électricité Connectée</title>
-    <meta name="description" content="Tout savoir sur les volets roulants connectés : avantages, installation et comparaison des meilleurs systèmes">
-    <link rel="stylesheet" href="../../../assets/css/style.css">
-    <link rel="stylesheet" href="../../../assets/css/blog-article.css">
+    <title>Guide Complet des Volets Connectés 2024 | Elec-Connect</title>
+    <meta name="description" content="Guide complet sur les volets roulants connectés : avantages, installation, comparaison des meilleurs systèmes (Somfy, Sonoff, KNX). Devis gratuit en Tunisie.">
+    <meta name="keywords" content="volets connectés, domotique, Somfy, Sonoff, KNX, automatisation, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
-        /* Styles spécifiques */
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --blue: #3498db;
+            --success: #27ae60;
+            --info: #3498db;
+            --warning: #f39c12;
+            --dark: #1a2c38;
+            --light: #f5f7fa;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-blue: linear-gradient(135deg, #667eea 0%, #3498db 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HEADER
+        ============================================ */
+        header {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* LOGO ANIMÉ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.6));
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
+
+        .logo-elec {
+            color: white;
+            animation: glow-elec 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-elec {
+            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(94, 6, 237, 0.6); }
+        }
+
+        .logo-separator {
+            color: var(--secondary);
+            font-weight: 300;
+            margin: 0 3px;
+            animation: blink-separator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink-separator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12, var(--secondary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           HERO
+        ============================================ */
         .article-hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+            background: linear-gradient(rgba(52, 152, 219, 0.85), rgba(41, 128, 185, 0.85)), 
                         url('../../../assets/img/blog/volets-connectes-hero.jpg') center/cover no-repeat;
-            height: 50vh;
-            max-height: 400px;
+            height: 65vh;
+            max-height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            margin-bottom: 30px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: pulse-hero 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-hero {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .article-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
         .product-badge {
-            background: #3498db;
-            color: white;
-            padding: 5px 15px;
+            background: rgba(241, 196, 15, 0.95);
+            color: var(--dark);
+            padding: 8px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
+            font-weight: 700;
             display: inline-block;
             margin-bottom: 15px;
+            animation: bounce 2s ease-in-out infinite;
         }
-        
-        .benefit-card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .article-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            font-size: 1rem;
+            opacity: 0.95;
+            flex-wrap: wrap;
+        }
+
+        .article-meta span {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 8px;
         }
-        
-        .benefit-icon {
+
+        /* ============================================
+           CONTAINER
+        ============================================ */
+        .article-container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        article {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ============================================
+           SECTIONS
+        ============================================ */
+        .article-section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .article-section:last-child {
+            border-bottom: none;
+        }
+
+        .article-section h2 {
+            color: var(--blue);
+            margin-bottom: 25px;
             font-size: 2rem;
-            color: #3498db;
-            min-width: 50px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        
+
+        .article-section h2 i {
+            font-size: 1.8rem;
+        }
+
+        .article-section h3 {
+            color: var(--dark);
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 5px solid var(--blue);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        /* ============================================
+           BENEFIT CARDS
+        ============================================ */
+        .benefit-card {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(52, 152, 219, 0.3);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--blue);
+            min-width: 60px;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .benefit-card h3 {
+            color: var(--blue);
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+        }
+
+        .benefit-card p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           IMAGES
+        ============================================ */
+        .article-img,
+        .article-img-medium {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .article-img:hover,
+        .article-img-medium:hover {
+            transform: scale(1.02);
+        }
+
+        .article-img-medium {
+            max-width: 70%;
+        }
+
+        /* ============================================
+           TABLEAU COMPARATIF
+        ============================================ */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
             margin: 30px 0;
-        }
-        
-        .comparison-table th, 
-        .comparison-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        
-        .comparison-table th {
-            background-color: #f8f9fa;
-        }
-        
-        .comparison-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        
-        .product-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .product-card {
-            border: 1px solid #eee;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
         }
-        
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--gradient-blue);
+            color: white;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s;
+        }
+
+        /* ============================================
+           LISTES
+        ============================================ */
+        ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 12px 0;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        ul li::marker {
+            color: var(--blue);
+            font-size: 1.2rem;
+        }
+
+        /* ============================================
+           PRODUCT SHOWCASE
+        ============================================ */
+        .product-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .product-card {
+            border: 2px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.3);
+            border-color: var(--blue);
+        }
+
         .product-card img {
             width: 100%;
-            height: 180px;
+            height: 220px;
             object-fit: cover;
+            transition: transform 0.3s;
         }
-        
+
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+
         .product-card-body {
-            padding: 15px;
+            padding: 20px;
         }
-        
+
         .product-card h4 {
-            margin-top: 0;
-            color: #2c3e50;
+            color: var(--blue);
+            margin: 0 0 15px 0;
+            font-size: 1.3rem;
         }
-        
-        .article-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px auto;
-            display: block;
+
+        .product-card p {
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #555;
         }
-        
-        .article-img-medium {
-            max-width: 70%;
+
+        /* ============================================
+           CTA SECTION
+        ============================================ */
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: var(--gradient-blue);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 40px rgba(52, 152, 219, 0.4);
         }
-        
+
+        .cta-section h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--blue);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--blue);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 968px) {
+            nav {
+                gap: 30px;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            nav {
+                gap: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+
+            .article-hero {
+                height: 50vh;
+            }
+
+            article {
+                padding: 2rem 1.5rem;
+            }
+
             .benefit-card {
                 flex-direction: column;
                 text-align: center;
             }
-            
+
             .article-img-medium {
                 max-width: 100%;
             }
-            
-            .article-hero {
-                height: 40vh;
+
+            .product-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- HEADER -->
     <header>
         <nav>
-            <div class="menu-btn">
+            <a href="../../../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
             </div>
-            <ul class="nav-links">
-                <li><a href="../../../index.html">Accueil</a></li>
-                <li><a href="../../../services.html">Services</a></li> 
-                <li><a href="../../../realisations/maison1.html">Réalisations</a></li>
-                <li><a href="../../../blog.html" class="active">Blog</a></li>
-                <li><a href="../../../contact/contact.html">Contact</a></li>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../../../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="../../../realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../../../blog.html" class="active"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../../../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Bannière de l'article -->
+    <!-- HERO -->
     <section class="article-hero">
         <div class="article-hero-content">
-            <span class="product-badge">Domotique</span>
+            <span class="product-badge">🏠 Domotique</span>
             <h1>Guide Complet des Volets Connectés</h1>
             <div class="article-meta">
                 <span><i class="far fa-user"></i> Par Sahnoun</span>
-                <span><i class="far fa-calendar-alt"></i> 5 Oct. 2023</span>
+                <span><i class="far fa-calendar-alt"></i> 5 Oct. 2024</span>
+                <span><i class="far fa-clock"></i> 6 min</span>
             </div>
         </div>
     </section>
 
-    <!-- Contenu principal -->
+    <!-- CONTENU -->
     <main class="article-container">
         <article>
-            <!-- Introduction -->
+            <!-- INTRODUCTION -->
             <section class="article-section">
-                <p class="lead">Les volets roulants connectés ne sont plus un luxe mais une solution pratique et économe en énergie. Découvrez comment ils peuvent transformer votre quotidien et quels modèles choisir.</p>
+                <p class="lead">🎯 Les volets roulants connectés ne sont plus un luxe mais une solution pratique, économe en énergie et sécurisante. Découvrez comment ils peuvent transformer votre quotidien et quels modèles choisir selon vos besoins.</p>
                 
-                <img src="../../../assets/img/blog/volets-connectes-exemple.jpg" alt="Volets connectés en action" class="article-img-medium" loading="lazy">
+                <img src="../../../assets/img/blog/volets-connectes-exemple.jpg" 
+                     alt="Volets connectés en action" 
+                     class="article-img-medium" 
+                     loading="lazy">
             </section>
 
-            <!-- Section 1 -->
+            <!-- SECTION 1 : AVANTAGES -->
             <section class="article-section">
-                <h2><i class="fas fa-home"></i> Pourquoi choisir des volets connectés ?</h2>
+                <h2><i class="fas fa-home"></i> Pourquoi Choisir des Volets Connectés ?</h2>
                 
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-clock"></i>
                     </div>
                     <div>
-                        <h3>Confort au quotidien</h3>
-                        <p>Programmez l'ouverture/fermeture selon vos horaires ou via une application. Plus besoin de vous lever pour ajuster vos volets.</p>
+                        <h3>Confort au Quotidien</h3>
+                        <p>Programmez l'ouverture/fermeture selon vos horaires ou pilotez via une application mobile. <strong>Plus besoin de vous lever</strong> pour ajuster vos volets. Contrôle vocal compatible avec Alexa, Google Home et Siri.</p>
                     </div>
                 </div>
                 
@@ -189,8 +745,8 @@
                         <i class="fas fa-bolt"></i>
                     </div>
                     <div>
-                        <h3>Économies d'énergie</h3>
-                        <p>Jusqu'à 15% de réduction sur votre facture de chauffage/climatisation grâce à une gestion optimale de l'ensoleillement.</p>
+                        <h3>Économies d'Énergie</h3>
+                        <p>Jusqu'à <strong>15% de réduction</strong> sur votre facture de chauffage/climatisation grâce à une gestion optimale de l'ensoleillement. Le système ajuste automatiquement les volets selon la température extérieure.</p>
                     </div>
                 </div>
                 
@@ -199,106 +755,125 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div>
-                        <h3>Sécurité renforcée</h3>
-                        <p>Simulez une présence lors de vos absences avec des scénarios aléatoires d'ouverture/fermeture.</p>
+                        <h3>Sécurité Renforcée</h3>
+                        <p>Simulez une présence lors de vos absences avec des scénarios aléatoires d'ouverture/fermeture. <strong>Dissuasion efficace</strong> contre les cambrioleurs. Détection d'intrusion avec alertes instantanées.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Section 2 -->
+            <!-- SECTION 2 : INSTALLATION -->
             <section class="article-section">
-                <h2><i class="fas fa-wrench"></i> Options d'installation</h2>
+                <h2><i class="fas fa-wrench"></i> Options d'Installation</h2>
                 
-                <img src="../../../assets/img/blog/installation-volets.jpg" alt="Installation de volets connectés" class="article-img" loading="lazy">
+                <img src="../../../assets/img/blog/installation-volets.jpg" 
+                     alt="Installation de volets connectés" 
+                     class="article-img" 
+                     loading="lazy">
                 
-                <h3>1. Neuf ou rénovation</h3>
-                <p>Nous proposons des solutions adaptées à tous les cas :</p>
+                <h3>1. Neuf ou Rénovation</h3>
+                <p>Nous proposons des solutions adaptées à tous les cas de figure :</p>
                 
                 <table class="comparison-table">
-                    <tr>
-                        <th>Type</th>
-                        <th>Avantages</th>
-                        <th>Coût moyen</th>
-                    </tr>
-                    <tr>
-                        <td>Installation neuve</td>
-                        <td>Intégration parfaite, choix complet des modèles</td>
-                        <td>250-350 DT</td>
-                    </tr>
-                    <tr>
-                        <td>Motorisation existant</td>
-                        <td>Solution économique, pas de gros travaux</td>
-                        <td>200-250 DT</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Type d'Installation</th>
+                            <th>Avantages</th>
+                            <th>Coût Moyen (TND)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Installation Neuve</strong></td>
+                            <td>Intégration parfaite, choix complet des modèles, garantie optimale</td>
+                            <td>250-350 DT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Motorisation Existante</strong></td>
+                            <td>Solution économique, pas de gros travaux, installation rapide (2h)</td>
+                            <td>200-250 DT</td>
+                        </tr>
+                    </tbody>
                 </table>
                 
-                <h3>2. Protocoles disponibles</h3>
-                <p>Nous travaillons avec les principales technologies :</p>
+                <h3>2. Protocoles Disponibles</h3>
+                <p>Nous travaillons avec les principales technologies du marché :</p>
                 <ul>
-                    <li><strong>Sonoff</strong> : Solution filaire fiable</li>
-                    <li><strong>Zigbee</strong> : Sans fil à faible consommation</li>
-                    <li><strong>WiFi</strong> : Directement connecté à votre box</li>
-                    <li><strong>KNX</strong> : Pour les installations haut de gamme</li>
+                    <li><strong>🔌 Sonoff</strong> : Solution filaire fiable, excellente stabilité</li>
+                    <li><strong>📡 Zigbee</strong> : Sans fil à faible consommation, portée étendue</li>
+                    <li><strong>📶 WiFi</strong> : Directement connecté à votre box, contrôle à distance</li>
+                    <li><strong>🏆 KNX</strong> : Standard professionnel pour installations haut de gamme</li>
                 </ul>
             </section>
 
-            <!-- Section 3 -->
+            <!-- SECTION 3 : COMPARATIF -->
             <section class="article-section">
-                <h2><i class="fas fa-star"></i> Comparatif des meilleurs modèles 2023</h2>
+                <h2><i class="fas fa-star"></i> Comparatif des Meilleurs Modèles 2024</h2>
                 
                 <div class="product-showcase">
                     <div class="product-card">
-                        <img src="../../../assets/img/blog/volet-somfy.jpg" alt="Volet Somfy" loading="lazy">
+                        <img src="../../../assets/img/blog/volet-somfy.jpg" 
+                             alt="Micro Récepteur Somfy IZYMO IO" 
+                             loading="lazy">
                         <div class="product-card-body">
-                            <h4>Micro Récepteur IZYMO IO</h4>
-                            <p>Pour piloter à distance votre moteur de volets roulants filaires avec les box domotiques Conexoon ou Tahoma de Somfy</p>
-                            <p><strong></strong></p>
+                            <h4>Somfy IZYMO IO</h4>
+                            <p>Micro récepteur pour piloter à distance votre moteur de volets roulants filaires avec les box domotiques Conexoon ou Tahoma de Somfy.</p>
+                            <p><strong>✅ Notre choix premium</strong></p>
                         </div>
                     </div>
                     
                     <div class="product-card">
-                        <img src="../../../assets/img/blog/volet-sonoff.jpg" alt="Volet Sonoff" loading="lazy">
+                        <img src="../../../assets/img/blog/volet-sonoff.jpg" 
+                             alt="Sonoff DUAL R3" 
+                             loading="lazy">
                         <div class="product-card-body">
-                            <h4>Sonoff DUAL R3 </h4>
-                            <p>Sonoff Dual R3  Wifi pour  Volet roulant Interrupteur Surveiller le courant et la tension</p>
-                            <p><strong></strong></p>
+                            <h4>Sonoff DUAL R3</h4>
+                            <p>Interrupteur WiFi pour volet roulant avec monitoring du courant et de la tension. Compatible eWeLink et Home Assistant.</p>
+                            <p><strong>💰 Meilleur rapport qualité/prix</strong></p>
                         </div>
                     </div>
                     
                     <div class="product-card">
-                        <img src="../../../assets/img/blog/volet-knx.jpg" alt="Volet KNX" loading="lazy">
+                        <img src="../../../assets/img/blog/volet-knx.jpg" 
+                             alt="Actionneur KNX" 
+                             loading="lazy">
                         <div class="product-card-body">
-                            <h4>actionneur KNX</h4>
-                            <p>Les actionneurs à encastrer KNX se présentent sous plusieurs formes</p>
-                            <p><strong></strong></p>
+                            <h4>Actionneur KNX</h4>
+                            <p>Solution professionnelle pour intégration dans système domotique complet. Programmation avancée et fiabilité maximale.</p>
+                            <p><strong>🏆 Pour installations pro</strong></p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Section 4 -->
+            <!-- SECTION 4 : FONCTIONNALITÉS -->
             <section class="article-section">
-                <h2><i class="fas fa-cogs"></i> Fonctionnalités avancées</h2>
+                <h2><i class="fas fa-cogs"></i> Fonctionnalités Avancées</h2>
                 
-                <img src="../../../assets/img/blog/scenario-volets.jpg" alt="Scénarios domotiques" class="article-img-medium" loading="lazy">
+                <img src="../../../assets/img/blog/scenario-volets.jpg" 
+                     alt="Scénarios domotiques intelligents" 
+                     class="article-img-medium" 
+                     loading="lazy">
                 
-                <h3>Scénarios intelligents</h3>
-                <p>Quelques exemples de ce que nous configurons pour nos clients :</p>
+                <h3>Scénarios Intelligents</h3>
+                <p>Exemples de configurations que nous mettons en place pour nos clients :</p>
                 
                 <ul>
-                    <li><strong>Mode "Réveil"</strong> : Ouverture progressive à l'heure choisie</li>
-                    <li><strong>Protection solaire</strong> : Fermeture automatique en cas de fort ensoleillement</li>
-                    <li><strong>Optimisation thermique</strong> : Ajustement selon la température intérieure/extérieure</li>
-                    <li><strong>Absence prolongée</strong> : Mouvements aléatoires pour simuler une présence</li>
+                    <li><strong>☀️ Mode "Réveil Doux"</strong> : Ouverture progressive à l'heure choisie avec simulation d'un lever de soleil naturel</li>
+                    <li><strong>🌡️ Protection Solaire Automatique</strong> : Fermeture automatique en cas de fort ensoleillement pour préserver la fraîcheur</li>
+                    <li><strong>❄️ Optimisation Thermique</strong> : Ajustement intelligent selon la température intérieure/extérieure pour économiser l'énergie</li>
+                    <li><strong>🏖️ Mode Absence Prolongée</strong> : Mouvements aléatoires pour simuler une présence réaliste (horaires variables)</li>
+                    <li><strong>🌧️ Détection Météo</strong> : Fermeture automatique en cas d'alerte vent fort ou orage</li>
+                    <li><strong>🌙 Mode Nuit</strong> : Fermeture automatique au coucher du soleil avec activation de l'éclairage extérieur</li>
                 </ul>
             </section>
 
             <!-- CTA -->
             <section class="cta-section">
-                <h3>Prêt à automatiser vos volets ?</h3>
+                <h3>🚀 Prêt à Automatiser Vos Volets ?</h3>
+                <p>Bénéficiez d'un devis gratuit et personnalisé sous 24h. Installation professionnelle avec garantie 2 ans.</p>
                 <div class="cta-buttons">
                     <a href="../../../contact/contact.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-alt"></i> Demander un devis
+                        <i class="fas fa-calendar-alt"></i> Demander un Devis Gratuit
                     </a>
                     <a href="tel:+21629328870" class="btn btn-outline">
                         <i class="fas fa-phone"></i> 00216 29 328 870
@@ -308,82 +883,63 @@
         </article>
     </main>
 
-       <style>
-        /* Styles complémentaires */
-        .article-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .article-section {
-            margin-bottom: 50px;
-        }
-        
-        .lead {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #2c3e50;
-        }
-        
-        .cta-section {
-            text-align: center;
-            margin-top: 50px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .btn-primary {
-            background: #3498db;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .btn-outline {
-            border: 2px solid #3498db;
-            color: #3498db;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        @media (max-width: 600px) {
-            .cta-buttons {
-                flex-direction: column;
-            }
-            
-            .btn-primary, .btn-outline {
-                justify-content: center;
-            }
-        }
-       
-    </style>
-</body>
-<p></p>
-<footer class="site-footer">
-           
+    <!-- FOOTER -->
+    <footer class="site-footer">
         <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> Expert Volets Connectés & Domotique en Tunisie</p>
         </div>
-        
-    
-</footer>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // MENU MOBILE
+        // ============================================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // ============================================
+        // ANIMATIONS AU SCROLL
+        // ============================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.article-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        document.querySelectorAll('.benefit-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(-30px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.9)';
+            card.style.transition = 'all 0.5s ease-out';
+            observer.observe(card);
+        });
+
+        console.log('🏠 Guide volets connectés chargé avec succès!');
+    </script>
+</body>
 </html>
