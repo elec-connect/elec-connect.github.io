@@ -39,11 +39,84 @@
             opacity: 0.8;
             margin-top: 2px;
         }
+
+        /* Styles pour la vidéo d'arrière-plan */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #bgVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 5px rgba(94, 6, 237, 0.8);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <!-- Nouvel en-tête animé -->
+    <!-- En-tête avec vidéo d'arrière-plan -->
     <header class="hero animated-header">
+        <!-- Vidéo d'arrière-plan -->
+        <div class="video-background">
+            <video autoplay muted loop id="bgVideo">
+                <source src="assets/videos/domotique-fond.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas les vidéos HTML5.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
         <!-- Horloge Tunisienne -->
         <div class="horloge-connectee">
             <div class="horloge-content">
@@ -85,7 +158,7 @@
             </a>
         </div>
 
-        <!-- Particules et contenu... -->
+        <!-- Particules -->
         <div class="particles" id="particles"></div>
         
         <div class="hero-content">
