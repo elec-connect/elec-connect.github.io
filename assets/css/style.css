@@ -37,7 +37,7 @@ body {
 .hero {
     /* Image de fond */
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('../img/domotique-fond.jpg') center/cover;
+                url('../img/domotique-fond.mp4') center/cover;
     
     /* Dimensions */
     height: 80vh; /* 80% de la hauteur d'écran */
@@ -499,4 +499,5 @@ body {
         .social-logos, .partner-logos, .certifications {
             justify-content: center;
         }
+
     }
