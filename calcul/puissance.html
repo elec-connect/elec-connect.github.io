@@ -3,15 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculateur de Puissance Électrique Domestique</title>
+    <title>Calculateur de Puissance Électrique Domestique Professionnel | Elec-Connect</title>
+    <meta name="description" content="Calculez la puissance électrique nécessaire pour votre domicile et estimez votre abonnement kVA avec notre outil professionnel.">
+    <meta name="keywords" content="calculateur puissance électrique, kVA, abonnement électrique, électricité domestique, consommation électrique">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon"> <!-- Assurez-vous que le chemin est correct -->
+    
     <style>
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #e74c3c;
+            --primary-color: #3498db; /* Bleu */
+            --secondary-color: #2980b9; /* Bleu foncé */
+            --accent-color: #e74c3c; /* Rouge pour les erreurs */
+            --success-color: #2ecc71; /* Vert pour les succès */
             --light-bg: #f5f5f5;
             --dark-text: #2c3e50;
+            --gray-text: #7f8c8d;
+            --border-color: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-button: rgba(52, 152, 219, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
@@ -24,6 +42,9 @@
             color: var(--dark-text);
         }
         
+        /* ============================================
+           HEADER
+        ============================================ */
         h1, h2, h3 {
             color: var(--primary-color);
         }
@@ -31,48 +52,114 @@
         h1 {
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
+        h1 .fas {
+            font-size: 1.2em;
+            color: var(--secondary-color);
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-bottom: 25px; /* Adjusted margin */
+            transition: background 0.3s, transform 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-back:hover {
+            background: var(--secondary-color);
+            transform: translateX(-3px);
+        }
+        
+        /* ============================================
+           CALCULATOR FORM
+        ============================================ */
         .calculator {
             background-color: white;
             border-radius: 10px;
             padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .form-section:last-of-type { /* Use last-of-type for robustness */
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .form-section h2 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .form-section h2 .fas {
+            color: var(--primary-color);
         }
         
         .form-group {
             margin-bottom: 20px;
         }
         
-        .form-section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .form-section:last-child {
-            border-bottom: none;
-        }
-        
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
+            color: var(--dark-text);
         }
         
         input[type="number"] {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 6px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: inherit;
         }
         
         input[type="number"]:focus {
             border-color: var(--primary-color);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        input[type="number"].invalid {
+            border-color: var(--accent-color);
+        }
+        
+        .error-message {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none; /* Hidden by default */
+        }
+        
+        small {
+            display: block;
+            margin-top: 5px;
+            color: var(--gray-text);
+            font-size: 0.9em;
         }
         
         button {
@@ -91,42 +178,104 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            box-shadow: 0 4px 10px var(--shadow-button);
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 20px var(--shadow-button);
+        }
+        
+        /* ============================================
+           RESULTS
+        ============================================ */
+        .result, .recommendation {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .result.show-result, .recommendation.show-result {
+            display: block;
         }
         
         .result {
-            margin-top: 30px;
-            padding: 25px;
-            background-color: #e8f4fc;
-            border-radius: 8px;
+            background-color: #e8f4fc; /* Light blue */
             border-left: 5px solid var(--primary-color);
-            display: none;
-            animation: fadeIn 0.5s ease-out;
         }
         
         .recommendation {
-            margin-top: 20px;
-            padding: 25px;
-            background-color: #e8f8f0;
-            border-radius: 8px;
-            border-left: 5px solid #2ecc71;
-            display: none;
-            animation: fadeIn 0.5s ease-out;
+            background-color: #e8f8f0; /* Light green */
+            border-left: 5px solid var(--success-color);
         }
         
+        .result h3, .recommendation h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .result h3 .fas {
+            color: var(--primary-color);
+        }
+        
+        .recommendation h3 .fas {
+            color: var(--success-color);
+        }
+        
+        .result p, .recommendation p {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+        
+        .result p strong, .recommendation p strong {
+            color: var(--dark-text);
+        }
+        
+        .important-note {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            margin-top: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .important-note .fas {
+            color: var(--accent-color);
+            margin-top: 2px;
+        }
+        
+        /* ============================================
+           APPLIANCE TABLE
+        ============================================ */
         .appliance-list {
             margin-top: 30px;
+        }
+        
+        .appliance-list h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .appliance-list h3 .fas {
+            color: var(--primary-color);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px var(--shadow-light);
+            border-radius: 8px;
+            overflow: hidden; /* Ensures rounded corners apply to table content */
         }
         
         th, td {
@@ -138,36 +287,20 @@
         th {
             background-color: var(--primary-color);
             color: white;
+            font-weight: 600;
         }
         
         tr:nth-child(even) {
             background-color: #f8f9fa;
         }
         
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            margin: 20px 0;
-            transition: background 0.3s, transform 0.3s;
-            font-weight: 600;
+        tr:hover {
+            background-color: #eef7ff;
         }
         
-        .btn-back:hover {
-            background: var(--secondary-color);
-            transform: translateX(-3px);
-        }
-        
-        small {
-            display: block;
-            margin-top: 5px;
-            color: #7f8c8d;
-            font-size: 0.9em;
+        tfoot th {
+            background-color: var(--secondary-color);
+            font-size: 1.1em;
         }
         
         @keyframes fadeIn {
@@ -175,122 +308,151 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
             .calculator {
                 padding: 20px;
             }
             
             h1 {
                 font-size: 1.8rem;
+                gap: 10px;
+            }
+            
+            .form-section h2 {
+                font-size: 1.2rem;
             }
             
             th, td {
-                padding: 8px;
+                padding: 10px;
                 font-size: 0.9em;
+            }
+            
+            button {
+                font-size: 16px;
+                padding: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <a href="../calcul/calculateurs.html" class="btn btn-back">
+    <a href="../calcul/calculateurs.html" class="btn-back">
         <i class="fas fa-arrow-left"></i> Retour aux calculateurs
     </a>
     
-    <h1><i class="fas fa-bolt"></i> Calculateur de Puissance Électrique Domestique</h1>
+    <h1><i class="fas fa-bolt"></i> Calculateur de Puissance Électrique</h1>
     
     <div class="calculator">
-        <div class="form-section">
-            <h2><i class="fas fa-lightbulb"></i> Points Lumineux</h2>
-            <div class="form-group">
-                <label for="lamps">Nombre d'ampoules LED:</label>
-                <input type="number" id="lamps" min="0" value="0">
-                <small>10W par ampoule</small>
+        <form id="powerCalculatorForm"> <!-- Encapsulé dans une balise form -->
+            <div class="form-section">
+                <h2><i class="fas fa-lightbulb"></i> Points Lumineux</h2>
+                <div class="form-group">
+                    <label for="lamps">Nombre d'ampoules LED:</label>
+                    <input type="number" id="lamps" min="0" value="0" required aria-describedby="lamps-error">
+                    <div class="error-message" id="lamps-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 10W par ampoule</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="halogens">Nombre de spots halogènes:</label>
+                    <input type="number" id="halogens" min="0" value="0" required aria-describedby="halogens-error">
+                    <div class="error-message" id="halogens-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 50W par spot</small>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label for="halogens">Nombre de spots halogènes:</label>
-                <input type="number" id="halogens" min="0" value="0">
-                <small>50W par spot</small>
+            <div class="form-section">
+                <h2><i class="fas fa-tv"></i> Appareils Électroniques</h2>
+                <div class="form-group">
+                    <label for="tvs">Nombre de téléviseurs:</label>
+                    <input type="number" id="tvs" min="0" value="0" required aria-describedby="tvs-error">
+                    <div class="error-message" id="tvs-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 100W par TV</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="computers">Nombre d'ordinateurs:</label>
+                    <input type="number" id="computers" min="0" value="0" required aria-describedby="computers-error">
+                    <div class="error-message" id="computers-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 150W par unité</small>
+                </div>
             </div>
-        </div>
+            
+            <div class="form-section">
+                <h2><i class="fas fa-home"></i> Électroménager</h2>
+                <div class="form-group">
+                    <label for="fridges">Nombre de réfrigérateurs:</label>
+                    <input type="number" id="fridges" min="0" value="0" required aria-describedby="fridges-error">
+                    <div class="error-message" id="fridges-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 200W par unité</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="washing">Machines à laver:</label>
+                    <input type="number" id="washing" min="0" value="0" required aria-describedby="washing-error">
+                    <div class="error-message" id="washing-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 2500W par unité</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ovens">Fours électriques:</label>
+                    <input type="number" id="ovens" min="0" value="0" required aria-describedby="ovens-error">
+                    <div class="error-message" id="ovens-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 3000W par unité</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ac">Climatiseurs:</label>
+                    <input type="number" id="ac" min="0" value="0" required aria-describedby="ac-error">
+                    <div class="error-message" id="ac-error">Veuillez entrer un nombre valide (≥ 0).</div>
+                    <small>Estimation: 2000W par unité</small>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2><i class="fas fa-plug"></i> Autres Appareils & Coefficient</h2>
+                <div class="form-group">
+                    <label for="others">Autres appareils (puissance totale en watts):</label>
+                    <input type="number" id="others" min="0" value="0" required aria-describedby="others-error">
+                    <div class="error-message" id="others-error">Veuillez entrer une puissance valide (≥ 0W).</div>
+                    <small>Entrez la puissance totale des appareils non listés</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coeff">Coefficient de simultanéité:</label>
+                    <input type="number" id="coeff" min="0.1" max="1.0" step="0.1" value="0.7" required aria-describedby="coeff-error">
+                    <div class="error-message" id="coeff-error">Veuillez entrer une valeur entre 0.1 et 1.0.</div>
+                    <small>Probabilité que tous les appareils fonctionnent simultanément (0.1 à 1.0)</small>
+                </div>
+            </div>
+            
+            <button type="button" id="calculateBtn"> <!-- type="button" pour éviter la soumission par défaut -->
+                <i class="fas fa-calculator"></i> Calculer la Puissance Requise
+            </button>
+        </form>
         
-        <div class="form-section">
-            <h2><i class="fas fa-tv"></i> Appareils Électroniques</h2>
-            <div class="form-group">
-                <label for="tvs">Nombre de téléviseurs:</label>
-                <input type="number" id="tvs" min="0" value="0">
-                <small>100W par TV</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="computers">Nombre d'ordinateurs:</label>
-                <input type="number" id="computers" min="0" value="0">
-                <small>150W par unité</small>
-            </div>
-        </div>
-        
-        <div class="form-section">
-            <h2><i class="fas fa-home"></i> Électroménager</h2>
-            <div class="form-group">
-                <label for="fridges">Nombre de réfrigérateurs:</label>
-                <input type="number" id="fridges" min="0" value="0">
-                <small>200W par unité</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="washing">Machines à laver:</label>
-                <input type="number" id="washing" min="0" value="0">
-                <small>2500W par unité</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="ovens">Fours électriques:</label>
-                <input type="number" id="ovens" min="0" value="0">
-                <small>3000W par unité</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="ac">Climatiseurs:</label>
-                <input type="number" id="ac" min="0" value="0">
-                <small>2000W par unité</small>
-            </div>
-        </div>
-        
-        <div class="form-section">
-            <h2><i class="fas fa-plug"></i> Autres Appareils</h2>
-            <div class="form-group">
-                <label for="others">Autres appareils (puissance totale en watts):</label>
-                <input type="number" id="others" min="0" value="0">
-                <small>Entrez la puissance totale de vos autres appareils</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="coeff">Coefficient de simultanéité:</label>
-                <input type="number" id="coeff" min="0.1" max="1.0" step="0.1" value="0.7">
-                <small>Probabilité que tous les appareils fonctionnent simultanément (0.1 à 1.0)</small>
-            </div>
-        </div>
-        
-        <button onclick="calculatePower()">
-            <i class="fas fa-calculator"></i> Calculer la Puissance Requise
-        </button>
-        
-        <div id="result" class="result">
+        <div id="result" class="result" aria-live="polite"> <!-- aria-live pour l'accessibilité -->
             <h3><i class="fas fa-clipboard-list"></i> Résultats du Calcul</h3>
             <p><strong>Puissance totale installée:</strong> <span id="total-power">0</span> W</p>
             <p><strong>Puissance simultanée estimée:</strong> <span id="simul-power">0</span> W</p>
             <p><strong>Puissance en kilowatts:</strong> <span id="kw-power">0</span> kW</p>
         </div>
         
-        <div id="recommendation" class="recommendation">
+        <div id="recommendation" class="recommendation" aria-live="polite"> <!-- aria-live pour l'accessibilité -->
             <h3><i class="fas fa-chart-line"></i> Recommandation d'Abonnement</h3>
             <p>Votre puissance estimée est de <span id="rec-power">0</span> kW.</p>
             <p>Nous recommandons un abonnement d'au moins <strong><span id="subscription">6</span> kVA</strong>.</p>
-            <p class="important-note"><i class="fas fa-exclamation-circle"></i> Note: Cette estimation est indicative. Consultez un professionnel pour une évaluation précise.</p>
+            <p class="important-note"><i class="fas fa-exclamation-circle"></i> Note: Cette estimation est indicative. Consultez un professionnel pour une évaluation précise de vos besoins.</p>
         </div>
         
         <div class="appliance-list">
-            <h3><i class="fas fa-list-ol"></i> Répartition de la Puissance</h3>
+            <h3><i class="fas fa-list-ol"></i> Répartition Détaillée de la Puissance</h3>
             <table id="power-table">
                 <thead>
                     <tr>
@@ -305,7 +467,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="3">Total</th>
+                        <th colspan="3">Total Puissance Installée</th>
                         <th id="table-total">0 W</th>
                     </tr>
                 </tfoot>
@@ -314,92 +476,261 @@
     </div>
 
     <script>
-        function calculatePower() {
-            // Récupération et validation des valeurs
-            const lamps = parseInt(document.getElementById('lamps').value) || 0;
-            const halogens = parseInt(document.getElementById('halogens').value) || 0;
-            const tvs = parseInt(document.getElementById('tvs').value) || 0;
-            const computers = parseInt(document.getElementById('computers').value) || 0;
-            const fridges = parseInt(document.getElementById('fridges').value) || 0;
-            const washing = parseInt(document.getElementById('washing').value) || 0;
-            const ovens = parseInt(document.getElementById('ovens').value) || 0;
-            const ac = parseInt(document.getElementById('ac').value) || 0;
-            const others = parseInt(document.getElementById('others').value) || 0;
-            
-            let coeff = parseFloat(document.getElementById('coeff').value) || 0.7;
-            coeff = Math.max(0.1, Math.min(1.0, coeff)); // Forcer entre 0.1 et 1.0
-            
-            // Calcul des puissances
-            const powerValues = {
-                lamps: { name: 'Ampoules LED', qty: lamps, unitPower: 10, totalPower: lamps * 10 },
-                halogens: { name: 'Spots halogènes', qty: halogens, unitPower: 50, totalPower: halogens * 50 },
-                tvs: { name: 'Téléviseurs', qty: tvs, unitPower: 100, totalPower: tvs * 100 },
-                computers: { name: 'Ordinateurs', qty: computers, unitPower: 150, totalPower: computers * 150 },
-                fridges: { name: 'Réfrigérateurs', qty: fridges, unitPower: 200, totalPower: fridges * 200 },
-                washing: { name: 'Machines à laver', qty: washing, unitPower: 2500, totalPower: washing * 2500 },
-                ovens: { name: 'Fours électriques', qty: ovens, unitPower: 3000, totalPower: ovens * 3000 },
-                ac: { name: 'Climatiseurs', qty: ac, unitPower: 2000, totalPower: ac * 2000 },
-                others: { name: 'Autres appareils', qty: others > 0 ? 1 : 0, unitPower: others, totalPower: others }
-            };
-            
-            // Calcul du total
-            let totalPower = 0;
-            for (const key in powerValues) {
-                totalPower += powerValues[key].totalPower;
+        // ============================================
+        // CONSTANTES GLOBALES
+        // ============================================
+        const APPLIANCE_WATTAGES = {
+            lamps: 10,
+            halogens: 50,
+            tvs: 100,
+            computers: 150,
+            fridges: 200,
+            washing: 2500,
+            ovens: 3000,
+            ac: 2000
+        };
+        
+        const COEFFICIENT_MIN = 0.1;
+        const COEFFICIENT_MAX = 1.0;
+        const KVA_SUBSCRIPTION_LEVELS = [3, 6, 9, 12, 15, 18, 24, 30, 36]; // kVA
+        
+        // ============================================
+        // SÉLECTION DES ÉLÉMENTS DU DOM
+        // ============================================
+        const powerCalculatorForm = document.getElementById('powerCalculatorForm');
+        const calculateButton = document.getElementById('calculateBtn');
+        const resultSection = document.getElementById('result');
+        const recommendationSection = document.getElementById('recommendation');
+
+        // Champs de saisie
+        const inputElements = {
+            lamps: document.getElementById('lamps'),
+            halogens: document.getElementById('halogens'),
+            tvs: document.getElementById('tvs'),
+            computers: document.getElementById('computers'),
+            fridges: document.getElementById('fridges'),
+            washing: document.getElementById('washing'),
+            ovens: document.getElementById('ovens'),
+            ac: document.getElementById('ac'),
+            others: document.getElementById('others'),
+            coeff: document.getElementById('coeff')
+        };
+
+        // Messages d'erreur
+        const errorElements = {
+            lamps: document.getElementById('lamps-error'),
+            halogens: document.getElementById('halogens-error'),
+            tvs: document.getElementById('tvs-error'),
+            computers: document.getElementById('computers-error'),
+            fridges: document.getElementById('fridges-error'),
+            washing: document.getElementById('washing-error'),
+            ovens: document.getElementById('ovens-error'),
+            ac: document.getElementById('ac-error'),
+            others: document.getElementById('others-error'),
+            coeff: document.getElementById('coeff-error')
+        };
+        
+        // Affichage des résultats
+        const totalPowerSpan = document.getElementById('total-power');
+        const simulPowerSpan = document.getElementById('simul-power');
+        const kwPowerSpan = document.getElementById('kw-power');
+        const recPowerSpan = document.getElementById('rec-power');
+        const subscriptionSpan = document.getElementById('subscription');
+        const powerTableBody = document.querySelector('#power-table tbody');
+        const tableTotalTh = document.getElementById('table-total');
+
+        // ============================================
+        // FONCTIONS UTILITAIRES
+        // ============================================
+
+        /**
+         * Formate un nombre en chaîne de caractères locale (fr-FR).
+         * @param {number} num - Le nombre à formater.
+         * @param {object} options - Options de formatage pour toLocaleString.
+         * @returns {string} Le nombre formaté.
+         */
+        function formatNumber(num, options = {}) {
+            return num.toLocaleString('fr-FR', options);
+        }
+
+        /**
+         * Valide un champ de saisie et affiche/masque un message d'erreur.
+         * @param {HTMLInputElement} inputElement - L'élément input à valider.
+         * @param {HTMLElement} errorElement - L'élément où afficher le message d'erreur.
+         * @returns {boolean} True si le champ est valide, false sinon.
+         */
+        function validateInput(inputElement, errorElement) {
+            if (!inputElement.checkValidity()) {
+                errorElement.style.display = 'block';
+                inputElement.classList.add('invalid');
+                inputElement.setAttribute('aria-invalid', 'true');
+                return false;
+            } else {
+                errorElement.style.display = 'none';
+                inputElement.classList.remove('invalid');
+                inputElement.setAttribute('aria-invalid', 'false');
+                return true;
             }
+        }
+
+        /**
+         * Récupère une valeur numérique d'un champ, la parse et assure qu'elle est dans les bornes.
+         * @param {HTMLInputElement} element - L'élément HTML à partir duquel récupérer la valeur.
+         * @param {Function} parser - La fonction de parsing (parseFloat ou parseInt).
+         * @param {number} min - La valeur minimale autorisée.
+         * @param {number} max - La valeur maximale autorisée.
+         * @returns {number} La valeur numérique sécurisée.
+         */
+        function getSafeNumericValue(element, parser, min = 0, max = Infinity) {
+            let value = parser(element.value);
+            if (isNaN(value)) {
+                value = 0;
+            }
+            return Math.max(min, Math.min(max, value));
+        }
+
+        // ============================================
+        // LOGIQUE DE CALCUL
+        // ============================================
+
+        /**
+         * Calcule la puissance électrique requise et met à jour l'interface.
+         */
+        function calculatePower() {
+            // 1. Récupération et sécurisation des valeurs d'entrée
+            const lamps = getSafeNumericValue(inputElements.lamps, parseInt);
+            const halogens = getSafeNumericValue(inputElements.halogens, parseInt);
+            const tvs = getSafeNumericValue(inputElements.tvs, parseInt);
+            const computers = getSafeNumericValue(inputElements.computers, parseInt);
+            const fridges = getSafeNumericValue(inputElements.fridges, parseInt);
+            const washing = getSafeNumericValue(inputElements.washing, parseInt);
+            const ovens = getSafeNumericValue(inputElements.ovens, parseInt);
+            const ac = getSafeNumericValue(inputElements.ac, parseInt);
+            const others = getSafeNumericValue(inputElements.others, parseInt);
+            const coeff = getSafeNumericValue(inputElements.coeff, parseFloat, COEFFICIENT_MIN, COEFFICIENT_MAX);
             
-            // Puissance simultanée (avec coefficient)
-            const simulPower = Math.round(totalPower * coeff);
+            // 2. Préparation des données pour le calcul et le tableau
+            const applianceData = [
+                { id: 'lamps', name: 'Ampoules LED', qty: lamps, unitPower: APPLIANCE_WATTAGES.lamps },
+                { id: 'halogens', name: 'Spots halogènes', qty: halogens, unitPower: APPLIANCE_WATTAGES.halogens },
+                { id: 'tvs', name: 'Téléviseurs', qty: tvs, unitPower: APPLIANCE_WATTAGES.tvs },
+                { id: 'computers', name: 'Ordinateurs', qty: computers, unitPower: APPLIANCE_WATTAGES.computers },
+                { id: 'fridges', name: 'Réfrigérateurs', qty: fridges, unitPower: APPLIANCE_WATTAGES.fridges },
+                { id: 'washing', name: 'Machines à laver', qty: washing, unitPower: APPLIANCE_WATTAGES.washing },
+                { id: 'ovens', name: 'Fours électriques', qty: ovens, unitPower: APPLIANCE_WATTAGES.ovens },
+                { id: 'ac', name: 'Climatiseurs', qty: ac, unitPower: APPLIANCE_WATTAGES.ac },
+                { id: 'others', name: 'Autres appareils', qty: others > 0 ? 1 : 0, unitPower: others } // Traiter "autres" comme 1 unité avec puissance totale
+            ];
+            
+            // 3. Calcul de la puissance totale installée
+            const totalPowerInstalled = applianceData.reduce((sum, item) => sum + (item.qty * item.unitPower), 0);
+            
+            // 4. Calcul de la puissance simultanée estimée
+            const simulPower = Math.round(totalPowerInstalled * coeff);
             const kwPower = simulPower / 1000;
             
-            // Affichage des résultats
-            document.getElementById('total-power').textContent = totalPower.toLocaleString();
-            document.getElementById('simul-power').textContent = simulPower.toLocaleString();
-            document.getElementById('kw-power').textContent = kwPower.toFixed(2);
-            document.getElementById('rec-power').textContent = kwPower.toFixed(2);
-            
-            // Recommandation d'abonnement
-            const subscriptionLevels = [6, 9, 12, 15, 18, 24, 30, 36];
-            let subscription = subscriptionLevels.find(level => level >= kwPower) || subscriptionLevels[subscriptionLevels.length - 1];
-            
-            // Si la puissance est inférieure au plus petit niveau, on prend le plus petit
-            if (kwPower < subscriptionLevels[0]) {
-                subscription = subscriptionLevels[0];
-            }
-            
-            document.getElementById('subscription').textContent = subscription;
-            
-            // Mise à jour du tableau
-            updatePowerTable(powerValues, totalPower);
-            
-            // Affichage des résultats
-            document.getElementById('result').style.display = 'block';
-            document.getElementById('recommendation').style.display = 'block';
-            
-            // Faire défiler jusqu'aux résultats
-            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function updatePowerTable(data, totalPower) {
-            const tableBody = document.querySelector('#power-table tbody');
-            tableBody.innerHTML = '';
-            
-            for (const key in data) {
-                if (data[key].qty > 0 || (key === 'others' && data[key].totalPower > 0)) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${data[key].name}</td>
-                        <td>${data[key].qty}</td>
-                        <td>${data[key].unitPower.toLocaleString()}</td>
-                        <td>${data[key].totalPower.toLocaleString()}</td>
-                    `;
-                    tableBody.appendChild(row);
+            // 5. Recommandation d'abonnement kVA
+            let recommendedKva = KVA_SUBSCRIPTION_LEVELS[0]; // Par défaut, le plus petit
+            for (const level of KVA_SUBSCRIPTION_LEVELS) {
+                if (level >= kwPower) {
+                    recommendedKva = level;
+                    break;
                 }
             }
             
-            // Mise à jour du total
-            document.getElementById('table-total').textContent = totalPower.toLocaleString() + ' W';
+            // 6. Affichage des résultats
+            totalPowerSpan.textContent = formatNumber(totalPowerInstalled);
+            simulPowerSpan.textContent = formatNumber(simulPower);
+            kwPowerSpan.textContent = kwPower.toFixed(2);
+            recPowerSpan.textContent = kwPower.toFixed(2);
+            subscriptionSpan.textContent = recommendedKva;
+            
+            // 7. Mise à jour du tableau de répartition
+            updatePowerTable(applianceData, totalPowerInstalled);
+            
+            // 8. Affichage des sections de résultats
+            resultSection.classList.add('show-result');
+            recommendationSection.classList.add('show-result');
+            
+            // Faire défiler jusqu'aux résultats
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        /**
+         * Met à jour le tableau de répartition des puissances.
+         * @param {Array<Object>} data - Données des appareils.
+         * @param {number} totalPower - Puissance totale installée.
+         */
+        function updatePowerTable(data, totalPower) {
+            powerTableBody.innerHTML = ''; // Nettoyer le tableau
+            
+            data.forEach(item => {
+                // Afficher seulement les appareils avec une quantité ou une puissance > 0
+                if (item.qty > 0 || (item.id === 'others' && item.unitPower > 0)) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.qty}</td>
+                        <td>${formatNumber(item.unitPower)}</td>
+                        <td>${formatNumber(item.qty * item.unitPower)}</td>
+                    `;
+                    powerTableBody.appendChild(row);
+                }
+            });
+            
+            tableTotalTh.textContent = formatNumber(totalPower) + ' W';
+        }
+
+        // ============================================
+        // GESTION DES ÉVÉNEMENTS
+        // ============================================
+
+        /**
+         * Gère le clic sur le bouton de calcul, incluant la validation.
+         */
+        function handleCalculateButtonClick() {
+            let allInputsAreValid = true;
+            let firstInvalidInput = null;
+
+            // Valider tous les champs
+            for (const key in inputElements) {
+                const input = inputElements[key];
+                const error = errorElements[key];
+                if (!validateInput(input, error)) {
+                    allInputsAreValid = false;
+                    if (!firstInvalidInput) {
+                        firstInvalidInput = input;
+                    }
+                }
+            }
+            
+            if (allInputsAreValid) {
+                calculatePower();
+            } else {
+                // Si des champs sont invalides, faire défiler vers le premier et lui donner le focus
+                if (firstInvalidInput) {
+                    firstInvalidInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalidInput.focus();
+                }
+                // Masquer les résultats précédents si la validation échoue
+                resultSection.classList.remove('show-result');
+                recommendationSection.classList.remove('show-result');
+            }
+        }
+
+        // Exécuter le code une fois que le DOM est complètement chargé
+        document.addEventListener('DOMContentLoaded', () => {
+            calculateButton.addEventListener('click', handleCalculateButtonClick);
+
+            // Ajouter des écouteurs d'événements pour la validation en temps réel sur chaque champ
+            for (const key in inputElements) {
+                const input = inputElements[key];
+                const error = errorElements[key];
+                input.addEventListener('input', () => validateInput(input, error));
+                input.addEventListener('change', () => validateInput(input, error)); // Utile pour les inputs type="number" avec flèches
+            }
+            console.log('⚡ Calculateur de Puissance Électrique chargé et prêt !');
+        });
     </script>
 </body>
 </html>
