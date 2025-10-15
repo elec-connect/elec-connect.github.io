@@ -3,94 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nos Réalisations à Jemmel | Électricité Connectée</title>
-    <meta name="description" content="Découvrez nos dernières réalisations électriques et domotiques à Jemmel en vidéo">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <title>Nos Réalisations à Jemmel - Portfolio Électricité | Elec-Connect</title>
+    <meta name="description" content="Découvrez nos réalisations en électricité et domotique à Jemmel. Portfolio vidéo de nos projets résidentiels et commerciaux en Tunisie.">
+    <meta name="keywords" content="réalisations, portfolio, projets électricité, domotique, Jemmel, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+    
     <style>
-        /* Styles généraux */
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --blue: #3498db;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --dark: #1a2c38;
+            --light: #f5f7fa;
+            --gray: #7f8c8d;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
+        }
+
+        /* ============================================
+           HEADER NAV
+        ============================================ */
+        header {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
         }
-        
-        .realisations-header {
-            text-align: center;
-            margin: 40px 0;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #4a6fa5;
-        }
-        
-        .realisations-header h1 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        
-        /* Grille des réalisations */
-        .realisations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .realisation-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        /* LOGO ANIMÉ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
             transition: transform 0.3s ease;
         }
-        
-        .realisation-card:hover {
-            transform: translateY(-5px);
+
+        .logo:hover {
+            transform: scale(1.05);
         }
-        
-        /* Conteneur média (image + vidéo) */
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.6));
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
+
+        .logo-elec {
+            color: white;
+            animation: glow-elec 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-elec {
+            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(94, 6, 237, 0.6); }
+        }
+
+        .logo-separator {
+            color: var(--secondary);
+            font-weight: 300;
+            margin: 0 3px;
+            animation: blink-separator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink-separator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12, var(--secondary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           REALISATIONS HEADER
+        ============================================ */
+        .realisations-header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .realisations-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .realisations-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .realisations-header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           MAIN CONTENT
+        ============================================ */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* ============================================
+           REALISATIONS GRID
+        ============================================ */
+        .realisations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        /* ============================================
+           REALISATION CARD
+        ============================================ */
+        .realisation-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .realisation-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .realisation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(94, 6, 237, 0.2);
+        }
+
+        /* ============================================
+           MEDIA CONTAINER
+        ============================================ */
         .media-container {
             position: relative;
             width: 100%;
-            height: 250px;
+            height: 280px;
             overflow: hidden;
+            background: var(--dark);
         }
-        
+
         .realisation-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s ease;
         }
-        
-        /* Style des vidéos */
+
+        .realisation-card:hover .realisation-img {
+            transform: scale(1.1);
+        }
+
         .realisation-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: none;
         }
-        
+
         .video-active .realisation-video {
             display: block;
         }
-        
+
         .video-active .realisation-img {
             display: none;
         }
-        
-        /* Bouton de lecture */
+
+        /* ============================================
+           PLAY BUTTON
+        ============================================ */
         .play-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(74, 111, 165, 0.8);
-            width: 60px;
-            height: 60px;
+            background: rgba(94, 6, 237, 0.9);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -98,91 +326,277 @@
             cursor: pointer;
             z-index: 10;
             transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(94, 6, 237, 0.5);
         }
-        
+
         .play-button:hover {
-            background: rgba(74, 111, 165, 1);
-            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--primary);
+            transform: translate(-50%, -50%) scale(1.15);
+            box-shadow: 0 8px 30px rgba(94, 6, 237, 0.7);
         }
-        
+
         .play-button i {
             color: white;
-            font-size: 24px;
+            font-size: 28px;
             margin-left: 5px;
         }
-        
-        /* Contenu texte */
+
+        .video-active .play-button {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .video-active .play-button:hover {
+            background: var(--red);
+        }
+
+        /* ============================================
+           REALISATION CONTENT
+        ============================================ */
         .realisation-content {
-            padding: 20px;
+            padding: 30px;
         }
-        
+
         .realisation-content h2 {
-            color: #4a6fa5;
-            margin-top: 0;
-            font-size: 1.5rem;
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            transition: color 0.3s;
         }
-        
+
+        .realisation-card:hover .realisation-content h2 {
+            color: var(--blue);
+        }
+
         .realisation-content p {
-            color: #666;
-            margin-bottom: 20px;
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.8;
         }
-        
-        /* Boutons */
+
+        /* ============================================
+           ACTION BUTTONS
+        ============================================ */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .btn {
-            display: inline-block;
-            background: #4a6fa5;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: background 0.3s;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
         }
-        
-        .btn:hover {
-            background: #3a5a80;
-        }
-        
+
         .btn-video {
-            background: #2c3e50;
-            margin-right: 10px;
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(94, 6, 237, 0.3);
         }
-        
+
         .btn-video:hover {
-            background: #1a2635;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(94, 6, 237, 0.5);
         }
-        
+
+        .btn:not(.btn-video) {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:not(.btn-video):hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           BACK BUTTON
+        ============================================ */
         .back-btn {
-            display: block;
-            text-align: center;
-            margin: 40px auto;
-            max-width: 200px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 40px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(94, 6, 237, 0.3);
+            margin: 60px auto 0;
+            display: flex;
+            width: fit-content;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .realisations-header h1 {
-                font-size: 2rem;
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(94, 6, 237, 0.5);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 968px) {
+            nav {
+                gap: 30px;
             }
-            
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .realisations-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+
+            .realisations-header {
+                padding: 60px 20px 40px;
+            }
+
+            main {
+                padding: 40px 15px;
+            }
+
             .realisations-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
-            
+
             .media-container {
-                height: 200px;
+                height: 220px;
+            }
+
+            .realisation-content {
+                padding: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .back-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .play-button i {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="realisations.html" class="active"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- REALISATIONS HEADER -->
     <header class="realisations-header">
-        <h1>Nos Réalisations à Jemmel</h1>
+        <h1>📸 Nos Réalisations à Jemmel</h1>
         <p>Découvrez en vidéo nos projets d'électricité et domotique</p>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main>
         <div class="realisations-grid">
             <!-- Réalisation 1 -->
@@ -201,8 +615,8 @@
                     </div>
                 </div>
                 <div class="realisation-content">
-                    <h2>Villa Moderne</h2>
-                    <p>Installation électrique complète avec système Intelligent SONOFF pour cette villa de 250m² à Jemmel.</p>
+                    <h2>🏡 Villa Moderne</h2>
+                    <p>Installation électrique complète avec système domotique intelligent SONOFF pour cette villa de 250m² à Jemmel.</p>
                     <div class="action-buttons">
                         <button class="btn btn-video" onclick="toggleVideo('media1')">
                             <i class="fas fa-video"></i> Voir la vidéo
@@ -230,8 +644,8 @@
                     </div>
                 </div>
                 <div class="realisation-content">
-                    <h2>Appartement Contemporain</h2>
-                    <p>Rénovation électrique avec éclairage connecté et volets roulants automatisés.</p>
+                    <h2>🌆 Appartement Contemporain</h2>
+                    <p>Rénovation électrique complète avec éclairage LED connecté et volets roulants automatisés intelligents.</p>
                     <div class="action-buttons">
                         <button class="btn btn-video" onclick="toggleVideo('media2')">
                             <i class="fas fa-video"></i> Voir la vidéo
@@ -259,8 +673,8 @@
                     </div>
                 </div>
                 <div class="realisation-content">
-                    <h2>Maison Traditionnelle</h2>
-                    <p>Mise aux normes et installation d'un système de sécurité intégré.</p>
+                    <h2>🏠 Maison Traditionnelle</h2>
+                    <p>Mise aux normes NF C 15-100 et installation d'un système de sécurité intégré avec alarme et caméras.</p>
                     <div class="action-buttons">
                         <button class="btn btn-video" onclick="toggleVideo('media3')">
                             <i class="fas fa-video"></i> Voir la vidéo
@@ -288,8 +702,8 @@
                     </div>
                 </div>
                 <div class="realisation-content">
-                    <h2>Bureau Équipé</h2>
-                    <p>Installation électrique sur mesure pour cet espace de travail à Jemmel.</p>
+                    <h2>💼 Bureau Professionnel</h2>
+                    <p>Installation électrique sur mesure avec réseau informatique et éclairage optimisé pour cet espace de travail à Jemmel.</p>
                     <div class="action-buttons">
                         <button class="btn btn-video" onclick="toggleVideo('media4')">
                             <i class="fas fa-video"></i> Voir la vidéo
@@ -317,8 +731,8 @@
                     </div>
                 </div>
                 <div class="realisation-content">
-                    <h2>Commerce Moderne</h2>
-                    <p>Éclairage professionnel et système de gestion énergétique pour ce local commercial.</p>
+                    <h2>🏪 Commerce Moderne</h2>
+                    <p>Éclairage professionnel LED, système de gestion énergétique et sécurité pour ce local commercial.</p>
                     <div class="action-buttons">
                         <button class="btn btn-video" onclick="toggleVideo('media5')">
                             <i class="fas fa-video"></i> Voir la vidéo
@@ -331,40 +745,51 @@
             </article>
         </div>
         
-        <a href="../index.html" class="btn back-btn">
+        <a href="../index.html" class="back-btn">
             <i class="fas fa-arrow-left"></i> Retour à l'accueil
         </a>
     </main>
 
-    <p></p>
-<footer class="site-footer">
-           
+    <!-- FOOTER -->
+    <footer class="site-footer">
         <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-images"></i> Portfolio Réalisations Électricité & Domotique - Jemmel, Tunisie</p>
         </div>
-        
-    
-</footer>
+    </footer>
 
+    <!-- JAVASCRIPT -->
     <script>
-        // Fonction pour activer/désactiver la vidéo
+        // ============================================
+        // MENU MOBILE
+        // ============================================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // ============================================
+        // TOGGLE VIDEO
+        // ============================================
         function toggleVideo(containerId) {
             const container = document.getElementById(containerId);
             const video = container.querySelector('.realisation-video');
+            const playIcon = container.querySelector('.play-button i');
             
             container.classList.toggle('video-active');
             
             if (container.classList.contains('video-active')) {
                 video.play();
-                container.querySelector('.play-button i').className = 'fas fa-pause';
+                playIcon.className = 'fas fa-pause';
             } else {
                 video.pause();
-                container.querySelector('.play-button i').className = 'fas fa-play';
+                playIcon.className = 'fas fa-play';
             }
         }
         
-        // Pause toutes les vidéos lorsqu'une nouvelle commence
+        // ============================================
+        // PAUSE AUTRES VIDÉOS
+        // ============================================
         document.querySelectorAll('.realisation-video').forEach(video => {
             video.addEventListener('play', function() {
                 document.querySelectorAll('.realisation-video').forEach(otherVideo => {
@@ -379,6 +804,29 @@
                 });
             });
         });
+
+        // ============================================
+        // ANIMATIONS AU SCROLL
+        // ============================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.realisation-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        console.log('📸 Page Réalisations chargée avec succès!');
     </script>
 </body>
 </html>
