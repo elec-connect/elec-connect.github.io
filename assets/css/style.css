@@ -2,7 +2,10 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
+    padding: 0;
+    font-size: 16px;
 }
+
 /* Menu */
 .menu-btn {
     display: none;
@@ -15,64 +18,62 @@ body {
     gap: 20px;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-    .menu-btn {
-        display: block;
-    }
-    .nav-links {
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        height: 100vh;
-        background: #0f62b5;
-        transition: left 0.3s;
-    }
-    .nav-links.active {
-        left: 0;
-    }
-}
-
-/* Dans votre fichier style.css */
+/* Styles pour la vidéo d'arrière-plan */
 .hero {
-    /* Image de fond */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('../img/domotique-fond.jpg') center/cover;
-    
-    /* Dimensions */
-    height: 80vh; /* 80% de la hauteur d'écran */
+    position: relative;
+    height: 80vh;
     min-height: 500px;
-    
-    /* Flexbox pour centrer le contenu */
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    /* Texte */
-    color: rgb(255, 255, 255);
+    color: white;
     text-align: center;
-    
-    /* Effet parallax (optionnel) */
-    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#bgVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
 }
 
 .hero-content {
+    position: relative;
+    z-index: 2;
     max-width: 800px;
     padding: 2rem;
     animation: fadeIn 1.5s ease-out;
 }
 
 .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive */
+    font-size: clamp(2rem, 5vw, 3.5rem);
     margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 5px rgb(94, 6, 237);
+    text-shadow: 2px 2px 5px rgba(94, 6, 237, 0.8);
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 /* Animation */
@@ -81,20 +82,9 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
-    .hero {
-        height: 60vh;
-        background-attachment: scroll; /* Désactive parallax sur mobile */
-    }
-    
-    .hero-content {
-        padding: 1rem;
-    }
-}
-
 /* Assurez la lisibilité */
 .hero {
-    text-shadow: 1px 1px 3px rgb(255, 255, 255);
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
 }
 
 .hero-btns {
@@ -128,14 +118,8 @@ body {
 
 /* Bouton "Nos Services" et "contact"*/
 .btn-outline {
-    /*background-color: #ffffff; /* Orange vif */
-    color: #1A2C38; /* Texte foncé */
+    color: #1A2C38;
     border: 0px solid hsl(0, 0%, 100%);
-}
-
-/*.btn-outline:hover {
-    background-color: transparent;
-    color: #ff0000;
 }
 
 /* Lien téléphone "nos services" et "contact"*/
@@ -145,15 +129,17 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
+
 .btn:hover {
     background-color: transparent;
     color: #ff0000;
-}
-
-.btn {
-    position: relative;
-    overflow: hidden;
 }
 
 .btn::after {
@@ -172,6 +158,12 @@ body {
 
 .btn:hover::after {
     left: 100%;
+}
+
+.btn-primary {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .music-control {
@@ -213,6 +205,7 @@ body {
     display: flex;
     gap: 15px;
     z-index: 10;
+    align-items: center;
 }
 
 .control-btn {
@@ -228,6 +221,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     border: none;
+    text-decoration: none;
 }
 
 .calcul-btn {
@@ -243,6 +237,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     border: none;
+    text-decoration: none;
 }
 
 .control-btn:hover {
@@ -253,6 +248,14 @@ body {
 .calcul-btn:hover {
     background: rgb(255, 0, 0);
     transform: scale(1.1);
+}
+
+.blog-link a {
+    color: rgb(76, 8, 247);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
       
 /* Ajustement pour le bouton Réalisations */
@@ -335,6 +338,7 @@ body {
     color: white;
     font-size: 1.2rem;
     transition: all 0.3s;
+    text-decoration: none;
 }
 
 .social-logos a:hover {
@@ -411,12 +415,12 @@ body {
 }
 
 .elec {
-    color: #0066cc; /* Bleu électrique */
+    color: #0066cc;
     font-weight: 800;
 }
 
 .connect {
-    color: #ff6b6b; /* Rouge/orange énergique */
+    color: #ff6b6b;
     font-weight: 800;
 }
 
@@ -426,33 +430,115 @@ body {
     font-weight: 400;
 }
 
-/* Style de base (PC/mobile) */
-body {
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
+/* Styles pour l'horloge */
+.horloge-connectee {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Pour les écrans < 768px (mobiles) */
+.horloge-content .pays {
+    font-size: 1em;
+    color: #f1c40f;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.heure-digital {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.date-connectee {
+    font-size: 0.8em;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+/* Styles pour les particules */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-    body {
-        font-size: 14px;
+    .menu-btn {
+        display: block;
     }
-    /* Exemple : empiler les éléments en colonne */
-    .ma-classe {
+    
+    .nav-links {
         flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #0f62b5;
+        transition: left 0.3s;
+        padding-top: 60px;
     }
-}
-
-/* Pour les écrans > 1200px (grands écrans) */
-@media (min-width: 1200px) {
-    .conteneur {
-        max-width: 1140px;
-        margin: 0 auto;
+    
+    .nav-links.active {
+        left: 0;
     }
-}
 
-@media (max-width: 768px) {
+    .hero {
+        height: 60vh;
+        background-attachment: scroll;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .hero-btns {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .header-controls {
+        top: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+    
+    .control-btn, .calcul-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .logo-badge {
+        padding: 8px 15px;
+        font-size: 1.1rem;
+    }
+    
+    .horloge-connectee {
+        top: 20px;
+        left: 20px;
+        padding: 8px 12px;
+    }
+    
+    .heure-digital {
+        font-size: 1.4em;
+    }
+    
     .footer-container {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -470,4 +556,38 @@ body {
     .social-logos, .partner-logos, .certifications {
         justify-content: center;
     }
+    
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Pour les écrans > 1200px (grands écrans) */
+@media (min-width: 1200px) {
+    .conteneur {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+}
+
+/* Styles pour le badge du blog */
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Styles pour les icônes mathématiques */
+.math-icon {
+    font-size: 1.1rem;
 }
