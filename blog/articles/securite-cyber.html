@@ -3,191 +3,956 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sécurité des Maisons Connectées | Électricité Connectée</title>
-    <meta name="description" content="Protégez votre habitat connecté contre les cyberattaques avec nos solutions expertes">
-    <link rel="stylesheet" href="../../../assets/css/style.css">
-    <link rel="stylesheet" href="../../../assets/css/blog-article.css">
+    <title>Sécurité Maison Connectée - Protégez-vous des Cyberattaques | Elec-Connect</title>
+    <meta name="description" content="Découvrez comment protéger votre maison connectée contre les cyberattaques. Solutions de sécurité IoT professionnelles en Tunisie.">
+    <meta name="keywords" content="cybersécurité, maison connectée, IoT, protection, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <style>
-        /* Styles spécifiques */
-        .article-hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('../../../assets/img/blog/cyber-securite-hero.jpg') center/cover no-repeat;
-            height: 50vh;
-            max-height: 400px;
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --danger: #e74c3c;
+            --warning: #ffc107;
+            --success: #27ae60;
+            --dark: #1a2c38;
+            --light: #f5f7fa;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --danger-gradient: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HEADER AVEC LOGO ANIMÉ
+        ============================================ */
+        header {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* LOGO ANIMÉ SUR UNE LIGNE */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Icône éclair animée */
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.6));
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(-10deg) scale(1.1);
+            }
+            50% {
+                transform: rotate(10deg) scale(1.15);
+            }
+            75% {
+                transform: rotate(-10deg) scale(1.1);
+            }
+        }
+
+        /* Texte Elec */
+        .logo-elec {
+            color: white;
+            position: relative;
+            animation: glow-elec 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-elec {
+            from {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                             0 0 30px rgba(94, 6, 237, 0.6);
+            }
+        }
+
+        /* Séparateur animé */
+        .logo-separator {
+            color: var(--secondary);
+            font-weight: 300;
+            margin: 0 3px;
+            animation: blink-separator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink-separator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Texte Connect */
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12, var(--secondary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+        }
+
+        /* ============================================
+           NAV LINKS
+        ============================================ */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           HERO SECTION
+        ============================================ */
+        .article-hero {
+            height: 65vh;
+            max-height: 550px;
+            background: linear-gradient(rgba(231, 76, 60, 0.85), rgba(192, 57, 43, 0.85)), 
+                        url('../../../assets/img/blog/cyber-securite-hero.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: pulse-security 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-security {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .article-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .security-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.6); }
+        }
+
+        .article-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ============================================
+           CONTAINER PRINCIPAL
+        ============================================ */
+        .article-container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        article {
+            padding: 3rem 2rem;
+        }
+
+        /* ============================================
+           SECTIONS
+        ============================================ */
+        .article-section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .article-section:last-child {
+            border-bottom: none;
+        }
+
+        .article-section h2 {
+            color: var(--danger);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .article-section h2 i {
+            font-size: 1.8rem;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
             margin-bottom: 30px;
         }
-        
-        .security-badge {
-            background: #e74c3c;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        
+
+        /* ============================================
+           WARNING BOX
+        ============================================ */
         .warning-box {
-            background: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 5px 5px 0;
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-left: 5px solid var(--warning);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.2);
         }
-        
+
+        .warning-box h4 {
+            color: #f57f17;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+
+        .warning-box h4 i {
+            font-size: 1.8rem;
+            animation: shake 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .warning-box p {
+            line-height: 1.8;
+            padding-left: 42px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* ============================================
+           COMPARISON GRID
+        ============================================ */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .comparison-card:hover {
+            border-color: var(--danger);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+        }
+
+        .comparison-card h4 {
+            color: var(--danger);
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--danger);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-card h4 i {
+            flex-shrink: 0;
+        }
+
+        .comparison-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-card li {
+            padding: 10px 0;
+            padding-left: 35px;
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .comparison-card li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* ============================================
+           PROTECTION STEPS
+        ============================================ */
         .protection-steps {
             counter-reset: step-counter;
-            margin: 25px 0;
+            margin: 30px 0;
         }
-        
+
         .protection-step {
             position: relative;
-            padding-left: 60px;
-            margin-bottom: 25px;
+            padding: 25px 25px 25px 80px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.2);
+            transition: all 0.3s;
         }
-        
+
+        .protection-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(39, 174, 96, 0.3);
+        }
+
         .protection-step::before {
             counter-increment: step-counter;
             content: counter(step-counter);
             position: absolute;
-            left: 0;
-            top: 0;
-            width: 40px;
-            height: 40px;
-            background: #2c3e50;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--success);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+            flex-shrink: 0;
         }
-        
-        .comparison-grid {
+
+        .protection-step h3 {
+            color: var(--success);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .protection-step h3 i {
+            flex-shrink: 0;
+        }
+
+        .protection-step p {
+            color: #2d5016;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           IMAGES
+        ============================================ */
+        .article-img,
+        .article-img-small {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .article-img:hover,
+        .article-img-small:hover {
+            transform: scale(1.02);
+        }
+
+        .article-img-small {
+            max-width: 70%;
+        }
+
+        /* ============================================
+           LISTES
+        ============================================ */
+        ul {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        li {
+            margin: 15px 0;
+            padding-left: 45px;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        li::before {
+            content: '🔒';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+        }
+
+        li strong {
+            display: block;
+            color: var(--danger);
+            margin-bottom: 5px;
+        }
+
+        /* ============================================
+           THREAT METER
+        ============================================ */
+        .threat-meter {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-radius: 15px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+        }
+
+        .threat-meter h3 {
+            color: var(--danger);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .threat-meter h3 i {
+            flex-shrink: 0;
+        }
+
+        .threat-level {
+            height: 40px;
+            background: linear-gradient(to right, var(--success) 0%, var(--warning) 40%, var(--danger) 100%);
+            border-radius: 20px;
+            position: relative;
+            margin: 25px auto;
+            max-width: 600px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .threat-pointer {
+            position: absolute;
+            top: -15px;
+            left: 75%;
+            width: 4px;
+            height: 70px;
+            background: var(--dark);
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .threat-pointer::after {
+            content: 'ÉLEVÉ';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--danger);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .threat-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-weight: 600;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ============================================
+           STATISTIQUES
+        ============================================ */
+        .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin: 30px 0;
         }
-        
-        .comparison-card {
+
+        .stat-card {
+            background: var(--danger-gradient);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .stat-card .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card .stat-label {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           CTA SECTION
+        ============================================ */
+        .cta-section {
+            background: var(--danger-gradient);
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            box-shadow: 0 10px 40px rgba(231, 76, 60, 0.4);
+        }
+
+        .cta-section h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .cta-section h3 i {
+            flex-shrink: 0;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .btn-security {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px 40px;
             background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            color: var(--danger);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
         }
-        
-        .comparison-card h4 {
-            color: #2c3e50;
-            margin-top: 0;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+
+        .btn-security:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.5);
         }
-        
-        .article-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px auto;
-            display: block;
+
+        .btn-security i {
+            flex-shrink: 0;
         }
-        
-        .article-img-small {
-            max-width: 60%;
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
         }
-        .article-container {
-            
-            background: #ffffff;
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
-        
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 968px) {
+            nav {
+                gap: 30px;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            nav {
+                gap: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+
+            .article-hero {
+                height: 50vh;
+            }
+
+            .article-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            article {
+                padding: 2rem 1rem;
+            }
+
             .comparison-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .article-img-small {
                 max-width: 100%;
             }
-            
-            .article-hero {
-                height: 40vh;
+
+            .protection-step {
+                padding-left: 25px;
+                padding-top: 70px;
+            }
+
+            .protection-step::before {
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .warning-box p {
+                padding-left: 0;
+            }
+
+            li {
+                padding-left: 35px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- HEADER -->
     <header>
         <nav>
-            <div class="menu-btn">
+            <!-- LOGO ANIMÉ SUR UNE LIGNE -->
+            <a href="../../../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
             </div>
-            <ul class="nav-links">
-                <li><a href="../../../index.html">Accueil</a></li>
-                <li><a href="../../../services.html">Services</a></li> 
-                <li><a href="../../../realisations/maison1.html">Réalisations</a></li>
-                <li><a href="../../../blog.html" class="active">Blog</a></li>
-                <li><a href="../../../contact/contact.html">Contact</a></li>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../../../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="../../../realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../../../blog.html" class="active"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../../../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Bannière de l'article -->
+    <!-- HERO -->
     <section class="article-hero">
         <div class="article-hero-content">
-            <span class="security-badge">Sécurité</span>
-            <h1>Protéger sa maison connectée des cyberattaques</h1>
+            <span class="security-badge">
+                <i class="fas fa-shield-alt"></i> Cybersécurité
+            </span>
+            <h1>Protéger sa Maison Connectée des Cyberattaques</h1>
             <div class="article-meta">
                 <span><i class="far fa-user"></i> Par Sahnoun</span>
-                <span><i class="far fa-calendar-alt"></i> 20 Oct. 2023</span>
+                <span><i class="far fa-calendar-alt"></i> 20 Oct. 2024</span>
+                <span><i class="far fa-clock"></i> 8 min</span>
             </div>
         </div>
     </section>
 
-    <!-- Contenu principal -->
+    <!-- CONTENU PRINCIPAL -->
     <main class="article-container">
         <article>
-            <!-- Introduction -->
+            <!-- INTRODUCTION -->
             <section class="article-section">
-                <p class="lead">Une maison connectée moyenne subit <strong>12 tentatives de piratage par mois</strong>. Découvrez nos solutions pour sécuriser votre habitat intelligent contre les cybermenaces.</p>
+                <p class="lead">
+                    Une maison connectée moyenne subit <strong>12 tentatives de piratage par mois</strong>. En Tunisie, les cyberattaques contre les objets connectés ont augmenté de 156% en 2024. Découvrez nos solutions professionnelles pour sécuriser votre habitat intelligent.
+                </p>
+                
+                <!-- Jauge de menaces -->
+                <div class="threat-meter">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Niveau de menace actuel</h3>
+                    <div class="threat-level">
+                        <div class="threat-pointer"></div>
+                    </div>
+                    <div class="threat-labels">
+                        <span>FAIBLE</span>
+                        <span>MODÉRÉ</span>
+                        <span>ÉLEVÉ</span>
+                        <span>CRITIQUE</span>
+                    </div>
+                </div>
+
+                <!-- Statistiques -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Attaques/mois</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">156%</div>
+                        <div class="stat-label">Augmentation 2024</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">73%</div>
+                        <div class="stat-label">Appareils vulnérables</div>
+                    </div>
+                </div>
                 
                 <img src="../../../assets/img/blog/cyber-menaces.jpg" alt="Cybermenaces maison connectée" class="article-img" loading="lazy">
                 
                 <div class="warning-box">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Attention</h4>
-                    <p>Les appareils non sécurisés peuvent servir de porte d'entrée à des attaques contre votre réseau entier, y compris vos données personnelles.</p>
+                    <h4><i class="fas fa-exclamation-triangle"></i> Alerte Sécurité</h4>
+                    <p>Les appareils IoT non sécurisés peuvent servir de <strong>porte d'entrée</strong> à des attaques contre votre réseau entier, exposant vos données personnelles, bancaires et votre vie privée. Un simple thermostat connecté peut compromettre toute votre sécurité.</p>
                 </div>
             </section>
 
-            <!-- Section 1 -->
+            <!-- SECTION 1 : RISQUES -->
             <section class="article-section">
-                <h2><i class="fas fa-lock"></i> Les risques principaux</h2>
+                <h2><i class="fas fa-skull-crossbones"></i> Les Risques Principaux</h2>
                 
                 <div class="comparison-grid">
                     <div class="comparison-card">
-                        <h4>Appareils vulnérables</h4>
+                        <h4><i class="fas fa-video"></i> Appareils Vulnérables</h4>
                         <ul>
-                            <li>Caméras piratées</li>
-                            <li>Enregistrements volés</li>
-                            <li>Surveillance compromise</li>
+                            <li>Caméras de surveillance piratées</li>
+                            <li>Enregistrements audio/vidéo volés</li>
+                            <li>Surveillance en temps réel compromise</li>
+                            <li>Contrôle à distance détourné</li>
+                            <li>Micro et caméra activés à distance</li>
                         </ul>
                     </div>
                     <div class="comparison-card">
-                        <h4>Données exposées</h4>
+                        <h4><i class="fas fa-database"></i> Données Exposées</h4>
                         <ul>
-                            <li>Historique de présence</li>
-                            <li>Données bancaires</li>
-                            <li>Identifiants personnels</li>
+                            <li>Historique de présence/absence</li>
+                            <li>Données bancaires et paiements</li>
+                            <li>Identifiants et mots de passe</li>
+                            <li>Photos et vidéos personnelles</li>
+                            <li>Conversations privées enregistrées</li>
                         </ul>
                     </div>
                 </div>
@@ -195,130 +960,152 @@
                 <img src="../../../assets/img/blog/risques-cyber.jpg" alt="Risques cybersécurité" class="article-img-small" loading="lazy">
             </section>
 
-            <!-- Section 2 -->
+            <!-- SECTION 2 : SOLUTIONS -->
             <section class="article-section">
-                <h2><i class="fas fa-shield-alt"></i> Notre solution de protection</h2>
+                <h2><i class="fas fa-shield-alt"></i> Notre Solution de Protection Complète</h2>
                 
                 <div class="protection-steps">
                     <div class="protection-step">
-                        <h3>Audit de sécurité complet</h3>
-                        <p>Analyse de tous les appareils connectés et identification des vulnérabilités.</p>
+                        <h3><i class="fas fa-search"></i> Audit de Sécurité Complet</h3>
+                        <p>Analyse approfondie de tous vos appareils connectés (caméras, thermostats, serrures, assistants vocaux). Identification des vulnérabilités, tests de pénétration et rapport détaillé avec plan d'action.</p>
                     </div>
                     
                     <div class="protection-step">
-                        <h3>Réseau sécurisé</h3>
-                        <p>Installation d'un réseau dédié pour les objets connectés, isolé de vos appareils principaux.</p>
+                        <h3><i class="fas fa-network-wired"></i> Réseau Sécurisé Dédié</h3>
+                        <p>Installation d'un réseau WiFi séparé pour vos objets connectés, totalement isolé de vos appareils principaux (PC, smartphones). Pare-feu professionnel et filtrage avancé.</p>
                     </div>
                     
                     <div class="protection-step">
-                        <h3>Chiffrement des données</h3>
-                        <p>Cryptage de toutes les communications entre vos appareils et le cloud.</p>
+                        <h3><i class="fas fa-lock"></i> Chiffrement des Données</h3>
+                        <p>Cryptage militaire AES-256 de toutes les communications entre vos appareils et le cloud. VPN dédié pour les connexions à distance. Certificats SSL/TLS sur tous les appareils.</p>
                     </div>
                     
                     <div class="protection-step">
-                        <h3>Surveillance continue</h3>
-                        <p>Détection et blocage en temps réel des tentatives d'intrusion.</p>
+                        <h3><i class="fas fa-eye"></i> Surveillance Continue 24/7</h3>
+                        <p>Monitoring en temps réel de votre réseau. Détection et blocage automatique des tentatives d'intrusion. Alertes instantanées sur votre smartphone. Mises à jour de sécurité automatiques.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Section 3 -->
+            <!-- SECTION 3 : BONNES PRATIQUES -->
             <section class="article-section">
-                <h2><i class="fas fa-check-circle"></i> Bonnes pratiques</h2>
+                <h2><i class="fas fa-check-double"></i> 10 Bonnes Pratiques Essentielles</h2>
                 
                 <img src="../../../assets/img/blog/bonnes-pratiques.jpg" alt="Bonnes pratiques cybersécurité" class="article-img" loading="lazy">
                 
                 <ul>
-                    <li><strong>Mots de passe complexes</strong> : Utilisez des phrases de passe uniques pour chaque appareil</li>
-                    <li><strong>Mises à jour régulières</strong> : Activez les mises à jour automatiques du firmware</li>
-                    <li><strong>Réseau invité</strong> : Isolez vos appareils IoT sur un réseau séparé</li>
-                    <li><strong>Authentification à deux facteurs</strong> : Activez la 2FA partout où c'est possible</li>
-                    <li><strong>Audit annuel</strong> : Faites vérifier votre système par des professionnels</li>
+                    <li>
+                        <strong>Mots de passe ultra-complexes</strong>
+                        Utilisez des phrases de passe uniques de 16+ caractères pour chaque appareil. Jamais de mot de passe par défaut.
+                    </li>
+                    
+                    <li>
+                        <strong>Mises à jour automatiques</strong>
+                        Activez TOUJOURS les mises à jour automatiques du firmware. 80% des piratages exploitent des failles connues et corrigées.
+                    </li>
+                    
+                    <li>
+                        <strong>Réseau invité/IoT séparé</strong>
+                        Isolez vos appareils IoT sur un réseau WiFi distinct. Ils ne doivent JAMAIS accéder à vos données personnelles.
+                    </li>
+                    
+                    <li>
+                        <strong>Authentification à deux facteurs (2FA)</strong>
+                        Activez la 2FA partout où c'est disponible. Préférez les apps d'authentification aux SMS.
+                    </li>
+                    
+                    <li>
+                        <strong>Désactivation des fonctions inutiles</strong>
+                        Éteignez le micro/caméra quand vous ne les utilisez pas. Désactivez l'accès à distance si non nécessaire.
+                    </li>
+                    
+                    <li>
+                        <strong>Audit de sécurité annuel</strong>
+                        Faites vérifier votre installation par des professionnels certifiés au moins une fois par an.
+                    </li>
+                    
+                    <li>
+                        <strong>Marques réputées uniquement</strong>
+                        Privilégiez les fabricants reconnus qui investissent dans la sécurité (Schneider, Legrand, Sonoff).
+                    </li>
+                    
+                    <li>
+                        <strong>VPN pour connexions externes</strong>
+                        Utilisez toujours un VPN quand vous accédez à votre maison depuis l'extérieur.
+                    </li>
+                    
+                    <li>
+                        <strong>Surveillance des logs</strong>
+                        Vérifiez régulièrement l'historique de connexion de vos appareils pour détecter des accès suspects.
+                    </li>
+                    
+                    <li>
+                        <strong>Plan de réponse aux incidents</strong>
+                        Sachez quoi faire en cas d'attaque (déconnexion, changement des mots de passe, contact avec un expert).
+                    </li>
                 </ul>
             </section>
 
-            
-
-            <!-- CTA -->
+            <!-- CTA FINAL -->
             <section class="cta-section">
-                <h3>Votre sécurité nous importe</h3>
-                <a href="../../../contact/contact.html" class="btn btn-security">
-                    <i class="fas fa-user-shield"></i> Demander un audit de sécurité
+                <h3><i class="fas fa-user-shield"></i> Protégez Votre Maison Dès Aujourd'hui</h3>
+                <p>Ne laissez pas votre sécurité au hasard. Notre équipe d'experts certifiés en cybersécurité IoT vous accompagne.</p>
+                <a href="../../../contact/contact.html" class="btn-security">
+                    <i class="fas fa-shield-alt"></i> 
+                    Demander un Audit de Sécurité Gratuit
                 </a>
+                <p style="margin-top: 20px; font-size: 0.95rem; opacity: 0.9;">
+                    <i class="fas fa-phone"></i> Urgence sécurité : 00216 29 328 870
+                </p>
             </section>
         </article>
     </main>
 
-        <style>
-        /* Styles complémentaires */
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .article-section {
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .article-section:last-child {
-            border-bottom: none;
-        }
-        
-        .lead {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #2c3e50;
-        }
-        
-        .certification-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .certification-badges img {
-            height: 80px;
-            width: auto;
-        }
-        
-        .btn-security {
-            background: #e74c3c;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.3s;
-        }
-        
-        .btn-security:hover {
-            background: #c0392b;
-        }
-        
-        @media (max-width: 600px) {
-            .certification-badges {
-                justify-content: center;
-            }
-            
-            .certification-badges img {
-                height: 60px;
-            }
-        }
-    </style>
-</body>
-<p></p>
-<footer class="site-footer">
-           
+    <!-- FOOTER -->
+    <footer class="site-footer">
         <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-shield-alt"></i> Expert Cybersécurité IoT - Certifié ISO 27001</p>
         </div>
-    
-</footer>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.article-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        document.querySelectorAll('.comparison-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            card.style.transition = 'all 0.5s ease-out';
+            observer.observe(card);
+        });
+
+        console.log('🔒 Article sécurité chargé');
+        console.log('⚡ Logo Elec-Connect animé avec navigation optimisée!');
+    </script>
+</body>
 </html>
