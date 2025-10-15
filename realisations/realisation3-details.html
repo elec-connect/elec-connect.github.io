@@ -3,307 +3,682 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mise aux Normes & Sécurité Intégrée | Électricité Connectée</title>
-    <meta name="description" content="Professionnels de la mise aux normes NFC 15-100 et installation de systèmes de sécurité intégrés pour habitations et entreprises">
+    <title>Mise aux Normes NFC 15-100 & Sécurité Intégrée | Elec-Connect</title>
+    <meta name="description" content="Experts en mise aux normes NFC 15-100 et installation de systèmes de sécurité intégrés pour habitations et entreprises en Tunisie">
+    <meta name="keywords" content="mise aux normes, NFC 15-100, sécurité, alarme, surveillance, certification, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
     <style>
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
         :root {
-            --primary: #2c3e50;
-            --secondary: #4a6fa5;
-            --accent: #e74c3c;
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --blue: #3498db;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --orange: #f39c12;
+            --dark: #1a2c38;
             --light: #f5f7fa;
-            --dark: #333;
-            --shadow: 0 5px 15px rgba(0,0,0,0.1);
-            --radius: 8px;
-            --transition: all 0.3s ease;
+            --gray: #7f8c8d;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-security: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            --gradient-warning: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
         }
-        
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            background: var(--light);
             color: var(--dark);
-            background-color: #fff;
-            max-width: 1200px;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HEADER NAV
+        ============================================ */
+        header.main-nav {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
         }
-        
-        /* Header */
+
+        /* LOGO ANIMÉ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+        }
+
+        .logo-elec {
+            color: white;
+        }
+
+        .logo-separator {
+            color: var(--secondary);
+        }
+
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           PROJECT HEADER
+        ============================================ */
         .project-header {
+            background: var(--gradient-security);
+            color: white;
             text-align: center;
-            margin: 40px 0;
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
+            padding: 80px 20px 60px;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
         .project-header h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
         }
-        
+
+        .project-header h2 {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
         .project-meta {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 30px;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
-        
+
         .meta-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: var(--light);
-            padding: 8px 15px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
             font-weight: 500;
         }
-        
-        /* Conteneur principal */
+
+        /* ============================================
+           MAIN CONTAINER
+        ============================================ */
         .project-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 40px;
-            margin-bottom: 50px;
+            gap: 50px;
         }
-        
+
         @media (min-width: 992px) {
             .project-container {
                 grid-template-columns: 2fr 1fr;
             }
         }
-        
-        /* Vidéo principale */
+
+        /* ============================================
+           MAIN VIDEO
+        ============================================ */
         .main-video {
             width: 100%;
-            border-radius: var(--radius);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
         }
-        
+
         .main-video video {
             width: 100%;
             display: block;
         }
-        
-        /* Galerie d'images */
+
+        /* ============================================
+           PROJECT SECTION
+        ============================================ */
+        .project-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .project-section h2 {
+            color: var(--red);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--red);
+            padding-bottom: 15px;
+        }
+
+        .project-section h3 {
+            color: var(--blue);
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+        }
+
+        .project-section p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* ============================================
+           ALERT BOX
+        ============================================ */
+        .alert-box {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-left: 5px solid var(--orange);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .alert-box h3 {
+            color: var(--orange);
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-box p {
+            color: var(--dark);
+            margin: 0;
+        }
+
+        /* ============================================
+           CHECKLIST - CORRECTION ICI
+        ============================================ */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            padding-left: 40px; /* ✅ Augmenté de 35px à 40px */
+            position: relative;
+            color: var(--dark);
+            transition: all 0.3s;
+            line-height: 1.6; /* ✅ Ajouté pour espacer */
+        }
+
+        .checklist li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--green);
+            position: absolute;
+            left: 0;
+            top: 12px; /* ✅ Ajouté pour alignement vertical */
+            font-size: 1.1rem; /* ✅ Réduit de 1.2rem à 1.1rem */
+            width: 25px; /* ✅ Largeur fixe pour l'icon */
+            text-align: center; /* ✅ Centré */
+        }
+
+        .checklist li:hover {
+            padding-left: 45px; /* ✅ Ajusté en conséquence */
+            color: var(--red);
+        }
+
+        /* ============================================
+           SIDEBAR CHECKLIST - CORRECTION ICI AUSSI
+        ============================================ */
+        .project-sidebar .checklist li {
+            padding: 12px 0;
+            padding-left: 40px; /* ✅ Augmenté */
+            border-bottom: 1px solid #eee;
+        }
+
+        .project-sidebar .checklist li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--green);
+            position: absolute;
+            left: 0;
+            top: 12px; /* ✅ Alignement vertical */
+            font-size: 1.1rem; /* ✅ Taille réduite */
+            width: 25px; /* ✅ Largeur fixe */
+            text-align: center; /* ✅ Centré */
+        }
+
+        .project-sidebar .checklist li:hover {
+            padding-left: 45px; /* ✅ Ajusté */
+        }
+
+        /* ============================================
+           GALLERY
+        ============================================ */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin: 30px 0;
         }
-        
+
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: var(--radius);
-            height: 200px;
+            border-radius: 15px;
+            height: 250px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: transform 0.5s ease;
         }
-        
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.3);
+        }
+
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
-        
-        .gallery-item:hover::after {
+
+        .gallery-item::after {
             content: '+';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(231, 76, 60, 0.8);
             color: white;
-            font-size: 2rem;
+            font-size: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        
-        /* Sections de contenu */
-        .project-section {
-            margin-bottom: 40px;
+
+        .gallery-item:hover::after {
+            opacity: 1;
         }
-        
-        .project-section h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .project-section h3 {
-            color: var(--secondary);
-            margin: 25px 0 15px;
-        }
-        
-        /* Spécifications techniques */
+
+        /* ============================================
+           TECH SPECS
+        ============================================ */
         .tech-specs {
-            background: var(--light);
-            padding: 25px;
-            border-radius: var(--radius);
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            padding: 40px;
+            border-radius: 20px;
             margin-top: 30px;
         }
-        
+
+        .tech-specs h3 {
+            color: var(--red);
+            margin-top: 0;
+            border-bottom: 3px solid var(--red);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
         .specs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
-        
+
         .spec-item {
-            margin-bottom: 15px;
-        }
-        
-        .spec-item strong {
-            color: var(--primary);
-        }
-        
-        /* Liste de vérification */
-        .checklist {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .checklist li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .checklist li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: #27ae60;
-            position: absolute;
-            left: 0;
-        }
-        
-        /* Sidebar */
-        .project-sidebar {
-            background: var(--light);
-            padding: 25px;
-            border-radius: var(--radius);
-            height: fit-content;
-        }
-        
-        .client-testimonial {
-            font-style: italic;
-            padding: 20px;
             background: white;
-            border-radius: var(--radius);
-            margin: 20px 0;
-            position: relative;
-            box-shadow: var(--shadow);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
-        
+
+        .spec-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .spec-item strong {
+            color: var(--red);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* ============================================
+           SIDEBAR
+        ============================================ */
+        .project-sidebar {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .project-sidebar h3 {
+            color: var(--red);
+            border-bottom: 3px solid var(--red);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .project-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-sidebar > ul > li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* ============================================
+           TESTIMONIAL
+        ============================================ */
+        .client-testimonial {
+            background: var(--gradient-security);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            font-style: italic;
+        }
+
         .client-testimonial::before {
             content: '"';
-            font-size: 60px;
-            color: var(--secondary);
-            opacity: 0.2;
+            font-size: 80px;
+            color: rgba(255, 255, 255, 0.2);
             position: absolute;
             top: -10px;
-            left: 5px;
+            left: 10px;
+            font-family: Georgia, serif;
         }
-        
-        /* Badges technologies */
+
+        .client-testimonial p {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        /* ============================================
+           TECH BADGES
+        ============================================ */
         .tech-badges {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin: 20px 0;
         }
-        
+
         .tech-badge {
-            background: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            background: var(--gradient-security);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 0.9rem;
-            box-shadow: var(--shadow);
+            font-weight: 600;
         }
-        
-        /* Boutons */
+
+        /* ============================================
+           BUTTONS
+        ============================================ */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--secondary);
-            color: white;
-            padding: 12px 25px;
-            border-radius: var(--radius);
+            padding: 15px 35px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: var(--transition);
+            font-weight: 700;
+            transition: all 0.3s;
             margin-top: 20px;
-            text-align: center;
-            border: none;
             cursor: pointer;
-            font-weight: 500;
+            border: none;
         }
-        
-        .btn:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
+
         .btn-back {
-            background: var(--primary);
+            background: var(--dark);
+            color: white;
         }
-        
+
+        .btn-back:hover {
+            background: var(--red);
+            transform: translateX(-5px);
+        }
+
         .btn-accent {
-            background: var(--accent);
+            background: var(--gradient-security);
+            color: white;
+            width: 100%;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
         }
-        
-        /* Alerte importante */
-        .alert-box {
-            background: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: var(--radius);
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(231, 76, 60, 0.5);
         }
-        
-        /* Footer */
-        footer {
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
             text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 1px solid #eee;
-            color: var(--primary);
+            padding: 30px 20px;
+            margin-top: 80px;
         }
-        
-        /* Responsive */
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
         @media (max-width: 768px) {
-            .project-header h1 {
-                font-size: 2rem;
+            .menu-btn {
+                display: flex;
             }
-            
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .project-header {
+                padding: 60px 20px 40px;
+            }
+
+            .project-container {
+                padding: 40px 15px;
+            }
+
+            .project-section {
+                padding: 25px;
+            }
+
+            .project-sidebar {
+                padding: 25px;
+                position: static;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 220px;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
             .project-meta {
                 flex-direction: column;
-                align-items: center;
-                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- HEADER NAV -->
+    <header class="main-nav">
+        <nav>
+            <a href="../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- PROJECT HEADER -->
     <header class="project-header">
-        <h1>Mise aux Normes & Sécurité Intégrée</h1>
-        <h2>Protection complète pour votre habitat ou entreprise</h2>
+        <h1>🛡️ Mise aux Normes & Sécurité Intégrée</h1>
+        <h2>Protection Complète pour Votre Habitat ou Entreprise</h2>
         <div class="project-meta">
             <span class="meta-item">
                 <i class="fas fa-shield-alt"></i> Sécurité 360°
@@ -320,6 +695,7 @@
         </div>
     </header>
 
+    <!-- MAIN CONTAINER -->
     <main class="project-container">
         <div class="project-content">
             <!-- Vidéo principale -->
@@ -333,98 +709,106 @@
             <!-- Description du projet -->
             <section class="project-section">
                 <h2>Solution Complète de Sécurité</h2>
-                <p>Notre offre combine la mise aux normes électriques NFC 15-100 avec l'installation d'un système de sécurité intégré pour une protection optimale de votre propriété.</p>
+                <p>Notre offre combine la <strong>mise aux normes électriques NFC 15-100</strong> avec l'installation d'un <strong>système de sécurité intégré</strong> pour une protection optimale et certifiée de votre propriété.</p>
                 
                 <div class="alert-box">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Pourquoi une mise aux normes ?</h3>
-                    <p>Une installation électrique aux normes réduit considérablement les risques d'incendie et d'électrocution, tout en étant obligatoire pour les constructions neuves ou les rénovations importantes.</p>
+                    <h3><i class="fas fa-exclamation-triangle"></i> Pourquoi une Mise aux Normes ?</h3>
+                    <p>Une installation électrique aux normes <strong>réduit de 80% les risques d'incendie</strong> et d'électrocution, tout en étant <strong>obligatoire</strong> pour les constructions neuves ou les rénovations importantes. Elle valorise également votre bien immobilier.</p>
                 </div>
                 
-                <h3>Nos interventions</h3>
+                <h3>🔧 Nos Interventions Complètes</h3>
                 <ul class="checklist">
-                    <li>Diagnostic complet de l'installation existante</li>
-                    <li>Mise à niveau du tableau électrique</li>
-                    <li>Installation de dispositifs différentiels haute sensibilité</li>
-                    <li>Protection contre les surtensions</li>
-                    <li>Câblage sécurisé et gainage</li>
-                    <li>Installation du système de sécurité</li>
-                    <li>Tests et certification finale</li>
+                    <li>Diagnostic complet de l'installation électrique existante</li>
+                    <li>Mise à niveau du tableau électrique aux normes actuelles</li>
+                    <li>Installation de dispositifs différentiels haute sensibilité 30mA</li>
+                    <li>Protection contre les surtensions (parafoudre)</li>
+                    <li>Câblage sécurisé et gainage selon normes</li>
+                    <li>Installation du système de sécurité (alarme, caméras, détecteurs)</li>
+                    <li>Tests complets et certification CONSUEL finale</li>
                 </ul>
             </section>
             
             <!-- Galerie d'images -->
             <section class="project-section">
-                <h3>Galerie de nos installations</h3>
+                <h3>📸 Galerie de Nos Installations</h3>
                 <div class="gallery" id="lightgallery">
-                    <a href="tableau-norme.jpg" class="gallery-item">
-                        <img src="tableau-norme-thumb.jpg" alt="Tableau électrique aux normes" loading="lazy">
+                    <a href="../assets/img/realisations/tableau-norme.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/tableau-norme.jpg" alt="Tableau électrique aux normes NFC 15-100" loading="lazy">
                     </a>
-                    <a href="camera-securite.jpg" class="gallery-item">
-                        <img src="camera-securite-thumb.jpg" alt="Caméra de sécurité installée" loading="lazy">
+                    <a href="../assets/img/realisations/camera-securite.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/camera-securite.jpg" alt="Caméra de sécurité 4K installée" loading="lazy">
                     </a>
-                    <a href="detecteur-fumee.jpg" class="gallery-item">
-                        <img src="detecteur-fumee-thumb.jpg" alt="Détecteur de fumée connecté" loading="lazy">
+                    <a href="../assets/img/realisations/detecteur-fumee.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/detecteur-fumee.jpg" alt="Détecteur de fumée connecté" loading="lazy">
                     </a>
-                    <a href="alarme-maison.jpg" class="gallery-item">
-                        <img src="alarme-maison-thumb.jpg" alt="Système d'alarme complet" loading="lazy">
+                    <a href="../assets/img/realisations/alarme-maison.jpg" class="gallery-item">
+                        <img src="../assets/img/realisations/alarme-maison.jpg" alt="Système d'alarme complet" loading="lazy">
                     </a>
                 </div>
             </section>
             
             <!-- Spécifications techniques -->
             <section class="tech-specs">
-                <h3>Composants du système</h3>
+                <h3>⚙️ Composants du Système</h3>
                 <div class="specs-grid">
                     <div class="spec-item">
-                        <strong>Tableau électrique:</strong> Hager ou Schneider
+                        <strong>Tableau Électrique</strong>
+                        Hager ou Schneider certifié
                     </div>
                     <div class="spec-item">
-                        <strong>Dispositifs de protection:</strong> 30mA type A
+                        <strong>Dispositifs de Protection</strong>
+                        Différentiels 30mA type A/AC
                     </div>
                     <div class="spec-item">
-                        <strong>Caméras:</strong> 4K avec vision nocturne
+                        <strong>Caméras Surveillance</strong>
+                        4K avec vision nocturne IR
                     </div>
                     <div class="spec-item">
-                        <strong>Détecteurs:</strong> Mouvement + Ouverture
+                        <strong>Détecteurs</strong>
+                        Mouvement + Ouverture magnétique
                     </div>
                     <div class="spec-item">
-                        <strong>Alarme:</strong> Sirène 110dB
+                        <strong>Alarme</strong>
+                        Sirène intérieure/extérieure 110dB
                     </div>
                     <div class="spec-item">
-                        <strong>Contrôle:</strong> Application mobile
+                        <strong>Contrôle</strong>
+                        Application mobile iOS/Android
                     </div>
                     <div class="spec-item">
-                        <strong>Monitoring:</strong> 24/7 optionnel
+                        <strong>Monitoring</strong>
+                        Surveillance 24/7 en option
                     </div>
                     <div class="spec-item">
-                        <strong>Garantie:</strong> 2 ans pièces et main d'œuvre
+                        <strong>Garantie</strong>
+                        2 ans pièces et main d'œuvre
                     </div>
                 </div>
             </section>
             
-            <a href="../realisations/realisations.html" class="btn btn-back">
+            <a href="realisations.html" class="btn btn-back">
                 <i class="fas fa-arrow-left"></i> Retour aux réalisations
             </a>
         </div>
         
-        <!-- Sidebar -->
+        <!-- SIDEBAR -->
         <aside class="project-sidebar">
-            <h3>Avantages clés</h3>
+            <h3>✅ Avantages Clés</h3>
             <ul class="checklist">
-                <li>Conformité légale garantie</li>
-                <li>Réduction des risques électriques</li>
-                <li>Dissuasion des intrusions</li>
-                <li>Surveillance à distance</li>
-                <li>Assurance habitation facilitée</li>
-                <li>Valorisation du bien immobilier</li>
+                <li>Conformité légale garantie NFC 15-100</li>
+                <li>Réduction drastique des risques électriques</li>
+                <li>Dissuasion efficace des intrusions</li>
+                <li>Surveillance à distance en temps réel</li>
+                <li>Assurance habitation facilitée et réduction prime</li>
+                <li>Valorisation significative du bien immobilier</li>
             </ul>
             
             <div class="client-testimonial">
-                <p>"Après notre cambriolage, nous avons opté pour le pack complet. Maintenant nous dormons tranquilles et notre assurance a baissé de 15% grâce aux dispositifs installés."</p>
-                <p><strong>Famille Ben Khalifa</strong>, Jemmel</p>
+                <p>"Après notre cambriolage, nous avons opté pour le pack complet mise aux normes + sécurité. Maintenant nous dormons tranquilles et notre assurance a baissé de 15% grâce aux dispositifs installés !"</p>
+                <p><strong>— Famille Ben Khalifa</strong>, Jemmel</p>
             </div>
             
-            <h3>Normes appliquées</h3>
+            <h3>📜 Normes Appliquées</h3>
             <div class="tech-badges">
                 <span class="tech-badge">NFC 15-100</span>
                 <span class="tech-badge">NF C 32-070</span>
@@ -432,47 +816,52 @@
                 <span class="tech-badge">ISO 9001</span>
             </div>
             
-            <h3>Options disponibles</h3>
+            <h3>🎯 Options Disponibles</h3>
             <ul>
-                <li>Monitoring 24h/24</li>
-                <li>Contrôle d'accès biométrique</li>
-                <li>Détection incendie</li>
-                <li>Simulation de présence</li>
+                <li><strong>Monitoring 24h/24</strong> - Centre de télésurveillance</li>
+                <li><strong>Contrôle d'accès</strong> - Biométrique ou badge RFID</li>
+                <li><strong>Détection incendie</strong> - Détecteurs de fumée connectés</li>
+                <li><strong>Simulation présence</strong> - Éclairage et volets automatisés</li>
             </ul>
             
             <a href="../contact/contact.html" class="btn btn-accent">
-                <i class="fas fa-phone"></i> Demander un diagnostic
+                <i class="fas fa-phone"></i> Demander un Diagnostic Gratuit
             </a>
         </aside>
     </main>
-   <p></p>
-<footer class="site-footer">
-           
-        <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
-        </div>
-        
-    
-</footer>
 
-    <!-- Lightgallery -->
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="copyright">
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-shield-alt"></i> Mise aux Normes & Sécurité - Expert Certifié Tunisie</p>
+        </div>
+    </footer>
+
+    <!-- LIGHTGALLERY JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
     <script>
-        // Initialisation de la lightbox
+        // Menu mobile
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Lightgallery
         lightGallery(document.getElementById('lightgallery'), {
             selector: '.gallery-item',
             download: false,
-            counter: false
+            counter: true,
+            speed: 500,
+            getCaptionFromTitleOrAlt: true
         });
-        
-        // Préchargement vidéo
+
+        // Video optimization
         const video = document.querySelector('.main-video video');
-        video.addEventListener('mouseover', function() {
-            if (video.readyState < 3) {
-                video.preload = 'auto';
-            }
+        video.addEventListener('mouseover', () => {
+            if (video.readyState < 3) video.preload = 'auto';
         });
+
+        console.log('🛡️ Page chargée!');
     </script>
 </body>
 </html>
