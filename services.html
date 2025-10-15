@@ -3,31 +3,607 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nos Services - Électricité Connectée</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/services.css">
+    <title>Nos Services - Expert Domotique & Électricité | Elec-Connect</title>
+    <meta name="description" content="Découvrez nos services d'électricité résidentielle, domotique intelligente, sécurité électronique et solutions industrielles en Tunisie. Devis gratuit.">
+    <meta name="keywords" content="services électricité, domotique, sécurité, installation industrielle, Tunisie">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --blue: #3498db;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --orange: #e67e22;
+            --dark: #1a2c38;
+            --light: #f5f7fa;
+            --gray: #7f8c8d;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-blue: linear-gradient(135deg, #667eea 0%, #3498db 100%);
+            --gradient-green: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            --gradient-red: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            --gradient-orange: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           HEADER
+        ============================================ */
+        header {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* LOGO ANIMÉ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.6));
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
+
+        .logo-elec {
+            color: white;
+            animation: glow-elec 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-elec {
+            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(94, 6, 237, 0.6); }
+        }
+
+        .logo-separator {
+            color: var(--secondary);
+            font-weight: 300;
+            margin: 0 3px;
+            animation: blink-separator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink-separator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12, var(--secondary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           SERVICES MAIN
+        ============================================ */
+        .services-main {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+            position: relative;
+        }
+
+        /* BACK TO HOME */
+        .back-to-home {
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(94, 6, 237, 0.2);
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(94, 6, 237, 0.4);
+        }
+
+        /* TITRE PRINCIPAL */
+        .services-main > h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 60px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           SERVICES CONTAINER
+        ============================================ */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /* ============================================
+           SERVICE CARD
+        ============================================ */
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .service-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:nth-child(1) { transition-delay: 0.1s; }
+        .service-card:nth-child(2) { transition-delay: 0.2s; }
+        .service-card:nth-child(3) { transition-delay: 0.3s; }
+        .service-card:nth-child(4) { transition-delay: 0.4s; }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:nth-child(1)::before { background: var(--gradient-blue); }
+        .service-card:nth-child(2)::before { background: var(--gradient-primary); }
+        .service-card:nth-child(3)::before { background: var(--gradient-red); }
+        .service-card:nth-child(4)::before { background: var(--gradient-orange); }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card article {
+            padding: 40px 30px;
+        }
+
+        /* SERVICE ICON */
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(94, 6, 237, 0.3);
+        }
+
+        .service-card:nth-child(1) .service-icon {
+            background: var(--gradient-blue);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: var(--gradient-primary);
+            box-shadow: 0 10px 25px rgba(94, 6, 237, 0.3);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: var(--gradient-red);
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        .service-card:nth-child(4) .service-icon {
+            background: var(--gradient-orange);
+            box-shadow: 0 10px 25px rgba(230, 126, 34, 0.3);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(94, 6, 237, 0.5);
+        }
+
+        /* TITRE SERVICE */
+        .service-card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+
+        .service-card:hover h2 {
+            color: var(--primary);
+        }
+
+        .service-card:nth-child(1):hover h2 { color: var(--blue); }
+        .service-card:nth-child(3):hover h2 { color: var(--red); }
+        .service-card:nth-child(4):hover h2 { color: var(--orange); }
+
+        /* LISTE */
+        .service-card ul {
+            list-style: none;
+            margin-bottom: 25px;
+            padding-left: 0;
+        }
+
+        .service-card li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--gray);
+            transition: all 0.3s;
+        }
+
+        .service-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .service-card:nth-child(1) li::before { color: var(--blue); }
+        .service-card:nth-child(3) li::before { color: var(--red); }
+        .service-card:nth-child(4) li::before { color: var(--orange); }
+
+        .service-card:hover li {
+            padding-left: 35px;
+            color: var(--dark);
+        }
+
+        /* SERVICE DETAILS */
+        .service-details {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .service-details p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .service-details .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(94, 6, 237, 0.3);
+        }
+
+        .service-card:nth-child(1) .service-details .btn {
+            background: var(--gradient-blue);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .service-card:nth-child(3) .service-details .btn {
+            background: var(--gradient-red);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .service-card:nth-child(4) .service-details .btn {
+            background: var(--gradient-orange);
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        .service-details .btn::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-details .btn {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(94, 6, 237, 0.5);
+        }
+
+        .service-card:hover .service-details .btn::after {
+            transform: translateX(5px);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 968px) {
+            nav {
+                gap: 30px;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .services-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+
+            .services-main {
+                padding: 40px 1rem;
+            }
+
+            .services-main > h1 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .services-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .service-card article {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header cohérent avec index.html -->
+    <!-- HEADER -->
     <header>
         <nav>
-            <div class="menu-btn">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="services.html" class="active">Services</a></li> 
-                <li><a href="realisations/realisations.html">Réalisations</a></li>
-                <li><a href="contact/contact.html">Contact</a></li>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="services.html" class="active"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="services-main">
         <div class="back-to-home">
             <a href="index.html" class="back-btn">
@@ -47,11 +623,11 @@
                     <h2>Installation Résidentielle</h2>
                     <ul>
                         <li>Tableau électrique aux normes</li>
-                        <li>Câblage sécurisé</li>
-                        <li>Certification CONSUEL</li>
+                        <li>Câblage sécurisé professionnel</li>
+                        <li>Certification CONSUEL garantie</li>
                     </ul>
                     <div class="service-details">
-                        <p>Nos techniciens certifiés réalisent une installation 100% conforme à la NF C 15-100.</p>
+                        <p>Nos techniciens certifiés réalisent une installation 100% conforme à la NF C 15-100 avec garantie décennale.</p>
                         <span class="btn">Voir détails</span>
                     </div>
                 </article>
@@ -65,31 +641,31 @@
                     </div>
                     <h2>Domotique Intelligente</h2>
                     <ul>
-                        <li>Pilotage vocal</li>
-                        <li>Scénarios personnalisés</li>
-                        <li>Protocole KNX</li>
+                        <li>Pilotage vocal Alexa/Google</li>
+                        <li>Scénarios personnalisés IA</li>
+                        <li>Protocoles KNX/Zigbee/WiFi</li>
                     </ul>
                     <div class="service-details">
-                        <p>Transformez votre habitat en maison connectée avec nos solutions évolutives.</p>
+                        <p>Transformez votre habitat en maison connectée avec nos solutions évolutives et compatibles.</p>
                         <span class="btn">Voir détails</span>
                     </div>
                 </article>
             </a>
 
-            <!-- Service 3 - Sécurité Electronique -->
+            <!-- Service 3 - Sécurité Électronique -->
             <a href="services/securite.html" class="service-card">
                 <article>
                     <div class="service-icon">
-                        <i class="fas fa-camera"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h2>Sécurité Electronique</h2>
+                    <h2>Sécurité Électronique</h2>
                     <ul>
-                        <li>Surveillance Connectée</li>
-                        <li>Visionnage à distance</li>
-                        <li>Alarmes intelligentes</li>
+                        <li>Surveillance connectée HD/4K</li>
+                        <li>Visionnage à distance mobile</li>
+                        <li>Alarmes intelligentes IA</li>
                     </ul>
                     <div class="service-details">
-                        <p>Systèmes de sécurité intégrés avec monitoring 24/7.</p>
+                        <p>Systèmes de sécurité intégrés avec monitoring 24/7 et détection intelligente.</p>
                         <span class="btn">Voir détails</span>
                     </div>
                 </article>
@@ -103,12 +679,12 @@
                     </div>
                     <h2>Solutions Industrielles</h2>
                     <ul>
-                        <li>Installation sécurisée</li>
-                        <li>Maintenance préventive</li>
-                        <li>Automatisation</li>
+                        <li>Installation haute tension</li>
+                        <li>Maintenance préventive 24/7</li>
+                        <li>Automatisation complète</li>
                     </ul>
                     <div class="service-details">
-                        <p>Optimisez vos processus avec notre expertise industrielle.</p>
+                        <p>Optimisez vos processus industriels avec notre expertise technique avancée.</p>
                         <span class="btn">Voir détails</span>
                     </div>
                 </article>
@@ -116,12 +692,28 @@
         </div>
     </main>
 
-    <script src="assets/js/main.js"></script>
-    
-    <!-- Script pour animations -->
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="copyright">
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> Expert Électricité & Domotique en Tunisie</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
     <script>
+        // ============================================
+        // MENU MOBILE
+        // ============================================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // ============================================
+        // ANIMATIONS AU SCROLL
+        // ============================================
         document.addEventListener('DOMContentLoaded', () => {
-            // Animation au scroll
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -138,26 +730,17 @@
             // Transition entre pages
             document.querySelectorAll('.service-card').forEach(card => {
                 card.addEventListener('click', (e) => {
-                    if (!e.target.closest('a')) {
-                        e.preventDefault();
-                        document.body.style.opacity = '0';
-                        setTimeout(() => {
-                            window.location = card.href;
-                        }, 300);
-                    }
+                    e.preventDefault();
+                    document.body.style.transition = 'opacity 0.3s ease';
+                    document.body.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location = card.href;
+                    }, 300);
                 });
             });
         });
+
+        console.log('🛠️ Page services chargée avec succès!');
     </script>
 </body>
-<p></p>
-<footer class="site-footer">
-           
-        <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
-        </div>
-        
-    
-</footer>
 </html>
