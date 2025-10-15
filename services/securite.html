@@ -3,29 +3,719 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sécurité Électronique | Électricité Connectée</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/service-detail.css">
+    <title>Sécurité Électronique - Surveillance & Alarme | Elec-Connect</title>
+    <meta name="description" content="Expert en sécurité électronique en Tunisie. Installation caméras 4K, alarmes connectées, visionnage à distance. Monitoring 24/7. Devis gratuit.">
+    <meta name="keywords" content="sécurité, caméras surveillance, alarme, vidéosurveillance, monitoring, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --red: #e74c3c;
+            --red-dark: #c0392b;
+            --blue: #3498db;
+            --green: #27ae60;
+            --dark: #1a2c38;
+            --light: #f5f7fa;
+            --gray: #7f8c8d;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-red: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HEADER
+        ============================================ */
+        header {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* LOGO ANIMÉ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.6));
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
+
+        .logo-elec {
+            color: white;
+            animation: glow-elec 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-elec {
+            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(94, 6, 237, 0.6); }
+        }
+
+        .logo-separator {
+            color: var(--secondary);
+            font-weight: 300;
+            margin: 0 3px;
+            animation: blink-separator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink-separator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12, var(--secondary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           SERVICE DETAIL
+        ============================================ */
+        .service-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .back-button {
+            margin-bottom: 30px;
+        }
+
+        .back-button .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: white;
+            color: var(--red);
+            border: 2px solid var(--red);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+
+        .back-button .btn:hover {
+            background: var(--red);
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        /* ============================================
+           TITRE PRINCIPAL
+        ============================================ */
+        article > h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 40px;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        article > h1 i {
+            font-size: 1.2em;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse-shield 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-shield {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* ============================================
+           SERVICE HERO
+        ============================================ */
+        .service-hero {
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.85), rgba(192, 57, 43, 0.85));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           SERVICE SECTIONS
+        ============================================ */
+        .service-section {
+            padding: 60px 0;
+        }
+
+        .service-section.alt-bg {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .section-grid.reverse {
+            direction: rtl;
+        }
+
+        .section-grid.reverse > * {
+            direction: ltr;
+        }
+
+        .section-content h2 {
+            font-size: 2rem;
+            color: var(--red);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-red);
+            border-radius: 2px;
+        }
+
+        .section-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+
+        .section-content li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.7;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .section-content li::before {
+            content: '🔒';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .section-content li:hover {
+            padding-left: 40px;
+            color: var(--red);
+        }
+
+        /* ============================================
+           SECTION IMAGE
+        ============================================ */
+        .section-image {
+            position: relative;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease;
+        }
+
+        .section-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(231, 76, 60, 0.95);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           INTEGRATION SECTION
+        ============================================ */
+        .integration-section {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--red);
+            margin-bottom: 40px;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .integration-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.3);
+        }
+
+        .integration-card i {
+            font-size: 3rem;
+            color: var(--red);
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .integration-card h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .integration-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           CTA SECTION
+        ============================================ */
+        .cta-section {
+            background: var(--gradient-red);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            box-shadow: 0 15px 40px rgba(231, 76, 60, 0.3);
+        }
+
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tech-badges img {
+            height: 60px;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .tech-badges img:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: white;
+            color: var(--red);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-accent {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-accent:hover {
+            background: white;
+            color: var(--red);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 968px) {
+            nav {
+                gap: 30px;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-grid.reverse {
+                direction: ltr;
+            }
+
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-badges {
+                gap: 20px;
+            }
+
+            .tech-badges img {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+
+            .service-detail {
+                padding: 40px 1rem;
+            }
+
+            .service-hero {
+                height: 350px;
+            }
+
+            .service-section,
+            .service-section.alt-bg,
+            .integration-section,
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-large {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            article > h1 {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .tech-badges img {
+                height: 45px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- HEADER -->
     <header>
         <nav>
-            <div class="menu-btn">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
             </div>
-            <ul class="nav-links">
-                <li><a href="../../index.html">Accueil</a></li>
-                <li><a href="../../services.html">Services</a></li>
-                <li><a href="../../realisations/maison1.html">Réalisations</a></li>
-                <li><a href="../../contact/contact.html">Contact</a></li>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="../../realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="service-detail">
         <div class="back-button">
             <a href="../../services.html" class="btn">
@@ -39,8 +729,8 @@
             <div class="service-hero" style="background-image: url('../../assets/img/securite-banner.jpg')">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <h2>Protection 360° de votre habitat</h2>
-                    <p>Solutions sur-mesure avec monitoring 24/7</p>
+                    <h2>Protection 360° de Votre Habitat</h2>
+                    <p>Solutions Sur-Mesure avec Monitoring 24/7</p>
                 </div>
             </div>
             
@@ -49,18 +739,19 @@
                 <div class="section-grid">
                     <div class="section-content">
                         <h2>Installation Professionnelle de Caméras</h2>
-                        <p>Nous déployons des systèmes de vidéosurveillance haute résolution :</p>
+                        <p>Nous déployons des <strong>systèmes de vidéosurveillance haute résolution</strong> adaptés à votre environnement :</p>
                         <ul>
-                            <li>Caméras 4K avec vision nocturne infrarouge</li>
-                            <li>Positionnement stratégique (angles morts, entrées)</li>
-                            <li>Installation discrète ou visible selon votre besoin</li>
-                            <li>Alimentation sécurisée (POE + batterie de secours)</li>
+                            <li>Caméras 4K Ultra HD avec vision nocturne infrarouge jusqu'à 30m</li>
+                            <li>Positionnement stratégique optimisé (angles morts, entrées, zones sensibles)</li>
+                            <li>Installation discrète ou visible selon votre besoin de dissuasion</li>
+                            <li>Alimentation sécurisée (POE + batterie de secours anti-coupure)</li>
+                            <li>Caméras PTZ motorisées avec suivi automatique</li>
                         </ul>
-                        <p>Tous nos kits incluent une garantie anti-vandalisme et sont adaptés aux conditions météo extrêmes (IP66 minimum).</p>
+                        <p>Tous nos kits incluent une <strong>garantie anti-vandalisme</strong> et sont certifiés pour conditions météo extrêmes (IP66 minimum - étanche poussière et jets d'eau).</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/installation-camera.jpg" alt="Technicien installant une caméra de sécurité" loading="lazy">
-                        <div class="image-caption">Installation d'une caméra PTZ extérieure</div>
+                        <div class="image-caption">Installation d'une caméra PTZ extérieure 4K</div>
                     </div>
                 </div>
             </section>
@@ -70,14 +761,15 @@
                 <div class="section-grid reverse">
                     <div class="section-content">
                         <h2>Visionnage en Temps Réel</h2>
-                        <p>Accédez à vos caméras depuis n'importe où :</p>
+                        <p>Accédez à vos caméras depuis <strong>n'importe où dans le monde</strong> en toute sécurité :</p>
                         <ul>
-                            <li>Application mobile dédiée (iOS/Android)</li>
-                            <li>Alertes intelligentes (détection de mouvement, visages, véhicules)</li>
-                            <li>Stockage cloud sécurisé ou NAS local</li>
-                            <li>Partage d'accès sécurisé (famille, gardiennage)</li>
+                            <li>Application mobile dédiée intuitive (iOS/Android) avec interface tactile</li>
+                            <li>Alertes intelligentes IA (détection de mouvement, visages, véhicules, zones)</li>
+                            <li>Stockage cloud sécurisé crypté ou NAS local selon préférence</li>
+                            <li>Partage d'accès multi-niveaux sécurisé (famille, gardien, employés)</li>
+                            <li>Lecture en direct HD avec latence < 1 seconde</li>
                         </ul>
-                        <p>Notre plateforme permet de consulter les historiques jusqu'à 6 mois avec système de tagging intelligent pour retrouver facilement un événement.</p>
+                        <p>Notre plateforme permet de consulter les <strong>historiques jusqu'à 6 mois</strong> avec système de tagging intelligent et recherche par date/heure/événement pour retrouver facilement un moment précis.</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/visionnage-distance.jpg" alt="Application mobile de visionnage des caméras" loading="lazy">
@@ -91,75 +783,112 @@
                 <div class="section-grid">
                     <div class="section-content">
                         <h2>Système d'Alarme Complet</h2>
-                        <p>Protection globale avec nos solutions certifiées :</p>
+                        <p>Protection globale avec nos <strong>solutions certifiées professionnelles</strong> :</p>
                         <ul>
-                            <li>Centrale connectée avec double communication (GSM + WiFi)</li>
-                            <li>Détecteurs volumétriques anti-animaux</li>
-                            <li>Sirène intérieure/extérieure (110dB)</li>
-                            <li>Transmission immédiate aux N°.Telephonique</li>
+                            <li>Centrale connectée avec double communication redondante (GSM 4G + WiFi)</li>
+                            <li>Détecteurs volumétriques immunisés anti-animaux jusqu'à 25kg</li>
+                            <li>Sirène intérieure/extérieure puissante (110dB) avec flash lumineux</li>
+                            <li>Transmission immédiate aux numéros d'urgence programmés</li>
+                            <li>Clavier tactile avec codes personnalisés et badges RFID</li>
+                            <li>Détecteurs ouverture magnétiques sur portes et fenêtres</li>
                         </ul>
-                        <p>Nos systèmes sont certifiés et compatibles avec les assurances habitation. Options : bris de glace, ouverture de porte, détecteurs d'inondation/fumée.</p>
+                        <p>Nos systèmes sont <strong>certifiés NF A2P</strong> et compatibles avec toutes les assurances habitation. <strong>Options disponibles :</strong> détecteurs bris de glace, détecteurs d'inondation, détecteurs de fumée connectés.</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/alarme-maison.jpg" alt="Système d'alarme centralisé" loading="lazy">
-                        <div class="image-caption">Centrale d'alarme avec écran numérique</div>
+                        <div class="image-caption">Centrale d'alarme tactile dernière génération</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Section Bonus : Intégration -->
+            <!-- Section Intégration -->
             <section class="service-section integration-section">
-                <h2 class="section-title">Intégration Complète</h2>
+                <h2 class="section-title">🔗 Intégration Complète & Intelligente</h2>
                 <div class="integration-grid">
                     <div class="integration-card">
                         <i class="fas fa-sync-alt"></i>
                         <h3>Synergie Domotique</h3>
-                        <p>Vos systèmes sécurité interagissent avec l'éclairage (allumage automatique en cas d'alerte) et les volets roulants.</p>
+                        <p>Vos systèmes de sécurité interagissent intelligemment avec l'éclairage (allumage automatique en cas d'alerte), les volets roulants (fermeture automatique) et le chauffage.</p>
                     </div>
                     <div class="integration-card">
                         <i class="fas fa-user-shield"></i>
                         <h3>Contrôle d'Accès</h3>
-                        <p>Badges, codes ou empreintes pour gérer les entrées. Historique complet des accès.</p>
+                        <p>Gestion avancée des entrées par badges RFID, codes PIN, empreintes digitales ou reconnaissance faciale. Historique complet et horodaté de tous les accès.</p>
                     </div>
                     <div class="integration-card">
                         <i class="fas fa-bell"></i>
-                        <h3>Monitoring Pro</h3>
-                        <p>Option surveillance 24/24 par nos centres agréés avec intervention locale si nécessaire.</p>
+                        <h3>Monitoring Professionnel</h3>
+                        <p>Option surveillance 24h/24 et 7j/7 par nos centres de télésurveillance agréés avec intervention locale rapide si nécessaire (< 15 minutes).</p>
                     </div>
                 </div>
             </section>
 
             <!-- Section CTA -->
             <section class="cta-section dark-cta">
-			 <div class="tech-badges">
-				    <img src="../../assets/img/alarme4.png" alt="Compatibilité elkron" loading="lazy">
-                    <img src="../../assets/img/alarme1.jpg" alt="alarme" loading="lazy">
-                    <img src="../../assets/img/alarme3.png" alt="Compatibilité alarme" loading="lazy">
-                    
+                <div class="tech-badges">
+                    <img src="../../assets/img/alarme4.png" alt="Compatibilité Elkron" loading="lazy">
+                    <img src="../../assets/img/alarme1.jpg" alt="Systèmes alarme professionnels" loading="lazy">
+                    <img src="../../assets/img/alarme3.png" alt="Caméras surveillance HD" loading="lazy">
                 </div>
-                <h2>Votre sécurité mérite notre expertise</h2>
+                <h2>🛡️ Votre Sécurité Mérite Notre Expertise</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.95;">
+                    Installation en 48h • Garantie 5 ans • Support technique 24/7 • Devis gratuit
+                </p>
                 <div class="cta-buttons">
-                    <a href="tel:+21629328870" class="btn btn-large">
-                        <i class="fas fa-phone"></i> Urgence 24/7
+                    <a href="tel:+21629328870" class="btn-large">
+                        <i class="fas fa-phone-volume"></i> Urgence 24/7
                     </a>
-                    <a href="../../contact/contact.html" class="btn btn-large btn-accent">
-                        <i class="fas fa-lock"></i> Audit Sécurité
+                    <a href="../../contact/contact.html" class="btn-large btn-accent">
+                        <i class="fas fa-shield-alt"></i> Audit Sécurité Gratuit
                     </a>
                 </div>
             </section>
         </article>
     </main>
 
-    <script src="../../assets/js/main.js"></script>
-</body>
-<p></p>
-<footer class="site-footer">
-           
+    <!-- FOOTER -->
+    <footer class="site-footer">
         <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-shield-alt"></i> Expert Sécurité Électronique en Tunisie</p>
         </div>
-        
-    
-</footer>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // MENU MOBILE
+        // ============================================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // ============================================
+        // ANIMATIONS AU SCROLL
+        // ============================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-section, .integration-card').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        console.log('🔒 Page Sécurité Électronique chargée avec succès!');
+    </script>
+</body>
 </html>
