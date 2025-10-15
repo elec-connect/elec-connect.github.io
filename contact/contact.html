@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Électricité Connectée</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
+        /* VOTRE CSS EXISTANT - JE GARDE TOUT */
         :root {
             --primary: #2A5C8D;
             --secondary: #FFA500;
@@ -320,27 +322,23 @@
             <h2>Demande de devis</h2>
             
             <div id="successMessage" class="message-alert success">
-                <i class="fas fa-check-circle"></i> Message envoyé avec succès ! Vous recevrez une copie par email.
+                <i class="fas fa-check-circle"></i> Message envoyé avec succès ! Nous vous contactons rapidement.
             </div>
             
             <div id="errorMessage" class="message-alert error">
                 <i class="fas fa-exclamation-triangle"></i> Erreur lors de l'envoi. Veuillez réessayer.
             </div>
 
-            <!-- REMPLACEZ "your-form-id" par votre VRAI ID Formspree -->
-            <form id="contactForm" action="https://formspree.io/f/xjkajwdp" method="POST">
-                <!-- CHAMPS CACHÉS IMPORTANTS -->
-                <input type="hidden" name="_subject" value="Nouveau message - Site Électricité Connectée">
-                <input type="hidden" name="_replyto" value="iot.sahnoun@gmail.com">
-                
+            <!-- FORMULAIRE SIMPLE SANS FORMSPREE -->
+            <form id="contactForm">
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="from_name" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="from_email" required>
                 </div>
                 
                 <div class="form-group">
@@ -352,10 +350,10 @@
                     <label for="service">Service demandé *</label>
                     <select id="service" name="service" required>
                         <option value="">-- Sélectionnez --</option>
-                        <option value="installation">Installation électrique</option>
-                        <option value="domotique">Domotique</option>
-                        <option value="depannage">Dépannage</option>
-                        <option value="autre">Autre demande</option>
+                        <option value="Installation électrique">Installation électrique</option>
+                        <option value="Domotique">Domotique</option>
+                        <option value="Dépannage">Dépannage</option>
+                        <option value="Autre demande">Autre demande</option>
                     </select>
                 </div>
                 
@@ -378,7 +376,10 @@
     </div>
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        // Initialisation EmailJS - REMPLACEZ AVEC VOS VRAIES CLÉS
+        emailjs.init("lo9T4HfqecAZKxdjf");
+        
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
@@ -390,38 +391,25 @@
             document.getElementById('successMessage').style.display = 'none';
             document.getElementById('errorMessage').style.display = 'none';
             
-            try {
-                const formData = new FormData(this);
-                
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
+            // Envoi avec EmailJS
+            emailjs.sendForm('service_qv6ujef', 'template_s0xsp49', this)
+                .then(function() {
                     document.getElementById('successMessage').style.display = 'block';
-                    this.reset();
+                    document.getElementById('contactForm').reset();
                     
-                    // Faire défiler vers le message de succès
                     window.scrollTo({
                         top: document.querySelector('.contact-form').offsetTop - 100,
                         behavior: 'smooth'
                     });
-                } else {
-                    throw new Error('Erreur lors de l\'envoi');
-                }
-            } catch (error) {
-                document.getElementById('errorMessage').style.display = 'block';
-                console.error('Erreur:', error);
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            }
+                }, function(error) {
+                    document.getElementById('errorMessage').style.display = 'block';
+                    console.error('Erreur EmailJS:', error);
+                })
+                .finally(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                });
         });
     </script>
 </body>
 </html>
-
