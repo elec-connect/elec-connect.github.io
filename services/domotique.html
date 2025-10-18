@@ -19,8 +19,7 @@
             --blue: #3498db;
             --green: #27ae60;
             --red: #e74c3c;
-            --dark: #1a1a1a; /* Harmonisé avec index.html */
-            --light-dark: #0a0a0a; /* Ajouté pour le footer */
+            --dark: #1a2c38;
             --light: #f5f7fa;
             --gray: #7f8c8d;
             --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -492,150 +491,27 @@
         }
 
         /* ============================================
-           FOOTER (Mis à jour)
+           FOOTER
         ============================================ */
         .site-footer {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--light-dark) 100%); /* Utilisation des variables */
+            background: var(--dark);
             color: white;
-            padding: 60px 20px 20px; /* Padding généreux */
-            margin-top: 80px;
-            border-top: 3px solid var(--primary); /* Bordure supérieure */
-            text-align: left; /* Alignement du texte par défaut */
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            color: var(--secondary); /* Couleur secondaire pour les titres */
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            border-bottom: 2px solid var(--primary); /* Ligne sous les titres */
-            padding-bottom: 10px;
-        }
-
-        .contact-info, .quick-links {
-            list-style: none;
-        }
-
-        .contact-info li, .quick-links li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .contact-info i {
-            color: var(--primary); /* Icônes en couleur primaire */
-            width: 20px;
-        }
-
-        .contact-info a, .quick-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .contact-info a:hover, .quick-links a:hover {
-            color: var(--secondary); /* Liens en couleur secondaire au survol */
-            padding-left: 5px;
-        }
-
-        /* Réseaux sociaux */
-        .social-logos {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-logos a {
-            width: 45px;
-            height: 45px;
-            background: rgba(var(--primary), 0.2);
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .social-logos a:hover {
-            background: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(var(--primary), 0.4);
-        }
-
-        /* Logos partenaires - visibilité améliorée */
-        .partner-logos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-            justify-content: flex-start; /* Alignement à gauche dans les sections */
-            padding-top: 10px;
-        }
-
-        .partner-logos img {
-            height: 44px; /* Légèrement plus grand */
-            width: auto;
-            filter: grayscale(40%) contrast(1.05) brightness(1); /* Moins désaturé, plus de contraste */
-            opacity: 0.95; /* Plus opaque */
-            transition: transform .3s ease, filter .3s ease, opacity .3s ease, box-shadow .3s ease, background .3s ease;
-        }
-
-        .partner-logos img:hover {
-            filter: grayscale(0%) contrast(1.05) brightness(1); /* Couleurs pleines au survol */
-            opacity: 1;
-            transform: scale(1.08); /* Effet de zoom légèrement plus prononcé */
-        }
-
-        /* Schneider et Somfy: pas de désaturation + pastille claire pour meilleur contraste */
-        .partner-logos img.logo-schneider,
-        .partner-logos img.logo-somfy {
-            filter: none; /* Pas de désaturation */
-            opacity: 1;
-            background: rgba(255,255,255,0.92); /* Fond blanc semi-transparent */
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 10px;
-            padding: 6px 10px; /* Ajouter du padding autour du logo */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-        }
-
-        .partner-logos img.logo-schneider:hover,
-        .partner-logos img.logo-somfy:hover {
-            transform: translateY(-2px) scale(1.06); /* Effet de léger déplacement et zoom */
-            box-shadow: 0 10px 24px rgba(0,0,0,0.35);
-        }
-
-        /* Footer Bottom */
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
         }
 
         .copyright {
-            color: #999;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.8;
         }
 
         .copyright i {
-            color: var(--secondary); /* Icône en couleur secondaire */
-            margin-right: 5px;
+            color: var(--secondary);
         }
 
         /* ============================================
-           RESPONSIVE (Mis à jour pour le footer)
+           RESPONSIVE
         ============================================ */
         @media (max-width: 968px) {
             nav {
@@ -665,23 +541,6 @@
 
             .tech-badges img {
                 height: 40px;
-            }
-            
-            /* Footer responsive */
-            .footer-container {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajustement pour les écrans intermédiaires */
-                gap: 30px;
-            }
-
-            .footer-section {
-                text-align: center; /* Centrer les sections du footer sur les petits écrans */
-            }
-            .footer-section h3::after { /* Centrer la ligne sous le titre */
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .contact-info, .quick-links, .social-logos, .partner-logos {
-                justify-content: center; /* Centrer les éléments des listes/logos */
             }
         }
 
@@ -746,15 +605,6 @@
             .btn-large {
                 width: 100%;
                 justify-content: center;
-            }
-
-            /* Footer responsive */
-            .footer-container {
-                grid-template-columns: 1fr; /* Une seule colonne sur les très petits écrans */
-                gap: 30px;
-            }
-            .partner-logos img {
-                height: 40px; /* Ajustement pour mobile */
             }
         }
 
@@ -909,68 +759,11 @@
         </article>
     </main>
 
-    <!-- FOOTER (Mis à jour) -->
+    <!-- FOOTER -->
     <footer class="site-footer">
-        <div class="footer-container">
-            <!-- Section Contact -->
-            <div class="footer-section">
-                <h3>Contactez-nous</h3>
-                <ul class="contact-info">
-                    <li><i class="fas fa-map-marker-alt"></i> 01, Rue Manfalouti JEMMEL 5020</li>
-                    <li><i class="fas fa-phone"></i> <a href="tel:+21629328870">00216 29 328 870</a></li>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:Iot.sahnoun@gmail.com">Iot.sahnoun@gmail.com</a></li>
-                </ul>
-            </div>
-
-            <!-- Section Liens rapides -->
-            <div class="footer-section">
-                <h3>Liens rapides</h3>
-                <ul class="quick-links">
-                    <li><a href="../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="../../services.html"><i class="fas fa-cogs"></i> Services</a></li>
-                    <li><a href="../../realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
-                    <li><a href="../../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-                    <li><a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a></li>
-                </ul>
-            </div>
-
-            <!-- Section Réseaux sociaux -->
-            <div class="footer-section">
-                <h3>Suivez-nous</h3>
-                <div class="social-logos">
-                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Section Logos partenaires -->
-            <div class="footer-section">
-                <h3>Nos partenaires</h3>
-                <div class="partner-logos">
-                    <img src="../../assets/img/schneider-logo.png" alt="Schneider Electric" loading="lazy" class="logo-schneider">
-                    <img src="../../assets/img/legrand-logo.png" alt="Legrand" loading="lazy">
-                    <img src="../../assets/img/sonoff-logo.png" alt="Sonoff" loading="lazy">
-                    <img src="../../assets/img/somfy-logo.png" alt="Somfy" loading="lazy" class="logo-somfy">
-                </div>
-            </div>
-        </div>
-
-        <!-- Copyright -->
-        <div class="footer-bottom">
-            <div class="copyright">
-                <p>&copy; 2024 Électricité Connectée. Tous droits réservés.</p>
-                <p><i class="fas fa-home"></i> <strong>"ELEC-CONNECT"</strong> - Votre partenaire domotique en Tunisie</p>
-            </div>
+        <div class="copyright">
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-home"></i> Expert Domotique Intelligente en Tunisie</p>
         </div>
     </footer>
 
