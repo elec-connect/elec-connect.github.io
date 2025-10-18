@@ -415,42 +415,122 @@
         /* ============================================
            CTA SECTION
         ============================================ */
+       .cta-section {
+    background: var(--gradient-primary);
+    padding: 60px 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    margin-top: 60px;
+    box-shadow: 0 15px 40px rgba(94, 6, 237, 0.3);
+}
+
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+/* État par défaut pour tous les logos */
+.tech-badges img {
+    height: 44px;
+    width: auto;
+    filter: grayscale(40%) contrast(1.05) brightness(1);
+    opacity: 0.95;
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* État au survol pour les logos normaux */
+.tech-badges img:hover {
+    filter: grayscale(0%) contrast(1.05) brightness(1);
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+/* Styles spécifiques pour Schneider et Somfy */
+.tech-badges img.logo-schneider,
+.tech-badges img.logo-somfy {
+    filter: none; /* Pas de désaturation */
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 6px 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* État au survol pour Schneider et Somfy */
+.tech-badges img.logo-schneider:hover,
+.tech-badges img.logo-somfy:hover {
+    transform: translateY(-2px) scale(1.06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.cta-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 30px;
+}
         .cta-section {
-            background: var(--gradient-primary);
-            padding: 60px 40px;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
-            margin-top: 60px;
-            box-shadow: 0 15px 40px rgba(94, 6, 237, 0.3);
-        }
+    background: var(--gradient-primary);
+    padding: 60px 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    margin-top: 60px;
+    box-shadow: 0 15px 40px rgba(94, 6, 237, 0.3);
+}
 
-        .tech-badges {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
 
-        .tech-badges img {
-            height: 50px;
-            filter: brightness(0) invert(1);
-            opacity: 0.9;
-            transition: all 0.3s;
-        }
+/* État par défaut pour tous les logos */
+.tech-badges img {
+    height: 44px;
+    width: auto;
+    filter: grayscale(40%) contrast(1.05) brightness(1);
+    opacity: 0.95;
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+}
 
-        .tech-badges img:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
+/* État au survol pour les logos normaux */
+.tech-badges img:hover {
+    filter: grayscale(0%) contrast(1.05) brightness(1);
+    opacity: 1;
+    transform: scale(1.08);
+}
 
-        .cta-section h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 30px;
-        }
+/* Styles spécifiques pour Schneider et Somfy */
+.tech-badges img.logo-schneider,
+.tech-badges img.logo-somfy {
+    filter: none; /* Pas de désaturation */
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 6px 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
 
+/* État au survol pour Schneider et Somfy */
+.tech-badges img.logo-schneider:hover,
+.tech-badges img.logo-somfy:hover {
+    transform: translateY(-2px) scale(1.06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.cta-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 30px;
+}
         .cta-buttons {
             display: flex;
             justify-content: center;
