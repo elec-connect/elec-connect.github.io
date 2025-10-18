@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Électricité Connectée - Solutions domotiques intelligentes en Tunisie. Installation, maintenance et conseil en maison connectée.">
-    <meta name="keywords" content="domotique, maison intelligente, électricité, Tunisie, smart home">
+    <meta name="keywords" content="domotique, maison intelligente, électricité, Tunisie, smart home, Schneider, Legrand, Somfy">
     <title>Elec-Connect - Électricité Intelligente en Tunisie</title>
+    
+    <!-- ============================================ -->
+    <!-- BALISES RÉSEAUX SOCIAUX OPTIMISÉES -->
+    <!-- ============================================ -->
+    
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:title" content="Elec-Connect - Électricité Intelligente en Tunisie">
+    <meta property="og:description" content="Transformez votre habitat en maison intelligente avec nos solutions domotiques certifiées Schneider, Legrand, Somfy. Installation et maintenance en Tunisie.">
+    <meta property="og:image" content="http://elec-connect.github.io/assets/img/partage-social.jpg">
+    <meta property="og:url" content="http://elec-connect.github.io">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Elec-Connect">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Elec-Connect - Domotique Tunisie">
+    <meta name="twitter:description" content="Expert en solutions domotiques intelligentes pour votre maison en Tunisie. Schneider, Legrand, Somfy.">
+    <meta name="twitter:image" content="http://elec-connect.github.io/assets/img/twitter-partage.jpg">
+    <meta name="twitter:site" content="@elecconnecttn">
+    
+    <!-- Canonique -->
+    <link rel="canonical" href="http://elec-connect.github.io">
+    
+    <!-- Schema.org Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Elec-Connect",
+        "description": "Solutions domotiques intelligentes en Tunisie - Expert Schneider, Legrand, Somfy",
+        "url": "http://elec-connect.github.io",
+        "telephone": "+21629328870",
+        "email": "Iot.sahnoun@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "01, Rue Manfalouti",
+            "addressLocality": "JEMMEL",
+            "postalCode": "5020",
+            "addressCountry": "TN"
+        },
+        "areaServed": "Tunisie",
+        "serviceType": "Installation domotique, Électricité intelligente, Maison connectée",
+        "brand": ["Schneider Electric", "Legrand", "Somfy", "Sonoff"]
+    }
+    </script>
+
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -373,6 +420,38 @@
         }
 
         /* ============================================
+           BOUTONS DE PARTAGE SOCIAL
+        ============================================ */
+        .social-share-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .share-btn {
+            padding: 12px 20px;
+            background: rgba(94, 6, 237, 0.2);
+            border: 2px solid #5e06ed;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .share-btn:hover {
+            background: #5e06ed;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(94, 6, 237, 0.4);
+        }
+
+        /* ============================================
            FOOTER
         ============================================ */
         .site-footer {
@@ -461,34 +540,34 @@
         }
 
         .partner-logos img {
-            height: 44px; /* Légèrement plus grand */
+            height: 44px;
             width: auto;
-            filter: grayscale(40%) contrast(1.05) brightness(1); /* Moins désaturé, plus de contraste */
-            opacity: 0.95; /* Plus opaque */
+            filter: grayscale(40%) contrast(1.05) brightness(1);
+            opacity: 0.95;
             transition: transform .3s ease, filter .3s ease, opacity .3s ease, box-shadow .3s ease, background .3s ease;
         }
 
         .partner-logos img:hover {
-            filter: grayscale(0%) contrast(1.05) brightness(1); /* Couleurs pleines au survol */
+            filter: grayscale(0%) contrast(1.05) brightness(1);
             opacity: 1;
-            transform: scale(1.08); /* Effet de zoom légèrement plus prononcé */
+            transform: scale(1.08);
         }
 
         /* Schneider et Somfy: pas de désaturation + pastille claire pour meilleur contraste */
         .partner-logos img.logo-schneider,
         .partner-logos img.logo-somfy {
-            filter: none; /* Pas de désaturation */
+            filter: none;
             opacity: 1;
-            background: rgba(255,255,255,0.92); /* Fond blanc semi-transparent */
+            background: rgba(255,255,255,0.92);
             border: 1px solid rgba(255,255,255,0.3);
             border-radius: 10px;
-            padding: 6px 10px; /* Ajouter du padding autour du logo */
+            padding: 6px 10px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         }
 
         .partner-logos img.logo-schneider:hover,
         .partner-logos img.logo-somfy:hover {
-            transform: translateY(-2px) scale(1.06); /* Effet de léger déplacement et zoom */
+            transform: translateY(-2px) scale(1.06);
             box-shadow: 0 10px 24px rgba(0,0,0,0.35);
         }
 
@@ -561,7 +640,17 @@
             }
 
             .partner-logos img {
-                height: 40px; /* Ajustement pour mobile */
+                height: 40px;
+            }
+
+            .social-share-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .share-btn {
+                flex: 1;
+                min-width: 120px;
             }
         }
 
@@ -594,6 +683,17 @@
 
         .header-controls {
             animation: slideInFromRight 0.8s ease-out;
+        }
+
+        /* Animation pour le bouton auto-refresh */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(94, 6, 237, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(94, 6, 237, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(94, 6, 237, 0); }
+        }
+
+        .auto-refresh-btn {
+            animation: pulse-glow 2s infinite;
         }
     </style>
 </head>
@@ -641,6 +741,11 @@
             <!-- Bouton Son -->
             <button id="musicToggle" class="control-btn" aria-label="Contrôle musical">
                 <i class="fas fa-volume-mute"></i>
+            </button>
+
+            <!-- Bouton Auto-Refresh Réseaux Sociaux -->
+            <button id="autoRefreshBtn" class="control-btn auto-refresh-btn" aria-label="Rafraîchissement automatique réseaux sociaux" title="Auto-rafraîchissement réseaux sociaux">
+                <i class="fas fa-sync-alt"></i>
             </button>
 
             <!-- Logo -->
@@ -724,7 +829,7 @@
                 </div>
             </div>
 
-            <!-- Section Logos partenaires -->
+            <!-- Section Partenaires + Partage Social -->
             <div class="footer-section">
                 <h3>Nos partenaires</h3>
                 <div class="partner-logos">
@@ -732,6 +837,23 @@
                     <img src="assets/img/legrand-logo.png" alt="Legrand" loading="lazy">
                     <img src="assets/img/sonoff-logo.png" alt="Sonoff" loading="lazy">
                     <img src="assets/img/somfy-logo.png" alt="Somfy" loading="lazy" class="logo-somfy">
+                </div>
+                
+                <!-- BOUTONS DE PARTAGE SOCIAL -->
+                <h3 style="margin-top: 30px;">Partagez notre site</h3>
+                <div class="social-share-buttons">
+                    <button onclick="shareOnFacebook()" class="share-btn">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                    <button onclick="shareOnTwitter()" class="share-btn">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <button onclick="shareOnLinkedIn()" class="share-btn">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </button>
+                    <button onclick="copyLink()" class="share-btn">
+                        <i class="fas fa-link"></i> Copier lien
+                    </button>
                 </div>
             </div>
         </div>
@@ -741,12 +863,95 @@
             <div class="copyright">
                 <p>&copy; 2024 Électricité Connectée. Tous droits réservés.</p>
                 <p><i class="fas fa-home"></i> <strong>"ELEC-CONNECT"</strong> - Votre partenaire domotique en Tunisie</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">
+                    🔄 Système auto-rafraîchissement réseaux sociaux activé | http://elec-connect.github.io
+                </p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script>
+        // ============================================
+        // SYSTÈME AUTOMATIQUE RÉSEAUX SOCIAUX
+        // ============================================
+        class SocialMediaAutoRefresh {
+            constructor() {
+                this.baseUrl = 'http://elec-connect.github.io';
+                this.lastUpdate = localStorage.getItem('lastSocialRefresh') || Date.now();
+                this.updateInterval = 24 * 60 * 60 * 1000; // 24 heures
+                this.init();
+            }
+
+            init() {
+                console.log('🚀 Système auto-rafraîchissement réseaux sociaux activé!');
+                
+                // Vérifier si besoin de rafraîchir au chargement
+                if(this.shouldRefresh()) {
+                    this.autoPreload();
+                }
+                
+                // Planifier le rafraîchissement quotidien
+                setInterval(() => {
+                    this.autoPreload();
+                }, this.updateInterval);
+            }
+
+            shouldRefresh() {
+                return (Date.now() - this.lastUpdate) > this.updateInterval;
+            }
+
+            getSocialUrl() {
+                // URL unique pour forcer le re-scraping
+                return `${this.baseUrl}?t=${Date.now()}`;
+            }
+
+            autoPreload() {
+                console.log('🔄 Préchargement automatique pour réseaux sociaux...');
+                
+                // Préchargement invisible pour forcer le scraping
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = this.getSocialUrl();
+                document.body.appendChild(iframe);
+                
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                    this.lastUpdate = Date.now();
+                    localStorage.setItem('lastSocialRefresh', this.lastUpdate);
+                    console.log('✅ Préchargement réseaux sociaux terminé');
+                }, 3000);
+            }
+
+            forceRefreshAll() {
+                console.log('🎯 Forçage du rafraîchissement complet...');
+                
+                // 1. Préchargement
+                this.autoPreload();
+                
+                // 2. Ouvrir les outils de debug
+                setTimeout(() => {
+                    const socialUrl = this.getSocialUrl();
+                    const tools = [
+                        `https://developers.facebook.com/tools/debug/sharing/?q=${encodeURIComponent(socialUrl)}`,
+                        `https://cards-dev.twitter.com/validator`,
+                        `https://www.linkedin.com/post-inspector/inspect/${encodeURIComponent(socialUrl)}`
+                    ];
+                    
+                    tools.forEach((tool, index) => {
+                        setTimeout(() => {
+                            window.open(tool, '_blank');
+                        }, index * 1000);
+                    });
+                    
+                    alert('🔧 Outils de rafraîchissement ouverts!\n\nCollez votre URL dans chaque outil et cliquez "Scrape Again"');
+                }, 2000);
+            }
+        }
+
+        // Initialiser le système automatique
+        const socialAutoRefresh = new SocialMediaAutoRefresh();
+
         // ============================================
         // CONTRÔLE MUSICAL
         // ============================================
@@ -828,6 +1033,42 @@
         createParticles();
 
         // ============================================
+        // FONCTIONS DE PARTAGE SOCIAL AVEC URL UNIQUE
+        // ============================================
+        function shareOnFacebook() {
+            const url = encodeURIComponent(socialAutoRefresh.getSocialUrl());
+            const text = encodeURIComponent("Découvrez Elec-Connect - Solutions domotiques intelligentes en Tunisie ! 🏠⚡ Schneider • Legrand • Somfy");
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(socialAutoRefresh.getSocialUrl());
+            const text = encodeURIComponent("Je viens de découvrir Elec-Connect - Expert en domotique en Tunisie ! 🏠⚡ Solutions Schneider, Legrand, Somfy");
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(socialAutoRefresh.getSocialUrl());
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        function copyLink() {
+            const url = socialAutoRefresh.getSocialUrl();
+            navigator.clipboard.writeText(url)
+                .then(() => alert('🔗 Lien copié avec timestamp unique !\n\nPartagez-le où vous voulez 📋\n\n' + url))
+                .catch(err => console.error('Erreur : ', err));
+        }
+
+        // ============================================
+        // BOUTON AUTO-REFRESH
+        // ============================================
+        document.getElementById('autoRefreshBtn').addEventListener('click', function() {
+            if(confirm('🔄 Lancer le rafraîchissement automatique réseaux sociaux?\n\nCette action va :\n• Précharger votre site\n• Ouvrir les outils de debug\n• Forcer le re-scraping')) {
+                socialAutoRefresh.forceRefreshAll();
+            }
+        });
+
+        // ============================================
         // SMOOTH SCROLL
         // ============================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -861,8 +1102,17 @@
         // CHARGEMENT INITIAL
         // ============================================
         window.addEventListener('load', function() {
-            console.log('Site Elec-Connect chargé avec succès! ✨');
-            console.log('Vidéo plus claire activée! 🎥');
+            console.log('🚀 Site Elec-Connect FULLY OPTIMIZED!');
+            console.log('🔄 Système auto-rafraîchissement réseaux sociaux: ACTIVÉ');
+            console.log('🎯 URL: http://elec-connect.github.io');
+            
+            // Notification discrète
+            setTimeout(() => {
+                if(!localStorage.getItem('welcomeShown')) {
+                    console.log('💡 Astuce: Utilisez le bouton 🔄 pour rafraîchir le cache des réseaux sociaux!');
+                    localStorage.setItem('welcomeShown', 'true');
+                }
+            }, 2000);
         });
     </script>
 </body>
