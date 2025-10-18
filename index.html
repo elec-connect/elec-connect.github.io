@@ -241,7 +241,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(1.2) contrast(1.1); /* Vidéo plus claire */
+            filter: brightness(1.2) contrast(1.1);
         }
 
         .video-overlay {
@@ -250,7 +250,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(94, 6, 237, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%); /* Overlay plus transparent */
+            background: linear-gradient(135deg, rgba(94, 6, 237, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%);
             z-index: 1;
         }
 
@@ -452,7 +452,7 @@
             box-shadow: 0 10px 20px rgba(94, 6, 237, 0.4);
         }
 
-        /* Logos partenaires */
+        /* Logos partenaires - visibilité améliorée */
         .partner-logos {
             display: flex;
             flex-wrap: wrap;
@@ -461,17 +461,35 @@
         }
 
         .partner-logos img {
-            height: 40px;
+            height: 44px; /* Légèrement plus grand */
             width: auto;
-            filter: grayscale(100%) brightness(200%);
-            opacity: 0.7;
-            transition: all 0.3s ease;
+            filter: grayscale(40%) contrast(1.05) brightness(1); /* Moins désaturé, plus de contraste */
+            opacity: 0.95; /* Plus opaque */
+            transition: transform .3s ease, filter .3s ease, opacity .3s ease, box-shadow .3s ease, background .3s ease;
         }
 
         .partner-logos img:hover {
-            filter: grayscale(0%) brightness(100%);
+            filter: grayscale(0%) contrast(1.05) brightness(1); /* Couleurs pleines au survol */
             opacity: 1;
-            transform: scale(1.1);
+            transform: scale(1.08); /* Effet de zoom légèrement plus prononcé */
+        }
+
+        /* Schneider et Somfy: pas de désaturation + pastille claire pour meilleur contraste */
+        .partner-logos img.logo-schneider,
+        .partner-logos img.logo-somfy {
+            filter: none; /* Pas de désaturation */
+            opacity: 1;
+            background: rgba(255,255,255,0.92); /* Fond blanc semi-transparent */
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 6px 10px; /* Ajouter du padding autour du logo */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .partner-logos img.logo-schneider:hover,
+        .partner-logos img.logo-somfy:hover {
+            transform: translateY(-2px) scale(1.06); /* Effet de léger déplacement et zoom */
+            box-shadow: 0 10px 24px rgba(0,0,0,0.35);
         }
 
         /* Footer Bottom */
@@ -540,6 +558,10 @@
             .footer-container {
                 grid-template-columns: 1fr;
                 gap: 30px;
+            }
+
+            .partner-logos img {
+                height: 40px; /* Ajustement pour mobile */
             }
         }
 
@@ -706,10 +728,10 @@
             <div class="footer-section">
                 <h3>Nos partenaires</h3>
                 <div class="partner-logos">
-                    <img src="assets/img/schneider-logo.png" alt="Schneider Electric" loading="lazy">
+                    <img src="assets/img/schneider-logo.png" alt="Schneider Electric" loading="lazy" class="logo-schneider">
                     <img src="assets/img/legrand-logo.png" alt="Legrand" loading="lazy">
                     <img src="assets/img/sonoff-logo.png" alt="Sonoff" loading="lazy">
-                    <img src="assets/img/somfy-logo.png" alt="Somfy" loading="lazy">
+                    <img src="assets/img/somfy-logo.png" alt="Somfy" loading="lazy" class="logo-somfy">
                 </div>
             </div>
         </div>
