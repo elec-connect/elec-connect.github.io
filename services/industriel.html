@@ -3,47 +3,718 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solutions Industrielles | Électricité Connectée</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/service-detail.css">
+    <title>Solutions Industrielles - Électricité Professionnelle | Elec-Connect</title>
+    <meta name="description" content="Expert en installations électriques industrielles en Tunisie. Maintenance préventive, automatisation, conformité NF C 15-100. Disponible 24/7.">
+    <meta name="keywords" content="électricité industrielle, maintenance, automatisation, Schneider, Siemens, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+    
     <style>
-        /* Styles spécifiques industrie */
-        .industrial-icon {
-            color: #2c3e50;
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            --primary: #5e06ed;
+            --secondary: #f1c40f;
+            --industrial: #e67e22;
+            --industrial-dark: #d35400;
+            --blue: #3498db;
+            --green: #27ae60;
+            --red: #e74c3c;
+            --dark: #1a2c38;
+            --light: #f5f7fa;
+            --gray: #7f8c8d;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-industrial: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
         }
-        .safety-badge {
-            background-color: #e74c3c;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HEADER
+        ============================================ */
+        header {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* LOGO ANIMÉ */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2rem;
+            animation: rotate-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(241, 196, 15, 0.6));
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(1.15); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
+
+        .logo-elec {
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
+            animation: glow-elec 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow-elec {
+            from { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(94, 6, 237, 0.6); }
+        }
+
+        .logo-separator {
+            color: var(--secondary);
+            font-weight: 300;
+            margin: 0 3px;
+            animation: blink-separator 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink-separator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .logo-connect {
+            background: linear-gradient(45deg, var(--secondary), #f39c12, var(--secondary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        /* NAV LINKS */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            margin-left: auto;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i {
             font-size: 0.9rem;
-            font-weight: bold;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* ============================================
+           SERVICE DETAIL
+        ============================================ */
+        .service-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .back-button {
+            margin-bottom: 30px;
+        }
+
+        .back-button .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: white;
+            color: var(--industrial);
+            border: 2px solid var(--industrial);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.2);
+        }
+
+        .back-button .btn:hover {
+            background: var(--industrial);
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
+        }
+
+        /* ============================================
+           TITRE PRINCIPAL
+        ============================================ */
+        article > h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 40px;
+            background: var(--gradient-industrial);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        article > h1 i {
+            font-size: 1.2em;
+            background: var(--gradient-industrial);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================
+           SERVICE HERO
+        ============================================ */
+        .service-hero {
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.85), rgba(230, 126, 34, 0.85));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           SERVICE SECTIONS
+        ============================================ */
+        .service-section {
+            padding: 60px 0;
+        }
+
+        .service-section.alt-bg {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .section-grid.reverse {
+            direction: rtl;
+        }
+
+        .section-grid.reverse > * {
+            direction: ltr;
+        }
+
+        .industrial-icon {
+            color: var(--industrial);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .section-content h2 {
+            font-size: 2rem;
+            color: var(--industrial);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-industrial);
+            border-radius: 2px;
+        }
+
+        .safety-intro {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .safety-badge {
+            background: var(--red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 700;
             display: inline-block;
-            margin-right: 0.5rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .section-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+
+        .section-content li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.7;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .section-content li::before {
+            content: '⚙';
+            position: absolute;
+            left: 0;
+            color: var(--industrial);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .section-content li:hover {
+            padding-left: 40px;
+            color: var(--industrial);
+        }
+
+        /* ============================================
+           SECTION IMAGE
+        ============================================ */
+        .section-image {
+            position: relative;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease;
+        }
+
+        .section-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(230, 126, 34, 0.95);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           CERTIFICATION SECTION
+        ============================================ */
+        .certification-section {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .certification-section h2 {
+            font-size: 2.2rem;
+            color: var(--industrial);
+            margin-bottom: 40px;
+        }
+
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .certification-item {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .certification-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(230, 126, 34, 0.3);
+        }
+
+        .certification-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: grayscale(0.5);
+            transition: filter 0.3s;
+        }
+
+        .certification-item:hover img {
+            filter: grayscale(0);
+        }
+
+        .certification-item p {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        /* ============================================
+           CTA SECTION
+        ============================================ */
+        .cta-section {
+            background: var(--gradient-industrial);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            box-shadow: 0 15px 40px rgba(230, 126, 34, 0.3);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: white;
+            color: var(--industrial);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline-industrial {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-industrial:hover {
+            background: white;
+            color: var(--industrial);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .site-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .copyright i {
+            color: var(--secondary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 968px) {
+            nav {
+                gap: 30px;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-grid.reverse {
+                direction: ltr;
+            }
+
+            .certification-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 20px;
+            }
+
+            .menu-btn {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s;
+                margin-left: 0;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-icon {
+                font-size: 1.6rem;
+            }
+
+            .service-detail {
+                padding: 40px 1rem;
+            }
+
+            .service-hero {
+                height: 350px;
+            }
+
+            .service-section,
+            .service-section.alt-bg,
+            .certification-section,
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-large {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .certification-item img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            article > h1 {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .safety-badge {
+                display: block;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
     <header>
         <nav>
-            <div class="menu-btn">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-bolt logo-icon"></i>
+                <span class="logo-elec">Elec</span>
+                <span class="logo-separator">-</span>
+                <span class="logo-connect">Connect</span>
+            </a>
+            
+            <div class="menu-btn" onclick="toggleMenu()">
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
                 <div class="burger-line"></div>
             </div>
-            <ul class="nav-links">
-                <li><a href="../../index.html">Accueil</a></li>
-                <li><a href="../../services.html">Services</a></li>
-                <li><a href="../../realisations/maison1.html">Réalisations</a></li>
-                <li><a href="../../contact/contact.html">Contact</a></li>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="../../services.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="../../realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                <li><a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                <li><a href="../../contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="service-detail industrial-theme">
         <div class="back-button">
             <a href="../../services.html" class="btn">
@@ -57,8 +728,8 @@
             <div class="service-hero" style="background-image: url('../../assets/img/usine-banner.jpg')">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <h2>Expertise électrique pour l'industrie</h2>
-                    <p>Conformité, sécurité et performance énergétique</p>
+                    <h2>Expertise Électrique pour l'Industrie</h2>
+                    <p>Conformité, Sécurité et Performance Énergétique</p>
                 </div>
             </div>
             
@@ -67,21 +738,26 @@
                 <div class="section-grid">
                     <div class="section-content">
                         <div class="industrial-icon">
-                            <i class="fas fa-bolt"></i>
+                            <i class="fas fa-hard-hat"></i>
                         </div>
                         <h2>Installations Sécurisées</h2>
-                        <p class="safety-intro"><span class="safety-badge">NF C 15-100</span><span class="safety-badge">IEC 60364</span> Nos installations industrielles répondent aux normes les plus exigeantes :</p>
+                        <p class="safety-intro">
+                            <span class="safety-badge">NF C 15-100</span>
+                            <span class="safety-badge">IEC 60364</span>
+                            Nos installations industrielles répondent aux normes les plus exigeantes :
+                        </p>
                         <ul>
                             <li>Protection des moteurs (disjoncteurs différentiels, relais thermiques)</li>
-                            <li>Tableaux électriques IP55 avec séparation des circuits</li>
-                            <li>Protection contre les surtensions et courts-circuits</li>
-                            <li>Gestion des harmoniques (filtres actifs)</li>
+                            <li>Tableaux électriques IP55 avec séparation stricte des circuits</li>
+                            <li>Protection contre les surtensions et courts-circuits instantanée</li>
+                            <li>Gestion des harmoniques avec filtres actifs de dernière génération</li>
+                            <li>Système de mise à la terre optimisé pour environnements industriels</li>
                         </ul>
-                        <p>Nous utilisons exclusivement des composants Schneider Electric ou Siemens pour les environnements industriels difficiles (poussière, humidité, vibrations).</p>
+                        <p>Nous utilisons exclusivement des composants <strong>Schneider Electric, Siemens ou ABB</strong> pour les environnements industriels difficiles (poussière, humidité, vibrations, températures extrêmes).</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/armoire-industrielle.jpg" alt="Armoire électrique industrielle sécurisée" loading="lazy">
-                        <div class="image-caption">Tableau divisionnaire industriel certifié</div>
+                        <div class="image-caption">Tableau divisionnaire industriel certifié IP55</div>
                     </div>
                 </div>
             </section>
@@ -93,19 +769,20 @@
                         <div class="industrial-icon">
                             <i class="fas fa-tools"></i>
                         </div>
-                        <h2>Maintenance Préventive</h2>
-                        <p>Programmes de maintenance sur mesure pour éviter les arrêts de production :</p>
+                        <h2>Maintenance Préventive 24/7</h2>
+                        <p>Programmes de maintenance personnalisés pour <strong>éviter les arrêts de production coûteux</strong> :</p>
                         <ul>
-                            <li>Contrôle thermographique des installations</li>
-                            <li>Mesure de l'isolement et de la terre</li>
-                            <li>Vérification des couples de serrage</li>
-                            <li>Analyse des courbes de consommation</li>
+                            <li>Contrôle thermographique infrarouge des installations électriques</li>
+                            <li>Mesure précise de l'isolement et de la terre (mégohmmètre)</li>
+                            <li>Vérification systématique des couples de serrage selon normes</li>
+                            <li>Analyse détaillée des courbes de consommation et facteur de puissance</li>
+                            <li>Tests de continuité et contrôle des protections différentielles</li>
                         </ul>
-                        <p>Nos rapports incluent une cartographie des risques et un plan d'optimisation énergétique avec ROI calculé.</p>
+                        <p>Nos rapports d'intervention incluent une <strong>cartographie complète des risques</strong> et un plan d'optimisation énergétique avec ROI calculé et recommandations priorisées.</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/maintenance-industrielle.jpg" alt="Technicien en maintenance électrique" loading="lazy">
-                        <div class="image-caption">Contrôle thermographique d'un tableau</div>
+                        <div class="image-caption">Contrôle thermographique d'un tableau de distribution</div>
                     </div>
                 </div>
             </section>
@@ -115,52 +792,56 @@
                 <div class="section-grid">
                     <div class="section-content">
                         <div class="industrial-icon">
-                            <i class="fas fa-robot"></i>
+                            <i class="fas fa-microchip"></i>
                         </div>
                         <h2>Automatisation Industrielle</h2>
-                        <p>Solutions clés en main pour moderniser vos process :</p>
+                        <p>Solutions clés en main pour <strong>moderniser et optimiser vos processus de production</strong> :</p>
                         <ul>
-                            <li>Pilotage des automates (Siemens, Allen-Bradley, Schneider)</li>
-                            <li>Interface homme-machine (IHM) tactile</li>
-                            <li>Supervision SCADA avec alertes SMS/email</li>
-                            <li>Intégration IoT pour le monitoring distant</li>
+                            <li>Programmation et pilotage d'automates (Siemens S7, Allen-Bradley, Schneider Modicon)</li>
+                            <li>Interface homme-machine (IHM) tactile couleur dernière génération</li>
+                            <li>Supervision SCADA complète avec alertes SMS/email en temps réel</li>
+                            <li>Intégration IoT Industrie 4.0 pour monitoring distant sécurisé</li>
+                            <li>Variateurs de vitesse et démarreurs progressifs intelligents</li>
                         </ul>
-                        <p>Nous développons des solutions sur-mesure avec des temps de réponse < 100ms pour les applications critiques.</p>
+                        <p>Nous développons des <strong>solutions sur-mesure</strong> avec des temps de réponse < 100ms pour les applications critiques et une disponibilité garantie > 99,5%.</p>
                     </div>
                     <div class="section-image">
                         <img src="../../assets/img/automatisation.jpg" alt="Système d'automatisation industrielle" loading="lazy">
-                        <div class="image-caption">Poste de contrôle automatisé</div>
+                        <div class="image-caption">Poste de contrôle SCADA automatisé</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Section Bonus : Certifications -->
+            <!-- Section Certifications -->
             <section class="certification-section">
-                <h2>Nos traveaux selon les certifications industrielles</h2>
+                <h2>🏆 Nos Travaux Selon les Certifications Industrielles</h2>
                 <div class="certification-grid">
                     <div class="certification-item">
                         <img src="../../assets/img/certifs/certif-iec.png" alt="Normes IEC" loading="lazy">
-                        <p>Sécurité</p>
+                        <p>Normes Sécurité IEC</p>
                     </div>
                     <div class="certification-item">
                         <img src="../../assets/img/certifs/certif-ecoelectric.png" alt="Label EcoElectric" loading="lazy">
-                        <p>Énergie</p>
+                        <p>Efficacité Énergétique</p>
                     </div>
                     <div class="certification-item">
                         <img src="../../assets/img/certifs/certif-iso.png" alt="Certification ISO 9001" loading="lazy">
-                        <p>Qualité</p>
+                        <p>Qualité ISO 9001</p>
                     </div>
                 </div>
             </section>
 
             <!-- Section CTA -->
             <section class="cta-section industrial-cta">
-                <h2>Optimisez votre outil de production</h2>
+                <h2>⚡ Optimisez Votre Outil de Production</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.95;">
+                    Intervention rapide 24/7 • Audit énergétique gratuit • Devis sous 48h
+                </p>
                 <div class="cta-buttons">
-                    <a href="tel:+21629328870" class="btn btn-large btn-industrial">
-                        <i class="fas fa-phone-volume"></i> Urgence Technique
+                    <a href="tel:+21629328870" class="btn-large">
+                        <i class="fas fa-phone-volume"></i> Urgence Technique 24/7
                     </a>
-                    <a href="../../contact/contact.html" class="btn btn-large btn-outline-industrial">
+                    <a href="../../contact/contact.html" class="btn-large btn-outline-industrial">
                         <i class="fas fa-file-signature"></i> Audit Gratuit
                     </a>
                 </div>
@@ -168,16 +849,49 @@
         </article>
     </main>
 
-    <script src="../../assets/js/main.js"></script>
-</body>
-<p></p>
-<footer class="site-footer">
-           
+    <!-- FOOTER -->
+    <footer class="site-footer">
         <div class="copyright">
-            <p>&copy; 2023 Électricité Connectée. Tous droits réservés.</p>
-            <p><i class="fas fa-home"></i> "ELEC-CONNECT"</p>
+            <p><strong>&copy; 2024 Elec-Connect.</strong> Tous droits réservés.</p>
+            <p><i class="fas fa-industry"></i> Expert Électricité Industrielle en Tunisie</p>
         </div>
-        
-    
-</footer>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // MENU MOBILE
+        // ============================================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // ============================================
+        // ANIMATIONS AU SCROLL
+        // ============================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-section, .certification-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        console.log('⚙️ Page Solutions Industrielles chargée avec succès!');
+    </script>
+</body>
 </html>
