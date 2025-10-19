@@ -8,24 +8,42 @@
     <title>Elec-Connect - Électricité Intelligente en Tunisie</title>
     
     <!-- ============================================ -->
-    <!-- BALISES RÉSEAUX SOCIAUX OPTIMISÉES -->
+    <!-- BALISES RÉSEAUX SOCIAUX AVEC VIDÉOS -->
     <!-- ============================================ -->
     
     <!-- Open Graph (Facebook, LinkedIn) -->
     <meta property="og:title" content="Elec-Connect - Électricité Intelligente en Tunisie">
     <meta property="og:description" content="Transformez votre habitat en maison intelligente avec nos solutions domotiques certifiées Schneider, Legrand, Somfy. Installation et maintenance en Tunisie.">
-    <meta property="og:image" content="http://elec-connect.github.io/assets/img/partage-social.jpg">
+    <meta property="og:image" content="http://elec-connect.github.io/assets/videos/thumbnail-video-social.jpg">
     <meta property="og:url" content="http://elec-connect.github.io">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Elec-Connect">
     <meta property="og:locale" content="fr_FR">
     
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- AJOUTEZ CETTE LIGNE AVEC VOTRE VÉRITABLE APP ID -->
+    <meta property="fb:app_id" content="VOTRE_APP_ID_FACEBOOK_ICI"> 
+
+    <!-- Vidéo pour Facebook (doit être un lien direct vers le fichier MP4) -->
+    <meta property="og:video" content="http://elec-connect.github.io/assets/videos/presentation-domotique.mp4">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1200">
+    <meta property="og:video:height" content="630">
+    <!-- og:video:secure_url est souvent redondant si og:video est déjà HTTPS, mais peut être utile si le site supporte les deux -->
+    <meta property="og:video:secure_url" content="http://elec-connect.github.io/assets/videos/presentation-domotique.mp4">
+    
+    <!-- Twitter Card avec Player -->
+    <meta name="twitter:card" content="player">
     <meta name="twitter:title" content="Elec-Connect - Domotique Tunisie">
     <meta name="twitter:description" content="Expert en solutions domotiques intelligentes pour votre maison en Tunisie. Schneider, Legrand, Somfy.">
-    <meta name="twitter:image" content="http://elec-connect.github.io/assets/img/twitter-partage.jpg">
+    <meta name="twitter:image" content="http://elec-connect.github.io/assets/videos/thumbnail-video-twitter.jpg">
     <meta name="twitter:site" content="@elecconnecttn">
+    
+    <!-- Twitter Player (pointe vers le stream direct de la vidéo) -->
+    <meta name="twitter:player" content="http://elec-connect.github.io/assets/videos/presentation-domotique-twitter.mp4">
+    <meta name="twitter:player:width" content="480">
+    <meta name="twitter:player:height" content="280">
+    <meta name="twitter:player:stream" content="http://elec-connect.github.io/assets/videos/presentation-domotique-twitter.mp4">
+    <meta name="twitter:player:stream:content_type" content="video/mp4">
     
     <!-- Canonique -->
     <link rel="canonical" href="http://elec-connect.github.io">
@@ -49,11 +67,21 @@
         },
         "areaServed": "Tunisie",
         "serviceType": "Installation domotique, Électricité intelligente, Maison connectée",
-        "brand": ["Schneider Electric", "Legrand", "Somfy", "Sonoff"]
+        "brand": ["Schneider Electric", "Legrand", "Somfy", "Sonoff"],
+        "video": {
+            "@type": "VideoObject",
+            "name": "Présentation Elec-Connect - Solutions Domotiques",
+            "description": "Découvrez nos solutions domotiques intelligentes pour votre maison en Tunisie",
+            "thumbnailUrl": "http://elec-connect.github.io/assets/videos/thumbnail-video-social.jpg",
+            "contentUrl": "http://elec-connect.github.io/assets/videos/presentation-domotique.mp4",
+            "uploadDate": "2024-01-01",
+            "duration": "PT1M30S"
+        }
     }
     </script>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Assurez-vous que ce fichier CSS existe et est bien lié -->
+    <link rel="stylesheet" href="assets/css/style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
     
@@ -420,11 +448,13 @@
         }
 
         /* ============================================
-           BOUTONS DE PARTAGE SOCIAL
+           BOUTONS DE PARTAGE SOCIAL (MODIFIÉ POUR HORIZONTAL)
         ============================================ */
         .social-share-buttons {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;     /* CHANGÉ : Alignement horizontal */
+            flex-wrap: wrap;         /* AJOUTÉ : Permet aux boutons de passer à la ligne si l'espace est insuffisant */
+            justify-content: center; /* AJOUTÉ : Centre les boutons horizontalement dans leur conteneur */
             gap: 10px;
             margin-top: 15px;
         }
@@ -441,14 +471,9 @@
             align-items: center;
             gap: 10px;
             font-size: 0.9rem;
-            width: 100%;
+            width: auto;     /* CHANGÉ : Les boutons s'adaptent à leur contenu */
+            min-width: 120px; /* AJOUTÉ (optionnel) : Assure une largeur minimale pour chaque bouton */
             justify-content: center;
-        }
-
-        .share-btn:hover {
-            background: #5e06ed;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(94, 6, 237, 0.4);
         }
 
         /* ============================================
@@ -643,14 +668,16 @@
                 height: 40px;
             }
 
+            /* Pour les écrans plus petits, les boutons de partage peuvent s'étirer */
             .social-share-buttons {
-                flex-direction: row;
+                flex-direction: row; /* Maintenu pour la cohérence */
                 flex-wrap: wrap;
+                justify-content: center;
             }
 
             .share-btn {
-                flex: 1;
-                min-width: 120px;
+                flex: 1; /* Permet aux boutons de prendre une part égale de l'espace disponible */
+                min-width: 120px; /* Assure une taille minimale même avec flex:1 */
             }
         }
 
@@ -684,21 +711,9 @@
         .header-controls {
             animation: slideInFromRight 0.8s ease-out;
         }
-
-        /* Animation pour le bouton auto-refresh */
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(94, 6, 237, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(94, 6, 237, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(94, 6, 237, 0); }
-        }
-
-        .auto-refresh-btn {
-            animation: pulse-glow 2s infinite;
-        }
     </style>
 </head>
 <body>
-    <!-- En-tête avec vidéo d'arrière-plan -->
     <header class="hero">
         <!-- Vidéo d'arrière-plan -->
         <div class="video-background">
@@ -722,34 +737,29 @@
         <div class="header-controls">                    
             <!-- Bouton blog -->
             <div class="blog-link">
-                <a href="blog.html" aria-label="Accéder au blog">
+                <a href="blog.html" aria-label="Accéder au blog" title="Notre Blog">
                     <i class="fas fa-blog fa-2x"></i>
                     <span class="badge">3</span>
                 </a>
             </div>
 
             <!-- Bouton Réalisations -->
-            <a href="realisations/realisations.html" class="control-btn" aria-label="Voir nos réalisations">
+            <a href="realisations/realisations.html" class="control-btn" aria-label="Voir nos réalisations" title="Nos Réalisations">
                 <i class="fas fa-photo-video"></i>
             </a>
 
             <!-- Bouton calcul -->
-            <a href="calcul/calculateurs.html" class="calcul-btn" aria-label="Calculateurs">
+            <a href="calcul/calculateurs.html" class="calcul-btn" aria-label="Calculateurs" title="Accéder aux calculateurs">
                 <i class="fas fa-calculator"></i>
             </a>
             
             <!-- Bouton Son -->
-            <button id="musicToggle" class="control-btn" aria-label="Contrôle musical">
+            <button id="musicToggle" class="control-btn" aria-label="Contrôle musical" title="Activer/Désactiver la musique d'ambiance">
                 <i class="fas fa-volume-mute"></i>
             </button>
 
-            <!-- Bouton Auto-Refresh Réseaux Sociaux -->
-            <button id="autoRefreshBtn" class="control-btn auto-refresh-btn" aria-label="Rafraîchissement automatique réseaux sociaux" title="Auto-rafraîchissement réseaux sociaux">
-                <i class="fas fa-sync-alt"></i>
-            </button>
-
             <!-- Logo -->
-            <a href="#" class="logo-badge" aria-label="Page d'accueil">
+            <a href="#" class="logo-badge" aria-label="Page d'accueil" title="Accueil Elec-Connect">
                 <i class="fas fa-bolt"></i>
                 <span class="elec">Elec</span>
                 <span class="divider">-</span>
@@ -842,16 +852,16 @@
                 <!-- BOUTONS DE PARTAGE SOCIAL -->
                 <h3 style="margin-top: 30px;">Partagez notre site</h3>
                 <div class="social-share-buttons">
-                    <button onclick="shareOnFacebook()" class="share-btn">
+                    <button onclick="shareOnFacebook()" class="share-btn" title="Partager sur Facebook">
                         <i class="fab fa-facebook"></i> Facebook
                     </button>
-                    <button onclick="shareOnTwitter()" class="share-btn">
+                    <button onclick="shareOnTwitter()" class="share-btn" title="Partager sur Twitter">
                         <i class="fab fa-twitter"></i> Twitter
                     </button>
-                    <button onclick="shareOnLinkedIn()" class="share-btn">
+                    <button onclick="shareOnLinkedIn()" class="share-btn" title="Partager sur LinkedIn">
                         <i class="fab fa-linkedin"></i> LinkedIn
                     </button>
-                    <button onclick="copyLink()" class="share-btn">
+                    <button onclick="copyLink()" class="share-btn" title="Copier le lien du site">
                         <i class="fas fa-link"></i> Copier lien
                     </button>
                 </div>
@@ -864,7 +874,7 @@
                 <p>&copy; 2024 Électricité Connectée. Tous droits réservés.</p>
                 <p><i class="fas fa-home"></i> <strong>"ELEC-CONNECT"</strong> - Votre partenaire domotique en Tunisie</p>
                 <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">
-                    🔄 Système auto-rafraîchissement réseaux sociaux activé | http://elec-connect.github.io
+                    🎥 Partage vidéo activé
                 </p>
             </div>
         </div>
@@ -873,84 +883,9 @@
     <!-- JavaScript -->
     <script>
         // ============================================
-        // SYSTÈME AUTOMATIQUE RÉSEAUX SOCIAUX
+        // CONFIGURATION GLOBALE
         // ============================================
-        class SocialMediaAutoRefresh {
-            constructor() {
-                this.baseUrl = 'http://elec-connect.github.io';
-                this.lastUpdate = localStorage.getItem('lastSocialRefresh') || Date.now();
-                this.updateInterval = 24 * 60 * 60 * 1000; // 24 heures
-                this.init();
-            }
-
-            init() {
-                console.log('🚀 Système auto-rafraîchissement réseaux sociaux activé!');
-                
-                // Vérifier si besoin de rafraîchir au chargement
-                if(this.shouldRefresh()) {
-                    this.autoPreload();
-                }
-                
-                // Planifier le rafraîchissement quotidien
-                setInterval(() => {
-                    this.autoPreload();
-                }, this.updateInterval);
-            }
-
-            shouldRefresh() {
-                return (Date.now() - this.lastUpdate) > this.updateInterval;
-            }
-
-            getSocialUrl() {
-                // URL unique pour forcer le re-scraping
-                return `${this.baseUrl}?t=${Date.now()}`;
-            }
-
-            autoPreload() {
-                console.log('🔄 Préchargement automatique pour réseaux sociaux...');
-                
-                // Préchargement invisible pour forcer le scraping
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = this.getSocialUrl();
-                document.body.appendChild(iframe);
-                
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                    this.lastUpdate = Date.now();
-                    localStorage.setItem('lastSocialRefresh', this.lastUpdate);
-                    console.log('✅ Préchargement réseaux sociaux terminé');
-                }, 3000);
-            }
-
-            forceRefreshAll() {
-                console.log('🎯 Forçage du rafraîchissement complet...');
-                
-                // 1. Préchargement
-                this.autoPreload();
-                
-                // 2. Ouvrir les outils de debug
-                setTimeout(() => {
-                    const socialUrl = this.getSocialUrl();
-                    const tools = [
-                        `https://developers.facebook.com/tools/debug/sharing/?q=${encodeURIComponent(socialUrl)}`,
-                        `https://cards-dev.twitter.com/validator`,
-                        `https://www.linkedin.com/post-inspector/inspect/${encodeURIComponent(socialUrl)}`
-                    ];
-                    
-                    tools.forEach((tool, index) => {
-                        setTimeout(() => {
-                            window.open(tool, '_blank');
-                        }, index * 1000);
-                    });
-                    
-                    alert('🔧 Outils de rafraîchissement ouverts!\n\nCollez votre URL dans chaque outil et cliquez "Scrape Again"');
-                }, 2000);
-            }
-        }
-
-        // Initialiser le système automatique
-        const socialAutoRefresh = new SocialMediaAutoRefresh();
+        const BASE_URL = 'http://elec-connect.github.io'; 
 
         // ============================================
         // CONTRÔLE MUSICAL
@@ -965,7 +900,8 @@
                     musicPlaying = true;
                     this.innerHTML = '<i class="fas fa-volume-up"></i>';
                 }).catch(err => {
-                    console.log('Lecture audio bloquée:', err);
+                    console.log('Lecture audio bloquée par le navigateur (interaction utilisateur nécessaire) :', err);
+                    alert('Le navigateur a bloqué la lecture automatique. Cliquez à nouveau pour activer le son.');
                 });
             } else {
                 backgroundMusic.pause();
@@ -1005,7 +941,7 @@
         }
 
         setInterval(mettreAJourHorloge, 1000);
-        mettreAJourHorloge();
+        mettreAJourHorloge(); // Appel initial pour afficher l'heure immédiatement
 
         // ============================================
         // PARTICULES ANIMÉES
@@ -1019,12 +955,12 @@
                 particle.className = 'particle';
                 
                 // Position et taille aléatoires
-                const size = Math.random() * 4 + 1;
+                const size = Math.random() * 4 + 1; // Taille entre 1px et 5px
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 15 + 's'; // Délai d'animation jusqu'à 15s
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's'; // Durée d'animation entre 10s et 20s
                 
                 particlesContainer.appendChild(particle);
             }
@@ -1033,40 +969,30 @@
         createParticles();
 
         // ============================================
-        // FONCTIONS DE PARTAGE SOCIAL AVEC URL UNIQUE
+        // FONCTIONS DE PARTAGE SOCIAL
         // ============================================
         function shareOnFacebook() {
-            const url = encodeURIComponent(socialAutoRefresh.getSocialUrl());
-            const text = encodeURIComponent("Découvrez Elec-Connect - Solutions domotiques intelligentes en Tunisie ! 🏠⚡ Schneider • Legrand • Somfy");
+            const url = encodeURIComponent(BASE_URL);
+            const text = encodeURIComponent("🎥 Découvrez Elec-Connect en vidéo ! Solutions domotiques intelligentes en Tunisie. Schneider • Legrand • Somfy");
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
         }
 
         function shareOnTwitter() {
-            const url = encodeURIComponent(socialAutoRefresh.getSocialUrl());
-            const text = encodeURIComponent("Je viens de découvrir Elec-Connect - Expert en domotique en Tunisie ! 🏠⚡ Solutions Schneider, Legrand, Somfy");
+            const url = encodeURIComponent(BASE_URL);
+            const text = encodeURIComponent("🎥 Je viens de découvrir Elec-Connect - Expert en domotique en Tunisie ! Vidéo de présentation disponible.");
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
         }
 
         function shareOnLinkedIn() {
-            const url = encodeURIComponent(socialAutoRefresh.getSocialUrl());
+            const url = encodeURIComponent(BASE_URL);
             window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
         }
 
         function copyLink() {
-            const url = socialAutoRefresh.getSocialUrl();
-            navigator.clipboard.writeText(url)
-                .then(() => alert('🔗 Lien copié avec timestamp unique !\n\nPartagez-le où vous voulez 📋\n\n' + url))
-                .catch(err => console.error('Erreur : ', err));
+            navigator.clipboard.writeText(BASE_URL)
+                .then(() => alert('🔗 Lien copié !\n\nPartagez-le où vous voulez 📋\n\n' + BASE_URL))
+                .catch(err => console.error('Erreur lors de la copie du lien : ', err));
         }
-
-        // ============================================
-        // BOUTON AUTO-REFRESH
-        // ============================================
-        document.getElementById('autoRefreshBtn').addEventListener('click', function() {
-            if(confirm('🔄 Lancer le rafraîchissement automatique réseaux sociaux?\n\nCette action va :\n• Précharger votre site\n• Ouvrir les outils de debug\n• Forcer le re-scraping')) {
-                socialAutoRefresh.forceRefreshAll();
-            }
-        });
 
         // ============================================
         // SMOOTH SCROLL
@@ -1094,7 +1020,8 @@
             if (document.hidden) {
                 video.pause();
             } else {
-                video.play();
+                // Tente de rejouer la vidéo, mais les navigateurs peuvent bloquer l'autoplay sans interaction
+                video.play().catch(e => console.log("La lecture de la vidéo a été bloquée par le navigateur.", e));
             }
         });
 
@@ -1102,17 +1029,14 @@
         // CHARGEMENT INITIAL
         // ============================================
         window.addEventListener('load', function() {
-            console.log('🚀 Site Elec-Connect FULLY OPTIMIZED!');
-            console.log('🔄 Système auto-rafraîchissement réseaux sociaux: ACTIVÉ');
-            console.log('🎯 URL: http://elec-connect.github.io');
+            console.log('✅ Site Elec-Connect chargé et optimisé.');
+            console.log('💡 Les vidéos ont un taux d\'engagement 5x supérieur aux images!');
             
-            // Notification discrète
-            setTimeout(() => {
-                if(!localStorage.getItem('welcomeShown')) {
-                    console.log('💡 Astuce: Utilisez le bouton 🔄 pour rafraîchir le cache des réseaux sociaux!');
-                    localStorage.setItem('welcomeShown', 'true');
-                }
-            }, 2000);
+            // Notification discrète (une seule fois)
+            if(!localStorage.getItem('videoWelcomeShown')) {
+                console.log('Conseil : Assurez-vous que les vidéos sont bien compressées pour le web.');
+                localStorage.setItem('videoWelcomeShown', 'true');
+            }
         });
     </script>
 </body>
