@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tendances Domotiques 2024 - Innovations & Technologies | Elec-Connect</title>
-    <meta name="description" content="Découvrez les innovations domotiques 2024 : IA embarquée, énergie intelligente, sécurité biométrique. Guide complet par nos experts en Tunisie.">
-    <meta name="keywords" content="domotique 2024, maison intelligente, IA, énergie, sécurité biométrique, Tunisie">
+    <title>Tendances Domotiques 2026 - Innovations & Technologies | Elec-Connect</title>
+    <meta name="description" content="Découvrez les innovations domotiques 2026 : IA embarquée, énergie intelligente, sécurité biométrique. Guide complet par nos experts en Tunisie.">
+    <meta name="keywords" content="domotique 2026, maison intelligente, IA, énergie, sécurité biométrique, Tunisie">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../../assets/img/favicon.ico" type="image/x-icon">
     
     <style>
         /* ============================================
@@ -325,6 +326,24 @@
             font-size: 1.8rem;
         }
 
+        .article-content h3 {
+            color: var(--info);
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+
+        .article-content h4 {
+            color: var(--primary);
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .article-content p {
+            margin: 15px 0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
         /* ============================================
            IMAGES OPTIMISÉES
         ============================================ */
@@ -361,6 +380,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin: 25px 0;
+            clear: both;
         }
 
         .img-group img {
@@ -414,6 +434,9 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .video-btn:hover {
@@ -441,6 +464,182 @@
         .article-highlight strong {
             color: #856404;
             font-size: 1.1rem;
+        }
+
+        /* ============================================
+           TECH BOXES (pour section sécurité)
+        ============================================ */
+        .tech-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary);
+            clear: both;
+        }
+
+        .tech-box.success {
+            background: #e8f5e9;
+            border-left-color: var(--success);
+        }
+
+        .tech-box.warning {
+            background: #fff3cd;
+            border-left-color: var(--warning);
+        }
+
+        .tech-box h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* ============================================
+           PRICING CARDS
+        ============================================ */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+            clear: both;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--primary);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured {
+            border-top-color: var(--success);
+            box-shadow: 0 8px 30px rgba(94,6,237,0.3);
+            transform: scale(1.05);
+        }
+
+        .pricing-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .pricing-card .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .pricing-card.featured .price {
+            color: var(--success);
+        }
+
+        .pricing-card ul {
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 2;
+            list-style: none;
+            padding: 0;
+        }
+
+        .pricing-card ul li::before {
+            content: "✓ ";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* ============================================
+           PROCESS STEPS
+        ============================================ */
+        .process-steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+
+        .process-steps li {
+            counter-increment: step;
+            margin: 20px 0;
+            padding: 20px 20px 20px 70px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .process-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .process-steps li strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ============================================
+           PROMO BANNER
+        ============================================ */
+        .promo-banner {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            clear: both;
+        }
+
+        .promo-banner h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .why-choose {
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            clear: both;
+        }
+
+        .why-choose ul {
+            columns: 2;
+            column-gap: 30px;
+            line-height: 2;
+            list-style: none;
+            padding: 0;
+        }
+
+        .why-choose ul li::before {
+            content: "✓ ";
+            font-weight: bold;
+            margin-right: 5px;
         }
 
         /* ============================================
@@ -488,6 +687,31 @@
             color: var(--primary);
             margin-bottom: 15px;
             font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-list li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-list a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .sidebar-list a:hover {
+            color: var(--primary);
+            padding-left: 10px;
         }
 
         /* ============================================
@@ -499,6 +723,7 @@
             gap: 20px;
             margin: 40px 0;
             flex-wrap: wrap;
+            clear: both;
         }
 
         .btn {
@@ -571,6 +796,10 @@
             .nav-links a {
                 font-size: 0.9rem;
             }
+
+            .why-choose ul {
+                columns: 1;
+            }
         }
 
         @media (max-width: 768px) {
@@ -618,6 +847,10 @@
                 padding: 2rem 1.5rem;
             }
 
+            .article-content h2 {
+                font-size: 1.5rem;
+            }
+
             .article-img-right,
             .article-img-left {
                 float: none;
@@ -629,11 +862,28 @@
                 grid-template-columns: 1fr;
             }
 
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
             .cta-buttons {
                 flex-direction: column;
             }
 
             .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .video-playlist {
+                flex-direction: column;
+            }
+
+            .video-btn {
                 width: 100%;
                 justify-content: center;
             }
@@ -670,12 +920,12 @@
     <!-- HERO -->
     <section class="article-hero">
         <div class="article-hero-content">
-            <span class="article-tag">🚀 Innovations 2024</span>
-            <h1>Les Tendances Domotiques 2024</h1>
+            <span class="article-tag">🚀 Innovations 2026</span>
+            <h1>Les Tendances Domotiques 2026</h1>
             <div class="article-meta">
-                <span><i class="far fa-calendar-alt"></i> 15 Nov. 2024</span>
+                <span><i class="far fa-calendar-alt"></i> 15 Nov. 2026</span>
                 <span><i class="far fa-user"></i> Par Sahnoun</span>
-                <span><i class="far fa-clock"></i> 5 min</span>
+                <span><i class="far fa-clock"></i> 8 min</span>
             </div>
         </div>
     </section>
@@ -684,9 +934,9 @@
     <main class="article-container">
         <article class="article-content">
             <!-- INTRODUCTION -->
-            <section class="article-intro">
-                <p><strong>🏠 2024 marque un tournant décisif pour la domotique.</strong> Découvrez les innovations qui transformeront nos habitats en écosystèmes intelligents, intuitifs et durables. De l'intelligence artificielle embarquée à la sécurité biométrique de pointe, explorez l'avenir de la maison connectée.</p>
-            </section>
+            <div class="article-intro">
+                <p><strong>🏠 2026 marque un tournant décisif pour la domotique.</strong> Découvrez les innovations qui transformeront nos habitats en écosystèmes intelligents, intuitifs et durables. De l'intelligence artificielle embarquée à la sécurité biométrique de pointe, explorez l'avenir de la maison connectée.</p>
+            </div>
 
             <!-- SECTION VIDÉO -->
             <section>
@@ -738,7 +988,7 @@
                 </ul>
                 
                 <div class="article-highlight">
-                    <p><strong>💡 Conseil d'expert :</strong> Privilégiez les systèmes compatibles avec le protocole <strong>Matter</strong> (norme universelle 2024) pour garantir l'interopérabilité entre vos appareils de différentes marques.</p>
+                    <p><strong>💡 Conseil d'expert :</strong> Privilégiez les systèmes compatibles avec le protocole <strong>Matter</strong> (norme universelle 2026) pour garantir l'interopérabilité entre vos appareils de différentes marques.</p>
                 </div>
             </section>
 
@@ -761,7 +1011,7 @@
                          height="267">
                 </div>
                 
-                <h3>🔋 Innovations 2024 :</h3>
+                <h3>🔋 Innovations 2026 :</h3>
                 <ul>
                     <li><strong>Batteries modulaires extensibles</strong> : capacité évolutive de 5 à 50 kWh selon vos besoins</li>
                     <li><strong>Panneaux solaires auto-nettoyants</strong> : nano-revêtement hydrophobe, rendement +15%</li>
@@ -773,48 +1023,171 @@
                 <p><strong>📈 Impact réel :</strong> Nos clients en Tunisie constatent une <strong>réduction de 40 à 60%</strong> de leur facture électrique dès la première année avec un système complet (panneaux + batterie + IA).</p>
             </section>
 
-            <!-- SECTION 3 : SÉCURITÉ -->
+            <!-- SECTION 3 : SÉCURITÉ BIOMÉTRIQUE AVANCÉE (RÉORGANISÉE) -->
             <section>
                 <h2><i class="fas fa-shield-alt"></i> Sécurité Biométrique Avancée</h2>
                 
                 <img src="../../../assets/img/blog/securite-biometrique.jpg" 
-                     alt="Sécurité biométrique maison"
-                     class="article-img-left"
+                     alt="Sécurité biométrique maison intelligente 2026"
+                     class="article-img-right"
                      loading="lazy"
                      width="400"
                      height="267">
                 
-                <p>Fini les clés, codes PIN et badges ! La sécurité 2024 repose sur <strong>l'identification multi-biométrique</strong> pour une protection maximale sans compromis sur la commodité.</p>
+                <p>En 2026, la sécurité domestique entre dans une nouvelle ère. <strong>Fini les clés perdues, les codes PIN oubliés et les badges à remplacer !</strong> Les systèmes de sécurité biométrique de nouvelle génération reposent sur <strong>l'identification multi-facteurs</strong> pour offrir une protection maximale sans compromettre votre confort au quotidien.</p>
                 
-                <h3>🔐 Technologies déployées :</h3>
-                <ol>
-                    <li><strong>Reconnaissance faciale 3D</strong>
+                <p>Ces technologies, autrefois réservées aux installations militaires et aux centres de haute sécurité, sont désormais accessibles pour sécuriser votre domicile en Tunisie à des tarifs compétitifs.</p>
+
+                <h3>🔐 Technologies Biométriques Déployées</h3>
+                
+                <div class="tech-box">
+                    <h4><i class="fas fa-user-shield"></i> 1. Reconnaissance Faciale 3D</h4>
+                    <p><strong>La technologie la plus aboutie du marché</strong>, alliant rapidité et sécurité maximale.</p>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Cartographie ultra-précise</strong> : Analyse de plus de 40 000 points uniques de votre visage</li>
+                        <li><strong>Vision nocturne</strong> : Fonctionne dans l'obscurité totale grâce aux capteurs infrarouges</li>
+                        <li><strong>Anti-spoofing</strong> : Impossible à tromper avec une photo, vidéo ou masque 3D</li>
+                        <li><strong>Vitesse d'identification</strong> : Moins de 0,5 seconde, même avec lunettes ou masque médical</li>
+                        <li><strong>Évolution adaptative</strong> : Le système s'adapte aux changements (coiffure, barbe, vieillissement)</li>
+                    </ul>
+                </div>
+
+                <div class="tech-box success">
+                    <h4><i class="fas fa-walking"></i> 2. Analyse de Démarche (Gait Recognition)</h4>
+                    <p><strong>Une innovation révolutionnaire</strong> qui identifie les personnes par leur façon unique de marcher.</p>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Identification à distance</strong> : Détecte et reconnaît jusqu'à 15 mètres</li>
+                        <li><strong>Analyse comportementale</strong> : Détecte les comportements suspects ou anormaux</li>
+                        <li><strong>Détection d'intrusion</strong> : Alerte instantanée si une personne non autorisée est identifiée</li>
+                        <li><strong>Vision 360°</strong> : Caméras intelligentes couvrant tous les angles de votre propriété</li>
+                        <li><strong>Mode apprentissage</strong> : S'améliore avec le temps en analysant vos habitudes</li>
+                    </ul>
+                </div>
+
+                <div class="tech-box warning">
+                    <h4><i class="fas fa-fingerprint"></i> 3. Capteurs de Veine Digitale</h4>
+                    <p><strong>Le summum de la sécurité biométrique</strong>, utilisé par les banques et institutions gouvernementales.</p>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Sécurité maximale</strong> : Cartographie des veines sous la peau, impossible à copier</li>
+                        <li><strong>Ultra-rapide</strong> : Déverrouillage en 0,3 seconde chrono</li>
+                        <li><strong>Hygiénique</strong> : Pas besoin de contact direct, fonctionne à 2 cm de distance</li>
+                        <li><strong>Résistant aux conditions</strong> : Fonctionne même avec les mains sales ou mouillées</li>
+                        <li><strong>Vivacité requise</strong> : Ne fonctionne qu'avec un flux sanguin actif (sécurité absolue)</li>
+                    </ul>
+                </div>
+
+                <h3>🏠 Intégration Complète dans Votre Maison</h3>
+                
+                <p>Ces technologies ne fonctionnent pas de manière isolée. Elles s'intègrent dans un <strong>écosystème de sécurité intelligent</strong> qui communique avec tous vos appareils :</p>
+                
+                <ul>
+                    <li>🚪 <strong>Serrures intelligentes</strong> : Déverrouillage automatique à votre approche</li>
+                    <li>💡 <strong>Éclairage adaptatif</strong> : Les lumières s'allument sur votre passage</li>
+                    <li>🔔 <strong>Notifications instantanées</strong> : Alertes sur smartphone en cas d'intrusion</li>
+                    <li>📹 <strong>Enregistrement automatique</strong> : Vidéos sauvegardées en cloud sécurisé</li>
+                    <li>🚨 <strong>Liaison avec les autorités</strong> : Alerte automatique vers la police en cas de danger</li>
+                    <li>🏡 <strong>Scénarios personnalisés</strong> : "Mode vacances", "Mode nuit", "Mode invités"</li>
+                </ul>
+
+                <div class="article-highlight">
+                    <p><strong>🛡️ Garantie Sécurité & Conformité :</strong></p>
+                    <ul style="margin-top: 10px; list-style: none; padding: 0;">
+                        <li>✅ <strong>Taux de fausses acceptations</strong> : Inférieur à 0,001% (norme militaire ISO 19092)</li>
+                        <li>✅ <strong>Cryptage AES-256</strong> : Vos données biométriques sont chiffrées selon les standards bancaires</li>
+                        <li>✅ <strong>Conformité RGPD</strong> : Respect total de la protection des données personnelles</li>
+                        <li>✅ <strong>Stockage local</strong> : Vos empreintes biométriques restent chez vous, jamais dans le cloud</li>
+                        <li>✅ <strong>Garantie 5 ans</strong> : Matériel et logiciel, avec mises à jour de sécurité gratuites</li>
+                    </ul>
+                </div>
+
+                <h3>💰 Tarification & Installation en Tunisie</h3>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h4>📦 Pack Essentiel</h4>
+                        <div class="price">3 350 TND</div>
                         <ul>
-                            <li>Cartographie de 40 000 points du visage</li>
-                            <li>Fonctionne dans l'obscurité (infrarouge)</li>
-                            <li>Impossible à tromper avec une photo</li>
+                            <li>sonoff central intelligent</li>
+                            <li>8 point lumineux connectés</li>
+                            <li>4 volets roulants connectés</li>
+                            <li>Installation & formation</li>
+                            <li>Garantie 2 ans</li>
                         </ul>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <h4>🏆 Pack Premium <span style="background: var(--secondary); color: var(--dark); padding: 3px 8px; border-radius: 5px; font-size: 0.7rem;">POPULAIRE</span></h4>
+                        <div class="price">6 200 TND</div>
+                        <ul>
+                            <li>sonoff central intelligent</li>
+                            <li>16 point lumineux connectés</li>
+                            <li>10 volets roulants connectés</li>
+                            <li>1 capteur de température et humidité</li>
+                            <li>1 module pour ouverture porte garage</li>
+                            <li>Installation & formation</li>
+                            <li>Garantie 5 ans</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h4>💎 Pack Elite</h4>
+                        <div class="price">8 700 TND</div>
+                        <ul>
+                            <li>Tout le Pack Premium</li>
+                            <li>fourniture et pose 4 Caméras 5Mp 4K</li>
+                            <li>Système anti-intrusion Elkron</li>
+                            <li>1 module permettant l'activation et désactivation alarme via smartphone</li>
+                            <li>Support prioritaire 24/7</li>
+                            <li>Garantie 10 ans</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="promo-banner">
+                    <h4>🎁 Offre de Lancement 2026</h4>
+                    <p style="font-size: 1.2rem; margin-bottom: 10px;"><strong>-15% sur tous les packs</strong> jusqu'au 31 mars 2026</p>
+                    <p style="font-size: 1rem; opacity: 0.9;"></p>
+                </div>
+
+                <h3>📞 Processus d'Installation</h3>
+                
+                <ol class="process-steps">
+                    <li>
+                        <strong>Audit de Sécurité Gratuit</strong>
+                        <p>Visite de votre domicile par nos experts pour évaluer vos besoins (30-45 min)</p>
                     </li>
                     
-                    <li><strong>Analyse de démarche (Gait Recognition)</strong>
-                        <ul>
-                            <li>Identification à 15 mètres de distance</li>
-                            <li>Détecte les comportements suspects</li>
-                            <li>Alerte en cas d'intrusion</li>
-                        </ul>
+                    <li>
+                        <strong>Devis Personnalisé</strong>
+                        <p>Proposition détaillée avec plan d'installation sous 48h</p>
                     </li>
                     
-                    <li><strong>Capteurs de veine digitale</strong>
-                        <ul>
-                            <li>Sécurité bancaire pour votre domicile</li>
-                            <li>Impossible à falsifier</li>
-                            <li>Déverrouillage en 0,3 seconde</li>
-                        </ul>
+                    <li>
+                        <strong>Installation Professionnelle</strong>
+                        <p>Intervention par techniciens certifiés (1 à 2 jours selon pack)</p>
+                    </li>
+                    
+                    <li>
+                        <strong>Formation & Mise en Service</strong>
+                        <p>Formation complète de 1h pour vous et votre famille + manuel en français</p>
+                    </li>
+                    
+                    <li>
+                        <strong>Support & Maintenance</strong>
+                        <p>Assistance technique 7j/7 + maintenance annuelle incluse</p>
                     </li>
                 </ol>
-                
-                <div class="article-highlight">
-                    <p><strong>🛡️ Garantie sécurité :</strong> Les systèmes que nous installons offrent un taux de fausses acceptations inférieur à <strong>0,001%</strong> (norme militaire) et sont conformes au <strong>RGPD</strong> pour la protection de vos données biométriques.</p>
+
+                <div class="why-choose">
+                    <p style="font-size: 1.2rem; margin-bottom: 15px;"><strong>✨ Pourquoi choisir Elec-Connect pour votre sécurité biométrique ?</strong></p>
+                    <ul>
+                        <li>15 ans d'expérience en Tunisie</li>
+                        <li>+100 installations réussies</li>
+                        <li>Techniciens certifiés</li>
+                        <li>Garantie satisfait ou remboursé 30 jours</li>
+                        <li>Pièces de rechange disponibles 10 ans</li>
+                        <li>Formation continue de nos équipes</li>
+                    </ul>
                 </div>
             </section>
 
@@ -833,19 +1206,19 @@
         <aside class="article-sidebar">
             <div class="sidebar-card">
                 <h3><i class="fas fa-fire"></i> Articles Populaires</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 15px;">
-                        <a href="#" style="color: var(--dark); text-decoration: none;">
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#">
                             🔒 Protéger sa maison connectée
                         </a>
                     </li>
-                    <li style="margin-bottom: 15px;">
-                        <a href="#" style="color: var(--dark); text-decoration: none;">
+                    <li>
+                        <a href="#">
                             💡 Économiser avec la domotique
                         </a>
                     </li>
                     <li>
-                        <a href="#" style="color: var(--dark); text-decoration: none;">
+                        <a href="#">
                             🏠 Guide d'installation complète
                         </a>
                     </li>
@@ -854,7 +1227,7 @@
 
             <div class="sidebar-card">
                 <h3><i class="fas fa-tag"></i> Offre Spéciale</h3>
-                <p><strong>-20% sur votre installation domotique complète</strong> jusqu'au 31 décembre 2024</p>
+                <p><strong>-10% sur votre installation domotique complète</strong> jusqu'au 31 décembre 2026</p>
                 <a href="../../../contact/contact.html" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 15px;">
                     <i class="fas fa-gift"></i> En profiter
                 </a>
@@ -952,7 +1325,7 @@
             observer.observe(section);
         });
 
-        console.log('🏠 Article domotique 2024 chargé avec succès!');
+        console.log('🏠 Article domotique 2026 chargé avec succès!');
     </script>
 </body>
 </html>
