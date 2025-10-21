@@ -8,14 +8,18 @@
     <title>Elec-Connect - Électricité Intelligente en Tunisie</title>
     
     <!-- ============================================ -->
-    <!-- BALISES RÉSEAUX SOCIAUX AVEC VIDÉOS -->
+    <!-- BALISES RÉSEAUX SOCIAUX AVEC IMAGES -->
     <!-- ============================================ -->
     
     <!-- Open Graph (Facebook, LinkedIn) -->
     <meta property="og:title" content="Elec-Connect - Électricité Intelligente en Tunisie">
     <meta property="og:description" content="Transformez votre habitat en maison intelligente avec nos solutions domotiques certifiées Schneider, Legrand, Somfy. Installation et maintenance en Tunisie.">
-    <meta property="og:image" content="http://elec-connect.github.io/assets/videos/thumbnail-video-social.jpg">
-    <meta property="og:url" content="http://elec-connect.github.io">
+    <meta property="og:image" content="https://elec-connect.github.io/assets/img/domotique-facbook.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:alt" content="Elec-Connect - Solutions domotiques intelligentes en Tunisie">
+    <meta property="og:url" content="https://elec-connect.github.io">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Elec-Connect">
     <meta property="og:locale" content="fr_FR">
@@ -23,30 +27,17 @@
     <!-- AJOUTEZ CETTE LIGNE AVEC VOTRE VÉRITABLE APP ID -->
     <meta property="fb:app_id" content="VOTRE_APP_ID_FACEBOOK_ICI"> 
 
-    <!-- Vidéo pour Facebook (doit être un lien direct vers le fichier MP4) -->
-    <meta property="og:video" content="http://elec-connect.github.io/assets/videos/presentation-domotique.mp4">
-    <meta property="og:video:type" content="video/mp4">
-    <meta property="og:video:width" content="1200">
-    <meta property="og:video:height" content="630">
-    <!-- og:video:secure_url est souvent redondant si og:video est déjà HTTPS, mais peut être utile si le site supporte les deux -->
-    <meta property="og:video:secure_url" content="http://elec-connect.github.io/assets/videos/presentation-domotique.mp4">
-    
-    <!-- Twitter Card avec Player -->
-    <meta name="twitter:card" content="player">
+    <!-- Twitter Card avec Image -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Elec-Connect - Domotique Tunisie">
     <meta name="twitter:description" content="Expert en solutions domotiques intelligentes pour votre maison en Tunisie. Schneider, Legrand, Somfy.">
-    <meta name="twitter:image" content="http://elec-connect.github.io/assets/videos/thumbnail-video-twitter.jpg">
+    <meta name="twitter:image" content="https://elec-connect.github.io/assets/img/domotique-twitter.jpg">
+    <meta name="twitter:image:alt" content="Elec-Connect - Votre expert en domotique">
     <meta name="twitter:site" content="@elecconnecttn">
-    
-    <!-- Twitter Player (pointe vers le stream direct de la vidéo) -->
-    <meta name="twitter:player" content="http://elec-connect.github.io/assets/videos/presentation-domotique-twitter.mp4">
-    <meta name="twitter:player:width" content="480">
-    <meta name="twitter:player:height" content="280">
-    <meta name="twitter:player:stream" content="http://elec-connect.github.io/assets/videos/presentation-domotique-twitter.mp4">
-    <meta name="twitter:player:stream:content_type" content="video/mp4">
+    <meta name="twitter:creator" content="@elecconnecttn">
     
     <!-- Canonique -->
-    <link rel="canonical" href="http://elec-connect.github.io">
+    <link rel="canonical" href="https://elec-connect.github.io">
     
     <!-- Schema.org Rich Snippets -->
     <script type="application/ld+json">
@@ -55,7 +46,7 @@
         "@type": "LocalBusiness",
         "name": "Elec-Connect",
         "description": "Solutions domotiques intelligentes en Tunisie - Expert Schneider, Legrand, Somfy",
-        "url": "http://elec-connect.github.io",
+        "url": "https://elec-connect.github.io",
         "telephone": "+21629328870",
         "email": "Iot.sahnoun@gmail.com",
         "address": {
@@ -68,19 +59,11 @@
         "areaServed": "Tunisie",
         "serviceType": "Installation domotique, Électricité intelligente, Maison connectée",
         "brand": ["Schneider Electric", "Legrand", "Somfy", "Sonoff"],
-        "video": {
-            "@type": "VideoObject",
-            "name": "Présentation Elec-Connect - Solutions Domotiques",
-            "description": "Découvrez nos solutions domotiques intelligentes pour votre maison en Tunisie",
-            "thumbnailUrl": "http://elec-connect.github.io/assets/videos/thumbnail-video-social.jpg",
-            "contentUrl": "http://elec-connect.github.io/assets/videos/presentation-domotique.mp4",
-            "uploadDate": "2024-01-01",
-            "duration": "PT1M30S"
-        }
+        "image": "https://elec-connect.github.io/assets/images/social-preview.jpg",
+        "logo": "https://elec-connect.github.io/assets/img/favicon.ico"
     }
     </script>
 
-    <!-- Assurez-vous que ce fichier CSS existe et est bien lié -->
     <link rel="stylesheet" href="assets/css/style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -156,6 +139,79 @@
             opacity: 0.9;
             margin-top: 5px;
             color: #ccc;
+        }
+
+        /* ============================================
+           BOUTON OFFRE SPÉCIALE - NOUVELLE VERSION ROUGE
+        ============================================ */
+        .offre-speciale-btn {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 18px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            animation: pulse-offer 2s infinite;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes pulse-offer {
+            0%, 100% {
+                transform: translateY(-50%) scale(1);
+                box-shadow: 0 8px 30px rgba(231, 76, 60, 0.6);
+            }
+            50% {
+                transform: translateY(-50%) scale(1.05);
+                box-shadow: 0 12px 40px rgba(231, 76, 60, 0.8);
+            }
+        }
+
+        .offre-speciale-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 15px 50px rgba(231, 76, 60, 0.9);
+            animation: none;
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        }
+
+        .offre-speciale-btn i {
+            font-size: 1.4rem;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .offre-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+        }
+
+        .offre-main {
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .offre-sub {
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.9;
         }
 
         /* ============================================
@@ -388,7 +444,7 @@
             text-shadow: 3px 3px 10px rgba(94, 6, 237, 0.8);
             font-weight: 800;
             line-height: 1.2;
-            background: linear-gradient(45deg, #fff, #f1c40f);
+            background: linear-gradient(45deg, #ffffff, #f1c40f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -679,6 +735,40 @@
                 flex: 1; /* Permet aux boutons de prendre une part égale de l'espace disponible */
                 min-width: 120px; /* Assure une taille minimale même avec flex:1 */
             }
+
+            /* Adaptation du bouton offre spéciale pour mobile */
+            .offre-speciale-btn {
+                right: 10px;
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+
+            .offre-main {
+                font-size: 0.9rem;
+            }
+
+            .offre-sub {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .offre-speciale-btn {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+
+            .offre-text {
+                line-height: 1.1;
+            }
+
+            .offre-main {
+                font-size: 0.8rem;
+            }
+
+            .offre-sub {
+                font-size: 0.65rem;
+            }
         }
 
         /* Animations pour le chargement */
@@ -711,9 +801,22 @@
         .header-controls {
             animation: slideInFromRight 0.8s ease-out;
         }
+
+        .offre-speciale-btn {
+            animation: slideInFromRight 0.8s ease-out 0.5s both, pulse-offer 2s infinite 1.5s;
+        }
     </style>
 </head>
 <body>
+    <!-- BOUTON OFFRE SPÉCIALE -->
+    <a href="offre.html" class="offre-speciale-btn" aria-label="Découvrir nos offres spéciales" title="Offres Spéciales">
+        <i class="fas fa-gift"></i>
+        <div class="offre-text">
+            <span class="offre-main">OFFRE SPÉCIALE</span>
+            <span class="offre-sub">-15% JUSQU'AU 31/03</span>
+        </div>
+    </a>
+
     <header class="hero">
         <!-- Vidéo d'arrière-plan -->
         <div class="video-background">
@@ -874,7 +977,7 @@
                 <p>&copy; 2024 Électricité Connectée. Tous droits réservés.</p>
                 <p><i class="fas fa-home"></i> <strong>"ELEC-CONNECT"</strong> - Votre partenaire domotique en Tunisie</p>
                 <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">
-                    🎥 Partage vidéo activé
+                    🖼️ Partage image activé
                 </p>
             </div>
         </div>
@@ -885,7 +988,7 @@
         // ============================================
         // CONFIGURATION GLOBALE
         // ============================================
-        const BASE_URL = 'http://elec-connect.github.io'; 
+        const BASE_URL = 'https://elec-connect.github.io'; 
 
         // ============================================
         // CONTRÔLE MUSICAL
@@ -973,13 +1076,13 @@
         // ============================================
         function shareOnFacebook() {
             const url = encodeURIComponent(BASE_URL);
-            const text = encodeURIComponent("🎥 Découvrez Elec-Connect en vidéo ! Solutions domotiques intelligentes en Tunisie. Schneider • Legrand • Somfy");
+            const text = encodeURIComponent("🏠 Découvrez Elec-Connect ! Solutions domotiques intelligentes en Tunisie. Schneider • Legrand • Somfy");
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
         }
 
         function shareOnTwitter() {
             const url = encodeURIComponent(BASE_URL);
-            const text = encodeURIComponent("🎥 Je viens de découvrir Elec-Connect - Expert en domotique en Tunisie ! Vidéo de présentation disponible.");
+            const text = encodeURIComponent("🏠 Je viens de découvrir Elec-Connect - Expert en domotique en Tunisie !");
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
         }
 
@@ -1030,12 +1133,18 @@
         // ============================================
         window.addEventListener('load', function() {
             console.log('✅ Site Elec-Connect chargé et optimisé.');
-            console.log('💡 Les vidéos ont un taux d\'engagement 5x supérieur aux images!');
+            console.log('🖼️ Partage social avec images activé');
+            
+            // Vérifier les images de prévisualisation
+            const socialImage = new Image();
+            socialImage.onload = () => console.log('✅ Image de prévisualisation chargée avec succès');
+            socialImage.onerror = () => console.warn('⚠️ Image de prévisualisation non trouvée, créez assets/images/social-preview.jpg');
+            socialImage.src = 'assets/images/social-preview.jpg';
             
             // Notification discrète (une seule fois)
-            if(!localStorage.getItem('videoWelcomeShown')) {
-                console.log('Conseil : Assurez-vous que les vidéos sont bien compressées pour le web.');
-                localStorage.setItem('videoWelcomeShown', 'true');
+            if(!localStorage.getItem('socialImageWelcomeShown')) {
+                console.log('💡 Conseil : Créez des images de prévisualisation optimisées pour les réseaux sociaux');
+                localStorage.setItem('socialImageWelcomeShown', 'true');
             }
         });
     </script>
