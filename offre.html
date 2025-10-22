@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions Domotique - Nos Packs d'Installation</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro {
+            text-align: center;
+            padding: 3rem 0;
+            background-color: white;
+        }
+        
+        .intro h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .packs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+        
+        .pack {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pack:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pack.popular::before {
+            content: "POPULAIRE";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .pack-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pack-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pack-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .pack-price span {
+            font-size: 1rem;
+            color: #777;
+        }
+        
+        .features-list {
+            list-style-type: none;
+            margin-bottom: 2rem;
+        }
+        
+        .features-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eee;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            color: #2ecc71;
+            position: absolute;
+            left: 0;
+        }
+        
+        .pack-cta {
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+        
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+        
+        .contact-section {
+            background-color: var(--light-color);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .contact-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-section p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .devis-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent-color), #c0392b);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .devis-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(135deg, #c0392b, #a93226);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .packs-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pack {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .devis-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Solutions Domotique Complètes</h1>
+            <p>Transformez votre maison en un habitat intelligent avec nos packs d'installation domotique sur mesure</p>
+        </div>
+    </header>
+    
+    <section class="intro">
+        <div class="container">
+            <h2>Choisissez le pack qui correspond à vos besoins</h2>
+            <p>Nos experts vous accompagnent dans la transformation de votre habitat en maison connectée, adaptée à votre mode de vie.</p>
+        </div>
+    </section>
+    
+    <section class="packs-container container">
+        <div class="pack">
+            <div class="pack-header">
+                <h3 class="pack-name">Pack Essentiel</h3>
+                <div class="pack-price">499€ <span>HT</span></div>
+            </div>
+            <ul class="features-list">
+                <li>Éclairage intelligent (3 pièces)</li>
+                <li>Thermostat connecté</li>
+                <li>Prise connectée (2 unités)</li>
+                <li>Installation et configuration</li>
+                <li>Application mobile de contrôle</li>
+                <li>Support technique 3 mois</li>
+            </ul>
+            <div class="pack-cta">
+                <a href="contact/contact.html" class="btn">Choisir ce pack</a>
+            </div>
+        </div>
+        
+        <div class="pack popular">
+            <div class="pack-header">
+                <h3 class="pack-name">Pack Confort</h3>
+                <div class="pack-price">899€ <span>HT</span></div>
+            </div>
+            <ul class="features-list">
+                <li>Tout le Pack Essentiel</li>
+                <li>Éclairage intelligent (6 pièces)</li>
+                <li>Volets roulants connectés (3 unités)</li>
+                <li>Caméra de sécurité intérieure</li>
+                <li>Capteurs d'ouverture (3 unités)</li>
+                <li>Assistant vocal inclus</li>
+                <li>Scénarios d'automatisation</li>
+                <li>Support technique 6 mois</li>
+            </ul>
+            <div class="pack-cta">
+                <a href="contact/contact.html" class="btn btn-accent">Choisir ce pack</a>
+            </div>
+        </div>
+        
+        <div class="pack">
+            <div class="pack-header">
+                <h3 class="pack-name">Pack Premium</h3>
+                <div class="pack-price">1499€ <span>HT</span></div>
+            </div>
+            <ul class="features-list">
+                <li>Tout le Pack Confort</li>
+                <li>Éclairage complet de la maison</li>
+                <li>Volets roulants connectés (6 unités)</li>
+                <li>Système de sécurité complet</li>
+                <li>Station météo connectée</li>
+                <li>Arrosage automatique intelligent</li>
+                <li>Intégration multimédia</li>
+                <li>Tableau de bord personnalisé</li>
+                <li>Support technique 12 mois</li>
+            </ul>
+            <div class="pack-cta">
+                <a href="contact/contact.html" class="btn">Choisir ce pack</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-section">
+        <div class="container">
+            <h2>Prêt à transformer votre maison ?</h2>
+            <p>Contactez-nous dès maintenant pour obtenir un devis personnalisé et gratuit</p>
+            
+            <a href="contact/contact.html" class="devis-btn">
+                📋 Demander un devis gratuit
+            </a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Solutions Domotique. Tous droits réservés.</p>
+            <p>Contact: Iot.sahnoun@gmail.com | 29 328 870</p>
+        </div>
+    </footer>
+</body>
+</html>
