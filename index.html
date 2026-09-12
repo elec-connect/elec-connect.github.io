@@ -593,7 +593,7 @@
         ============================================ */
         .ec-chat-footer {
             display: flex; padding: 10px; background: #fff;
-            border-top: 1px solid #eee; gap: 8px; align-items: center;
+            border-top: 1px solid #eee; gap: 6px; align-items: center;
         }
         #ec-chat-input {
             flex: 1; border: 2px solid #e5e5e5; border-radius: 25px;
@@ -664,6 +664,36 @@
         #ec-mic-btn:disabled {
             opacity: .4;
             cursor: not-allowed;
+        }
+
+        /* ============================================
+           SÉLECTEUR DE LANGUE DU MICRO
+        ============================================ */
+        #ec-mic-lang {
+            border: 2px solid #e5e5e5;
+            border-radius: 18px;
+            padding: 6px 6px;
+            font-size: .75rem;
+            background: #fafafa;
+            color: var(--ec-primary);
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            flex-shrink: 0;
+            transition: all .2s;
+            font-family: inherit;
+            appearance: none;
+            -webkit-appearance: none;
+            text-align: center;
+            width: 62px;
+        }
+        #ec-mic-lang:hover {
+            background: #ede9fe;
+            border-color: var(--ec-primary);
+        }
+        #ec-mic-lang:focus {
+            border-color: var(--ec-primary);
+            box-shadow: 0 0 0 3px rgba(94,6,237,.1);
         }
 
         .ec-typing {
@@ -983,12 +1013,16 @@
                 </div>
             </div>
 
-            <!-- FOOTER CHATBOT avec boutons voix -->
+            <!-- FOOTER CHATBOT avec boutons voix + sélecteur langue -->
             <div class="ec-chat-footer">
                 <button id="ec-voice-toggle" aria-label="Activer/Désactiver la voix" title="Activer/Désactiver la voix du bot">
                     <i class="fas fa-volume-up"></i>
                 </button>
                 <input type="text" id="ec-chat-input" placeholder="Écrivez ou parlez... / اكتب أو تكلم..." autocomplete="off">
+                <select id="ec-mic-lang" title="Langue du microphone">
+                    <option value="fr-FR">🇫🇷 FR</option>
+                    <option value="ar-SA">🇹🇳 AR</option>
+                </select>
                 <button id="ec-mic-btn" aria-label="Parler" title="Cliquer pour parler">
                     <i class="fas fa-microphone"></i>
                 </button>
@@ -1206,13 +1240,15 @@
             const sendBtn  = document.getElementById('ec-chat-send');
             const voiceToggleBtn = document.getElementById('ec-voice-toggle');
             const micBtn   = document.getElementById('ec-mic-btn');
+            const micLangSelect = document.getElementById('ec-mic-lang');
 
             // ============================================
             // ÉTAT VOCAL
             // ============================================
-            let voiceEnabled = true;   // Le bot parle par défaut
+            let voiceEnabled = true;
             let isListening  = false;
             let recognition  = null;
+            let recognitionReady = false;  // ⚠️ Nouveau : état du micro
 
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const synth = window.speechSynthesis;
@@ -1234,7 +1270,7 @@
             }
 
             function getVoiceLang(text) {
-                return isArabic(text) ? 'ar-TN' : 'fr-FR';
+                return isArabic(text) ? 'ar-SA' : 'fr-FR';
             }
 
             // ============================================
@@ -1244,7 +1280,6 @@
                 if (!voiceEnabled || !synth) return;
                 synth.cancel();
 
-                // Nettoie le HTML
                 const clean = text
                     .replace(/<br\s*\/?>/gi, '. ')
                     .replace(/<[^>]+>/g, ' ')
@@ -1259,7 +1294,6 @@
                 u.pitch = 1.0;
                 u.volume = 0.95;
 
-                // Choisit la meilleure voix disponible
                 const voices = synth.getVoices();
                 const lang = u.lang.split('-')[0];
                 const preferred = voices.find(v =>
@@ -1271,7 +1305,6 @@
                 synth.speak(u);
             }
 
-            // Précharge les voix
             if (synth) {
                 synth.getVoices();
                 if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -1280,31 +1313,46 @@
             }
 
             // ============================================
-            // 🎤 RECONNAISSANCE VOCALE
+            // 🎤 RECONNAISSANCE VOCALE (CORRIGÉE)
             // ============================================
             function initSpeechRecognition() {
+                // Diagnostic 1 : support navigateur
                 if (!SpeechRecognition) {
                     micBtn.disabled = true;
-                    micBtn.title = "Reconnaissance vocale non supportée par ce navigateur";
+                    micBtn.title = "Non supporté (utilisez Chrome, Edge ou Safari)";
+                    micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+                    console.error('❌ SpeechRecognition non supporté');
+                    return;
+                }
+
+                // Diagnostic 2 : HTTPS
+                if (!window.isSecureContext) {
+                    micBtn.disabled = true;
+                    micBtn.title = "HTTPS requis";
+                    micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+                    console.error('❌ Contexte non sécurisé');
                     return;
                 }
 
                 recognition = new SpeechRecognition();
-                recognition.continuous     = false;
-                recognition.interimResults = true;
+                recognition.continuous      = false;
+                recognition.interimResults  = true;
                 recognition.maxAlternatives = 1;
                 recognition.lang = 'fr-FR';
 
                 recognition.onstart = () => {
+                    console.log('✅ Micro démarré (langue :', recognition.lang, ')');
                     isListening = true;
                     micBtn.classList.add('ec-listening');
-                    input.placeholder = "🎤 J'écoute... / كنت أسمع...";
+                    const flag = recognition.lang.startsWith('ar') ? '🇹🇳' : '🇫🇷';
+                    input.placeholder = flag + (recognition.lang.startsWith('ar') ? ' كنت أسمع...' : ' J\'écoute...');
                 };
 
                 recognition.onresult = (e) => {
                     const transcript = Array.from(e.results)
                         .map(r => r[0].transcript)
                         .join('');
+                    console.log('📝 Transcription (' + recognition.lang + ') :', transcript);
                     input.value = transcript;
 
                     if (e.results[e.results.length - 1].isFinal) {
@@ -1315,25 +1363,74 @@
                 };
 
                 recognition.onerror = (e) => {
-                    console.warn('⚠️ Erreur micro :', e.error);
-                    if (e.error === 'not-allowed') {
-                        alert('🎤 Autorisez l\'accès au microphone dans votre navigateur.');
+                    console.error('❌ Erreur micro :', e.error);
+                    let msg = '';
+                    switch (e.error) {
+                        case 'not-allowed':            msg = 'Autorisez le micro 🔒 dans la barre d\'adresse'; break;
+                        case 'service-not-allowed':    msg = 'HTTPS requis pour le micro'; break;
+                        case 'network':                msg = 'Problème réseau — vérifiez votre connexion'; break;
+                        case 'audio-capture':          msg = 'Aucun micro détecté'; break;
+                        case 'no-speech':              msg = 'Aucune parole détectée — parlez plus fort'; break;
+                        case 'language-not-supported': msg = 'Langue non supportée — essayez ar-SA'; break;
+                        case 'aborted':                return;
+                        default:                       msg = 'Erreur : ' + e.error;
+                    }
+                    // On n'affiche pas d'alerte bloquante pour 'no-speech'
+                    if (e.error !== 'no-speech' && e.error !== 'aborted') {
+                        alert('🎤 ' + msg);
                     }
                 };
 
                 recognition.onend = () => {
+                    console.log('🎤 Micro arrêté');
                     isListening = false;
                     micBtn.classList.remove('ec-listening');
                     input.placeholder = "Écrivez ou parlez... / اكتب أو تكلم...";
+                    recognitionReady = false;
                 };
+
+                recognitionReady = true;
             }
 
+            // ============================================
+            // 🎤 DÉMARRAGE MICRO (CORRIGÉ)
+            // ============================================
             function startListening(lang) {
-                if (!recognition) return;
-                if (isListening) { recognition.stop(); return; }
-                recognition.lang = lang || 'fr-FR';
-                try { recognition.start(); }
-                catch (e) { console.warn(e); }
+                if (!recognition) {
+                    alert('🎤 Reconnaissance vocale non disponible');
+                    return;
+                }
+
+                const targetLang = lang || 'fr-FR';
+                console.log('🎤 Démarrage micro (langue :', targetLang, ')');
+
+                // Si déjà en écoute → on arrête
+                if (isListening) {
+                    try { recognition.stop(); } catch(e) {}
+                    return;
+                }
+
+                // ⚠️ CORRECTIF PRINCIPAL :
+                // 1. On stoppe proprement toute session précédente
+                try { recognition.abort(); } catch(e) {}
+
+                // 2. On attend 150ms que Chrome se réinitialise
+                setTimeout(() => {
+                    recognition.lang = targetLang;
+                    try {
+                        recognition.start();
+                    } catch (e) {
+                        console.error('❌ Erreur start :', e);
+                        // Si ar-SA échoue, on essaie ar-EG puis ar
+                        if (targetLang === 'ar-SA') {
+                            console.log('🔄 Nouvel essai avec ar-EG...');
+                            recognition.lang = 'ar-EG';
+                            setTimeout(() => {
+                                try { recognition.start(); } catch(e2) { console.error(e2); }
+                            }, 200);
+                        }
+                    }
+                }, 150);
             }
 
             // ============================================
@@ -1429,18 +1526,18 @@
                     if (data && data.reply) {
                         const reply = data.reply.replace(/\n/g, '<br>');
                         addMessage(reply, 'bot');
-                        speak(data.reply);   // 🔊 Le bot parle
+                        speak(data.reply);
                     } else {
                         const local = getLocalAnswer(userText);
                         addMessage(local, 'bot');
-                        speak(local);   // 🔊
+                        speak(local);
                     }
                 } catch (err) {
                     console.warn('⚠️ Gemini indisponible → fallback local :', err);
                     typing.remove();
                     const local = getLocalAnswer(userText);
                     addMessage(local, 'bot');
-                    speak(local);   // 🔊
+                    speak(local);
                 } finally {
                     sendBtn.disabled = false;
                     input.focus();
@@ -1479,7 +1576,7 @@
             });
 
             // ============================================
-            // 🔊 BOUTON HAUT-PARLEUR (activer/couper la voix)
+            // 🔊 BOUTON HAUT-PARLEUR
             // ============================================
             voiceToggleBtn.addEventListener('click', () => {
                 voiceEnabled = !voiceEnabled;
@@ -1491,18 +1588,29 @@
             });
 
             // ============================================
-            // 🎤 BOUTON MICRO (démarrer/arrêter l'écoute)
+            // 🎤 BOUTON MICRO — utilise le sélecteur de langue
             // ============================================
             micBtn.addEventListener('click', () => {
-                const lastUser = document.querySelector('.ec-msg.ec-user');
-                const lang = (lastUser && isArabic(lastUser.textContent)) ? 'ar-TN' : 'fr-FR';
+                const lang = micLangSelect.value;
+                console.log('🎤 Clic micro → langue sélectionnée :', lang);
                 startListening(lang);
             });
 
-            // Initialise la reconnaissance vocale
+            // Mémorise la langue choisie
+            micLangSelect.addEventListener('change', () => {
+                localStorage.setItem('ec_mic_lang', micLangSelect.value);
+                console.log('💾 Langue micro mémorisée :', micLangSelect.value);
+            });
+
+            // Restaure la langue préférée
+            const savedMicLang = localStorage.getItem('ec_mic_lang');
+            if (savedMicLang) micLangSelect.value = savedMicLang;
+
+            // Initialise
             initSpeechRecognition();
 
             console.log('✅ Chatbot vocal Elec-Connect prêt (FR/AR/Darija + 🔊 + 🎤)');
+            console.log('💡 Astuce : choisissez 🇫🇷 FR ou 🇹🇳 AR dans le menu avant de cliquer sur 🎤');
         })();
     </script>
 </body>
