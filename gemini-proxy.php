@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // CONFIGURATION
 // ============================================
 $API_KEY = 'AQ.Ab8RN6LFMDOjio5vLZbL3vYEMWYooiyhzDAM7DKKF4YH8SqTOA';
-$MODEL   = 'gemini-2.0-flash'; // ou gemini-1.5-flash
+$MODEL   = 'gemini-1.5-flash'; // ou gemini-1.5-flash
 
 // Récupération du message
 $rawInput = file_get_contents('php://input');
