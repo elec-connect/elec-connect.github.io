@@ -228,6 +228,55 @@
             box-shadow: 0 0 20px rgba(94,6,237,.6);
         }
         .control-btn i, .calcul-btn i { font-size: 1.2rem; }
+
+        /* ===== BOUTON PROJETS CONNECTÉS ===== */
+        .projets-btn {
+            background: rgba(0,0,0,.85);
+            border: 2px solid rgba(241,196,15,.5);
+            color: #f1c40f;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            position: relative;
+        }
+        .projets-btn:hover {
+            background: rgba(241,196,15,.9);
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(241,196,15,.8);
+        }
+        .projets-btn i { font-size: 1.2rem; }
+        .projets-btn::after {
+            content: '';
+            position: absolute;
+            top: -3px; right: -3px;
+            width: 12px; height: 12px;
+            background: #5e06ed;
+            border-radius: 50%;
+            border: 2px solid #0a0a0a;
+            animation: pulse-glow 2s infinite;
+        }
+        .projet-card.sa-card::before {
+    background: linear-gradient(90deg, #4a6cf7, #f1c40f, #4a6cf7);
+    background-size: 200% 100%;
+}
+.projet-card.sa-card:hover {
+    border-color: #4a6cf7;
+    box-shadow: 0 30px 70px rgba(74,108,247,.4);
+}
+.projet-card.sa-card .icon-wrapper {
+    background: linear-gradient(135deg, #4a6cf7, #6b8aff);
+    box-shadow: 0 10px 30px rgba(74,108,247,.5);
+}
+.projet-card.sa-card h3 { color: #6b8aff; }
+
         .blog-link { position: relative; }
         .blog-link a {
             background: rgba(0,0,0,.85);
@@ -351,6 +400,155 @@
             display: flex; align-items: center; gap: 10px;
             font-size: .9rem; width: auto; min-width: 120px;
             justify-content: center;
+        }
+
+        /* ===== SECTION PROJETS CONNECTÉS ===== */
+        .projets-connectes-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        .projets-connectes-section h2 {
+            text-align: center;
+            color: #f1c40f;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .projets-connectes-section .section-subtitle {
+            text-align: center;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* ===== GRILLE 4 PROJETS ===== */
+        .projets-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== GRILLE 5 PROJETS ===== */
+        .projets-grid-5 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+            max-width: 1300px;
+            margin: 0 auto;
+      }
+
+@media (max-width: 768px) {
+    .projets-grid-5 { grid-template-columns: 1fr; gap: 20px; }
+}
+
+        /* ===== CARTE PROJET ===== */
+        .projet-card {
+            text-decoration: none;
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 20px;
+            padding: 35px 25px;
+            border: 3px solid rgba(94,6,237,.4);
+            transition: all .4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .projet-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #5e06ed, #f1c40f, #5e06ed);
+            background-size: 200% 100%;
+            animation: gradientMove 3s linear infinite;
+        }
+        .projet-card.car-card::before {
+            background: linear-gradient(90deg, #e74c3c, #f1c40f, #e74c3c);
+            background-size: 200% 100%;
+        }
+        .projet-card.va-card::before {
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb);
+            background-size: 200% 100%;
+        }
+        .projet-card.temp-card::before {
+            background: linear-gradient(90deg, #3182ce, #f1c40f, #3182ce);
+            background-size: 200% 100%;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        .projet-card:hover {
+            transform: translateY(-10px);
+            border-color: #f1c40f;
+            box-shadow: 0 30px 70px rgba(94,6,237,.5);
+        }
+        .projet-card.car-card:hover {
+            border-color: #e74c3c;
+            box-shadow: 0 30px 70px rgba(231,76,60,.4);
+        }
+        .projet-card.va-card:hover {
+            border-color: #2563eb;
+            box-shadow: 0 30px 70px rgba(37,99,235,.4);
+        }
+        .projet-card.temp-card:hover {
+            border-color: #3182ce;
+            box-shadow: 0 30px 70px rgba(49,130,206,.4);
+        }
+        .projet-card .icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, #5e06ed, #8b5cf6);
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            box-shadow: 0 10px 30px rgba(94,6,237,.5);
+            flex-shrink: 0;
+        }
+        .projet-card.car-card .icon-wrapper {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 10px 30px rgba(231,76,60,.5);
+        }
+        .projet-card.va-card .icon-wrapper {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            box-shadow: 0 10px 30px rgba(37,99,235,.5);
+        }
+        .projet-card.temp-card .icon-wrapper {
+            background: linear-gradient(135deg, #1a365d, #3182ce);
+            box-shadow: 0 10px 30px rgba(26,54,93,.5);
+        }
+        .projet-card .icon-wrapper i {
+            font-size: 1.9rem;
+            color: white;
+        }
+        .projet-card h3 {
+            color: #f1c40f;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+        .projet-card.car-card h3 { color: #e74c3c; }
+        .projet-card.va-card h3 { color: #60a5fa; }
+        .projet-card.temp-card h3 { color: #63b3ed; }
+        .projet-card > p {
+            color: #bbb;
+            font-size: .88rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+            flex-grow: 1;
+        }
+
+        .projets-cta {
+            text-align: center;
+            margin-top: 50px;
         }
 
         /* ===== FOOTER ===== */
@@ -588,9 +786,6 @@
             box-shadow: 0 4px 12px rgba(94,6,237,.3);
         }
 
-        /* ============================================
-           FOOTER CHATBOT (avec boutons voix)
-        ============================================ */
         .ec-chat-footer {
             display: flex; padding: 10px; background: #fff;
             border-top: 1px solid #eee; gap: 6px; align-items: center;
@@ -623,9 +818,6 @@
             opacity: .5; cursor: not-allowed;
         }
 
-        /* ============================================
-           BOUTONS VOIX (micro + haut-parleur)
-        ============================================ */
         #ec-voice-toggle,
         #ec-mic-btn {
             width: 38px;
@@ -666,9 +858,6 @@
             cursor: not-allowed;
         }
 
-        /* ============================================
-           SÉLECTEUR DE LANGUE DU MICRO
-        ============================================ */
         #ec-mic-lang {
             border: 2px solid #e5e5e5;
             border-radius: 18px;
@@ -706,9 +895,6 @@
             30% { opacity: 1; }
         }
 
-        /* ============================================
-           CORRECTION RTL/LTR POUR ARABE
-        ============================================ */
         .ec-rtl {
             direction: rtl;
             text-align: right;
@@ -739,6 +925,8 @@
             .heure-digital { font-size: 1.5em; }
             .header-controls { top: 10px; right: 10px; gap: 10px; }
             .control-btn, .calcul-btn, .blog-link a { width: 40px; height: 40px; }
+            .projets-btn { width: 40px; height: 40px; }
+            .projets-btn i { font-size: 1rem; }
             .logo-badge { font-size: .85rem; padding: 8px 15px; }
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 1rem; }
@@ -755,6 +943,13 @@
             .password-content { padding: 30px 20px; margin: 20px; }
             .password-buttons { flex-direction: column; }
             .password-btn { width: 100%; justify-content: center; }
+            .projets-connectes-section h2 { font-size: 1.8rem; }
+            .projets-connectes-section .section-subtitle { font-size: .95rem; }
+            .projets-grid-4 { grid-template-columns: 1fr; gap: 20px; }
+            .projet-card { padding: 30px 22px; }
+            .projet-card h3 { font-size: 1.2rem; }
+            .projet-card .icon-wrapper { width: 65px; height: 65px; }
+            .projet-card .icon-wrapper i { font-size: 1.6rem; }
         }
         @media (max-width: 500px) {
             #ec-chat-window {
@@ -771,7 +966,6 @@
             .offre-sub { font-size: .65rem; }
         }
 
-        /* Animations chargement */
         @keyframes slideInFromLeft {
             0% { transform: translateX(-100%); opacity: 0; }
             100% { transform: translateX(0); opacity: 1; }
@@ -846,6 +1040,12 @@
                     <span class="badge">3</span>
                 </a>
             </div>
+
+            <!-- Bouton Mes Projets Connectés -->
+            <a href="projets-connectes/projets-connectes.html" class="projets-btn" aria-label="Mes Projets Connectés" title="Mes Projets Connectés">
+                <i class="fas fa-microchip"></i>
+            </a>
+
             <a href="realisations/realisations.html" class="control-btn" aria-label="Voir nos réalisations" title="Nos Réalisations">
                 <i class="fas fa-photo-video"></i>
             </a>
@@ -890,6 +1090,86 @@
         <source src="assets/audio/ambiance.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- ============================================ -->
+    <!-- SECTION MES PROJETS CONNECTÉS (ACCUEIL) -->
+    <!-- ============================================ -->
+    <section class="projets-connectes-section">
+        <h2><i class="fas fa-microchip"></i> Mes Projets Connectés</h2>
+        <p class="section-subtitle">
+            Découvrez mes applications et systèmes innovants — pilotage de pompe, contrôle de véhicule, gestion administrative avec IA locale et régulation industrielle.
+        </p>
+
+        <div class="projets-grid-5">
+
+            <!-- CARTE 1 : CONTRÔLE POMPE -->
+            <a href="projets-connectes/controle-pompe/controle-pompe-details.html" class="projet-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h3>Contrôle Pompe Connecté</h3>
+                <p>
+                    Application mobile de contrôle de pompe à distance via carte ESP8266.
+                    Contrôle des relais, horaires programmables, connexion LOCAL et DISTANCE.
+                </p>
+            </a>
+
+            <!-- CARTE 2 : CAR CONTROL -->
+            <a href="projets-connectes/car-control/car-control-details.html" class="projet-card car-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3>CAR CONTROL - Véhicule</h3>
+                <p>
+                    Contrôle sécurisé du véhicule à distance via ESP8266 : Contact, IGN, Démarrage
+                    automatique, Verrouillage centralisé. Système anti-perte de connexion.
+                </p>
+            </a>
+
+            <!-- CARTE 3 : VIRTUAL ADMIN -->
+            <a href="projets-connectes/virtual-admin/virtual-admin-details.html" class="projet-card va-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Virtual Admin v5.1</h3>
+                <p>
+                    Application de gestion administrative avec IA locale : factures, devis, stock,
+                    chat intelligent. Architecture 5 couches sécurisée.
+                </p>
+            </a>
+
+            <!-- CARTE 4 : CONTRÔLE TEMPÉRATURE -->
+            <a href="projets-connectes/controle-temperature/controle-temperature-details.html" class="projet-card temp-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-temperature-high"></i>
+                </div>
+                <h3>Régulation Température</h3>
+                <p>
+                    Système industriel de régulation thermique avec capteurs PT100, actionneurs
+                    et automate programmable. Multi-automates (Siemens, Schneider, Rockwell...).
+                </p>
+            </a>
+
+            <!-- CARTE 5 : SMART ATTENDANCE SYSTEM -->
+            <a href="projets-connectes/smart-attendance/smart-attendance-details.html" class="projet-card sa-card">
+                <div class="icon-wrapper">
+                   <i class="fas fa-user-check"></i>
+                </div>
+                <h3>Smart Attendance</h3>
+                <p>
+                    Système de gestion des présences par reconnaissance faciale. Pointage, gestion
+                    employés, paie, rapports et notifications. React + Node.js + PostgreSQL.
+                </p>
+            </a>
+
+        </div>
+
+        <div class="projets-cta">
+            <a href="projets-connectes/projets-connectes.html" class="btn btn-primary">
+                <i class="fas fa-arrow-right"></i> Voir tous mes projets
+            </a>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-container">
@@ -907,6 +1187,12 @@
                     <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
                     <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
                     <li><a href="realisations/realisations.html"><i class="fas fa-images"></i> Réalisations</a></li>
+                    <li><a href="projets-connectes/projets-connectes.html"><i class="fas fa-microchip"></i> Projets Connectés</a></li>
+                    <li><a href="projets-connectes/controle-pompe/controle-pompe-details.html"><i class="fas fa-water"></i> Contrôle Pompe</a></li>
+                    <li><a href="projets-connectes/car-control/car-control-details.html"><i class="fas fa-car"></i> CAR CONTROL</a></li>
+                    <li><a href="projets-connectes/virtual-admin/virtual-admin-details.html"><i class="fas fa-building"></i> Virtual Admin</a></li>
+                    <li><a href="projets-connectes/controle-temperature/controle-temperature-details.html"><i class="fas fa-temperature-high"></i> Régulation Température</a></li>
+                    <li><a href="projets-connectes/smart-attendance/smart-attendance-details.html"><i class="fas fa-user-check"></i> Smart Attendance</a></li>
                     <li><a href="contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                     <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
                 </ul>
@@ -994,10 +1280,10 @@
                     👋 Bonjour ! Je suis l'assistant Elec-Connect.<br>
                     Comment puis-je vous aider ?
                     <div class="ec-quick-replies">
-                        <button data-q="Vos services">Vos services</button>
-                        <button data-q="Vos tarifs">Vos tarifs</button>
-                        <button data-q="Vous contacter">Vous contacter</button>
-                        <button data-q="C'est quoi la domotique ?">La domotique ?</button>
+                        <button data-q="Vos applications">Vos applications</button>
+                        <button data-q="Contrôle Pompe">Contrôle Pompe</button>
+                        <button data-q="CAR CONTROL">CAR CONTROL</button>
+                        <button data-q="Régulation Température">Régulation Température</button>
                     </div>
                 </div>
 
@@ -1005,15 +1291,14 @@
                     👋 أهلا وسهلا ! أنا مساعد Elec-Connect.<br>
                     كيفاش نجم نعاونك ؟
                     <div class="ec-quick-replies">
-                        <button data-q="خدمات">خدمات</button>
-                        <button data-q="أسعار">أسعار</button>
+                        <button data-q="تطبيقاتنا">تطبيقاتنا</button>
+                        <button data-q="كونترول بومبة">كونترول بومبة</button>
+                        <button data-q="كار كنترول">كار كنترول</button>
                         <button data-q="تواصل">تواصل</button>
-                        <button data-q="شنوة الدوموتيك؟">شنوة الدوموتيك؟</button>
                     </div>
                 </div>
             </div>
 
-            <!-- FOOTER CHATBOT avec boutons voix + sélecteur langue -->
             <div class="ec-chat-footer">
                 <button id="ec-voice-toggle" aria-label="Activer/Désactiver la voix" title="Activer/Désactiver la voix du bot">
                     <i class="fas fa-volume-up"></i>
@@ -1037,16 +1322,10 @@
     <!-- JAVASCRIPT -->
     <!-- ============================================ -->
     <script>
-        // ============================================
-        // CONFIGURATION GLOBALE
-        // ============================================
         const BASE_URL = 'https://elec-connect.tn';
         const CACHE_BUSTER = Date.now();
         const ADMIN_PASSWORD = "Aa&123456789";
 
-        // ============================================
-        // MOT DE PASSE
-        // ============================================
         const passwordModal = document.getElementById('passwordModal');
         const passwordInput = document.getElementById('passwordInput');
         const passwordSubmit = document.getElementById('passwordSubmit');
@@ -1079,9 +1358,6 @@
         passwordInput.addEventListener('keypress', e => { if (e.key === 'Enter') checkPassword(); });
         passwordModal.addEventListener('click', e => { if (e.target === passwordModal) hidePasswordModal(); });
 
-        // ============================================
-        // MÉTADONNÉES SOCIALES
-        // ============================================
         function updateMetaTagsWithCacheBuster() {
             const metaTags = [
                 { property: 'og:image', content: `${BASE_URL}/assets/img/domotique-facebook.jpeg?v=${CACHE_BUSTER}` },
@@ -1116,9 +1392,6 @@
 
         document.getElementById('refreshMetadataBtn').addEventListener('click', showPasswordModal);
 
-        // ============================================
-        // MUSIQUE
-        // ============================================
         const musicToggle = document.getElementById('musicToggle');
         const backgroundMusic = document.getElementById('backgroundMusic');
         let musicPlaying = false;
@@ -1140,9 +1413,6 @@
         });
         backgroundMusic.volume = 0.3;
 
-        // ============================================
-        // HORLOGE
-        // ============================================
         function mettreAJourHorloge() {
             const options = { timeZone: 'Africa/Tunis', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
             const dateOptions = { timeZone: 'Africa/Tunis', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -1153,9 +1423,6 @@
         setInterval(mettreAJourHorloge, 1000);
         mettreAJourHorloge();
 
-        // ============================================
-        // PARTICULES
-        // ============================================
         function createParticles() {
             const container = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
@@ -1172,9 +1439,6 @@
         }
         createParticles();
 
-        // ============================================
-        // PARTAGE SOCIAL
-        // ============================================
         function shareOnFacebook() {
             const url = encodeURIComponent(BASE_URL);
             const text = encodeURIComponent("🏠 Découvrez Elec-Connect ! Solutions domotiques intelligentes en Tunisie.");
@@ -1195,9 +1459,6 @@
                 .catch(err => console.error(err));
         }
 
-        // ============================================
-        // SMOOTH SCROLL
-        // ============================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1206,18 +1467,12 @@
             });
         });
 
-        // ============================================
-        // OPTIMISATION VIDÉO
-        // ============================================
         const video = document.getElementById('bgVideo');
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) video.pause();
             else video.play().catch(e => console.log("Autoplay bloqué.", e));
         });
 
-        // ============================================
-        // CHARGEMENT INITIAL
-        // ============================================
         window.addEventListener('load', () => {
             console.log('✅ Site Elec-Connect chargé.');
             const img = new Image();
@@ -1226,11 +1481,6 @@
             img.src = 'assets/img/domotique-facebook.jpeg';
         });
 
-        // ============================================
-        // ============================================
-        // CHATBOT IA VOCAL ELEC-CONNECT (FR + AR + DARIJA)
-        // ============================================
-        // ============================================
         (function() {
             const toggle   = document.getElementById('ec-chat-toggle');
             const win      = document.getElementById('ec-chat-window');
@@ -1242,20 +1492,14 @@
             const micBtn   = document.getElementById('ec-mic-btn');
             const micLangSelect = document.getElementById('ec-mic-lang');
 
-            // ============================================
-            // ÉTAT VOCAL
-            // ============================================
             let voiceEnabled = true;
             let isListening  = false;
             let recognition  = null;
-            let recognitionReady = false;  // ⚠️ Nouveau : état du micro
+            let recognitionReady = false;
 
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const synth = window.speechSynthesis;
 
-            // ============================================
-            // DÉTECTION AUTOMATIQUE DE LA LANGUE
-            // ============================================
             function isArabic(text) {
                 const arabicRegex = /[\u0600-\u06FF]/;
                 if (arabicRegex.test(text)) return true;
@@ -1263,7 +1507,7 @@
                     'chnowa','chneya','chnou','b9adech','b9adeh','9adeh','aslema','3aslema',
                     'kifech','kifach','wa9tech','wa9tach','3andkom','3andek','n7eb','nheb',
                     'bech','bch','fammech','mriguel','salam','ahlan','marhba',
-                    'chkoun','fehma','fhemt','yezzi','yezina','barra','bara'
+                    'chkoun','fehma','fhemt','yezzi','yezina','barra','bara','kar','tomobil'
                 ];
                 const lower = text.toLowerCase();
                 return darijaWords.some(w => lower.includes(w));
@@ -1273,9 +1517,6 @@
                 return isArabic(text) ? 'ar-SA' : 'fr-FR';
             }
 
-            // ============================================
-            // 🔊 SYNTHÈSE VOCALE
-            // ============================================
             function speak(text) {
                 if (!voiceEnabled || !synth) return;
                 synth.cancel();
@@ -1312,11 +1553,7 @@
                 }
             }
 
-            // ============================================
-            // 🎤 RECONNAISSANCE VOCALE (CORRIGÉE)
-            // ============================================
             function initSpeechRecognition() {
-                // Diagnostic 1 : support navigateur
                 if (!SpeechRecognition) {
                     micBtn.disabled = true;
                     micBtn.title = "Non supporté (utilisez Chrome, Edge ou Safari)";
@@ -1325,7 +1562,6 @@
                     return;
                 }
 
-                // Diagnostic 2 : HTTPS
                 if (!window.isSecureContext) {
                     micBtn.disabled = true;
                     micBtn.title = "HTTPS requis";
@@ -1375,7 +1611,6 @@
                         case 'aborted':                return;
                         default:                       msg = 'Erreur : ' + e.error;
                     }
-                    // On n'affiche pas d'alerte bloquante pour 'no-speech'
                     if (e.error !== 'no-speech' && e.error !== 'aborted') {
                         alert('🎤 ' + msg);
                     }
@@ -1392,9 +1627,6 @@
                 recognitionReady = true;
             }
 
-            // ============================================
-            // 🎤 DÉMARRAGE MICRO (CORRIGÉ)
-            // ============================================
             function startListening(lang) {
                 if (!recognition) {
                     alert('🎤 Reconnaissance vocale non disponible');
@@ -1404,24 +1636,19 @@
                 const targetLang = lang || 'fr-FR';
                 console.log('🎤 Démarrage micro (langue :', targetLang, ')');
 
-                // Si déjà en écoute → on arrête
                 if (isListening) {
                     try { recognition.stop(); } catch(e) {}
                     return;
                 }
 
-                // ⚠️ CORRECTIF PRINCIPAL :
-                // 1. On stoppe proprement toute session précédente
                 try { recognition.abort(); } catch(e) {}
 
-                // 2. On attend 150ms que Chrome se réinitialise
                 setTimeout(() => {
                     recognition.lang = targetLang;
                     try {
                         recognition.start();
                     } catch (e) {
                         console.error('❌ Erreur start :', e);
-                        // Si ar-SA échoue, on essaie ar-EG puis ar
                         if (targetLang === 'ar-SA') {
                             console.log('🔄 Nouvel essai avec ar-EG...');
                             recognition.lang = 'ar-EG';
@@ -1433,11 +1660,7 @@
                 }, 150);
             }
 
-            // ============================================
-            // BASE DE CONNAISSANCES LOCALE (FALLBACK)
-            // ============================================
             const KB = [
-                // ---- FRANÇAIS ----
                 { keywords: ['service','services','proposez','offrez','faites','travail','métier','activité','boulot','prestation','spécialité'], answer: "Nous proposons :<br>• Installation domotique complète<br>• Électricité intelligente<br>• Maintenance & dépannage<br>• Conseil et devis gratuit<br><br>📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" },
                 { keywords: ['tarif','prix','coût','combien','devis','budget','facture','coute','couterait','estimation','cher','gratuit','payant'], answer: "Nos tarifs dépendent de votre projet.<br><br>📞 Appelez-nous au <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a> pour un <strong>devis gratuit</strong>." },
                 { keywords: ['contact','contacter','joindre','appeler','téléphone','numéro','mail','email','écrire','sms','whatsapp','coordonnées'], answer: "📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a><br>✉️ <a href='mailto:Iot.sahnoun@gmail.com' class='ec-phone'>Iot.sahnoun@gmail.com</a><br>📍 01, Rue Manfalouti, Jemmel 5020" },
@@ -1447,9 +1670,13 @@
                 { keywords: ['delai','délai','temps','duree','durée','long','rapide','vite','jours'], answer: "Pour une installation standard : <strong>2 à 5 jours</strong>." },
                 { keywords: ['bonjour','salut','hello','bonsoir','coucou'], answer: "Bonjour ! 😊 Comment puis-je vous aider ?" },
                 { keywords: ['merci','thanks','top','super'], answer: "Avec plaisir ! 🙏" },
-                { keywords: ['realisation','réalisation','projet','travaux','portfolio','galerie'], answer: "Découvrez nos réalisations : <a href='realisations/realisations.html'>Voir nos projets</a> 🏠" },
-
-                // ---- ARABE ----
+                { keywords: ['realisation','réalisation','projet','travaux','portfolio','galerie','application','app'], answer: "Découvrez mes projets : 💧 <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Contrôle Pompe</a>, 🚗 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>CAR CONTROL</a>, 🏢 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Virtual Admin</a>, 🌡️ <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Régulation Température</a>" },
+                { keywords: ['pompe','controle pompe','contrôle pompe','esp8266','water'], answer: "💧 <strong>Contrôle Pompe v5.0</strong> — Application ESP8266 pour piloter votre pompe. <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Détails</a> | <a href='https://play.google.com/apps/testing/com.sahnoun.pompe' target='_blank'>Test fermé</a>" },
+                { keywords: ['voiture','car','vehicule','véhicule','car control','demarrage','démarrage','contact','ign','central','urgence'], answer: "🚗 <strong>CAR CONTROL v3.0</strong> — Contrôle sécurisé du véhicule (Contact, IGN, Démarrage, Verrouillage centralisé).<br>📱 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>Télécharger sur Google Play</a>" },
+                { keywords: ['virtual admin','virtual','admin','gestion','facture','devis','stock','ia locale','ollama'], answer: "🏢 <strong>Virtual Admin v5.1</strong> — Gestion administrative avec IA locale (factures, devis, stock, chat).<br>📄 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Détails</a>" },
+                { keywords: ['temperature','température','regulation','régulation','pid','pt100','industriel','automate','plc','four','chauffage'], answer: "🌡️ <strong>Régulation Température</strong> — Système industriel de régulation thermique avec capteurs PT100, actionneurs et automate programmable. Multi-PLC.<br>📄 <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Détails</a>" },
+                { keywords: ['play store','google play','playstore'], answer: "📱 Téléchargez <strong>CAR CONTROL</strong> sur Google Play :<br><a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>Cliquez ici</a>" },
+                { keywords: ['apk','telecharger apk','télécharger apk','download apk'], answer: "📱 Pour Contrôle Pompe : <a href='https://play.google.com/apps/testing/com.sahnoun.pompe' target='_blank'>Test fermé Google Play</a>" },
                 { keywords: ['خدمات','خدمة','أعمال','نشاط','تخصص','تقدمون'], answer: "نقدمو :<br>• تركيب منازل ذكية<br>• كهرباء ذكية<br>• صيانة<br>• devis مجاني<br><br>📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" },
                 { keywords: ['سعر','أسعار','تكلفة','ثمن','كم','ميزانية','غالي','رخيص','مجاني'], answer: "📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a> باش نعطيوك devis مجاني." },
                 { keywords: ['اتصال','تواصل','رقم','هاتف','بريد','إيميل','واتساب'], answer: "📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a><br>✉️ <a href='mailto:Iot.sahnoun@gmail.com' class='ec-phone'>Iot.sahnoun@gmail.com</a>" },
@@ -1458,22 +1685,20 @@
                 { keywords: ['عنوان','مكان','موقع','أين','منطقة'], answer: "في <strong>جمال (5020)</strong>، تونس." },
                 { keywords: ['مرحبا','أهلا','السلام','صباح','مساء'], answer: "أهلا و سهلا ! 😊 كيفاش نجم نعاونك ؟" },
                 { keywords: ['شكرا','يعطيك','ممتاز','رائع'], answer: "بكل فرح ! 🙏" },
-                { keywords: ['إنجاز','مشروع','مشاريع','أعمال'], answer: "شوف : <a href='realisations/realisations.html'>مشاريعنا</a> 🏠" },
-
-                // ---- DARIJA ----
+                { keywords: ['تطبيق','تطبيقات','ابليكاسيون','تحميل'], answer: "📱 عندنا 4 مشاريع :<br>💧 <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Contrôle Pompe</a><br>🚗 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>CAR CONTROL</a><br>🏢 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Virtual Admin</a><br>🌡️ <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Régulation Température</a>" },
+                { keywords: ['بومبة','بومبا','pompe','ماء'], answer: "💧 <strong>Contrôle Pompe v5.0</strong> : <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>تفاصيل</a> | <a href='https://play.google.com/apps/testing/com.sahnoun.pompe' target='_blank'>Test fermé</a>" },
+                { keywords: ['كار','طوموبيل','سيارة','كراهبة'], answer: "🚗 <strong>CAR CONTROL v3.0</strong> : <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>تحميل من Google Play</a>" },
                 { keywords: ['chnowa','chneya','chnou','شنوة','شنية'], answer: "نقدمو :<br>• تركيب منازل ذكية<br>• كهرباء ذكية<br>• صيانة<br>📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" },
                 { keywords: ['b9adech','b9adeh','9adeh','قداش'], answer: "📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a> للـ devis." },
                 { keywords: ['aslema','3aslema','salam','أسلامة','اهلا','marhba'], answer: "أهلا ! 😊 كيفاش نعاونك ؟" },
                 { keywords: ['win','wen','فين','وين'], answer: "في جمال (5020)، تونس." },
                 { keywords: ['kifech','kifach','كيفاش'], answer: "📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" },
                 { keywords: ['wa9tech','wa9tach','وقتاش'], answer: "2 إلى 5 أيام." },
-                { keywords: ['3andkom','3andek','عندكم'], answer: "نعم ! نقدمو التركيب في كل تونس. 📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" },
-                { keywords: ['bech','bch','باش','بش','n7eb','nheb'], answer: "باهي ! كيفاش نجم نعاونك ؟" },
                 { keywords: ['mriguel','مريقلة','شباب','top'], answer: "يعيشك ! 🙏" },
                 { keywords: ['fammech','fama','فما','promo','promos'], answer: "🎁 عندنا عرض خاص -15% !<br>📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" }
             ];
 
-            const FALLBACK = "ما فهمتش بالضبط 🤔<br>جرب : خدمات، أسعار، تواصل<br>أو <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>.<br><small>Je n'ai pas compris. Essayez : services, tarifs, contact.</small>";
+            const FALLBACK = "ما فهمتش بالضبط 🤔<br>جرب : تطبيقاتنا، كونترول بومبة، كار كنترول، regulation température<br>أو <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>.<br><small>Je n'ai pas compris. Essayez : applications, contrôle pompe, car control, virtual admin, régulation température.</small>";
 
             function getLocalAnswer(text) {
                 const t = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -1488,9 +1713,6 @@
                 return FALLBACK;
             }
 
-            // ============================================
-            // AFFICHAGE DES MESSAGES
-            // ============================================
             function addMessage(html, sender, forceRTL = false) {
                 const div = document.createElement('div');
                 div.className = 'ec-msg ec-' + sender;
@@ -1500,9 +1722,6 @@
                 body.scrollTop = body.scrollHeight;
             }
 
-            // ============================================
-            // botReply() — ASYNC + GEMINI + VOIX
-            // ============================================
             async function botReply(userText) {
                 const typing = document.createElement('div');
                 typing.className = 'ec-msg ec-bot';
@@ -1544,9 +1763,6 @@
                 }
             }
 
-            // ============================================
-            // GESTION DES ENTRÉES
-            // ============================================
             function handleUserInput(text) {
                 const clean = text.trim();
                 if (!clean) return;
@@ -1556,9 +1772,6 @@
                 botReply(clean);
             }
 
-            // ============================================
-            // ÉVÉNEMENTS
-            // ============================================
             toggle.addEventListener('click', () => {
                 win.classList.toggle('ec-hidden');
                 if (!win.classList.contains('ec-hidden')) input.focus();
@@ -1575,9 +1788,6 @@
                 }
             });
 
-            // ============================================
-            // 🔊 BOUTON HAUT-PARLEUR
-            // ============================================
             voiceToggleBtn.addEventListener('click', () => {
                 voiceEnabled = !voiceEnabled;
                 voiceToggleBtn.classList.toggle('ec-muted', !voiceEnabled);
@@ -1587,26 +1797,20 @@
                 if (!voiceEnabled && synth) synth.cancel();
             });
 
-            // ============================================
-            // 🎤 BOUTON MICRO — utilise le sélecteur de langue
-            // ============================================
             micBtn.addEventListener('click', () => {
                 const lang = micLangSelect.value;
                 console.log('🎤 Clic micro → langue sélectionnée :', lang);
                 startListening(lang);
             });
 
-            // Mémorise la langue choisie
             micLangSelect.addEventListener('change', () => {
                 localStorage.setItem('ec_mic_lang', micLangSelect.value);
                 console.log('💾 Langue micro mémorisée :', micLangSelect.value);
             });
 
-            // Restaure la langue préférée
             const savedMicLang = localStorage.getItem('ec_mic_lang');
             if (savedMicLang) micLangSelect.value = savedMicLang;
 
-            // Initialise
             initSpeechRecognition();
 
             console.log('✅ Chatbot vocal Elec-Connect prêt (FR/AR/Darija + 🔊 + 🎤)');
