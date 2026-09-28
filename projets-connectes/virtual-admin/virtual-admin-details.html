@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Virtual Admin v5.1 - Application de gestion administrative avec IA locale. FastAPI, Streamlit, PostgreSQL, Ollama.">
+<meta name="keywords" content="virtual admin, gestion administrative, FastAPI, Streamlit, PostgreSQL, Ollama, IA locale, factures, devis, stock">
+<title>Virtual Admin v5.1 - Architecture | Elec-Connect</title>
+
+<link rel="canonical" href="https://elec-connect.tn/projets-connectes/virtual-admin/virtual-admin-details.html">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+
+<style>
+  /* ============================================================
+     RESET & VARIABLES
+     ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --card: #ffffff;
+    --card-dark: #1a1a1a;
+    --card-darker: #0f0f0f;
+    --text: #1a2233;
+    --text-muted: #5a6a85;
+    --text-light: #ccc;
+    --border: #e1e7f0;
+    --border-dark: rgba(94, 6, 237, 0.3);
+    --primary: #5e06ed;
+    --primary-dark: #4a05bd;
+    --primary-light: #8b5cf6;
+    --accent: #f1c40f;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --whatsapp: #25d366;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, .06);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, .08);
+    --shadow-glow: 0 10px 30px rgba(94, 6, 237, .35);
+    --radius: 12px;
+    --radius-sm: 6px;
+    --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: white;
+    line-height: 1.65;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+
+  /* ============================================================
+     BOUTON RETOUR
+     ============================================================ */
+  .back-btn {
+    position: fixed;
+    top: 20px; left: 20px;
+    z-index: 1000;
+    background: rgba(0,0,0,.85);
+    border: 2px solid rgba(94,6,237,.5);
+    color: white;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s ease;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+  }
+  .back-btn:hover {
+    background: rgba(94,6,237,.9);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(94,6,237,.8);
+  }
+
+  /* ============================================================
+     HERO HEADER
+     ============================================================ */
+  .hero-header {
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    padding: 100px 20px 60px;
+    text-align: center;
+    border-bottom: 3px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(94,6,237,.2), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-header .va-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-glow);
+    animation: vaFloat 4s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes vaFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-header .va-icon i {
+    font-size: 3rem;
+    color: white;
+  }
+  .hero-header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    background: linear-gradient(45deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    font-weight: 800;
+  }
+  .hero-header p {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* BADGES HERO */
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 25px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hero-badge-blue   { background: rgba(37,99,235,.2); color: #93c5fd; border: 1px solid rgba(37,99,235,.4); }
+  .hero-badge-green  { background: rgba(16,185,129,.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,.4); }
+  .hero-badge-purple { background: rgba(124,58,237,.2); color: #c4b5fd; border: 1px solid rgba(124,58,237,.4); }
+  .hero-badge-orange { background: rgba(245,158,11,.2); color: #fcd34d; border: 1px solid rgba(245,158,11,.4); }
+
+  /* ============================================================
+     BOUTONS DE TÉLÉCHARGEMENT
+     ============================================================ */
+  .download-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+  }
+  .download-buttons a,
+  .download-buttons button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all .3s ease;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-download-zip {
+    background: linear-gradient(135deg, var(--accent), #f39c12);
+    color: #000;
+    box-shadow: 0 8px 25px rgba(241,196,15,.4);
+  }
+  .btn-download-zip:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(241,196,15,.6);
+  }
+  .btn-whatsapp {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    box-shadow: 0 8px 25px rgba(37,211,102,.4);
+  }
+  .btn-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(37,211,102,.6);
+  }
+
+  /* ============================================================
+     MODAL MOT DE PASSE
+     ============================================================ */
+  .zip-password-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,.85);
+    z-index: 10000;
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .zip-password-modal.active {
+    display: flex;
+    animation: fadeInModal .3s ease-out;
+  }
+  @keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .zip-password-content {
+    background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+    border: 3px solid var(--primary);
+    border-radius: 20px;
+    padding: 40px 35px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(94,6,237,.5);
+    animation: slideInModal .35s cubic-bezier(.175,.885,.32,1.275);
+    position: relative;
+  }
+  @keyframes slideInModal {
+    from { opacity: 0; transform: translateY(-30px) scale(.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .zip-password-content .lock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(94,6,237,.5);
+    animation: lockPulse 2s infinite;
+  }
+  @keyframes lockPulse {
+    0%,100% { box-shadow: 0 10px 30px rgba(94,6,237,.5); }
+    50% { box-shadow: 0 10px 40px rgba(94,6,237,.8); }
+  }
+  .zip-password-content .lock-icon i {
+    font-size: 2rem;
+    color: white;
+  }
+
+  .zip-password-content h3 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+  }
+  .zip-password-content .subtitle {
+    color: #aaa;
+    font-size: .95rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+
+  .zip-password-input {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255,255,255,.08);
+    border: 2px solid rgba(94,6,237,.5);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    transition: all .3s ease;
+    font-family: inherit;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  .zip-password-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255,255,255,.12);
+    box-shadow: 0 0 20px rgba(241,196,15,.3);
+  }
+  .zip-password-input::placeholder {
+    color: #888;
+    letter-spacing: normal;
+  }
+
+  .zip-password-error {
+    color: #ef4444;
+    font-size: .88rem;
+    margin-bottom: 15px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: 600;
+  }
+  .zip-password-error.show {
+    display: flex;
+    animation: shakeError .5s ease-in-out;
+  }
+  @keyframes shakeError {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+  }
+
+  .zip-password-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .zip-password-btn {
+    padding: 13px 26px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 700;
+    font-size: .95rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+    flex: 1;
+  }
+  .zip-password-submit {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    box-shadow: 0 6px 20px rgba(94,6,237,.4);
+  }
+  .zip-password-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(94,6,237,.6);
+  }
+  .zip-password-cancel {
+    background: rgba(255,255,255,.08);
+    color: white;
+    border: 2px solid rgba(255,255,255,.2);
+    flex: 0 0 auto;
+    padding: 13px 20px;
+  }
+  .zip-password-cancel:hover {
+    background: rgba(255,255,255,.15);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .zip-password-hint {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    font-size: .85rem;
+    color: #888;
+    line-height: 1.5;
+  }
+  .zip-password-hint a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .zip-password-hint a:hover {
+    text-decoration: underline;
+  }
+
+  /* ============================================================
+     BOUTON RETOUR PROJETS (bas de page)
+     ============================================================ */
+  .back-projects {
+    text-align: center;
+    margin: 50px auto 30px;
+    padding: 0 20px;
+  }
+  .back-projects a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all .3s ease;
+    box-shadow: 0 6px 20px rgba(94,6,237,.4);
+  }
+  .back-projects a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(94,6,237,.6);
+  }
+
+  /* ============================================================
+     LAYOUT DOC
+     ============================================================ */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #0a0a0a;
+  }
+
+  /* ============================================================
+     SIDEBAR
+     ============================================================ */
+  aside {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--card-dark);
+    border-right: 1px solid var(--border-dark);
+    padding: 28px 20px;
+  }
+
+  aside h1 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 6px;
+  }
+
+  aside .version {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-dark);
+  }
+
+  aside nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    color: #aaa;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    margin-bottom: 2px;
+    transition: all .15s ease;
+  }
+
+  aside nav a:hover {
+    background: rgba(94,6,237,.2);
+    color: var(--accent);
+  }
+
+  aside nav a .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: rgba(94,6,237,.3);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  aside nav a:hover .num {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* ============================================================
+     MAIN CONTENT
+     ============================================================ */
+  main {
+    padding: 48px 56px;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #0a0a0a;
+  }
+
+  .page-header {
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--border-dark);
+  }
+
+  .page-header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -.8px;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .page-header .subtitle {
+    color: #aaa;
+    font-size: 16px;
+  }
+
+  .page-header .badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .badge-blue   { background: rgba(37,99,235,.2); color: #93c5fd; }
+  .badge-green  { background: rgba(16,185,129,.2); color: #6ee7b7; }
+  .badge-purple { background: rgba(124,58,237,.2); color: #c4b5fd; }
+  .badge-orange { background: rgba(245,158,11,.2); color: #fcd34d; }
+
+  section {
+    margin-bottom: 56px;
+    scroll-margin-top: 20px;
+  }
+
+  section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  section h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: #fff;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 28px 0 12px;
+  }
+
+  section h4 {
+    font-weight: 600;
+    color: #aaa;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-size: 12px;
+  }
+
+  p { margin-bottom: 14px; color: var(--text-light); }
+  strong { color: white; font-weight: 600; }
+
+  /* ============================================================
+     CARDS
+     ============================================================ */
+  .card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s, transform .2s;
+  }
+
+  .card:hover { 
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .card.primary   { border-left: 4px solid var(--primary); }
+  .card.success   { border-left: 4px solid var(--success); }
+  .card.warning   { border-left: 4px solid var(--warning); }
+  .card.danger    { border-left: 4px solid var(--danger); }
+  .card.accent    { border-left: 4px solid var(--accent); }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+  }
+
+  /* ============================================================
+     GRID
+     ============================================================ */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+
+  @media (max-width: 900px) {
+    .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     LAYER CARDS
+     ============================================================ */
+  .layer {
+    background: var(--card-dark);
+    border: 2px solid var(--border-dark);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    transition: all .2s;
+    cursor: default;
+  }
+
+  .layer:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .layer .icon { font-size: 32px; margin-bottom: 8px; }
+  .layer .name { font-weight: 700; font-size: 14px; margin-bottom: 4px; color: white; }
+  .layer .folder { font-family: var(--font-mono); font-size: 11px; color: #888; }
+
+  .layer.l1 { border-color: #60a5fa; background: rgba(96,165,250,.1); }
+  .layer.l2 { border-color: #fbbf24; background: rgba(251,191,36,.1); }
+  .layer.l3 { border-color: #a78bfa; background: rgba(167,139,250,.1); }
+  .layer.l4 { border-color: #34d399; background: rgba(52,211,153,.1); }
+  .layer.l5 { border-color: #f87171; background: rgba(248,113,113,.1); }
+
+  /* ============================================================
+     TABLES
+     ============================================================ */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-dark);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid var(--border-dark);
+  }
+
+  thead { background: rgba(94,6,237,.15); }
+
+  thead th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border-dark);
+  }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-dark);
+    color: var(--text-light);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(94,6,237,.08); }
+
+  td code, th code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: rgba(94,6,237,.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--primary-light);
+  }
+
+  /* ============================================================
+     CODE BLOCKS
+     ============================================================ */
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    border: 1px solid var(--border-dark);
+  }
+
+  pre::before {
+    content: "PowerShell";
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    font-size: 10px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  pre.no-lang::before { content: none; }
+
+  code:not(pre code) {
+    font-family: var(--font-mono);
+    font-size: .9em;
+    background: rgba(94,6,237,.15);
+    color: var(--primary-light);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .comment { color: #64748b; font-style: italic; }
+  .keyword { color: #c084fc; }
+  .string  { color: #86efac; }
+  .number  { color: #fbbf24; }
+
+  /* ============================================================
+     FILE TREE
+     ============================================================ */
+  .filetree {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.9;
+    overflow-x: auto;
+    box-shadow: var(--shadow-sm);
+    color: var(--text-light);
+  }
+
+  .filetree .dir   { color: var(--primary-light); font-weight: 600; }
+  .filetree .file  { color: white; }
+  .filetree .note  { color: #666; font-style: italic; }
+  .filetree .icon  { margin-right: 4px; }
+
+  /* ============================================================
+     FLOW DIAGRAM
+     ============================================================ */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 16px;
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+  }
+
+  .flow-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+  }
+
+  .flow-box {
+    background: rgba(96,165,250,.15);
+    border: 2px solid #60a5fa;
+    border-radius: var(--radius-sm);
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    min-width: 140px;
+    color: #93c5fd;
+  }
+
+  .flow-box.api      { background: rgba(251,191,36,.15); border-color: #fbbf24; color: #fcd34d; }
+  .flow-box.service  { background: rgba(167,139,250,.15); border-color: #a78bfa; color: #c4b5fd; }
+  .flow-box.db       { background: rgba(52,211,153,.15); border-color: #34d399; color: #6ee7b7; }
+  .flow-box.ai       { background: rgba(248,113,113,.15); border-color: #f87171; color: #fca5a5; }
+  .flow-box.user     { background: rgba(148,163,184,.15); border-color: #94a3b8; color: #cbd5e1; }
+
+  .flow-arrow {
+    font-size: 22px;
+    color: #888;
+    line-height: 1;
+  }
+
+  /* ============================================================
+     STAT CARDS
+     ============================================================ */
+  .stat {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform .2s;
+  }
+
+  .stat:hover { transform: translateY(-3px); }
+
+  .stat .value {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-light), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat .label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-weight: 600;
+  }
+
+  /* ============================================================
+     CALLOUTS
+     ============================================================ */
+  .callout {
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    margin: 20px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text-light);
+  }
+
+  .callout .icon { font-size: 20px; flex-shrink: 0; line-height: 1; }
+  .callout p { margin: 0; }
+  .callout p + p { margin-top: 6px; }
+
+  .callout-info    { background: rgba(37,99,235,.15); border-left: 4px solid #3b82f6; }
+  .callout-success { background: rgba(16,185,129,.15); border-left: 4px solid var(--success); }
+  .callout-warning { background: rgba(245,158,11,.15); border-left: 4px solid var(--warning); }
+  .callout-danger  { background: rgba(239,68,68,.15); border-left: 4px solid var(--danger); }
+
+  /* ============================================================
+     PILLS
+     ============================================================ */
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    margin: 2px;
+  }
+
+  .pill-blue    { background: rgba(37,99,235,.2); color: #93c5fd; }
+  .pill-green   { background: rgba(16,185,129,.2); color: #6ee7b7; }
+  .pill-purple  { background: rgba(124,58,237,.2); color: #c4b5fd; }
+  .pill-orange  { background: rgba(245,158,11,.2); color: #fcd34d; }
+  .pill-red     { background: rgba(239,68,68,.2); color: #fca5a5; }
+  .pill-gray    { background: rgba(148,163,184,.2); color: #cbd5e1; }
+
+  /* ============================================================
+     SECTION TÉLÉCHARGEMENT FINALE
+     ============================================================ */
+  .final-download {
+    text-align: center;
+    padding: 50px 30px;
+    background: linear-gradient(135deg, rgba(94,6,237,.15), rgba(241,196,15,.1));
+    border-radius: 20px;
+    border: 2px solid rgba(94,6,237,.4);
+    margin-top: 40px;
+  }
+  .final-download h2 {
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    border: none;
+    padding: 0;
+    justify-content: center;
+  }
+  .final-download p {
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-dark);
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  footer strong { color: white; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ============================================================
+     SCROLLBAR
+     ============================================================ */
+  aside::-webkit-scrollbar { width: 6px; }
+  aside::-webkit-scrollbar-thumb { background: rgba(94,6,237,.5); border-radius: 3px; }
+  aside::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    main { padding: 24px 20px; }
+    .page-header h1 { font-size: 26px; }
+    .hero-header h1 { font-size: 1.8rem; }
+    .hero-header .va-icon { width: 85px; height: 85px; }
+    .hero-header .va-icon i { font-size: 2.3rem; }
+    .download-buttons { flex-direction: column; }
+    .download-buttons a,
+    .download-buttons button { width: 100%; justify-content: center; }
+    .back-btn { width: 42px; height: 42px; top: 12px; left: 12px; }
+    .zip-password-content { padding: 30px 22px; }
+    .zip-password-buttons { flex-direction: column; }
+    .zip-password-cancel { flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BOUTON RETOUR -->
+<a href="../projets-connectes.html" class="back-btn" aria-label="Retour aux projets" title="Retour aux projets">
+    <i class="fas fa-arrow-left"></i>
+</a>
+
+<!-- HERO HEADER -->
+<header class="hero-header">
+    <div class="va-icon">
+        <i class="fas fa-building"></i>
+    </div>
+    <h1>Virtual Admin v5.1</h1>
+    <p>Application de gestion administrative avec <strong>IA locale</strong>. Factures, devis, stock, chat intelligent — architecture 5 couches sécurisée.</p>
+
+    <div class="hero-badges">
+        <span class="hero-badge hero-badge-blue"><i class="fas fa-code-branch"></i> v5.1</span>
+        <span class="hero-badge hero-badge-green"><i class="fab fa-python"></i> Python 3.11</span>
+        <span class="hero-badge hero-badge-purple"><i class="fas fa-bolt"></i> FastAPI + Streamlit</span>
+        <span class="hero-badge hero-badge-orange"><i class="fas fa-database"></i> PostgreSQL 17</span>
+    </div>
+
+    <!-- BOUTONS DE TÉLÉCHARGEMENT -->
+    <div class="download-buttons">
+        <button type="button" class="btn-download-zip" onclick="openZipPasswordModal()">
+            <i class="fas fa-lock"></i> Télécharger l'archive (ZIP)
+        </button>
+        <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20t%C3%A9l%C3%A9charger%20Virtual%20Admin%20v5.1.%0A%0ANom%20%3A%20%0AUsage%20%3A%20%0AConfig%20PC%20%3A%20%0A%0AMerci%20!" 
+           target="_blank" 
+           rel="noopener" 
+           class="btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Demander via WhatsApp
+        </a>
+    </div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside>
+  <h1>🏗️ Virtual Admin</h1>
+  <div class="version">Architecture · v5.1 · Septembre 2026</div>
+
+  <nav>
+    <a href="#overview"><span class="num">1</span> Vue d'ensemble</a>
+    <a href="#flow"><span class="num">2</span> Flux de données</a>
+    <a href="#security"><span class="num">3</span> Sécurité</a>
+    <a href="#database"><span class="num">4</span> Base de données</a>
+    <a href="#signature"><span class="num">5</span> Signature</a>
+    <a href="#lifecycle"><span class="num">6</span> Cycle de vie</a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main>
+
+  <header class="page-header">
+    <h1>🏗️ Architecture — Virtual Admin</h1>
+    <p class="subtitle">
+      Document technique de référence décrivant l'architecture, les couches,
+      les flux de données et les points d'extension du projet.
+    </p>
+    <div class="badges">
+      <span class="badge badge-blue">Version 5.1</span>
+      <span class="badge badge-green">Python 3.11</span>
+      <span class="badge badge-purple">FastAPI + Streamlit</span>
+      <span class="badge badge-orange">PostgreSQL 17</span>
+    </div>
+  </header>
+
+  <!-- 1. VUE D'ENSEMBLE -->
+  <section id="overview">
+    <h2><span class="num">1</span> Vue d'ensemble</h2>
+
+    <p>
+      Virtual Admin est une application <strong>mono-utilisateur</strong>
+      (mais multi-comptes) de gestion administrative, articulée autour de
+      3 processus indépendants :
+    </p>
+
+    <div class="grid-3">
+      <div class="card primary">
+        <div class="card-title">🎨 Streamlit</div>
+        <p style="font-size: 13px; color: #aaa; margin: 0;">
+          Interface utilisateur<br>
+          <code>:8501</code>
+        </p>
+      </div>
+      <div class="card warning">
+        <div class="card-title">🔌 FastAPI</div>
+        <p style="font-size: 13px; color: #aaa; margin: 0;">
+          API REST interne<br>
+          <code>:8000</code>
+        </p>
+      </div>
+      <div class="card danger">
+        <div class="card-title">🦙 Ollama</div>
+        <p style="font-size: 13px; color: #aaa; margin: 0;">
+          Moteur LLM local<br>
+          <code>:11434</code>
+        </p>
+      </div>
+    </div>
+
+    <h3>Diagramme global</h3>
+
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-box user">🖥️ Utilisateur<br><small>Chrome / Edge</small></div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box">🎨 Streamlit<br><small>:8501</small></div>
+      </div>
+      <div class="flow-arrow">↓ HTTP + API_KEY</div>
+      <div class="flow-row">
+        <div class="flow-box api">🔌 FastAPI<br><small>:8000</small></div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box service">🧠 Services métier</div>
+        <div class="flow-box ai">🤖 Agent IA</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box db">🗄️ PostgreSQL<br><small>:5432</small></div>
+        <div class="flow-box ai">🦙 Ollama<br><small>:11434</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. FLUX DE DONNÉES -->
+  <section id="flow">
+    <h2><span class="num">2</span> Flux de données</h2>
+
+    <h3>2.1 — Création d'une facture</h3>
+
+    <div class="flow">
+      <div class="flow-row"><div class="flow-box user">👤 Utilisateur</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row"><div class="flow-box">🎨 Streamlit<br><small>POST /documents/create</small></div></div>
+      <div class="flow-arrow">↓ X-API-Key</div>
+      <div class="flow-row"><div class="flow-box api">🔌 API<br><small>verify_api_key()</small></div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row"><div class="flow-box service">🧠 document_service<br><small>INSERT + UPDATE stock</small></div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box service">🔏 signature_service<br><small>hash + HMAC + QR</small></div>
+        <div class="flow-box service">📄 document_pdf_service<br><small>PDF + logo</small></div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row"><div class="flow-box db">🗄️ PostgreSQL</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row"><div class="flow-box user">✅ FAC-2026-0001 créée</div></div>
+    </div>
+
+    <h3>2.2 — Chat avec l'IA</h3>
+
+    <div class="flow">
+      <div class="flow-row"><div class="flow-box user">"Quel est le stock de vis ?"</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row"><div class="flow-box">🎨 Streamlit</div></div>
+      <div class="flow-arrow">↓ POST /chat</div>
+      <div class="flow-row"><div class="flow-box ai">🤖 agent LangChain</div></div>
+      <div class="flow-arrow">↓ analyse</div>
+      <div class="flow-row"><div class="flow-box ai">🦙 Ollama qwen2.5:3b</div></div>
+      <div class="flow-arrow">↓ tool_call</div>
+      <div class="flow-row"><div class="flow-box db">🗄️ SELECT stock</div></div>
+      <div class="flow-arrow">↓ 150</div>
+      <div class="flow-row"><div class="flow-box user">"Il reste 150 vis en stock."</div></div>
+    </div>
+
+    <h3>2.3 — Vérification PDF par QR code</h3>
+
+    <div class="flow">
+      <div class="flow-row"><div class="flow-box user">📱 Client scanne</div></div>
+      <div class="flow-arrow">↓ URL + hash + sig</div>
+      <div class="flow-row"><div class="flow-box api">🔌 /verify</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row"><div class="flow-box db">🗄️ SELECT document</div></div>
+      <div class="flow-arrow">↓ recalcul</div>
+      <div class="flow-row"><div class="flow-box service">🔏 signature_service</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box" style="background:rgba(16,185,129,.2); border-color:#10b981; color:#6ee7b7;">✅ Authentique</div>
+        <div class="flow-box" style="background:rgba(239,68,68,.2); border-color:#ef4444; color:#fca5a5;">❌ Falsifié</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SÉCURITÉ -->
+  <section id="security">
+    <h2><span class="num">3</span> Sécurité</h2>
+
+    <p>
+      La sécurité est organisée en <strong>4 niveaux successifs</strong>,
+      chaque niveau devant être franchi pour atteindre le suivant.
+    </p>
+
+    <div class="grid-4">
+      <div class="card primary">
+        <div class="card-title">🔐 Niveau 1</div>
+        <p style="font-size: 13px; margin: 0; color: #aaa;">Auth Streamlit<br>
+        <small style="color: #888;">bcrypt + cookie</small></p>
+      </div>
+      <div class="card warning">
+        <div class="card-title">🔑 Niveau 2</div>
+        <p style="font-size: 13px; margin: 0; color: #aaa;">Auth API<br>
+        <small style="color: #888;">X-API-Key</small></p>
+      </div>
+      <div class="card success">
+        <div class="card-title">🗄️ Niveau 3</div>
+        <p style="font-size: 13px; margin: 0; color: #aaa;">Permissions PostgreSQL<br>
+        <small style="color: #888;">writer / readonly</small></p>
+      </div>
+      <div class="card danger">
+        <div class="card-title">🔏 Niveau 4</div>
+        <p style="font-size: 13px; margin: 0; color: #aaa;">Signature électronique<br>
+        <small style="color: #888;">SHA-256 + HMAC</small></p>
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="icon">⚠️</span>
+      <div>
+        <p><strong>SIGNATURE_SECRET</strong> ne doit <strong>jamais changer</strong>
+        après émission de documents — sinon les PDF existants ne seront plus vérifiables.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BASE DE DONNÉES -->
+  <section id="database">
+    <h2><span class="num">4</span> Base de données</h2>
+
+    <h3>Tables principales</h3>
+
+    <table>
+      <thead>
+        <tr><th>Table</th><th>Rôle</th><th>Lignes attendues</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>customers</code></td><td>Clients</td><td>10 – 10 000</td></tr>
+        <tr><td><code>products</code></td><td>Catalogue produits</td><td>10 – 5 000</td></tr>
+        <tr><td><code>invoices</code></td><td>Factures (legacy)</td><td>0 – 100 000</td></tr>
+        <tr><td><code>invoice_items</code></td><td>Lignes factures</td><td>×5 factures</td></tr>
+        <tr><td><code>documents</code></td><td>Devis + factures modernes</td><td>0 – 100 000</td></tr>
+        <tr><td><code>document_items</code></td><td>Lignes documents</td><td>×5 documents</td></tr>
+        <tr><td><code>company_settings</code></td><td>Infos entreprise</td><td><strong>1 seule ligne</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Utilisateurs PostgreSQL</h3>
+
+    <table>
+      <thead>
+        <tr><th>User</th><th>Droits</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>postgres</code></td>
+          <td><span class="pill pill-red">Superuser</span></td>
+          <td>Admin pgAdmin</td>
+        </tr>
+        <tr>
+          <td><code>agent_writer</code></td>
+          <td><span class="pill pill-orange">SELECT, INSERT, UPDATE</span></td>
+          <td>Écriture via API</td>
+        </tr>
+        <tr>
+          <td><code>agent_readonly</code></td>
+          <td><span class="pill pill-green">SELECT</span></td>
+          <td>Lecture seule (IA)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5. SIGNATURE -->
+  <section id="signature">
+    <h2><span class="num">5</span> Signature électronique</h2>
+
+    <p>Chaque document PDF généré contient :</p>
+    <ol style="margin-left: 24px; margin-bottom: 20px; color: var(--text-light);">
+      <li>Un <strong>hash SHA-256</strong> du contenu (empreinte)</li>
+      <li>Une <strong>signature HMAC</strong> de ce hash (preuve d'authenticité)</li>
+      <li>Un <strong>QR code</strong> contenant une URL de vérification</li>
+    </ol>
+
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-box">📄 Document</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box service">SHA-256</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box ai">🔑 SIGNATURE_SECRET</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box service">HMAC-SHA256</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box db">📱 QR Code</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">📄 PDF + QR</div>
+      </div>
+    </div>
+
+    <h3>Garanties</h3>
+
+    <table>
+      <thead>
+        <tr><th>Propriété</th><th>Mécanisme</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Intégrité</strong></td><td>SHA-256 du contenu</td></tr>
+        <tr><td><strong>Authenticité</strong></td><td>HMAC avec SIGNATURE_SECRET</td></tr>
+        <tr><td><strong>Non-répudiation</strong></td><td>URL de vérification publique</td></tr>
+        <tr><td><strong>Détection de falsification</strong></td><td>Recalcul + comparaison</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. CYCLE DE VIE -->
+  <section id="lifecycle">
+    <h2><span class="num">6</span> Cycle de vie (démarrage)</h2>
+
+    <div class="flow">
+      <div class="flow-row"><div class="flow-box user">🪟 Windows</div></div>
+      <div class="flow-arrow">↓ double-clic</div>
+      <div class="flow-row"><div class="flow-box">📜 start_all.bat</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row">
+        <div class="flow-box ai">🦙 ollama serve<br><small>:11434</small></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-box api">🔌 run_api.py<br><small>:8000</small></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-box">🎨 streamlit<br><small>:8501</small></div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-row"><div class="flow-box user">🌐 http://localhost:8501</div></div>
+    </div>
+
+    <h3>Processus parallèles</h3>
+
+    <table>
+      <thead>
+        <tr><th>Processus</th><th>Port</th><th>Terminal</th><th>Redémarrage fréquent</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ollama</td><td><code>11434</code></td><td>1</td><td>Rare</td></tr>
+        <tr><td>API FastAPI</td><td><code>8000</code></td><td>2</td><td>Modifications code API</td></tr>
+        <tr><td>Streamlit</td><td><code>8501</code></td><td>3</td><td>Modifications code UI</td></tr>
+        <tr><td>Daemon vocal</td><td>–</td><td>4</td><td>Optionnel</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TÉLÉCHARGEMENT FINAL -->
+  <div class="final-download">
+    <h2><i class="fas fa-rocket"></i> Télécharger Virtual Admin v5.1</h2>
+    <p>📦 Archive complète avec documentation, code source et scripts d'installation</p>
+    <div class="download-buttons" style="margin-top: 20px;">
+      <button type="button" class="btn-download-zip" onclick="openZipPasswordModal()">
+        <i class="fas fa-lock"></i> Télécharger (ZIP ~50 Mo)
+      </button>
+      <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20t%C3%A9l%C3%A9charger%20Virtual%20Admin%20v5.1.%0A%0ANom%20%3A%20%0AUsage%20%3A%20%0AConfig%20PC%20%3A%20%0A%0AMerci%20!" 
+         target="_blank" 
+         rel="noopener" 
+         class="btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> Demander via WhatsApp
+      </a>
+    </div>
+    <div style="margin-top: 30px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,.1); color: #999; font-size: .95rem;">
+      <p><i class="fas fa-envelope"></i> <a href="mailto:iot.sahnoun@gmail.com" style="color: #f1c40f; text-decoration: none;">iot.sahnoun@gmail.com</a></p>
+      <p style="margin-top: 8px;"><i class="fas fa-phone"></i> <a href="tel:+21629328870" style="color: #f1c40f; text-decoration: none;">+216 29 328 870</a></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>© 2026 BEN HAOUALA SAHNOUN — Tous droits réservés</strong></p>
+    <p>Version 5.1 · Septembre 2026</p>
+    <p style="margin-top: 16px; font-size: 12px;">
+      💡 Astuce : <code>Ctrl + P</code> pour imprimer ou exporter en PDF
+    </p>
+  </footer>
+
+</main>
+</div>
+
+<!-- ============================================ -->
+<!-- MODAL MOT DE PASSE POUR TÉLÉCHARGEMENT -->
+<!-- ============================================ -->
+<div class="zip-password-modal" id="zipPasswordModal">
+    <div class="zip-password-content">
+        <div class="lock-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <h3>Accès protégé</h3>
+        <p class="subtitle">
+            Veuillez entrer le mot de passe pour télécharger<br>
+            <strong>Virtual Admin v5.1</strong>
+        </p>
+
+        <input 
+            type="password" 
+            class="zip-password-input" 
+            id="zipPasswordInput" 
+            placeholder="••••••••••••"
+            autocomplete="off"
+            autofocus
+        >
+
+        <div class="zip-password-error" id="zipPasswordError">
+            <i class="fas fa-exclamation-triangle"></i>
+            Mot de passe incorrect
+        </div>
+
+        <div class="zip-password-buttons">
+            <button type="button" class="zip-password-btn zip-password-submit" onclick="validateZipPassword()">
+                <i class="fas fa-check"></i> Valider
+            </button>
+            <button type="button" class="zip-password-btn zip-password-cancel" onclick="closeZipPasswordModal()">
+                <i class="fas fa-times"></i> Annuler
+            </button>
+        </div>
+
+        <div class="zip-password-hint">
+            <i class="fas fa-question-circle"></i>
+            Pas encore de mot de passe ?<br>
+            <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20le%20mot%20de%20passe%20pour%20t%C3%A9l%C3%A9charger%20Virtual%20Admin%20v5.1.%0A%0ANom%20%3A%20%0AUsage%20%3A%20%0AConfig%20PC%20%3A%20%0A%0AMerci%20!" 
+               target="_blank" rel="noopener">
+                Demandez-le via WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- BOUTON RETOUR PROJETS -->
+<div class="back-projects">
+    <a href="../projets-connectes.html">
+        <i class="fas fa-microchip"></i> Retour à mes projets connectés
+    </a>
+</div>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT : GESTION DU MOT DE PASSE -->
+<!-- ============================================ -->
+<script>
+    // ============================================================
+    // CONFIGURATION
+    // ============================================================
+    // 🔑 Mot de passe pour télécharger le ZIP
+    const ZIP_PASSWORD = "Elec-Connect18011978v";  // ← NOUVEAU MOT DE PASSE
+
+    // 🔗 Lien de téléchargement direct (Google Drive)
+    const ZIP_DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=1-_L9zpBDwMtWUbDxPh7_Qilu4aT6LG2m";
+
+    // ============================================================
+    // OUVERTURE DU MODAL
+    // ============================================================
+    function openZipPasswordModal() {
+        const modal = document.getElementById('zipPasswordModal');
+        const input = document.getElementById('zipPasswordInput');
+        const error = document.getElementById('zipPasswordError');
+
+        modal.classList.add('active');
+        input.value = '';
+        input.focus();
+        error.classList.remove('show');
+    }
+
+    // ============================================================
+    // FERMETURE DU MODAL
+    // ============================================================
+    function closeZipPasswordModal() {
+        document.getElementById('zipPasswordModal').classList.remove('active');
+    }
+
+    // ============================================================
+    // VALIDATION DU MOT DE PASSE
+    // ============================================================
+    function validateZipPassword() {
+        const input = document.getElementById('zipPasswordInput');
+        const error = document.getElementById('zipPasswordError');
+        const password = input.value.trim();
+
+        if (password === ZIP_PASSWORD) {
+            // ✅ Mot de passe correct → téléchargement direct
+            error.classList.remove('show');
+            closeZipPasswordModal();
+
+            // 🔗 Lien direct : téléchargement immédiat
+            window.location.href = ZIP_DOWNLOAD_URL;
+
+            console.log('✅ Téléchargement Virtual Admin v5.1 déclenché');
+        } else {
+            // ❌ Mot de passe incorrect
+            error.classList.add('show');
+            input.value = '';
+            input.focus();
+
+            // Animation shake
+            input.style.animation = 'none';
+            setTimeout(() => {
+                input.style.animation = 'shakeError 0.5s ease-in-out';
+            }, 10);
+        }
+    }
+
+    // ============================================================
+    // ÉVÉNEMENTS
+    // ============================================================
+
+    // Touche Entrée pour valider
+    document.getElementById('zipPasswordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            validateZipPassword();
+        }
+    });
+
+    // Clic sur l'arrière-plan pour fermer
+    document.getElementById('zipPasswordModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeZipPasswordModal();
+        }
+    });
+
+    // Touche ESC pour fermer
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('zipPasswordModal');
+            if (modal.classList.contains('active')) {
+                closeZipPasswordModal();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

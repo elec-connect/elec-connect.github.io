@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fr" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CAR CONTROL v3.0 - Contrôle sécurisé du véhicule à distance via ESP8266. Contact, IGN, Démarrage automatique, Verrouillage centralisé. Téléchargez sur Google Play.">
+    <meta name="keywords" content="car control, contrôle véhicule, ESP8266, démarrage à distance, IoT, voiture connectée, Tunisie">
+    <title>CAR CONTROL v3.0 - Contrôle Véhicule | Elec-Connect</title>
+
+    <link rel="canonical" href="https://elec-connect.tn/projets-connectes/car-control/car-control-details.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* BOUTON RETOUR */
+        .back-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,.85);
+            border: 2px solid rgba(231,76,60,.5);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background: rgba(231,76,60,.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(231,76,60,.8);
+        }
+
+        /* HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 100px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid #e74c3c;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(231,76,60,.2), transparent 70%);
+            pointer-events: none;
+        }
+        .page-header .car-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 40px rgba(231,76,60,.5);
+            animation: carFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes carFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .page-header .car-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+        .page-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #fff, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* BOUTON PLAY STORE HEADER */
+        .play-store-header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #01875f, #00c896);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(1,135,95,.5);
+            transition: all .3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .play-store-header-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(1,135,95,.7);
+        }
+        .play-store-header-btn i { font-size: 1.3rem; }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* CARTE DÉTAIL */
+        .car-details-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid rgba(231,76,60,.3);
+            margin-bottom: 30px;
+            transition: all .3s ease;
+        }
+        .car-details-card:hover {
+            border-color: rgba(231,76,60,.6);
+            box-shadow: 0 15px 50px rgba(231,76,60,.2);
+        }
+        .car-details-card h3 {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(231,76,60,.2);
+        }
+        .car-details-card p {
+            color: #bbb;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .car-details-card h4 {
+            color: #f39c12;
+            margin: 20px 0 10px;
+            font-size: 1.05rem;
+        }
+        .car-details-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .car-details-card ul li {
+            color: #ccc;
+            padding: 8px 0 8px 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .car-details-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .car-details-card ul.warning li::before {
+            content: '⚠';
+            color: #f39c12;
+        }
+
+        /* NOUVEAUTÉS SPÉCIALES */
+        .nouveautes-card {
+            border: 2px solid rgba(241,196,15,.5);
+            background: linear-gradient(135deg, rgba(241,196,15,.08), rgba(231,76,60,.08));
+        }
+        .nouveautes-card h3 {
+            color: #f1c40f;
+            border-bottom-color: rgba(241,196,15,.3);
+        }
+        .nouveautes-card ul li::before {
+            content: '✨';
+            color: #f1c40f;
+        }
+        .free-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: .75rem;
+            font-weight: 800;
+            margin-left: 8px;
+            animation: pulseBadge 2s infinite;
+        }
+        @keyframes pulseBadge {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* FONCTIONNALITÉS GRID */
+        .features-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .feature-mini {
+            background: rgba(231,76,60,.08);
+            border: 1px solid rgba(231,76,60,.25);
+            padding: 18px;
+            border-radius: 12px;
+            transition: all .3s ease;
+        }
+        .feature-mini:hover {
+            background: rgba(231,76,60,.15);
+            border-color: #e74c3c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(231,76,60,.2);
+        }
+        .feature-mini .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feature-mini h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        .feature-mini p {
+            color: #999;
+            font-size: .85rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* AVANTAGES */
+        .advantages-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .advantage-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 18px;
+            background: rgba(46,204,113,.08);
+            border-radius: 10px;
+            border-left: 3px solid #2ecc71;
+            transition: all .3s ease;
+        }
+        .advantage-item:hover {
+            background: rgba(46,204,113,.15);
+            transform: translateX(5px);
+        }
+        .advantage-item i {
+            color: #2ecc71;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .advantage-item span {
+            color: #ccc;
+            font-size: .92rem;
+            line-height: 1.5;
+        }
+
+        /* CTA FINAL */
+        .cta-final {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, rgba(231,76,60,.15), rgba(241,196,15,.1));
+            border-radius: 20px;
+            border: 2px solid rgba(231,76,60,.4);
+            margin-top: 40px;
+        }
+        .cta-final h2 {
+            color: #f1c40f;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .cta-final p {
+            color: #ccc;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        .cta-final .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-final .cta-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all .3s ease;
+        }
+        .btn-play-big {
+            background: linear-gradient(135deg, #01875f, #00c896);
+            color: white;
+            box-shadow: 0 8px 25px rgba(1,135,95,.5);
+        }
+        .btn-play-big:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(1,135,95,.7);
+        }
+        .btn-contact-big {
+            background: rgba(255,255,255,.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,.3);
+        }
+        .btn-contact-big:hover {
+            background: rgba(255,255,255,.2);
+            border-color: #f1c40f;
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+        .page-footer {
+            background: #0a0a0a;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(231,76,60,.3);
+            color: #666;
+            font-size: .9rem;
+        }
+        .page-footer a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-footer a:hover { text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .back-btn { width: 42px; height: 42px; top: 12px; left: 12px; }
+            .page-header { padding: 90px 15px 45px; }
+            .page-header .car-icon { width: 85px; height: 85px; }
+            .page-header .car-icon i { font-size: 2.3rem; }
+            .car-details-card { padding: 25px 20px; }
+            .car-details-card h3 { font-size: 1.2rem; }
+            .features-mini-grid { grid-template-columns: 1fr; }
+            .advantages-list { grid-template-columns: 1fr; }
+            .cta-final { padding: 30px 20px; }
+            .cta-final h2 { font-size: 1.4rem; }
+            .cta-final .cta-buttons { flex-direction: column; }
+            .cta-final .cta-buttons a { width: 100%; justify-content: center; }
+            .play-store-header-btn { padding: 12px 22px; font-size: .9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOUTON RETOUR -->
+    <a href="../projets-connectes.html" class="back-btn" aria-label="Retour aux projets" title="Retour aux projets">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <div class="car-icon">
+            <i class="fas fa-car"></i>
+        </div>
+        <h1>CAR CONTROL v3.0</h1>
+        <p>🚗 Contrôle sécurisé du véhicule à distance. Interface optimisée, sécurité prioritaire, mode démo inclus.</p>
+
+        <a href="https://play.google.com/store/apps/details?id=com.voiture.control" target="_blank" rel="noopener" class="play-store-header-btn">
+            <i class="fab fa-google-play"></i> Télécharger sur Google Play
+        </a>
+    </header>
+
+    <!-- CONTAINER -->
+    <div class="container">
+
+        <!-- NOUVEAUTÉS -->
+        <div class="car-details-card nouveautes-card">
+            <h3><i class="fas fa-star"></i> ✨ NOUVEAUTÉS v3.0</h3>
+            <ul>
+                <li><strong>20 démarrages gratuits offerts</strong> — Testez sans engagement <span class="free-badge">GRATUIT</span></li>
+                <li>Achat in-app pour débloquer le <strong>démarrage illimité (9,99€)</strong></li>
+                <li>Interface optimisée pour une meilleure ergonomie</li>
+                <li>Boutons agrandis pour faciliter l'utilisation</li>
+                <li>Couleurs harmonisées (thème sombre)</li>
+                <li>Affichage clair du statut du véhicule</li>
+                <li>📱 Compatible Android 8.0 et supérieur</li>
+            </ul>
+        </div>
+
+        <!-- SÉCURITÉ -->
+        <div class="car-details-card">
+            <h3><i class="fas fa-shield-alt"></i> 🔐 SÉCURITÉ PRIORITAIRE</h3>
+            <p>L'application intègre un système de sécurité avancé pour protéger votre véhicule.</p>
+
+            <h4><i class="fas fa-wifi"></i> SYSTÈME ANTI-PERTE DE CONNEXION :</h4>
+            <ul class="warning">
+                <li>Surveillance continue de la liaison Wi-Fi</li>
+                <li>Arrêt automatique du véhicule en cas de perte de connexion (après 7 secondes)</li>
+                <li>Coupure immédiate du CONTACT et de l'IGN</li>
+                <li>Réinitialisation complète de l'état lors de la reconnexion</li>
+                <li>10 tentatives de reconnexion automatiques</li>
+            </ul>
+
+            <h4><i class="fas fa-lock"></i> SÉCURITÉ OPÉRATIONNELLE :</h4>
+            <ul>
+                <li>Authentification par mot de passe unique</li>
+                <li>Impossible de couper le contact/IGN lorsque le moteur tourne</li>
+                <li>Verrouillage du démarrage (avec un délai de 5 secondes)</li>
+                <li>Arrêt d'urgence avec coupure totale de l'alimentation</li>
+                <li>Interface synchronisée en temps réel</li>
+            </ul>
+        </div>
+
+        <!-- FONCTIONNALITÉS -->
+        <div class="car-details-card">
+            <h3><i class="fas fa-gamepad"></i> 🎮 FONCTIONNALITÉS</h3>
+            <div class="features-mini-grid">
+                <div class="feature-mini">
+                    <span class="feature-icon">🔋</span>
+                    <h4>CONTACT</h4>
+                    <p>Activer/désactiver le contact électrique</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">🔥</span>
+                    <h4>IGN</h4>
+                    <p>Contrôle de l'allumage (activation uniquement si le contact est mis)</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">▶</span>
+                    <h4>START</h4>
+                    <p>Démarrage automatique sécurisé (Contact → IGN → Démarrage)</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">⏹</span>
+                    <h4>STOP</h4>
+                    <p>Arrêt avec un compte à rebours de 60 secondes (annulable)</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">🔒</span>
+                    <h4>CENTRAL</h4>
+                    <p>Verrouillage/déverrouillage centralisé à distance</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">🚨</span>
+                    <h4>URGENCE</h4>
+                    <p>Coupure totale de l'alimentation (double validation requise)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMUNICATION -->
+        <div class="car-details-card">
+            <h3><i class="fas fa-wifi"></i> 📡 COMMUNICATION</h3>
+            <ul>
+                <li>Connexion Wi-Fi directe (Point d'accès)</li>
+                <li>Aucune connexion Internet requise</li>
+                <li>Authentification par mot de passe</li>
+                <li>Portée : environ 50 mètres</li>
+                <li>Compatible avec ESP8266 NodeMCU / ESP12F Relay-X4</li>
+            </ul>
+        </div>
+
+        <!-- MODE DÉMO -->
+        <div class="car-details-card">
+            <h3><i class="fas fa-flask"></i> 🎮 MODE DÉMO</h3>
+            <ul>
+                <li>Testez toutes les fonctions sans matériel</li>
+                <li>Simulation complète des relais</li>
+                <li>Comportement identique au mode réel</li>
+                <li>Aucun risque pour le véhicule</li>
+            </ul>
+        </div>
+
+        <!-- PRÉREQUIS -->
+        <div class="car-details-card">
+            <h3><i class="fas fa-tools"></i> 🔧 PRÉREQUIS MATÉRIELS</h3>
+            <ul>
+                <li>ESP8266 NodeMCU ou ESP12F Relay-X4</li>
+                <li>Module relais 4 canaux</li>
+                <li>Alimentation 5V</li>
+                <li>Android 7.0 (API 24) ou supérieur</li>
+            </ul>
+        </div>
+
+        <!-- AVANTAGES -->
+        <div class="car-details-card">
+            <h3><i class="fas fa-thumbs-up"></i> ✅ AVANTAGES</h3>
+            <div class="advantages-list">
+                <div class="advantage-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span><strong>Sécurité prioritaire</strong> — Arrêt automatique en cas de perte de connexion</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-gift"></i>
+                    <span><strong>20 démarrages gratuits</strong> offerts à l'installation</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-eye-slash"></i>
+                    <span><strong>Sans publicité</strong> — Aucune interruption</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-user-slash"></i>
+                    <span><strong>Aucun compte requis</strong> — Utilisation immédiate</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-lock"></i>
+                    <span><strong>Aucune collecte de données</strong> — Confidentialité totale</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-code"></i>
+                    <span><strong>Open source</strong> — Code transparent</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span><strong>Interface simple et intuitive</strong></span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-flask"></i>
+                    <span><strong>Mode démo inclus</strong> — Test sans matériel</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA FINAL -->
+        <div class="cta-final">
+            <h2><i class="fas fa-rocket"></i> Prêt à électrifier votre conduite ?</h2>
+            <p>📱 Téléchargez CAR CONTROL v3.0 maintenant sur Google Play</p>
+            <div class="cta-buttons">
+                <a href="https://play.google.com/store/apps/details?id=com.voiture.control" target="_blank" rel="noopener" class="btn-play-big">
+                    <i class="fab fa-google-play"></i> Télécharger sur Google Play
+                </a>
+                <a href="mailto:iot.sahnoun@gmail.com" class="btn-contact-big">
+                    <i class="fas fa-envelope"></i> Nous contacter
+                </a>
+            </div>
+            <div style="margin-top: 30px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,.1); color: #999; font-size: .95rem;">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:iot.sahnoun@gmail.com" style="color: #f1c40f; text-decoration: none;">iot.sahnoun@gmail.com</a></p>
+                <p style="margin-top: 8px;"><i class="fas fa-phone"></i> <a href="tel:+21629328870" style="color: #f1c40f; text-decoration: none;">+216 29 328 870</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+        <p>&copy; 2026 <a href="../../index.html">Elec-Connect</a> — Tous droits réservés</p>
+        <p style="margin-top: 10px;">📞 <a href="tel:+21629328870">+216 29 328 870</a> | ✉️ <a href="mailto:Iot.sahnoun@gmail.com">Iot.sahnoun@gmail.com</a></p>
+    </footer>
+
+</body>
+</html>

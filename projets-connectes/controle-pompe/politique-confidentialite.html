@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contrôle Pompe v5.0 - Application mobile ESP8266 pour piloter une pompe à distance. Contrôle des relais, horaires programmables, mode LOCAL et DISTANCE.">
+    <meta name="keywords" content="contrôle pompe, ESP8266, IoT, application mobile, domotique, Tunisie, Elec-Connect">
+    <title>Contrôle Pompe v5.0 - Détails | Elec-Connect</title>
+
+    <link rel="canonical" href="https://elec-connect.tn/projets-connectes/controle-pompe/controle-pompe-details.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* BOUTON RETOUR */
+        .back-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,.85);
+            border: 2px solid rgba(94,6,237,.5);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background: rgba(94,6,237,.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(94,6,237,.8);
+        }
+
+        /* HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 100px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid #5e06ed;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(94,6,237,.2), transparent 70%);
+            pointer-events: none;
+        }
+        .page-header .pump-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #5e06ed, #8b5cf6);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 40px rgba(94,6,237,.5);
+            animation: pumpFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes pumpFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .page-header .pump-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+        .page-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #fff, #5e06ed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* BOUTONS HEADER */
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+            transition: all .3s ease;
+        }
+        .play-store-header-btn {
+            background: linear-gradient(135deg, #01875f, #00c896);
+            color: white;
+            box-shadow: 0 8px 25px rgba(1,135,95,.5);
+        }
+        .play-store-header-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(1,135,95,.7);
+        }
+        .play-store-header-btn i { font-size: 1.3rem; }
+
+        .apk-header-btn {
+            background: linear-gradient(135deg, #5e06ed, #8b5cf6);
+            color: white;
+            box-shadow: 0 8px 25px rgba(94,6,237,.5);
+        }
+        .apk-header-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(94,6,237,.7);
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* CARTE DÉTAIL */
+        .pump-details-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid rgba(94,6,237,.3);
+            margin-bottom: 30px;
+            transition: all .3s ease;
+        }
+        .pump-details-card:hover {
+            border-color: rgba(94,6,237,.6);
+            box-shadow: 0 15px 50px rgba(94,6,237,.2);
+        }
+        .pump-details-card h3 {
+            color: #5e06ed;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(94,6,237,.2);
+        }
+        .pump-details-card p {
+            color: #bbb;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .pump-details-card h4 {
+            color: #f1c40f;
+            margin: 20px 0 10px;
+            font-size: 1.05rem;
+        }
+        .pump-details-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .pump-details-card ul li {
+            color: #ccc;
+            padding: 8px 0 8px 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .pump-details-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .pump-details-card ul.warning li::before {
+            content: '⚠';
+            color: #f39c12;
+        }
+
+        /* NOUVEAUTÉS SPÉCIALES */
+        .nouveautes-card {
+            border: 2px solid rgba(241,196,15,.5);
+            background: linear-gradient(135deg, rgba(241,196,15,.08), rgba(94,6,237,.08));
+        }
+        .nouveautes-card h3 {
+            color: #f1c40f;
+            border-bottom-color: rgba(241,196,15,.3);
+        }
+        .nouveautes-card ul li::before {
+            content: '✨';
+            color: #f1c40f;
+        }
+        .free-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: .75rem;
+            font-weight: 800;
+            margin-left: 8px;
+            animation: pulseBadge 2s infinite;
+        }
+        .beta-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: .75rem;
+            font-weight: 800;
+            margin-left: 8px;
+            animation: pulseBadge 2s infinite;
+        }
+        @keyframes pulseBadge {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* FONCTIONNALITÉS GRID */
+        .features-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .feature-mini {
+            background: rgba(94,6,237,.08);
+            border: 1px solid rgba(94,6,237,.25);
+            padding: 18px;
+            border-radius: 12px;
+            transition: all .3s ease;
+        }
+        .feature-mini:hover {
+            background: rgba(94,6,237,.15);
+            border-color: #5e06ed;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(94,6,237,.2);
+        }
+        .feature-mini .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feature-mini h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        .feature-mini p {
+            color: #999;
+            font-size: .85rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* AVANTAGES */
+        .advantages-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .advantage-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 18px;
+            background: rgba(46,204,113,.08);
+            border-radius: 10px;
+            border-left: 3px solid #2ecc71;
+            transition: all .3s ease;
+        }
+        .advantage-item:hover {
+            background: rgba(46,204,113,.15);
+            transform: translateX(5px);
+        }
+        .advantage-item i {
+            color: #2ecc71;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        .advantage-item span {
+            color: #ccc;
+            font-size: .92rem;
+            line-height: 1.5;
+        }
+
+        /* SECTION TEST FERMÉ */
+        .closed-test-card {
+            border: 2px solid rgba(243,156,18,.5);
+            background: linear-gradient(135deg, rgba(243,156,18,.08), rgba(94,6,237,.05));
+        }
+        .closed-test-card h3 {
+            color: #f39c12;
+            border-bottom-color: rgba(243,156,18,.3);
+        }
+        .closed-test-info {
+            background: rgba(243,156,18,.1);
+            padding: 16px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+            margin: 15px 0;
+            color: #ddd;
+            font-size: .92rem;
+            line-height: 1.7;
+        }
+        .closed-test-info strong { color: #f39c12; }
+
+        .closed-test-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+            box-shadow: 0 8px 25px rgba(243,156,18,.4);
+            transition: all .3s ease;
+            margin-top: 10px;
+        }
+        .closed-test-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(243,156,18,.6);
+        }
+
+        /* CTA FINAL */
+        .cta-final {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, rgba(94,6,237,.15), rgba(241,196,15,.1));
+            border-radius: 20px;
+            border: 2px solid rgba(94,6,237,.4);
+            margin-top: 40px;
+        }
+        .cta-final h2 {
+            color: #f1c40f;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .cta-final p {
+            color: #ccc;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        .cta-final .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-final .cta-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all .3s ease;
+        }
+        .btn-play-big {
+            background: linear-gradient(135deg, #01875f, #00c896);
+            color: white;
+            box-shadow: 0 8px 25px rgba(1,135,95,.5);
+        }
+        .btn-play-big:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(1,135,95,.7);
+        }
+        .btn-apk-big {
+            background: linear-gradient(135deg, #5e06ed, #8b5cf6);
+            color: white;
+            box-shadow: 0 8px 25px rgba(94,6,237,.5);
+        }
+        .btn-apk-big:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(94,6,237,.7);
+        }
+        .btn-contact-big {
+            background: rgba(255,255,255,.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,.3);
+        }
+        .btn-contact-big:hover {
+            background: rgba(255,255,255,.2);
+            border-color: #f1c40f;
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+        .page-footer {
+            background: #0a0a0a;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(94,6,237,.3);
+            color: #666;
+            font-size: .9rem;
+        }
+        .page-footer a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-footer a:hover { text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .back-btn { width: 42px; height: 42px; top: 12px; left: 12px; }
+            .page-header { padding: 90px 15px 45px; }
+            .page-header .pump-icon { width: 85px; height: 85px; }
+            .page-header .pump-icon i { font-size: 2.3rem; }
+            .pump-details-card { padding: 25px 20px; }
+            .pump-details-card h3 { font-size: 1.2rem; }
+            .features-mini-grid { grid-template-columns: 1fr; }
+            .advantages-list { grid-template-columns: 1fr; }
+            .cta-final { padding: 30px 20px; }
+            .cta-final h2 { font-size: 1.4rem; }
+            .cta-final .cta-buttons { flex-direction: column; }
+            .cta-final .cta-buttons a { width: 100%; justify-content: center; }
+            .header-buttons a { padding: 12px 20px; font-size: .85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOUTON RETOUR -->
+    <a href="../projets-connectes.html" class="back-btn" aria-label="Retour aux projets" title="Retour aux projets">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <div class="pump-icon">
+            <i class="fas fa-water"></i>
+        </div>
+        <h1>Contrôle Pompe v5.0</h1>
+        <p>💧 Application mobile ESP8266 pour piloter votre pompe à distance. Contrôle des relais, horaires programmables, mode LOCAL et DISTANCE.</p>
+
+        <div class="header-buttons">
+            <a href="https://play.google.com/apps/testing/com.sahnoun.pompe" target="_blank" rel="noopener" class="play-store-header-btn">
+                <i class="fab fa-google-play"></i> Tester sur Google Play
+            </a>
+            <a href="app/controle-pompe-v5.0.apk" download class="apk-header-btn">
+                <i class="fas fa-download"></i> Télécharger l'APK
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTAINER -->
+    <div class="container">
+
+        <!-- NOUVEAUTÉS / VERSION -->
+        <div class="pump-details-card nouveautes-card">
+            <h3><i class="fas fa-star"></i> ✨ NOUVEAUTÉS v5.0</h3>
+            <ul>
+                <li><strong>Interface modernisée</strong> — Design épuré et intuitif</li>
+                <li><strong>Connexion LOCAL & DISTANCE</strong> — Choisissez votre mode</li>
+                <li><strong>Horaires programmables</strong> — Planifiez vos cycles</li>
+                <li><strong>Scan QR Code</strong> — Connexion rapide et sécurisée <span class="free-badge">RAPIDE</span></li>
+                <li><strong>Sauvegarde locale</strong> — Configuration conservée sur votre appareil</li>
+                <li>📱 Compatible Android 6.0 et supérieur</li>
+            </ul>
+        </div>
+
+        <!-- TEST FERMÉ -->
+        <div class="pump-details-card closed-test-card">
+            <h3><i class="fas fa-flask"></i> 🧪 VERSION BÊTA — TEST FERMÉ</h3>
+            <p>
+                La version <strong>Contrôle Pompe v5.0</strong> est actuellement en <strong>test fermé</strong> sur Google Play.
+                Rejoignez le programme de test pour essayer l'application avant sa sortie officielle
+                et contribuez à son amélioration ! <span class="beta-badge">BÊTA</span>
+            </p>
+
+            <div class="closed-test-info">
+                <strong><i class="fas fa-info-circle"></i> Comment participer au test ?</strong><br><br>
+                <strong>1.</strong> Cliquez sur le bouton "Tester sur Google Play" ci-dessous<br>
+                <strong>2.</strong> Acceptez l'invitation en tant que testeur<br>
+                <strong>3.</strong> Installez l'application depuis le Play Store<br>
+                <strong>4.</strong> Profitez-en gratuitement et envoyez vos retours !
+            </div>
+
+            <a href="https://play.google.com/apps/testing/com.sahnoun.pompe" target="_blank" rel="noopener" class="closed-test-btn">
+                <i class="fab fa-google-play"></i> Rejoindre le test fermé
+            </a>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="pump-details-card">
+            <h3><i class="fas fa-info-circle"></i> 📝 DESCRIPTION</h3>
+            <p>
+                <strong>Contrôle Pompe v5.0</strong> est une application mobile Android permettant de piloter
+                une pompe à distance via une carte <strong>ESP8266</strong>. Grâce à une connexion WiFi,
+                vous pouvez contrôler les relais, programmer des horaires et gérer votre installation
+                en mode <strong>LOCAL</strong> (connexion directe) ou <strong>DISTANCE</strong> (via routeur).
+            </p>
+        </div>
+
+        <!-- FONCTIONNALITÉS -->
+        <div class="pump-details-card">
+            <h3><i class="fas fa-gamepad"></i> 🎮 FONCTIONNALITÉS</h3>
+            <div class="features-mini-grid">
+                <div class="feature-mini">
+                    <span class="feature-icon">🔌</span>
+                    <h4>Contrôle des relais</h4>
+                    <p>Activation / désactivation des relais en temps réel</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">⏰</span>
+                    <h4>Horaires programmables</h4>
+                    <p>Planifiez le fonctionnement selon vos besoins</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">📶</span>
+                    <h4>Mode LOCAL & DISTANCE</h4>
+                    <p>Connexion directe ou via routeur WiFi</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">📱</span>
+                    <h4>Scan QR Code</h4>
+                    <p>Connexion rapide en scannant le QR de la carte</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">🔒</span>
+                    <h4>Sécurité locale</h4>
+                    <p>Aucune donnée envoyée sur Internet</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="feature-icon">🎨</span>
+                    <h4>Interface intuitive</h4>
+                    <p>Design simple et moderne pour Android</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMUNICATION -->
+        <div class="pump-details-card">
+            <h3><i class="fas fa-wifi"></i> 📡 COMMUNICATION</h3>
+            <ul>
+                <li>Connexion Wi-Fi directe (Point d'accès) ou via routeur</li>
+                <li>Aucune connexion Internet requise en mode LOCAL</li>
+                <li>Authentification par mot de passe</li>
+                <li>Compatible avec ESP8266 NodeMCU / ESP12F</li>
+                <li>Mémoire flash LittleFS pour la configuration</li>
+            </ul>
+        </div>
+
+        <!-- PRÉREQUIS -->
+        <div class="pump-details-card">
+            <h3><i class="fas fa-tools"></i> 🔧 PRÉREQUIS MATÉRIELS</h3>
+            <ul>
+                <li>Carte ESP8266 NodeMCU ou ESP12F</li>
+                <li>Module relais (1 à 4 canaux selon besoin)</li>
+                <li>Alimentation 5V</li>
+                <li>Pompe à contrôler</li>
+                <li>Android 6.0 (API 23) ou supérieur</li>
+            </ul>
+        </div>
+
+        <!-- SÉCURITÉ -->
+        <div class="pump-details-card">
+            <h3><i class="fas fa-shield-alt"></i> 🔐 SÉCURITÉ</h3>
+            <h4><i class="fas fa-lock"></i> PROTECTION DES DONNÉES :</h4>
+            <ul>
+                <li>Aucune donnée envoyée sur Internet</li>
+                <li>Stockage local sur votre appareil et la carte ESP8266</li>
+                <li>Authentification par mot de passe</li>
+                <li>Communication sur réseau privé uniquement</li>
+                <li>Conforme RGPD — aucune collecte de données personnelles</li>
+            </ul>
+
+            <div style="background: rgba(94,6,237,.1); padding: 16px 20px; border-radius: 10px; border-left: 4px solid #5e06ed; margin-top: 20px; color: #ccc; font-size: .92rem; line-height: 1.7;">
+                <strong style="color: #5e06ed;"><i class="fas fa-file-shield"></i> Politique de confidentialité complète :</strong><br>
+                Consultez notre <a href="politique-confidentialite.html" style="color: #f1c40f; text-decoration: none; font-weight: 700;">politique de confidentialité</a> pour tous les détails sur la protection de vos données.
+            </div>
+        </div>
+
+        <!-- AVANTAGES -->
+        <div class="pump-details-card">
+            <h3><i class="fas fa-thumbs-up"></i> ✅ AVANTAGES</h3>
+            <div class="advantages-list">
+                <div class="advantage-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span><strong>Sécurité locale</strong> — Aucune donnée sur Internet</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-gift"></i>
+                    <span><strong>Gratuit</strong> — Sans publicité</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-user-slash"></i>
+                    <span><strong>Aucun compte requis</strong> — Utilisation immédiate</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-lock"></i>
+                    <span><strong>Aucune collecte de données</strong> — Confidentialité totale</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-code"></i>
+                    <span><strong>Open source</strong> — Code transparent</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span><strong>Interface simple et intuitive</strong></span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-qrcode"></i>
+                    <span><strong>Scan QR Code</strong> — Connexion ultra-rapide</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-clock"></i>
+                    <span><strong>Horaires programmables</strong> — Automatisation complète</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA FINAL -->
+        <div class="cta-final">
+            <h2><i class="fas fa-rocket"></i> Prêt à automatiser votre pompe ?</h2>
+            <p>🧪 Rejoignez le test fermé ou téléchargez directement l'APK</p>
+            <div class="cta-buttons">
+                <a href="https://play.google.com/apps/testing/com.sahnoun.pompe" target="_blank" rel="noopener" class="btn-play-big">
+                    <i class="fab fa-google-play"></i> Tester sur Google Play
+                </a>
+                <a href="app/controle-pompe-v5.0.apk" download class="btn-apk-big">
+                    <i class="fas fa-download"></i> Télécharger l'APK
+                </a>
+                <a href="mailto:iot.sahnoun@gmail.com" class="btn-contact-big">
+                    <i class="fas fa-envelope"></i> Nous contacter
+                </a>
+            </div>
+            <div style="margin-top: 30px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,.1); color: #999; font-size: .95rem;">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:iot.sahnoun@gmail.com" style="color: #f1c40f; text-decoration: none;">iot.sahnoun@gmail.com</a></p>
+                <p style="margin-top: 8px;"><i class="fas fa-phone"></i> <a href="tel:+21629328870" style="color: #f1c40f; text-decoration: none;">+216 29 328 870</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+        <p>&copy; 2026 <a href="../../index.html">Elec-Connect</a> — Tous droits réservés</p>
+        <p style="margin-top: 10px;">📞 <a href="tel:+21629328870">+216 29 328 870</a> | ✉️ <a href="mailto:Iot.sahnoun@gmail.com">Iot.sahnoun@gmail.com</a></p>
+    </footer>
+
+</body>
+</html>

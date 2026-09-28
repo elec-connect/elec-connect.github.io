@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mes Projets Connectés - Elec-Connect Tunisie. Applications mobiles IoT et systèmes industriels : Contrôle Pompe ESP8266, CAR CONTROL véhicule, Virtual Admin IA locale et Régulation Température.">
+    <meta name="keywords" content="projets connectés, IoT, ESP8266, contrôle pompe, car control, virtual admin, régulation température, PT100, PID, application mobile, Tunisie">
+    <title>Mes Projets Connectés - Elec-Connect</title>
+
+    <link rel="canonical" href="https://elec-connect.tn/projets-connectes/projets-connectes.html">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 100px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid #5e06ed;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(94,6,237,.15), transparent 70%);
+            pointer-events: none;
+        }
+        .page-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #fff, #f1c40f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .page-header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* BACK BUTTON */
+        .back-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,.85);
+            border: 2px solid rgba(94,6,237,.5);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background: rgba(94,6,237,.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(94,6,237,.8);
+        }
+
+        /* PROJETS GRID */
+        .projets-container {
+            max-width: 1200px;
+            margin: 50px auto 80px;
+            padding: 0 20px;
+        }
+        .projets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* CARTE PROJET */
+        .projet-card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 3px solid rgba(94,6,237,.4);
+            transition: all .4s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .projet-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #5e06ed, #f1c40f, #5e06ed);
+            background-size: 200% 100%;
+            animation: gradientMove 3s linear infinite;
+        }
+        .projet-card.car-card::before {
+            background: linear-gradient(90deg, #e74c3c, #f1c40f, #e74c3c);
+            background-size: 200% 100%;
+        }
+        .projet-card.va-card::before {
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb);
+            background-size: 200% 100%;
+        }
+        .projet-card.temp-card::before {
+            background: linear-gradient(90deg, #3182ce, #f1c40f, #3182ce);
+            background-size: 200% 100%;
+        }
+        .projet-card.sa-card::before {
+            background: linear-gradient(90deg, #4a6cf7, #f1c40f, #4a6cf7);
+            background-size: 200% 100%;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        .projet-card:hover {
+            transform: translateY(-10px);
+            border-color: #f1c40f;
+            box-shadow: 0 30px 70px rgba(94,6,237,.5);
+        }
+        .projet-card.car-card:hover {
+            border-color: #e74c3c;
+            box-shadow: 0 30px 70px rgba(231,76,60,.4);
+        }
+        .projet-card.va-card:hover {
+            border-color: #2563eb;
+            box-shadow: 0 30px 70px rgba(37,99,235,.4);
+        }
+        .projet-card.temp-card:hover {
+            border-color: #3182ce;
+            box-shadow: 0 30px 70px rgba(49,130,206,.4);
+        }
+        .projet-card.sa-card:hover {
+            border-color: #4a6cf7;
+            box-shadow: 0 30px 70px rgba(74,108,247,.4);
+        }
+        .projet-card .icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #5e06ed, #8b5cf6);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(94,6,237,.5);
+            flex-shrink: 0;
+        }
+        .projet-card.car-card .icon-wrapper {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 10px 30px rgba(231,76,60,.5);
+        }
+        .projet-card.va-card .icon-wrapper {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            box-shadow: 0 10px 30px rgba(37,99,235,.5);
+        }
+        .projet-card.temp-card .icon-wrapper {
+            background: linear-gradient(135deg, #1a365d, #3182ce);
+            box-shadow: 0 10px 30px rgba(26,54,93,.5);
+        }
+        .projet-card .icon-wrapper i {
+            font-size: 2.4rem;
+            color: white;
+        }
+        .projet-card.sa-card .icon-wrapper {
+            background: linear-gradient(135deg, #4a6cf7, #6b8aff);
+            box-shadow: 0 10px 30px rgba(74,108,247,.5);
+        }
+        .projet-card h3 {
+            color: #f1c40f;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        .projet-card.car-card h3 { color: #e74c3c; }
+        .projet-card.va-card h3 { color: #60a5fa; }
+        .projet-card.temp-card h3 { color: #63b3ed; }
+        .projet-card.sa-card h3 { color: #6b8aff; }
+        .badge-attendance {
+           background: linear-gradient(135deg, #4a6cf7, #6b8aff);
+           color: white;
+        }
+        .projet-card > p {
+            color: #bbb;
+            font-size: .98rem;
+            line-height: 1.7;
+            margin-bottom: 22px;
+            flex-grow: 1;
+            min-height: 100px;
+        }
+
+        /* BADGES */
+        .projet-card .badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+        .badge-item {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: .78rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .badge-version {
+            background: rgba(46,204,113,.15);
+            color: #2ecc71;
+            border: 1px solid rgba(46,204,113,.4);
+        }
+        .badge-play {
+            background: linear-gradient(135deg, #01875f, #00c896);
+            color: white;
+        }
+        .badge-beta {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+        .badge-apk {
+            background: linear-gradient(135deg, #5e06ed, #8b5cf6);
+            color: white;
+        }
+        .badge-rgpd {
+            background: rgba(241,196,15,.15);
+            color: #f1c40f;
+            border: 1px solid rgba(241,196,15,.4);
+        }
+        .badge-free {
+            background: rgba(46,204,113,.15);
+            color: #2ecc71;
+            border: 1px solid rgba(46,204,113,.4);
+        }
+        .badge-purple {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: white;
+        }
+        .badge-blue {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+        }
+        .badge-temperature {
+            background: linear-gradient(135deg, #3182ce, #63b3ed);
+            color: white;
+        }
+
+        /* CTA BUTTONS */
+        .projet-card .cta-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+        .projet-card .cta-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .87rem;
+            transition: all .3s ease;
+        }
+        .btn-download-main {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #000;
+            box-shadow: 0 6px 20px rgba(241,196,15,.4);
+        }
+        .btn-download-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(241,196,15,.6);
+        }
+        .btn-play-store {
+            background: linear-gradient(135deg, #01875f, #00c896);
+            color: white;
+            box-shadow: 0 6px 20px rgba(1,135,95,.4);
+        }
+        .btn-play-store:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(1,135,95,.6);
+        }
+        .btn-beta-store {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            box-shadow: 0 6px 20px rgba(243,156,18,.4);
+        }
+        .btn-beta-store:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(243,156,18,.6);
+        }
+        .btn-privacy-main {
+            background: rgba(255,255,255,.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,.3);
+        }
+        .btn-privacy-main:hover {
+            background: rgba(255,255,255,.2);
+            border-color: #5e06ed;
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+        .page-footer {
+            background: #0a0a0a;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(94,6,237,.3);
+            color: #666;
+            font-size: .9rem;
+        }
+        .page-footer a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .back-btn { width: 40px; height: 40px; top: 10px; left: 10px; }
+            .projets-grid { grid-template-columns: 1fr; gap: 25px; }
+            .projet-card { padding: 30px 22px; }
+            .projet-card h3 { font-size: 1.35rem; }
+            .projet-card .icon-wrapper { width: 75px; height: 75px; }
+            .projet-card .icon-wrapper i { font-size: 1.9rem; }
+            .projet-card .cta-buttons { flex-direction: column; }
+            .projet-card .cta-buttons a { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOUTON RETOUR -->
+    <a href="../index.html" class="back-btn" aria-label="Retour à l'accueil" title="Retour">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1><i class="fas fa-microchip"></i> Mes Projets Connectés</h1>
+        <p>Découvrez mes applications mobiles IoT et systèmes industriels — pilotage de pompe, contrôle de véhicule, gestion administrative avec IA locale et régulation thermique.</p>
+    </header>
+
+    <!-- PROJETS GRID -->
+    <div class="projets-container">
+        <div class="projets-grid">
+
+            <!-- CARTE 1 : CONTRÔLE POMPE -->
+            <div class="projet-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h3>Contrôle Pompe Connecté</h3>
+                <p>
+                    Application mobile de contrôle de pompe à distance via carte ESP8266.
+                    Contrôle des relais, horaires programmables, connexion LOCAL et DISTANCE.
+                </p>
+                <div class="badges">
+                    <span class="badge-item badge-version"><i class="fas fa-check-circle"></i> v5.0</span>
+                    <span class="badge-item badge-beta"><i class="fas fa-flask"></i> Bêta</span>
+                    <span class="badge-item badge-rgpd"><i class="fas fa-shield-alt"></i> RGPD</span>
+                </div>
+                <div class="cta-buttons">
+                    <a href="https://play.google.com/apps/testing/com.sahnoun.pompe" target="_blank" rel="noopener" class="btn-beta-store">
+                        <i class="fab fa-google-play"></i> Test fermé
+                    </a>
+                    <a href="controle-pompe/controle-pompe-details.html" class="btn-privacy-main">
+                        <i class="fas fa-info-circle"></i> Détails
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARTE 2 : CAR CONTROL -->
+            <div class="projet-card car-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3>CAR CONTROL - Véhicule</h3>
+                <p>
+                    Contrôle sécurisé du véhicule à distance via ESP8266 : Contact, IGN, Démarrage
+                    automatique, Verrouillage centralisé. Système anti-perte de connexion.
+                </p>
+                <div class="badges">
+                    <span class="badge-item badge-version"><i class="fas fa-check-circle"></i> v3.0</span>
+                    <span class="badge-item badge-play"><i class="fab fa-google-play"></i> Play Store</span>
+                    <span class="badge-item badge-free"><i class="fas fa-gift"></i> 20 gratuits</span>
+                </div>
+                <div class="cta-buttons">
+                    <a href="https://play.google.com/store/apps/details?id=com.voiture.control" target="_blank" rel="noopener" class="btn-play-store">
+                        <i class="fab fa-google-play"></i> Google Play
+                    </a>
+                    <a href="car-control/car-control-details.html" class="btn-privacy-main">
+                        <i class="fas fa-info-circle"></i> Détails
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARTE 3 : VIRTUAL ADMIN -->
+            <div class="projet-card va-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Virtual Admin v5.1</h3>
+                <p>
+                    Application de gestion administrative avec IA locale : factures, devis, stock,
+                    chat intelligent. Architecture 5 couches sécurisée.
+                </p>
+                <div class="badges">
+                    <span class="badge-item badge-version"><i class="fas fa-check-circle"></i> v5.1</span>
+                    <span class="badge-item badge-purple"><i class="fas fa-robot"></i> IA locale</span>
+                    <span class="badge-item badge-blue"><i class="fas fa-file-archive"></i> ZIP</span>
+                </div>
+                <div class="cta-buttons">
+                    <a href="virtual-admin/virtual-admin-details.html" class="btn-privacy-main">
+                        <i class="fas fa-info-circle"></i> Détails
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARTE 4 : RÉGULATION TEMPÉRATURE -->
+            <div class="projet-card temp-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-temperature-high"></i>
+                </div>
+                <h3>Régulation Température</h3>
+                <p>
+                    Système industriel de régulation thermique avec capteurs PT100, actionneurs
+                    et automate programmable. Compatible multi-automates (Siemens, Schneider,
+                    Rockwell, ABB, Mitsubishi, Omron...).
+                </p>
+                <div class="badges">
+                    <span class="badge-item badge-version"><i class="fas fa-check-circle"></i> v1.0</span>
+                    <span class="badge-item badge-temperature"><i class="fas fa-microchip"></i> Multi-PLC</span>
+                    <span class="badge-item badge-rgpd"><i class="fas fa-shield-alt"></i> Industriel</span>
+                </div>
+                <div class="cta-buttons">
+                    <a href="controle-temperature/controle-temperature-details.html" class="btn-privacy-main">
+                        <i class="fas fa-info-circle"></i> Détails
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARTE 5 : SMART ATTENDANCE SYSTEM -->
+            <div class="projet-card sa-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h3>Smart Attendance</h3>
+                <p>
+                    Système de gestion des présences par reconnaissance faciale avec IA.
+                    Pointage, gestion employés, paie, rapports et notifications.
+                    Architecture React + Node.js + PostgreSQL.
+                </p>
+                <div class="badges">
+                    <span class="badge-item badge-version"><i class="fas fa-check-circle"></i> v2.0</span>
+                    <span class="badge-item badge-attendance"><i class="fas fa-face-smile"></i> Reconnaissance faciale</span>
+                    <span class="badge-item badge-play"><i class="fab fa-windows"></i> Windows + Linux</span>
+                </div>
+                <div class="cta-buttons">
+                    <a href="smart-attendance/smart-attendance-details.html" class="btn-privacy-main">
+                        <i class="fas fa-info-circle"></i> Détails
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+        <p>&copy; 2024 <a href="../index.html">Elec-Connect</a> — Tous droits réservés</p>
+        <p style="margin-top: 10px;">📞 <a href="tel:+21629328870">+216 29 328 870</a> | ✉️ <a href="mailto:Iot.sahnoun@gmail.com">Iot.sahnoun@gmail.com</a></p>
+    </footer>
+
+</body>
+</html>

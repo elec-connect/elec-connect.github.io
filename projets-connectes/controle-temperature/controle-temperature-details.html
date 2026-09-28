@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Technique - Système de Régulation de Température</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2c5282;
+            --accent-color: #3182ce;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f7fafc;
+            color: #2d3748;
+            line-height: 1.7;
+        }
+
+        /* Header */
+        .doc-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .doc-header h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        .doc-header .lead {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Boutons header */
+        .header-actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        @media (max-width: 992px) {
+            .header-actions {
+                justify-content: flex-start;
+                margin-top: 20px;
+            }
+        }
+
+        .btn-header-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #000;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(241,196,15,.4);
+            transition: all .3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-header-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(241,196,15,.6);
+            color: #000;
+        }
+
+        .btn-header-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(37,211,102,.4);
+            transition: all .3s ease;
+        }
+
+        .btn-header-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37,211,102,.6);
+            color: white;
+        }
+
+        /* Table des matières */
+        .toc-sidebar {
+            position: sticky;
+            top: 20px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .toc-sidebar h5 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .toc-sidebar li {
+            padding: 0.4rem 0;
+        }
+
+        .toc-sidebar a {
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            padding: 0.35rem 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .toc-sidebar a:hover {
+            background: #ebf8ff;
+            color: var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        /* Contenu principal */
+        .doc-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 20px;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        /* Cartes composants */
+        .component-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            transition: all 0.2s;
+        }
+
+        .component-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateX(4px);
+        }
+
+        .component-card h5 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .component-card .manufacturer {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Tableaux */
+        .spec-table {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .spec-table td {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .spec-table td:first-child {
+            width: 35%;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        /* Schémas */
+        .schema-container {
+            background: #0d1117;
+            color: #7ee787;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.78rem;
+            line-height: 1.35;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #30363d;
+            white-space: pre;
+        }
+
+        .schema-container pre {
+            margin: 0;
+            color: #7ee787;
+            font-family: inherit;
+        }
+
+        /* Encadrés */
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.25rem 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        .info-box h5 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .danger-box {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 1.25rem 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        .danger-box h5 {
+            color: #c53030;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Badges */
+        .badge-sensor {
+            background: #3182ce;
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-actuator {
+            background: #dd6b20;
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-protocol {
+            background: #38a169;
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Tableaux généraux */
+        .table-industrial {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-industrial thead {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .table-industrial thead th {
+            font-weight: 600;
+            padding: 1rem;
+            border: none;
+        }
+
+        .table-industrial tbody td {
+            padding: 0.85rem 1rem;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        .doc-footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Section téléchargement (bas de page) */
+        .download-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #1a365d, #2c5282);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 15px 40px rgba(26,54,93,.4);
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .download-section h2 {
+            color: #f1c40f;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            border: none;
+            justify-content: center;
+        }
+
+        .download-section p {
+            color: #cbd5e0;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .download-buttons-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-download-drive {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(241,196,15,.4);
+            transition: all .3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-download-drive:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(241,196,15,.6);
+            color: #000;
+        }
+
+        .btn-whatsapp-temp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37,211,102,.4);
+            transition: all .3s ease;
+        }
+
+        .btn-whatsapp-temp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37,211,102,.6);
+            color: white;
+        }
+
+        .download-contact {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,.15);
+            color: #a0aec0;
+            font-size: .95rem;
+        }
+
+        .download-contact a {
+            color: #f1c40f;
+            text-decoration: none;
+        }
+
+        .download-contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           MODAL MOT DE PASSE
+        ============================================ */
+        .zip-password-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,.85);
+            z-index: 10000;
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .zip-password-modal.active {
+            display: flex;
+            animation: fadeInModal .3s ease-out;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .zip-password-content {
+            background: linear-gradient(135deg, #1a365d, #0f1e33);
+            border: 3px solid #3182ce;
+            border-radius: 20px;
+            padding: 40px 35px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(49,130,206,.5);
+            animation: slideInModal .35s cubic-bezier(.175,.885,.32,1.275);
+            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        @keyframes slideInModal {
+            from { opacity: 0; transform: translateY(-30px) scale(.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .zip-password-content .lock-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3182ce, #63b3ed);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(49,130,206,.5);
+            animation: lockPulse 2s infinite;
+        }
+        @keyframes lockPulse {
+            0%,100% { box-shadow: 0 10px 30px rgba(49,130,206,.5); }
+            50% { box-shadow: 0 10px 40px rgba(49,130,206,.8); }
+        }
+        .zip-password-content .lock-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .zip-password-content h3 {
+            color: #f1c40f;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .zip-password-content .subtitle {
+            color: #cbd5e0;
+            font-size: .95rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .zip-password-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255,255,255,.08);
+            border: 2px solid rgba(49,130,206,.5);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            transition: all .3s ease;
+            font-family: inherit;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .zip-password-input:focus {
+            outline: none;
+            border-color: #f1c40f;
+            background: rgba(255,255,255,.12);
+            box-shadow: 0 0 20px rgba(241,196,15,.3);
+        }
+        .zip-password-input::placeholder {
+            color: #888;
+            letter-spacing: normal;
+        }
+
+        .zip-password-error {
+            color: #fc8181;
+            font-size: .88rem;
+            margin-bottom: 15px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+        .zip-password-error.show {
+            display: flex;
+            animation: shakeError .5s ease-in-out;
+        }
+        @keyframes shakeError {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .zip-password-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .zip-password-btn {
+            padding: 13px 26px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: .95rem;
+            cursor: pointer;
+            transition: all .3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            flex: 1;
+        }
+        .zip-password-submit {
+            background: linear-gradient(135deg, #3182ce, #63b3ed);
+            color: white;
+            box-shadow: 0 6px 20px rgba(49,130,206,.4);
+        }
+        .zip-password-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(49,130,206,.6);
+        }
+        .zip-password-cancel {
+            background: rgba(255,255,255,.08);
+            color: white;
+            border: 2px solid rgba(255,255,255,.2);
+            flex: 0 0 auto;
+            padding: 13px 20px;
+        }
+        .zip-password-cancel:hover {
+            background: rgba(255,255,255,.15);
+            border-color: #fc8181;
+            color: #fc8181;
+        }
+
+        .zip-password-hint {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.08);
+            font-size: .85rem;
+            color: #a0aec0;
+            line-height: 1.5;
+        }
+        .zip-password-hint a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .zip-password-hint a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .toc-sidebar {
+                position: static;
+                max-height: none;
+                margin-bottom: 2rem;
+            }
+            .doc-content {
+                padding: 1.5rem;
+            }
+            .doc-header h1 {
+                font-size: 1.8rem;
+            }
+            .zip-password-content {
+                padding: 30px 22px;
+            }
+            .zip-password-buttons {
+                flex-direction: column;
+            }
+            .zip-password-cancel {
+                flex: 1;
+            }
+        }
+
+        /* Bouton retour en haut */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="doc-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1>
+                    <i class="fas fa-temperature-high me-3"></i>
+                    Système de Régulation de Température
+                </h1>
+                <p class="lead mb-0">
+                    Documentation technique — Fonctionnement, compatibilité multi-automates, capteurs, actionneurs et schémas industriels
+                </p>
+                <div class="mt-3">
+                    <div class="badge-sensor mb-2 d-inline-block">
+                        <i class="fas fa-microchip me-1"></i> Multi-constructeurs
+                    </div>
+                    <div class="badge-actuator d-inline-block ms-2">
+                        <i class="fas fa-plug-circle-check me-1"></i> Protocoles ouverts
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <!-- ============================================ -->
+                <!-- BOUTONS DE TÉLÉCHARGEMENT EN HAUT -->
+                <!-- ============================================ -->
+                <div class="header-actions">
+                    <button type="button" class="btn-header-download" onclick="openZipPasswordModal()">
+                        <i class="fas fa-lock"></i> Télécharger
+                    </button>
+                    <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20des%20informations%20sur%20le%20Syst%C3%A8me%20de%20R%C3%A9gulation%20de%20Temp%C3%A9rature.%0A%0ANom%20%3A%20%0AUsage%20%3A%20%0AConfig%20PC%20%3A%20%0A%0AMerci%20!" 
+                       target="_blank" 
+                       rel="noopener"
+                       class="btn-header-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <!-- Table des matières -->
+        <div class="col-lg-3 mb-4">
+            <nav class="toc-sidebar">
+                <h5><i class="fas fa-list me-2"></i>Sommaire</h5>
+                <ul>
+                    <li><a href="#overview"><i class="fas fa-info-circle me-2"></i>1. Vue d'ensemble</a></li>
+                    <li><a href="#operation"><i class="fas fa-cogs me-2"></i>1bis. Fonctionnement</a></li>
+                    <li><a href="#sensors"><i class="fas fa-thermometer-half me-2"></i>2. Capteurs</a></li>
+                    <li><a href="#actuators"><i class="fas fa-cogs me-2"></i>3. Actionneurs</a></li>
+                    <li><a href="#plc"><i class="fas fa-microchip me-2"></i>4. Automate (API)</a></li>
+                    <li><a href="#multiplc"><i class="fas fa-plug-circle-check me-2"></i>4bis. Multi-automates</a></li>
+                    <li><a href="#schema"><i class="fas fa-project-diagram me-2"></i>5. Schémas</a></li>
+                    <li><a href="#cabling"><i class="fas fa-plug me-2"></i>6. Câblage</a></li>
+                    <li><a href="#protocols"><i class="fas fa-network-wired me-2"></i>7. Protocoles</a></li>
+                    <li><a href="#safety"><i class="fas fa-shield-alt me-2"></i>8. Sécurité</a></li>
+                    <li><a href="#download"><i class="fas fa-download me-2"></i>9. Téléchargement</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenu -->
+        <div class="col-lg-9">
+            <div class="doc-content">
+
+                <!-- 1. Vue d'ensemble -->
+                <section class="section" id="overview">
+                    <h2><i class="fas fa-info-circle"></i>1. Vue d'ensemble</h2>
+                    <p>
+                        Ce système de régulation de température est conçu pour des environnements
+                        <strong>industriels</strong> où la précision, la fiabilité et la sécurité sont essentielles.
+                        Il combine des <strong>capteurs industriels</strong>, des <strong>actionneurs robustes</strong>
+                        et un <strong>automate programmable (API/PLC)</strong> pour assurer un contrôle
+                        thermique continu et précis.
+                    </p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-microchip fa-3x text-primary mb-3"></i>
+                                    <h5 class="card-title">Acquisition</h5>
+                                    <p class="card-text small">
+                                        Capteurs industriels 4-20 mA / HART / Modbus RTU
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-microchip fa-3x text-success mb-3"></i>
+                                    <h5 class="card-title">Traitement</h5>
+                                    <p class="card-text small">
+                                        Automate programmable (PLC) + régulation PID
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-cogs fa-3x text-warning mb-3"></i>
+                                    <h5 class="card-title">Action</h5>
+                                    <p class="card-text small">
+                                        Actionneurs industriels (vannes, résistances, moteurs)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Caractéristiques du système</h3>
+                    <table class="table table-industrial">
+                        <tbody>
+                            <tr><td><strong>Plage de température</strong></td><td>-50°C à +400°C (selon configuration)</td></tr>
+                            <tr><td><strong>Précision</strong></td><td>± 0.1°C à ± 0.5°C</td></tr>
+                            <tr><td><strong>Temps de cycle</strong></td><td>100 ms à 1 s</td></tr>
+                            <tr><td><strong>Communication</strong></td><td>Modbus TCP/RTU, Profibus, Profinet, Ethernet/IP, OPC UA</td></tr>
+                            <tr><td><strong>Alimentation</strong></td><td>24V DC (capteurs/automate) — 230/400V AC (puissance)</td></tr>
+                            <tr><td><strong>Indice de protection</strong></td><td>IP65 à IP67 (selon environnement)</td></tr>
+                            <tr><td><strong>Température ambiante</strong></td><td>-20°C à +60°C</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 1bis. Fonctionnement -->
+                <section class="section" id="operation">
+                    <h2><i class="fas fa-cogs"></i>1bis. Fonctionnement du système</h2>
+                    <p>
+                        Le système fonctionne selon une <strong>boucle de régulation fermée</strong>
+                        (closed-loop control) conforme à l'architecture standard des automatismes
+                        industriels : <strong>Acquisition → Traitement → Action → Vérification</strong>.
+                    </p>
+
+                    <h3>1bis.1 — Boucle de régulation fermée</h3>
+                    <div class="schema-container"><pre>
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              BOUCLE DE RÉGULATION FERMÉE — IEC 60617                         ║
+║              (Closed-Loop Control System)                                    ║
+║                                                                              ║
+║        SP              e(t) = SP − PV              u(t)                       ║
+║    CONSIGNE ──────┐      ERREUR      ┌──────────  COMMANDE                    ║
+║    (25.0°C)       │                  │            (0-100%)                    ║
+║                   ▼                  ▼                                       ║
+║          ┌────────────────┐   ┌──────────────┐   ┌─────────────────┐         ║
+║          │   COMPARATEUR  │   │  RÉGULATEUR  │   │   ACTIONNEUR    │         ║
+║          │                ├──►│              ├──►│                 │         ║
+║          │      Σ Δ       │   │  PID + Logique│   │  SSR / Vanne /  │         ║
+║          │                │   │  Zone morte   │   │  Variateur      │         ║
+║          └────────┬───────┘   └──────────────┘   └────────┬────────┘         ║
+║                   ▲                                       │                  ║
+║                   │ PV                                    ▼                  ║
+║          ┌────────┴───────┐                       ┌─────────────────┐         ║
+║          │   CAPTEUR      │                       │    PROCESS      │         ║
+║          │   PT100        │◄──────────────────────┤    Four / Cuve  │         ║
+║          └────────────────┘     Phénomène         └─────────────────┘         ║
+║                                 thermique                                     ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║  FORMULE PID (Position Form)                                                 ║
+║  u(t) = Kp · [ e(t) + (1/Ti)·∫e(τ)dτ + Td·de(t)/dt ] + u₀                    ║
+║                                                                              ║
+║  Variable       Symbole      Rôle                                            ║
+║  Consigne       SP           Valeur désirée (setpoint)                       ║
+║  Mesure         PV           Valeur réelle (process value)                   ║
+║  Erreur         e(t)         SP - PV                                         ║
+║  Commande       u(t)         Signal envoyé à l'actionneur                    ║
+║  Gain prop.     Kp           Réaction immédiate                              ║
+║  Temps intégral Ti           Correction des erreurs cumulées                 ║
+║  Temps dérivé   Td           Anticipation des variations                     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+</pre></div>
+
+                    <h3>1bis.2 — Algorithme embarqué (pseudo-code industriel)</h3>
+                    <div class="info-box">
+                        <h5><i class="fas fa-info-circle me-2"></i>Régulation par zone morte (deadband)</h5>
+                        <p class="mb-0">
+                            Ce système utilise une <strong>régulation par zone morte</strong> avec gains
+                            adaptatifs selon le mode choisi. Cela évite les oscillations permanentes autour
+                            de la consigne et <strong>préserve la durée de vie des actionneurs</strong>.
+                        </p>
+                    </div>
+
+                    <div class="schema-container"><pre>
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    ALGORITHME DE RÉGULATION EMBARQUÉ                         ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║  BOUCLE PRINCIPALE  (période = 5 secondes)                                   ║
+║  ─────────────────────────────────────────────────────────────────────────   ║
+║                                                                              ║
+║  ÉTAPE 1 — ACQUISITION                                                       ║
+║      T_actuelle  ← PLC.read_temperature()      [PT100 → 4-20 mA]             ║
+║      Humidité    ← PLC.read_humidity()         [Hygro → 4-20 mA]             ║
+║      Sécurité    ← PLC.read_safety_inputs()    [DI: Défaut, Arrêt]           ║
+║                                                                              ║
+║  ÉTAPE 2 — CALCUL DE L'ERREUR                                                ║
+║      e(t) ← Consigne_effective − T_actuelle                                  ║
+║                                                                              ║
+║  ÉTAPE 3 — SÉLECTION DU MODE                                                 ║
+║      ┌──────────┬───────────┬────────┬─────────┬────────────┐                ║
+║      │  MODE    │ DEADBAND  │  GAIN  │  P_MAX  │  OFFSET    │                ║
+║      ├──────────┼───────────┼────────┼─────────┼────────────┤                ║
+║      │  AUTO    │   0.5°C   │   ×50  │   100%  │   0.0°C    │                ║
+║      │  TURBO   │   0.2°C   │  ×100  │   100%  │   0.0°C    │                ║
+║      │  ÉCO     │   1.0°C   │   ×25  │    60%  │  -2.0°C    │                ║
+║      │  MANUEL  │    —      │    —   │     —   │     —      │                ║
+║      └──────────┴───────────┴────────┴─────────┴────────────┘                ║
+║                                                                              ║
+║  ÉTAPE 4 — DÉCISION                                                          ║
+║      SI |e(t)| ≤ deadband:  ► ARRÊT tous actionneurs                         ║
+║      SI e(t) > 0:           ► CHAUFFAGE + VENTILATION ON                     ║
+║      SI e(t) < 0:           ► REFROIDISSEMENT + VENTILATION ON               ║
+║                                                                              ║
+║  ÉTAPE 5 — SÉCURITÉS (toujours actives)                                      ║
+║      SI T > T_max_safe  ► Coupure chauffage + Alarme CRITIQUE                ║
+║      SI T < T_min_safe  ► Coupure froid + Alarme CRITIQUE                    ║
+║      SI capteur KO      ► Coupure totale + Alarme CRITIQUE                   ║
+║                                                                              ║
+║  ÉTAPE 6 — ÉCRITURE SORTIES                                                  ║
+║      PLC.set_heater(on, puissance)  → AO 0 + DO 0                            ║
+║      PLC.set_cooler(on, puissance)  → AO 1 + DO 1                            ║
+║      PLC.set_fan(on)                → DO 2                                   ║
+║      PLC.set_alarm(state)           → DO 3                                   ║
+║                                                                              ║
+║  ÉTAPE 7 — PERSISTANCE & DIFFUSION                                           ║
+║      ► INSERT INTO temperature_log (T, cible, actionneurs, ...)              ║
+║      ► WebSocket emit('temperature_update') vers IHM                         ║
+║      ► SI dépassement seuil ► Email / SMS / Webhook                          ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+</pre></div>
+
+                    <h3>1bis.3 — Les 4 modes de régulation</h3>
+                    <div class="table-responsive">
+                        <table class="table table-industrial">
+                            <thead>
+                                <tr>
+                                    <th>Mode</th>
+                                    <th>Zone morte</th>
+                                    <th>Gain</th>
+                                    <th>Puissance max</th>
+                                    <th>Offset consigne</th>
+                                    <th>Cas d'usage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge bg-primary">Auto</span></td>
+                                    <td>0.5°C</td>
+                                    <td>×50</td>
+                                    <td>100%</td>
+                                    <td>0°C</td>
+                                    <td>Fonctionnement standard</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-danger">Turbo</span></td>
+                                    <td>0.2°C</td>
+                                    <td>×100</td>
+                                    <td>100%</td>
+                                    <td>0°C</td>
+                                    <td>Réaction rapide, démarrage à froid</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-warning text-dark">Éco</span></td>
+                                    <td>1.0°C</td>
+                                    <td>×25</td>
+                                    <td>60%</td>
+                                    <td>−2°C</td>
+                                    <td>Économie d'énergie</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-secondary">Manuel</span></td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td>Maintenance, test actionneurs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>1bis.4 — Performances et temps de réponse</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                                    <h5 class="card-title">5 secondes</h5>
+                                    <p class="card-text small mb-0">Période de la boucle de régulation</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-bolt fa-3x text-warning mb-3"></i>
+                                    <h5 class="card-title">&lt; 100 ms</h5>
+                                    <p class="card-text small mb-0">Temps de réponse API → actionneur</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-bullseye fa-3x text-success mb-3"></i>
+                                    <h5 class="card-title">± 0.5°C</h5>
+                                    <p class="card-text small mb-0">Stabilité de régulation (mode Auto)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Capteurs -->
+                <section class="section" id="sensors">
+                    <h2><i class="fas fa-thermometer-half"></i>2. Capteurs industriels</h2>
+                    <p>
+                        Les capteurs industriels sont sélectionnés pour leur <strong>précision</strong>,
+                        leur <strong>durabilité</strong> et leur <strong>compatibilité</strong> avec les
+                        automates programmables industriels (API/PLC).
+                    </p>
+
+                    <h3>2.1 — Capteurs de température</h3>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-thermometer-half text-primary me-2"></i>
+                            PT100 / PT1000 — Sonde à résistance platine
+                            <span class="manufacturer">Endress+Hauser</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Sonde à résistance platine (RTD)</td></tr>
+                            <tr><td>Plage de mesure</td><td>-200°C à +600°C</td></tr>
+                            <tr><td>Précision</td><td>Classe A : ± 0.15°C à 0°C — Classe AA : ± 0.1°C à 0°C</td></tr>
+                            <tr><td>Signal de sortie</td><td>100 Ω / 1000 Ω (PT100 / PT1000)</td></tr>
+                            <tr><td>Raccordement</td><td>2, 3 ou 4 fils</td></tr>
+                            <tr><td>Protection</td><td>IP67 (avec gaine inox)</td></tr>
+                            <tr><td>Applications</td><td>Liquides, gaz, surfaces, process industriels</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-thermometer-half text-primary me-2"></i>
+                            Thermocouple Type K
+                            <span class="manufacturer">Omega Engineering</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Thermocouple (effet Seebeck)</td></tr>
+                            <tr><td>Plage de mesure</td><td>-200°C à +1372°C</td></tr>
+                            <tr><td>Précision</td><td>± 1.5°C ou 0.4% de la lecture</td></tr>
+                            <tr><td>Signal de sortie</td><td>Tension (mV) proportionnelle à la température</td></tr>
+                            <tr><td>Temps de réponse</td><td>&lt; 1 s (selon gaine)</td></tr>
+                            <tr><td>Protection</td><td>IP65 à IP68 (selon modèle)</td></tr>
+                            <tr><td>Applications</td><td>Hautes températures, fours, moteurs</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-thermometer-half text-primary me-2"></i>
+                            Transmetteur de température 4-20 mA
+                            <span class="manufacturer">Siemens SITRANS TH</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Transmetteur de température programmable</td></tr>
+                            <tr><td>Entrée</td><td>PT100, PT1000, thermocouples (B, E, J, K, N, R, S, T)</td></tr>
+                            <tr><td>Sortie</td><td>4-20 mA, 2 fils (boucle de courant)</td></tr>
+                            <tr><td>Précision</td><td>± 0.1°C</td></tr>
+                            <tr><td>Alimentation</td><td>7.5V à 45V DC (boucle 4-20 mA)</td></tr>
+                            <tr><td>Communication</td><td>HART, Profibus PA, Foundation Fieldbus</td></tr>
+                            <tr><td>Protection</td><td>IP66/IP67 (boîtier aluminium)</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>2.2 — Capteurs d'humidité</h3>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-tint text-primary me-2"></i>
+                            Hygromètre capacitif industriel
+                            <span class="manufacturer">Vaisala HMT120</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Hygromètre capacitif à couche mince</td></tr>
+                            <tr><td>Plage humidité</td><td>0 % à 100 % HR</td></tr>
+                            <tr><td>Précision</td><td>± 1.5 % HR (0-90 % HR) — ± 2.5 % HR (90-100 % HR)</td></tr>
+                            <tr><td>Signal de sortie</td><td>4-20 mA, 0-10 V, Modbus RTU</td></tr>
+                            <tr><td>Alimentation</td><td>10V à 30V DC</td></tr>
+                            <tr><td>Protection</td><td>IP65 (boîtier)</td></tr>
+                            <tr><td>Applications</td><td>HVAC, salles propres, industrie pharmaceutique</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>2.3 — Capteurs de pression</h3>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-gauge-high text-primary me-2"></i>
+                            Transmetteur de pression différentielle
+                            <span class="manufacturer">Endress+Hauser Deltabar</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Transmetteur de pression différentielle</td></tr>
+                            <tr><td>Plage</td><td>0 à 40 bar (selon modèle)</td></tr>
+                            <tr><td>Précision</td><td>± 0.075 % de l'échelle</td></tr>
+                            <tr><td>Signal de sortie</td><td>4-20 mA + HART</td></tr>
+                            <tr><td>Alimentation</td><td>11.5V à 45V DC</td></tr>
+                            <tr><td>Protection</td><td>IP66/IP67</td></tr>
+                            <tr><td>Applications</td><td>Mesure de débit, niveau, pression de process</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>2.4 — Tableau comparatif des capteurs</h3>
+                    <div class="table-responsive">
+                        <table class="table table-industrial">
+                            <thead>
+                                <tr>
+                                    <th>Capteur</th>
+                                    <th>Type</th>
+                                    <th>Plage</th>
+                                    <th>Précision</th>
+                                    <th>Sortie</th>
+                                    <th>Protocole</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>PT100/PT1000</strong></td>
+                                    <td><span class="badge-sensor">RTD</span></td>
+                                    <td>-200 à +600°C</td>
+                                    <td>± 0.1 à 0.15°C</td>
+                                    <td>Ω</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Thermocouple K</strong></td>
+                                    <td><span class="badge-sensor">TC</span></td>
+                                    <td>-200 à +1372°C</td>
+                                    <td>± 1.5°C</td>
+                                    <td>mV</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Transmetteur TH</strong></td>
+                                    <td><span class="badge-sensor">RTD/TC</span></td>
+                                    <td>-200 à +1372°C</td>
+                                    <td>± 0.1°C</td>
+                                    <td>4-20 mA</td>
+                                    <td><span class="badge-protocol">HART</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Hygromètre HMT120</strong></td>
+                                    <td><span class="badge-sensor">Capacitif</span></td>
+                                    <td>0-100 % HR</td>
+                                    <td>± 1.5 % HR</td>
+                                    <td>4-20 mA</td>
+                                    <td><span class="badge-protocol">Modbus</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Deltabar</strong></td>
+                                    <td><span class="badge-sensor">Pression diff.</span></td>
+                                    <td>0-40 bar</td>
+                                    <td>± 0.075 %</td>
+                                    <td>4-20 mA</td>
+                                    <td><span class="badge-protocol">HART</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 3. Actionneurs -->
+                <section class="section" id="actuators">
+                    <h2><i class="fas fa-cogs"></i>3. Actionneurs industriels</h2>
+                    <p>
+                        Les actionneurs industriels sont dimensionnés pour résister aux conditions
+                        sévères et répondre aux exigences de précision et de fiabilité.
+                    </p>
+
+                    <h3>3.1 — Systèmes de chauffage</h3>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-fire text-danger me-2"></i>
+                            Résistance chauffante blindée
+                            <span class="manufacturer">Watlow</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Résistance tubulaire blindée</td></tr>
+                            <tr><td>Puissance</td><td>1 kW à 100 kW (selon application)</td></tr>
+                            <tr><td>Tension</td><td>230V / 400V AC triphasé</td></tr>
+                            <tr><td>Température max</td><td>+750°C (selon gaine)</td></tr>
+                            <tr><td>Diamètre</td><td>8 à 20 mm</td></tr>
+                            <tr><td>Protection</td><td>IP65 à IP68</td></tr>
+                            <tr><td>Commande</td><td>Contacteur ou relais statique (SSR)</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-fire text-danger me-2"></i>
+                            Échangeur de chaleur à plaques
+                            <span class="manufacturer">Alfa Laval</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Échangeur à plaques brasées</td></tr>
+                            <tr><td>Puissance</td><td>10 kW à 5 MW</td></tr>
+                            <tr><td>Température</td><td>-40°C à +200°C</td></tr>
+                            <tr><td>Pression max</td><td>25 bar</td></tr>
+                            <tr><td>Fluides</td><td>Eau, glycol, huile thermique</td></tr>
+                            <tr><td>Applications</td><td>Chauffage centralisé, process industriels</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-fire text-danger me-2"></i>
+                            Relais statique (SSR) de puissance
+                            <span class="manufacturer">Schneider Electric / Carlo Gavazzi</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Relais statique monophasé / triphasé</td></tr>
+                            <tr><td>Courant</td><td>10 A à 125 A</td></tr>
+                            <tr><td>Tension de commande</td><td>3-32V DC ou 24-240V AC</td></tr>
+                            <tr><td>Tension de sortie</td><td>24-660V AC</td></tr>
+                            <tr><td>Mode de commande</td><td>Marche/arrêt ou angle de phase</td></tr>
+                            <tr><td>Refroidissement</td><td>Passif ou ventilé</td></tr>
+                            <tr><td>Protection</td><td>IP20 à IP54</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>3.2 — Systèmes de refroidissement</h3>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-snowflake text-info me-2"></i>
+                            Groupe froid industriel
+                            <span class="manufacturer">Carrier / Trane</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Groupe froid à compression</td></tr>
+                            <tr><td>Puissance frigorifique</td><td>5 kW à 500 kW</td></tr>
+                            <tr><td>Fluide frigorigène</td><td>R410A, R134a, R32</td></tr>
+                            <tr><td>Température</td><td>-20°C à +20°C</td></tr>
+                            <tr><td>Alimentation</td><td>400V AC triphasé</td></tr>
+                            <tr><td>Commande</td><td>0-10V, Modbus, contact sec</td></tr>
+                            <tr><td>Protection</td><td>IP54 à IP65</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-snowflake text-info me-2"></i>
+                            Refroidisseur à eau (Water Chiller)
+                            <span class="manufacturer">Daikin</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Refroidisseur d'eau glacée</td></tr>
+                            <tr><td>Puissance</td><td>10 kW à 1000 kW</td></tr>
+                            <tr><td>Température d'eau</td><td>5°C à 15°C</td></tr>
+                            <tr><td>Débit</td><td>1 à 100 m³/h</td></tr>
+                            <tr><td>Alimentation</td><td>400V AC triphasé</td></tr>
+                            <tr><td>Commande</td><td>Modbus TCP, BACnet</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>3.3 — Vannes de régulation</h3>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-shield-halved text-primary me-2"></i>
+                            Vanne de régulation à soupape
+                            <span class="manufacturer">Samson / Siemens</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Vanne à soupape à commande pneumatique ou électrique</td></tr>
+                            <tr><td>Diamètre</td><td>DN15 à DN300</td></tr>
+                            <tr><td>Pression</td><td>PN16 à PN100</td></tr>
+                            <tr><td>Température</td><td>-40°C à +450°C</td></tr>
+                            <tr><td>Signal de commande</td><td>4-20 mA, 0-10V</td></tr>
+                            <tr><td>Raccordement</td><td>Brides, fileté, soudé</td></tr>
+                            <tr><td>Protection</td><td>IP65 à IP67</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-shield-halved text-primary me-2"></i>
+                            Vanne à boisseau sphérique motorisée
+                            <span class="manufacturer">Siemens / Belimo</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Vanne à boisseau sphérique avec actionneur</td></tr>
+                            <tr><td>Diamètre</td><td>DN10 à DN100</td></tr>
+                            <tr><td>Pression</td><td>PN16 à PN40</td></tr>
+                            <tr><td>Température</td><td>-20°C à +180°C</td></tr>
+                            <tr><td>Signal de commande</td><td>Tout-ou-rien ou 0-10V</td></tr>
+                            <tr><td>Couple</td><td>10 Nm à 100 Nm</td></tr>
+                            <tr><td>Protection</td><td>IP67</td></tr>
+                        </table>
+                    </div>
+
+                    <h3>3.4 — Volets et registres</h3>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-wind text-success me-2"></i>
+                            Volet motorisé de gaine
+                            <span class="manufacturer">Belimo</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Volet circulaire ou rectangulaire</td></tr>
+                            <tr><td>Diamètre</td><td>DN100 à DN1000</td></tr>
+                            <tr><td>Couple</td><td>5 Nm à 40 Nm</td></tr>
+                            <tr><td>Signal de commande</td><td>0-10V, Modbus, BACnet</td></tr>
+                            <tr><td>Alimentation</td><td>24V AC/DC</td></tr>
+                            <tr><td>Protection</td><td>IP54 à IP66</td></tr>
+                            <tr><td>Applications</td><td>Régulation de débit d'air, ventilation</td></tr>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 4. Automate programmable -->
+                <section class="section" id="plc">
+                    <h2><i class="fas fa-microchip"></i>4. Automate programmable industriel (API/PLC)</h2>
+                    <p>
+                        L'automate est le <strong>cerveau du système</strong>. Il lit les capteurs,
+                        exécute l'algorithme de régulation et commande les actionneurs.
+                    </p>
+
+                    <div class="component-card">
+                        <h5>
+                            <i class="fas fa-microchip text-primary me-2"></i>
+                            Automate programmable modulaire
+                            <span class="manufacturer">Siemens SIMATIC S7-1500</span>
+                        </h5>
+                        <table class="spec-table">
+                            <tr><td>Type</td><td>Automate modulaire haut de gamme</td></tr>
+                            <tr><td>CPU</td><td>Jusqu'à 6 cœurs, 8 Mo de mémoire</td></tr>
+                            <tr><td>Temps de cycle</td><td>1 ms minimum</td></tr>
+                            <tr><td>Entrées/Sorties</td><td>Jusqu'à 1024 E/S</td></tr>
+                            <tr><td>Communication</td><td>Profinet, Profibus, Modbus TCP, Ethernet/IP</td></tr>
+                            <tr><td>Alimentation</td><td>24V DC</td></tr>
+                            <tr><td>Protection</td><td>IP20 (armoire)</td></tr>
+                            <tr><td>Programmation</td><td>TIA Portal (LADDER, FBD, SCL)</td></tr>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 4bis. Multi-automates -->
+                <section class="section" id="multiplc">
+                    <h2><i class="fas fa-plug-circle-check"></i>4bis. Compatibilité multi-automates</h2>
+
+                    <p>
+                        Ce système est <strong>indépendant du fabricant d'automate</strong>. Il communique via
+                        des <strong>protocoles standards ouverts</strong> (Modbus TCP/RTU, OPC UA, Ethernet/IP)
+                        et peut piloter n'importe quel API/PLC du marché.
+                    </p>
+
+                    <h3>4bis.1 — Automates supportés nativement</h3>
+                    <div class="table-responsive">
+                        <table class="table table-industrial">
+                            <thead>
+                                <tr>
+                                    <th>Fabricant</th>
+                                    <th>Gamme</th>
+                                    <th>Protocole</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Siemens</strong></td><td>S7-1200, S7-1500, S7-300, S7-400</td><td>Modbus TCP, Profinet, S7 Comm</td><td><span class="badge bg-success">Natif</span></td></tr>
+                                <tr><td><strong>Schneider Electric</strong></td><td>M221, M241, M251, M580</td><td>Modbus TCP/RTU, Ethernet/IP</td><td><span class="badge bg-success">Natif</span></td></tr>
+                                <tr><td><strong>Rockwell Automation</strong></td><td>CompactLogix, ControlLogix</td><td>Ethernet/IP, Modbus TCP</td><td><span class="badge bg-success">Natif</span></td></tr>
+                                <tr><td><strong>ABB</strong></td><td>AC500, AC800M</td><td>Modbus TCP, Profinet</td><td><span class="badge bg-success">Natif</span></td></tr>
+                                <tr><td><strong>Mitsubishi</strong></td><td>FX5U, Q Series, iQ-R</td><td>MELSEC, Modbus TCP</td><td><span class="badge bg-success">Natif</span></td></tr>
+                                <tr><td><strong>Omron</strong></td><td>NJI, NX1P, CJ2</td><td>FINS, EtherNet/IP, Modbus TCP</td><td><span class="badge bg-success">Natif</span></td></tr>
+                                <tr><td><strong>Delta</strong></td><td>DVP, AS Series</td><td>Modbus RTU/TCP</td><td><span class="badge bg-success">Natif</span></td></tr>
+                                <tr><td><strong>Wago</strong></td><td>PFC100, PFC200</td><td>Modbus TCP, EtherCAT</td><td><span class="badge bg-success">Natif</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>4bis.2 — Modes de communication</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-success text-white">
+                                    <i class="fas fa-network-wired me-2"></i>Modbus TCP (recommandé)
+                                </div>
+                                <div class="card-body">
+                                    <p class="small mb-2"><strong>Port :</strong> 502</p>
+                                    <p class="small mb-2"><strong>Câblage :</strong> Ethernet RJ45</p>
+                                    <p class="small mb-2"><strong>Vitesse :</strong> 10/100 Mbps</p>
+                                    <p class="small mb-0"><strong>Compatibilité :</strong> 95% des automates modernes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-info text-white">
+                                    <i class="fas fa-plug me-2"></i>Modbus RTU (série)
+                                </div>
+                                <div class="card-body">
+                                    <p class="small mb-2"><strong>Port :</strong> RS-485 / RS-232</p>
+                                    <p class="small mb-2"><strong>Câblage :</strong> Paire torsadée blindée</p>
+                                    <p class="small mb-2"><strong>Vitesse :</strong> 9.6 à 115.2 kbps</p>
+                                    <p class="small mb-0"><strong>Distance :</strong> jusqu'à 1200 m</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. Schémas -->
+                <section class="section" id="schema">
+                    <h2><i class="fas fa-project-diagram"></i>5. Schémas d'installation</h2>
+
+                    <div class="danger-box">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Avertissement</h5>
+                        <p class="mb-0">
+                            Les schémas ci-dessous sont donnés à titre indicatif. Toute installation
+                            électrique doit être réalisée par un <strong>professionnel qualifié</strong>.
+                        </p>
+                    </div>
+
+                    <h3>5.1 — Architecture globale (ISA-95)</h3>
+                    <div class="schema-container"><pre>
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              ARCHITECTURE GÉNÉRALE — 3 NIVEAUX HIÉRARCHIQUES                 ║
+║              (ISA-95 : Supervision / Contrôle / Terrain)                     ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  NIVEAU 3 — SUPERVISION (SCADA / MES / ERP)                                  ║
+║    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐                 ║
+║    │  Serveur     │    │   Poste      │    │   Écran      │                 ║
+║    │  SCADA       │◄──►│  Opérateur   │◄──►│   Tactile    │                 ║
+║    └───────┬──────┘    └───────┬──────┘    └───────┬──────┘                 ║
+║            └───────────────────┼───────────────────┘                        ║
+║                    ┌───────────┴───────────┐                                ║
+║                    │   Switch Manageable   │                                ║
+║                    └───────────┬───────────┘                                ║
+║                                │                                            ║
+║                    ┌───────────┴───────────┐                                ║
+║                    │   Firewall Industriel │                                ║
+║                    └───────────┬───────────┘                                ║
+║                                │                                            ║
+║  NIVEAU 2 — CONTRÔLE (Automates / IHM locales)                               ║
+║                    ┌───────────┴───────────┐                                ║
+║                    │  Switch Industriel    │                                ║
+║                    └───┬─────┬─────┬───┬───┘                                ║
+║            ┌───────────┘     │     │   └──────────┐                         ║
+║       ┌────┴─────┐      ┌────┴─────┐      ┌──────┴──────┐                   ║
+║       │  API/PLC │      │  API/PLC │      │  Variateur  │                   ║
+║       └────┬─────┘      └────┬─────┘      └──────┬──────┘                   ║
+║            └─────────────────┼───────────────────┘                          ║
+║            ┌─────────────────┼─────────────────┐                            ║
+║       ┌────┴─────┐      ┌────┴─────┐      ┌────┴─────┐                      ║
+║       │ Module   │      │ Module   │      │ Module   │                      ║
+║       │ E/S 1    │      │ E/S 2    │      │ E/S 3    │                      ║
+║       └────┬─────┘      └────┬─────┘      └────┬─────┘                      ║
+║            │                 │                 │                            ║
+║  NIVEAU 1 — TERRAIN (Capteurs / Actionneurs)                                 ║
+║       ┌────┴────┐      ┌─────┴────┐      ┌─────┴────┐                       ║
+║       │ PT100   │      │ Hygro    │      │ SSR      │                       ║
+║       │ Pression│      │ Débit    │      │ Vanne    │                       ║
+║       └─────────┘      └──────────┘      └──────────┘                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+</pre></div>
+
+                    <h3>5.2 — Schéma d'alimentation électrique</h3>
+                    <div class="schema-container"><pre>
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              ALIMENTATION ÉLECTRIQUE — 400V AC / 50 Hz                       ║
+║              (Distribution TT — Protection différentielle 30 mA)             ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                        ┌─────────────────────────┐                           ║
+║                        │   RÉSEAU PUBLIC         │                           ║
+║                        │   400V AC / 50 Hz       │                           ║
+║                        │   3 phases + N + PE     │                           ║
+║                        └────────────┬────────────┘                           ║
+║                        ┌────────────▼────────────┐                           ║
+║                        │   COMPTEUR ÉLECTRIQUE   │                           ║
+║                        └────────────┬────────────┘                           ║
+║                        ┌────────────▼────────────┐                           ║
+║                        │   DISJONCTEUR GÉNÉRAL   │                           ║
+║                        │   63 A — 4P — Type D    │                           ║
+║                        └────────────┬────────────┘                           ║
+║                        ┌────────────▼────────────┐                           ║
+║                        │   PARAFOUDRE            │                           ║
+║                        │   Type 2 — 40 kA        │                           ║
+║                        └────────────┬────────────┘                           ║
+║                        ┌────────────▼────────────┐                           ║
+║                        │   DIFFÉRENTIEL 30 mA    │                           ║
+║                        └────────────┬────────────┘                           ║
+║                        ┌────────────▼────────────┐                           ║
+║                        │  DISJONCTEURS DIV.      │                           ║
+║                        └──┬───┬───┬───┬───┬───┬──┘                           ║
+║              ┌────────────┘   │   │   │   │   └──────────┐                   ║
+║           ┌──▼─┐   ┌──▼─┐ ┌▼──┐          ┌───▼┐ ┌─▼──┐ ┌─▼───┐              ║
+║           │16A │   │20A │ │32A│          │16A │ │10A │ │ 6A  │              ║
+║           │Chf.│   │Frd.│ │Mot│          │Pom.│ │Écl.│ │ API │              ║
+║           └──┬─┘   └──┬─┘ └─┬─┘          └──┬─┘ └────┘ └──┬──┘              ║
+║              ▼        ▼     ▼               ▼            ▼                  ║
+║           ┌──────────────────────┐    ┌───────────────┐ ┌──────────────┐    ║
+║           │  RELAIS STATIQUES    │    │  Transfo      │ │ Alim 24V DC  │    ║
+║           │  SSR 1, 2, 3, 4      │    │  400V/24V     │ │ pour automate│    ║
+║           └──────────────────────┘    └───────────────┘ └──────────────┘    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+  CODES COULEURS (NF C 15-100)
+  ────────────────────────────
+  Noir        → Phase 1 (L1)
+  Marron      → Phase 2 (L2)
+  Gris        → Phase 3 (L3)
+  Bleu clair  → Neutre (N)
+  Vert/Jaune  → Terre (PE)
+</pre></div>
+
+                    <h3>5.3 — Schéma des entrées/sorties (E/S)</h3>
+                    <div class="schema-container"><pre>
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              RACCORDEMENT DES ENTRÉES / SORTIES                              ║
+║              (Automate Siemens S7-1500 — Exemple)                            ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║   ┌───────────────────────────────────────────────────────────────────────┐ ║
+║   │                    AUTOMATE S7-1500 (Rack 0)                          │ ║
+║   │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐   │ ║
+║   │  │  Module E/S      │  │  Module E/S      │  │  Module E/S      │   │ ║
+║   │  │  Analogiques AI  │  │  Analogiques AO  │  │  TOR (DI/DO)     │   │ ║
+║   │  │  AI 0 ── PT100   │  │  AO 0 ── Chauf.  │  │  DI 0 ── Arrêt   │   │ ║
+║   │  │  AI 1 ── PT100   │  │  AO 1 ── Froid   │  │  DI 1 ── Défaut  │   │ ║
+║   │  │  AI 2 ── Hygro   │  │  AO 2 ── Vanne   │  │  DI 2 ── Marche  │   │ ║
+║   │  │  AI 3 ── Pression│  │  AO 3 ── Volet   │  │  DI 3 ── Reset   │   │ ║
+║   │  │  AI 4 ── Débit   │  │  AO 4 ── Pompe   │  │  DO 0 ── Chauf.  │   │ ║
+║   │  │  AI 5 ── Niveau  │  │  AO 5 ── Ventilo │  │  DO 1 ── Froid   │   │ ║
+║   │  │                  │  │                  │  │  DO 2 ── Fan     │   │ ║
+║   │  │  4-20 mA         │  │  4-20 mA         │  │  DO 3 ── Alarme  │   │ ║
+║   │  └────────┬─────────┘  └────────┬─────────┘  └────────┬─────────┘   │ ║
+║   └───────────┼─────────────────────┼─────────────────────┼─────────────┘ ║
+║      ┌────────┴────────┐   ┌────────┴────────┐   ┌────────┴────────┐     ║
+║      │ CAPTEURS        │   │ ACTIONNEURS     │   │ TOR             │     ║
+║      │ ANALOGIQUES     │   │ ANALOGIQUES     │   │ (24V DC)        │     ║
+║      │                 │   │                 │   │                 │     ║
+║      │ ┌─────────────┐ │   │ ┌─────────────┐ │   │ ┌─────────────┐ │     ║
+║      │ │PT100 ambiante│ │   │ │SSR Chauffage│ │   │ │Bouton ARRÊT │ │     ║
+║      │ │PT100 fluide  │ │   │ │SSR Froid    │ │   │ │Contact DÉFAUT│ │     ║
+║      │ │Hygromètre    │ │   │ │Vanne motor. │ │   │ │Contact MARCHE│ │     ║
+║      │ │Pression diff.│ │   │ │Volet motor. │ │   │ │Bouton RESET  │ │     ║
+║      │ └─────────────┘ │   │ └─────────────┘ │   │ └─────────────┘ │     ║
+║      └─────────────────┘   └─────────────────┘   └─────────────────┘     ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+  DÉTAIL BOUCLE 4-20 mA (2 fils)
+  ──────────────────────────────
+  ┌──────────────┐         ┌──────────────┐         ┌──────────────┐
+  │ Transmetteur │         │ Alimentation │         │  Entrée API  │
+  │ 4-20 mA      │         │   24V DC     │         │  Analogique  │
+  │  + ──────────┼─────────┤ +            │         │              │
+  │  - ──────────┼────┐    │              │         │              │
+  └──────────────┘    │    └──────────────┘         │              │
+                      └─────────────────────────────┤  AI+         │
+                                                    │  AI- ──── GND│
+                                                    └──────────────┘
+</pre></div>
+
+                    <h3>5.4 — Schéma du réseau industriel</h3>
+                    <div class="schema-container"><pre>
+╔══════════════════════════════════════════════════════════════════════════════╗
+║              ARCHITECTURE RÉSEAU INDUSTRIEL — IEC 62443                      ║
+║              (Zones de sécurité / Defense in Depth)                          ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║  ZONE 3 — SUPERVISION (DMZ Industrielle) — Niveau sécurité : ÉLEVÉ           ║
+║   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐                     ║
+║   │  Serveur    │    │  Serveur    │    │   Poste     │                     ║
+║   │  SCADA      │    │  Historique │    │  Ingénieur  │                     ║
+║   └─────────────┘    └─────────────┘    └─────────────┘                     ║
+║                                │                                            ║
+║                    ┌───────────┴───────────┐                                ║
+║                    │  PARE-FEU INDUSTRIEL  │                                ║
+║                    └───────────┬───────────┘                                ║
+║                                │                                            ║
+║  ZONE 2 — CONTRÔLE — Niveau sécurité : MOYEN                                ║
+║    ┌────┴──────┐     ┌────┴──────┐     ┌─────┴─────┐                       ║
+║    │ API/PLC   │     │ API/PLC   │     │ Variateur │                       ║
+║    │ Principal │     │ Redondant │     │ Vitesse   │                       ║
+║    └─────┬─────┘     └─────┬─────┘     └─────┬─────┘                       ║
+║          └─────────────────┼─────────────────┘                             ║
+║          ┌─────────────────┼─────────────────┐                             ║
+║     ┌────┴──────┐     ┌────┴──────┐     ┌────┴──────┐                      ║
+║     │ Module E/S│     │ Module E/S│     │ Module E/S│                      ║
+║     │ Distant 1 │     │ Distant 2 │     │ Distant 3 │                      ║
+║     └─────┬─────┘     └─────┬─────┘     └─────┬─────┘                      ║
+║           │                 │                 │                            ║
+║  ZONE 1 — TERRAIN — Niveau sécurité : BAS                                   ║
+║  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐                    ║
+║  │ PT100    │  │ Hygro    │  │Pression  │  │ Débit    │                    ║
+║  └──────────┘  └──────────┘  └──────────┘  └──────────┘                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+</pre></div>
+                </section>
+
+                <!-- 6. Câblage -->
+                <section class="section" id="cabling">
+                    <h2><i class="fas fa-plug"></i>6. Câblage et raccordement</h2>
+
+                    <h3>6.1 — Types de câbles recommandés</h3>
+                    <div class="table-responsive">
+                        <table class="table table-industrial">
+                            <thead>
+                                <tr>
+                                    <th>Application</th>
+                                    <th>Type de câble</th>
+                                    <th>Section</th>
+                                    <th>Blindage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Capteurs analogiques 4-20 mA</td><td>Paire torsadée blindée</td><td>0.5 à 1 mm²</td><td>Oui (tresse cuivre)</td></tr>
+                                <tr><td>Capteurs PT100 (3/4 fils)</td><td>Multiconducteur blindé</td><td>0.5 à 1 mm²</td><td>Oui</td></tr>
+                                <tr><td>Signaux TOR (24V DC)</td><td>Multiconducteur</td><td>0.5 à 1.5 mm²</td><td>Non obligatoire</td></tr>
+                                <tr><td>Alimentation 24V DC</td><td>Multiconducteur</td><td>1.5 à 2.5 mm²</td><td>Non</td></tr>
+                                <tr><td>Alimentation puissance AC</td><td>Multiconducteur rigide</td><td>2.5 à 16 mm²</td><td>Non</td></tr>
+                                <tr><td>Réseau industriel (Profinet)</td><td>Câble Ethernet industriel</td><td>Cat 5e / Cat 6</td><td>Oui (paires blindées)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>6.2 — Codes couleurs des câbles (NF C 15-100)</h3>
+                    <div class="table-responsive">
+                        <table class="table table-industrial">
+                            <thead>
+                                <tr>
+                                    <th>Couleur</th>
+                                    <th>Signification</th>
+                                    <th>Utilisation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><span style="background:#000;color:white;padding:2px 8px;">Noir</span></td><td>Phase 1 (L1)</td><td>Alimentation AC</td></tr>
+                                <tr><td><span style="background:#8B4513;color:white;padding:2px 8px;">Marron</span></td><td>Phase 2 (L2)</td><td>Alimentation AC</td></tr>
+                                <tr><td><span style="background:#808080;color:white;padding:2px 8px;">Gris</span></td><td>Phase 3 (L3)</td><td>Alimentation AC</td></tr>
+                                <tr><td><span style="background:#0000FF;color:white;padding:2px 8px;">Bleu clair</span></td><td>Neutre (N)</td><td>Alimentation AC</td></tr>
+                                <tr><td><span style="background:#00FF00;color:black;padding:2px 8px;">Vert/Jaune</span></td><td>Terre de protection (PE)</td><td>Mise à la terre</td></tr>
+                                <tr><td><span style="background:#FF0000;color:white;padding:2px 8px;">Rouge</span></td><td>Positif 24V DC (+)</td><td>Alimentation DC</td></tr>
+                                <tr><td><span style="background:#000000;color:white;padding:2px 8px;">Noir</span></td><td>Négatif 24V DC (-)</td><td>Alimentation DC</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>6.3 — Raccordement des capteurs analogiques</h3>
+                    <div class="info-box">
+                        <h5><i class="fas fa-info-circle me-2"></i>Boucle de courant 4-20 mA</h5>
+                        <p class="mb-0">
+                            Le signal <strong>4-20 mA</strong> est le standard industriel pour la transmission
+                            analogique. Il est immunisé contre les parasites, permet la détection de coupure
+                            (0 mA) et fonctionne sur de longues distances (jusqu'à plusieurs centaines de mètres).
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 7. Protocoles -->
+                <section class="section" id="protocols">
+                    <h2><i class="fas fa-network-wired"></i>7. Protocoles de communication industriels</h2>
+
+                    <div class="table-responsive">
+                        <table class="table table-industrial">
+                            <thead>
+                                <tr>
+                                    <th>Protocole</th>
+                                    <th>Type</th>
+                                    <th>Débit</th>
+                                    <th>Distance</th>
+                                    <th>Utilisation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>4-20 mA</strong></td><td>Analogique</td><td>—</td><td>&lt; 1000 m</td><td>Capteurs, transmetteurs</td></tr>
+                                <tr><td><strong>HART</strong></td><td>Analogique + numérique</td><td>1.2 kbps</td><td>&lt; 3000 m</td><td>Configuration transmetteurs</td></tr>
+                                <tr><td><strong>Modbus RTU</strong></td><td>Série (RS-485)</td><td>9.6 à 115 kbps</td><td>&lt; 1200 m</td><td>Automates, capteurs, variateurs</td></tr>
+                                <tr><td><strong>Modbus TCP</strong></td><td>Ethernet</td><td>10/100 Mbps</td><td>&lt; 100 m / segment</td><td>Supervision, SCADA</td></tr>
+                                <tr><td><strong>Profibus DP</strong></td><td>Série (RS-485)</td><td>9.6 kbps à 12 Mbps</td><td>&lt; 1200 m</td><td>Automates, E/S distantes</td></tr>
+                                <tr><td><strong>Profinet</strong></td><td>Ethernet industriel</td><td>100 Mbps à 1 Gbps</td><td>&lt; 100 m / segment</td><td>Automates, E/S, variateurs</td></tr>
+                                <tr><td><strong>Ethernet/IP</strong></td><td>Ethernet industriel</td><td>100 Mbps à 1 Gbps</td><td>&lt; 100 m</td><td>Automates, robots</td></tr>
+                                <tr><td><strong>OPC UA</strong></td><td>Ethernet</td><td>Variable</td><td>Réseau</td><td>Interopérabilité, SCADA, MES</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>7.1 — Topologies réseau</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white"><i class="fas fa-circle-nodes me-2"></i>Bus</div>
+                                <div class="card-body">
+                                    <p class="small">Tous les appareils partagent le même câble.</p>
+                                    <p class="small mb-0"><strong>Avantage :</strong> Simple, économique</p>
+                                    <p class="small mb-0"><strong>Inconvénient :</strong> Une coupure = tout tombe</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white"><i class="fas fa-star me-2"></i>Étoile</div>
+                                <div class="card-body">
+                                    <p class="small">Chaque appareil relié à un switch central.</p>
+                                    <p class="small mb-0"><strong>Avantage :</strong> Robuste, isolé</p>
+                                    <p class="small mb-0"><strong>Inconvénient :</strong> Plus de câblage</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white"><i class="fas fa-ring me-2"></i>Anneau</div>
+                                <div class="card-body">
+                                    <p class="small">Les appareils forment une boucle fermée.</p>
+                                    <p class="small mb-0"><strong>Avantage :</strong> Redondance</p>
+                                    <p class="small mb-0"><strong>Inconvénient :</strong> Complexe</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. Sécurité -->
+                <section class="section" id="safety">
+                    <h2><i class="fas fa-shield-alt"></i>8. Sécurité et normes</h2>
+
+                    <div class="danger-box">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Consignes de sécurité obligatoires</h5>
+                        <ul class="mb-0">
+                            <li>Toute intervention sur le circuit 400V AC doit être effectuée <strong>hors tension</strong> par un <strong>professionnel habilité</strong></li>
+                            <li>Respecter les <strong>procédures de consignation</strong> (cadenas, étiquettes)</li>
+                            <li>Porter les <strong>EPI adaptés</strong> (gants isolants, chaussures de sécurité, lunettes)</li>
+                            <li>Vérifier l'<strong>absence de tension</strong> avant toute intervention (VAT)</li>
+                            <li>Utiliser des outils <strong>isolés 1000V</strong></li>
+                        </ul>
+                    </div>
+
+                    <h3>8.1 — Normes applicables</h3>
+                    <table class="table table-industrial">
+                        <thead>
+                            <tr><th>Norme</th><th>Domaine</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>IEC 61508</strong></td><td>Sécurité fonctionnelle</td></tr>
+                            <tr><td><strong>IEC 61511</strong></td><td>Sécurité fonctionnelle (process industriels)</td></tr>
+                            <tr><td><strong>IEC 62061</strong></td><td>Sécurité des machines</td></tr>
+                            <tr><td><strong>ISO 13849</strong></td><td>Sécurité des machines</td></tr>
+                            <tr><td><strong>IEC 61131</strong></td><td>Programmation des automates</td></tr>
+                            <tr><td><strong>IEC 60364</strong></td><td>Installations électriques basse tension</td></tr>
+                            <tr><td><strong>NF C 15-100</strong></td><td>Installations électriques (France)</td></tr>
+                            <tr><td><strong>IEC 60529</strong></td><td>Indices de protection IP</td></tr>
+                            <tr><td><strong>ATEX 2014/34/UE</strong></td><td>Atmosphères explosives</td></tr>
+                            <tr><td><strong>IEC 62443</strong></td><td>Cybersécurité des systèmes industriels</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>8.2 — Indices de protection IP</h3>
+                    <table class="table table-industrial">
+                        <thead>
+                            <tr><th>Indice</th><th>Protection solides</th><th>Protection liquides</th><th>Utilisation</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>IP20</strong></td><td>Doigts</td><td>Aucune</td><td>Armoire électrique</td></tr>
+                            <tr><td><strong>IP54</strong></td><td>Poussières</td><td>Éclaboussures</td><td>Local technique</td></tr>
+                            <tr><td><strong>IP65</strong></td><td>Poussières</td><td>Jets d'eau</td><td>Atelier</td></tr>
+                            <tr><td><strong>IP67</strong></td><td>Poussières</td><td>Immersion 1m</td><td>Extérieur</td></tr>
+                            <tr><td><strong>IP68</strong></td><td>Poussières</td><td>Immersion prolongée</td><td>Environnement sévère</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 9. Téléchargement -->
+                <section class="section" id="download">
+                    <div class="download-section">
+                        <h2><i class="fas fa-rocket me-2"></i> Télécharger la documentation</h2>
+                        <p>📦 Dossier complet — Schémas, code source et documentation technique</p>
+                        <div class="download-buttons-row">
+                            <button type="button" class="btn-download-drive" onclick="openZipPasswordModal()">
+                                <i class="fas fa-lock"></i> Télécharger (Drive)
+                            </button>
+                            <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20des%20informations%20sur%20le%20Syst%C3%A8me%20de%20R%C3%A9gulation%20de%20Temp%C3%A9rature.%0A%0ANom%20%3A%20%0AUsage%20%3A%20%0AConfig%20PC%20%3A%20%0A%0AMerci%20!" 
+                               target="_blank" 
+                               rel="noopener"
+                               class="btn-whatsapp-temp">
+                                <i class="fab fa-whatsapp"></i> Demander via WhatsApp
+                            </a>
+                        </div>
+                        <div class="download-contact">
+                            <p class="mb-2"><i class="fas fa-envelope me-2"></i> <a href="mailto:iot.sahnoun@gmail.com">iot.sahnoun@gmail.com</a></p>
+                            <p class="mb-0"><i class="fas fa-phone me-2"></i> <a href="tel:+21629328870">+216 29 328 870</a></p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MODAL MOT DE PASSE POUR TÉLÉCHARGEMENT -->
+<!-- ============================================ -->
+<div class="zip-password-modal" id="zipPasswordModal">
+    <div class="zip-password-content">
+        <div class="lock-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <h3>Accès protégé</h3>
+        <p class="subtitle">
+            Veuillez entrer le mot de passe pour télécharger<br>
+            <strong>Régulation Température v1.0</strong>
+        </p>
+
+        <input 
+            type="password" 
+            class="zip-password-input" 
+            id="zipPasswordInput" 
+            placeholder="••••••••••••"
+            autocomplete="off"
+            autofocus
+        >
+
+        <div class="zip-password-error" id="zipPasswordError">
+            <i class="fas fa-exclamation-triangle"></i>
+            Mot de passe incorrect
+        </div>
+
+        <div class="zip-password-buttons">
+            <button type="button" class="zip-password-btn zip-password-submit" onclick="validateZipPassword()">
+                <i class="fas fa-check"></i> Valider
+            </button>
+            <button type="button" class="zip-password-btn zip-password-cancel" onclick="closeZipPasswordModal()">
+                <i class="fas fa-times"></i> Annuler
+            </button>
+        </div>
+
+        <div class="zip-password-hint">
+            <i class="fas fa-question-circle"></i>
+            Pas encore de mot de passe ?<br>
+            <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20le%20mot%20de%20passe%20pour%20t%C3%A9l%C3%A9charger%20la%20documentation%20R%C3%A9gulation%20Temp%C3%A9rature.%0A%0ANom%20%3A%20%0AUsage%20%3A%20%0AConfig%20PC%20%3A%20%0A%0AMerci%20!" 
+               target="_blank" rel="noopener">
+                Demandez-le via WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Bouton retour en haut -->
+<a href="#" class="back-to-top" title="Retour en haut">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+<!-- Footer -->
+<footer class="doc-footer">
+    <div class="container text-center">
+        <p class="mb-0">
+            <i class="fas fa-temperature-high me-2"></i>
+            <strong>Documentation Technique — Système de Régulation de Température</strong>
+        </p>
+        <p class="small mb-0 mt-2" style="opacity: 0.8;">
+            Documentation industrielle — Compatible multi-constructeurs d'automates
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // ============================================================
+    // CONFIGURATION
+    // ============================================================
+    // 🔑 Mot de passe pour télécharger la documentation
+    const ZIP_PASSWORD = "Elec-Connect18011978t";  // ← MODIFIEZ ICI SI BESOIN
+
+    // 🔗 Lien de téléchargement direct (Google Drive)
+    const ZIP_DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=1sPIfmO2XtOV0M3c9RsB45qQ9hb_FdhrS";
+
+    // ============================================================
+    // OUVERTURE DU MODAL
+    // ============================================================
+    function openZipPasswordModal() {
+        const modal = document.getElementById('zipPasswordModal');
+        const input = document.getElementById('zipPasswordInput');
+        const error = document.getElementById('zipPasswordError');
+
+        modal.classList.add('active');
+        input.value = '';
+        input.focus();
+        error.classList.remove('show');
+    }
+
+    // ============================================================
+    // FERMETURE DU MODAL
+    // ============================================================
+    function closeZipPasswordModal() {
+        document.getElementById('zipPasswordModal').classList.remove('active');
+    }
+
+    // ============================================================
+    // VALIDATION DU MOT DE PASSE
+    // ============================================================
+    function validateZipPassword() {
+        const input = document.getElementById('zipPasswordInput');
+        const error = document.getElementById('zipPasswordError');
+        const password = input.value.trim();
+
+        if (password === ZIP_PASSWORD) {
+            // ✅ Mot de passe correct → téléchargement direct
+            error.classList.remove('show');
+            closeZipPasswordModal();
+
+            // 🔗 Lien direct : téléchargement immédiat
+            window.location.href = ZIP_DOWNLOAD_URL;
+
+            console.log('✅ Téléchargement Régulation Température déclenché');
+        } else {
+            // ❌ Mot de passe incorrect
+            error.classList.add('show');
+            input.value = '';
+            input.focus();
+
+            // Animation shake
+            input.style.animation = 'none';
+            setTimeout(() => {
+                input.style.animation = 'shakeError 0.5s ease-in-out';
+            }, 10);
+        }
+    }
+
+    // ============================================================
+    // ÉVÉNEMENTS
+    // ============================================================
+
+    // Touche Entrée pour valider
+    document.getElementById('zipPasswordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            validateZipPassword();
+        }
+    });
+
+    // Clic sur l'arrière-plan pour fermer
+    document.getElementById('zipPasswordModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeZipPasswordModal();
+        }
+    });
+
+    // Touche ESC pour fermer
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('zipPasswordModal');
+            if (modal.classList.contains('active')) {
+                closeZipPasswordModal();
+            }
+        }
+    });
+
+    // ============================================================
+    // SMOOTH SCROLL (Navigation sommaire)
+    // ============================================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ============================================================
+    // BOUTON RETOUR EN HAUT
+    // ============================================================
+    window.addEventListener('scroll', function() {
+        const backToTop = document.querySelector('.back-to-top');
+        if (window.scrollY > 300) {
+            backToTop.style.opacity = '1';
+            backToTop.style.pointerEvents = 'auto';
+        } else {
+            backToTop.style.opacity = '0';
+            backToTop.style.pointerEvents = 'none';
+        }
+    });
+</script>
+</body>
+</html>

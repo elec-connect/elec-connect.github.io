@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Attendance System - Présentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ═══════════════════════════════════════════
+           RESET & VARIABLES
+           ═══════════════════════════════════════════ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3651c9;
+            --primary-light: #eef1ff;
+            --secondary: #6b7280;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --text: #374151;
+            --text-light: #6b7280;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* ═══════════════════════════════════════════
+           HEADER / HERO
+           ═══════════════════════════════════════════ */
+        .hero {
+            background: linear-gradient(135deg, #4a6cf7 0%, #3651c9 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            font-size: 22px;
+            opacity: 0.95;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .hero .subtitle {
+            font-size: 16px;
+            opacity: 0.85;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-download-hero {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #000;
+            box-shadow: 0 6px 20px rgba(241,196,15,.4);
+        }
+
+        .btn-download-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(241,196,15,.6);
+            color: #000;
+        }
+
+        .btn-whatsapp-hero {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            box-shadow: 0 6px 20px rgba(37,211,102,.4);
+        }
+
+        .btn-whatsapp-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37,211,102,.6);
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════
+           SECTION TITLES
+           ═══════════════════════════════════════════ */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title .accent {
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════════
+           STATS
+           ═══════════════════════════════════════════ */
+        .stats-section {
+            background: var(--light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item { padding: 20px; }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════
+           FEATURES GRID
+           ═══════════════════════════════════════════ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(74, 108, 247, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════════
+           MODULES
+           ═══════════════════════════════════════════ */
+        .module-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            background: var(--light);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .module-item:hover {
+            background: var(--primary-light);
+            transform: translateX(5px);
+        }
+
+        .module-number {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .module-content h3 {
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .module-content p {
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        .module-tags {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 13px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════
+           HIGHLIGHTS
+           ═══════════════════════════════════════════ */
+        .highlight-section {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: white;
+        }
+
+        .highlight-section .section-title h2 { color: white; }
+        .highlight-section .section-title p { color: rgba(255, 255, 255, 0.7); }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .highlight-item {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight-item .icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .highlight-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .highlight-item p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════
+           DEPLOYMENT
+           ═══════════════════════════════════════════ */
+        .deploy-section { background: var(--light); }
+
+        .deploy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .deploy-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .deploy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .deploy-card .os-icon { font-size: 60px; margin-bottom: 15px; }
+
+        .deploy-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .deploy-card .size {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .deploy-card ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .deploy-card ul li {
+            padding: 6px 0;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .deploy-card ul li::before {
+            content: '✓ ';
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* ═══════════════════════════════════════════
+           TECH STACK
+           ═══════════════════════════════════════════ */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tech-item {
+            padding: 25px;
+            background: var(--light);
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .tech-item .tech-icon { font-size: 40px; margin-bottom: 10px; }
+
+        .tech-item .tech-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* ═══════════════════════════════════════════
+           PRICING
+           ═══════════════════════════════════════════ */
+        .pricing-section { background: var(--light); }
+
+        .pricing-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(74, 108, 247, 0.15);
+        }
+
+        .pricing-header {
+            background: linear-gradient(135deg, #4a6cf7 0%, #3651c9 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .pricing-header h3 { font-size: 24px; margin-bottom: 10px; }
+
+        .pricing-header .subtitle { font-size: 15px; opacity: 0.9; }
+
+        .pricing-body { padding: 40px; }
+
+        .pricing-body ul { list-style: none; }
+
+        .pricing-body li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .pricing-body li:last-child { border-bottom: none; }
+
+        .pricing-body li::before {
+            content: '✓ ';
+            color: var(--success);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        /* ═══════════════════════════════════════════
+           SECTION TÉLÉCHARGEMENT
+           ═══════════════════════════════════════════ */
+        .download-section {
+            background: linear-gradient(135deg, #4a6cf7, #3651c9);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            border-radius: 20px;
+            margin: 60px auto;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(74,108,247,.3);
+        }
+
+        .download-section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #f1c40f;
+        }
+
+        .download-section p {
+            font-size: 17px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .download-buttons-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-download-drive {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(241,196,15,.4);
+            transition: all .3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-download-drive:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(241,196,15,.6);
+            color: #000;
+        }
+
+        .btn-whatsapp-sa {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37,211,102,.4);
+            transition: all .3s ease;
+        }
+
+        .btn-whatsapp-sa:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37,211,102,.6);
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════
+           CTA / CONTACT
+           ═══════════════════════════════════════════ */
+        .cta-section {
+            background: linear-gradient(135deg, #4a6cf7 0%, #3651c9 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta-section h2 { font-size: 36px; margin-bottom: 20px; }
+
+        .cta-section p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .contact-item .icon { font-size: 24px; }
+
+        /* ═══════════════════════════════════════════
+           MODAL MOT DE PASSE
+           ═══════════════════════════════════════════ */
+        .zip-password-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,.85);
+            z-index: 10000;
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .zip-password-modal.active {
+            display: flex;
+            animation: fadeInModal .3s ease-out;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .zip-password-content {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            border: 3px solid #4a6cf7;
+            border-radius: 20px;
+            padding: 40px 35px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(74,108,247,.5);
+            animation: slideInModal .35s cubic-bezier(.175,.885,.32,1.275);
+            position: relative;
+        }
+        @keyframes slideInModal {
+            from { opacity: 0; transform: translateY(-30px) scale(.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .zip-password-content .lock-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4a6cf7, #6b8aff);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(74,108,247,.5);
+            animation: lockPulse 2s infinite;
+        }
+        @keyframes lockPulse {
+            0%,100% { box-shadow: 0 10px 30px rgba(74,108,247,.5); }
+            50% { box-shadow: 0 10px 40px rgba(74,108,247,.8); }
+        }
+        .zip-password-content .lock-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .zip-password-content h3 {
+            color: #f1c40f;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .zip-password-content .subtitle {
+            color: #cbd5e0;
+            font-size: .95rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .zip-password-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255,255,255,.08);
+            border: 2px solid rgba(74,108,247,.5);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            transition: all .3s ease;
+            font-family: inherit;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .zip-password-input:focus {
+            outline: none;
+            border-color: #f1c40f;
+            background: rgba(255,255,255,.12);
+            box-shadow: 0 0 20px rgba(241,196,15,.3);
+        }
+        .zip-password-input::placeholder {
+            color: #888;
+            letter-spacing: normal;
+        }
+
+        .zip-password-error {
+            color: #fc8181;
+            font-size: .88rem;
+            margin-bottom: 15px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+        .zip-password-error.show {
+            display: flex;
+            animation: shakeError .5s ease-in-out;
+        }
+        @keyframes shakeError {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .zip-password-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .zip-password-btn {
+            padding: 13px 26px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: .95rem;
+            cursor: pointer;
+            transition: all .3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            flex: 1;
+        }
+        .zip-password-submit {
+            background: linear-gradient(135deg, #4a6cf7, #6b8aff);
+            color: white;
+            box-shadow: 0 6px 20px rgba(74,108,247,.4);
+        }
+        .zip-password-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74,108,247,.6);
+        }
+        .zip-password-cancel {
+            background: rgba(255,255,255,.08);
+            color: white;
+            border: 2px solid rgba(255,255,255,.2);
+            flex: 0 0 auto;
+            padding: 13px 20px;
+        }
+        .zip-password-cancel:hover {
+            background: rgba(255,255,255,.15);
+            border-color: #fc8181;
+            color: #fc8181;
+        }
+
+        .zip-password-hint {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.08);
+            font-size: .85rem;
+            color: #a0aec0;
+            line-height: 1.5;
+        }
+        .zip-password-hint a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .zip-password-hint a:hover {
+            text-decoration: underline;
+        }
+
+        /* ═══════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════ */
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+        }
+
+        footer strong { color: white; }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .hero { padding: 60px 0; }
+            .hero h1 { font-size: 32px; }
+            .hero .tagline { font-size: 18px; }
+            .section-title h2 { font-size: 26px; }
+            .stat-number { font-size: 36px; }
+            section { padding: 40px 0; }
+            .contact-info { flex-direction: column; gap: 15px; align-items: center; }
+            .zip-password-content { padding: 30px 22px; }
+            .zip-password-buttons { flex-direction: column; }
+            .zip-password-cancel { flex: 1; }
+            .download-section { margin: 40px 15px; padding: 50px 20px; }
+            .download-section h2 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════ -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="logo-badge">
+                ✨ SOLUTION PROFESSIONNELLE DE GESTION DES PRÉSENCES
+            </div>
+            <h1>Smart Attendance System</h1>
+            <p class="tagline">La gestion des présences réinventée par la reconnaissance faciale</p>
+            <p class="subtitle">
+                Une solution complète, moderne et sécurisée pour automatiser le pointage,
+                la gestion des employés, la paie et les rapports — le tout depuis une seule interface intuitive.
+            </p>
+            
+            <!-- ============================================ -->
+            <!-- BOUTONS DE TÉLÉCHARGEMENT EN HAUT -->
+            <!-- ============================================ -->
+            <div class="hero-buttons">
+                <button type="button" class="btn btn-download-hero" onclick="openZipPasswordModal()">
+                    <i class="fas fa-lock"></i> Télécharger
+                </button>
+                <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20des%20informations%20sur%20Smart%20Attendance%20System.%0A%0ANom%20%3A%20%0AEntreprise%20%3A%20%0ANb%20employ%C3%A9s%20%3A%20%0A%0AMerci%20!" 
+                   target="_blank" 
+                   rel="noopener" 
+                   class="btn btn-whatsapp-hero">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-phone"></i> Découvrir
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS
+     ═══════════════════════════════════════════ -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Modules intégrés</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Précision reconnaissance</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">&lt; 3s</div>
+                <div class="stat-label">Temps de pointage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Disponibilité</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FEATURES
+     ═══════════════════════════════════════════ -->
+<section class="features-grid-section" id="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Fonctionnalités principales</h2>
+            <div class="accent"></div>
+            <p>Tout ce dont vous avez besoin pour gérer efficacement les présences de vos employés</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <h3>Reconnaissance faciale</h3>
+                <p>Pointage instantané par reconnaissance faciale avec une précision de 99.9%. Aucune carte, aucun badge, aucune fraude possible.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Gestion des employés</h3>
+                <p>Fiche complète pour chaque employé : informations personnelles, CIN, CNSS, département, poste, photo et historique.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Gestion des présences</h3>
+                <p>Suivi en temps réel des arrivées/départs, calcul automatique des heures travaillées et des retards, gestion des shifts.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Gestion de la paie</h3>
+                <p>Calcul automatique des salaires, primes, heures supplémentaires, retenues et cotisations sociales. Génération des bulletins de paie.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Rapports et exports</h3>
+                <p>Tableau de bord complet, statistiques en temps réel, export PDF/Excel de tous les rapports (présences, salaires, employés).</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📧</div>
+                <h3>Notifications par email</h3>
+                <p>Envoi automatique des bulletins de paie, rappels de pointage et rapports par email. Configuration multi-comptes SMTP sécurisée.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Sécurité renforcée</h3>
+                <p>Chiffrement AES-256 des données sensibles, authentification JWT, gestion des rôles et permissions, journal d'audit complet.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Multi-plateforme</h3>
+                <p>Accessible depuis n'importe quel navigateur. Support natif Windows et Linux. Configuration réseau modifiable depuis l'interface.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Sauvegarde et restauration</h3>
+                <p>Sauvegardes automatiques de la base de données, restauration en un clic, historique des modifications avec possibilité de rollback.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MODULES
+     ═══════════════════════════════════════════ -->
+<section class="modules-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Modules détaillés</h2>
+            <div class="accent"></div>
+            <p>Une plateforme complète avec 10 modules professionnels intégrés</p>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">1</div>
+            <div class="module-content">
+                <h3>Authentification & Gestion des utilisateurs</h3>
+                <p>Système d'authentification JWT avec gestion des rôles (admin, manager, employé) et des permissions granulaires.</p>
+                <div class="module-tags">
+                    <span class="tag">JWT</span>
+                    <span class="tag">Bcrypt</span>
+                    <span class="tag">Rôles</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">2</div>
+            <div class="module-content">
+                <h3>Gestion des employés</h3>
+                <p>CRUD complet avec gestion des documents, photos, historique et enregistrement facial.</p>
+                <div class="module-tags">
+                    <span class="tag">CRUD</span>
+                    <span class="tag">Photos</span>
+                    <span class="tag">Face ID</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">3</div>
+            <div class="module-content">
+                <h3>Pointage par reconnaissance faciale</h3>
+                <p>Utilise face-api.js avec SSD MobileNet pour une détection rapide et précise même dans des conditions difficiles.</p>
+                <div class="module-tags">
+                    <span class="tag">TensorFlow.js</span>
+                    <span class="tag">face-api.js</span>
+                    <span class="tag">WebRTC</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">4</div>
+            <div class="module-content">
+                <h3>Gestion des shifts et horaires</h3>
+                <p>Configuration flexible de plusieurs shifts, rotations automatiques, seuils de retard et demi-journée personnalisables.</p>
+                <div class="module-tags">
+                    <span class="tag">Multi-shift</span>
+                    <span class="tag">Rotation</span>
+                    <span class="tag">Horaires</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">5</div>
+            <div class="module-content">
+                <h3>Gestion de la paie</h3>
+                <p>Calcul automatique du salaire mensuel avec primes, déductions, impôts et cotisations CNSS. Bulletins PDF professionnels.</p>
+                <div class="module-tags">
+                    <span class="tag">Calculs auto</span>
+                    <span class="tag">Bulletins</span>
+                    <span class="tag">CNSS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">6</div>
+            <div class="module-content">
+                <h3>Notifications et emails</h3>
+                <p>Système de rotation de 5 comptes SMTP pour envoyer jusqu'à 2250 emails/jour. Templates personnalisables.</p>
+                <div class="module-tags">
+                    <span class="tag">Nodemailer</span>
+                    <span class="tag">Rotation</span>
+                    <span class="tag">Templates</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">7</div>
+            <div class="module-content">
+                <h3>Rapports et exports</h3>
+                <p>Exports PDF, Excel, CSV et ZIP. Rapports détaillés par employé, département, période ou statut.</p>
+                <div class="module-tags">
+                    <span class="tag">PDFKit</span>
+                    <span class="tag">ExcelJS</span>
+                    <span class="tag">CSV</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">8</div>
+            <div class="module-content">
+                <h3>Tableau de bord et statistiques</h3>
+                <p>Vue temps réel des présences, graphiques interactifs, KPIs personnalisables et alertes.</p>
+                <div class="module-tags">
+                    <span class="tag">Recharts</span>
+                    <span class="tag">Temps réel</span>
+                    <span class="tag">KPIs</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">9</div>
+            <div class="module-content">
+                <h3>Configuration réseau in-app</h3>
+                <p>Modification de l'IP, du port et des URLs directement depuis l'interface, sans toucher aux fichiers.</p>
+                <div class="module-tags">
+                    <span class="tag">In-app</span>
+                    <span class="tag">Live</span>
+                    <span class="tag">Sans redémarrage</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-item">
+            <div class="module-number">10</div>
+            <div class="module-content">
+                <h3>Gestion de licence</h3>
+                <p>Système de licence avec période d'essai de 30 jours, activation par clé et anti-copie matériel.</p>
+                <div class="module-tags">
+                    <span class="tag">Licence</span>
+                    <span class="tag">Essai 30j</span>
+                    <span class="tag">HMAC</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     HIGHLIGHTS
+     ═══════════════════════════════════════════ -->
+<section class="highlight-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Pourquoi choisir Smart Attendance ?</h2>
+            <p>Une solution pensée pour les entreprises modernes</p>
+        </div>
+
+        <div class="highlight-grid">
+            <div class="highlight-item">
+                <div class="icon">⚡</div>
+                <h3>Installation rapide</h3>
+                <p>Installateur tout-en-un pour Windows. Prêt en 15 minutes, aucune configuration technique requise.</p>
+            </div>
+
+            <div class="highlight-item">
+                <div class="icon">🔒</div>
+                <h3>Sécurité maximale</h3>
+                <p>Chiffrement AES-256-GCM, mots de passe bcrypt, JWT, HTTPS, sauvegardes chiffrées.</p>
+            </div>
+
+            <div class="highlight-item">
+                <div class="icon">📈</div>
+                <h3>Évolutif</h3>
+                <p>De 10 à 10 000 employés. Architecture scalable avec PostgreSQL et Node.js.</p>
+            </div>
+
+            <div class="highlight-item">
+                <div class="icon">🌍</div>
+                <h3>Multi-plateforme</h3>
+                <p>Fonctionne sur Windows et Linux. Accessible depuis n'importe quel navigateur.</p>
+            </div>
+
+            <div class="highlight-item">
+                <div class="icon">🎨</div>
+                <h3>Interface moderne</h3>
+                <p>Design épuré, responsive et intuitif. Prise en main immédiate sans formation.</p>
+            </div>
+
+            <div class="highlight-item">
+                <div class="icon">💬</div>
+                <h3>Support inclus</h3>
+                <p>Documentation complète, guides PDF, support par email et téléphone.</p>
+            </div>
+
+            <div class="highlight-item">
+                <div class="icon">🔄</div>
+                <h3>Mises à jour gratuites</h3>
+                <p>Recevez les nouvelles versions pendant la durée de votre licence.</p>
+            </div>
+
+            <div class="highlight-item">
+                <div class="icon">💾</div>
+                <h3>Vos données vous appartiennent</h3>
+                <p>Installation locale. Aucune donnée envoyée à des serveurs tiers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     DEPLOYMENT
+     ═══════════════════════════════════════════ -->
+<section class="deploy-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Disponible sur vos plateformes</h2>
+            <div class="accent"></div>
+            <p>Installateurs natifs pour Windows et Linux</p>
+        </div>
+
+        <div class="deploy-grid">
+            <div class="deploy-card">
+                <div class="os-icon">🪟</div>
+                <h3>Windows</h3>
+                <div class="size">Installateur : 639 MB</div>
+                <p style="color: var(--text-light); font-size: 14px;">Windows 10 / 11 (64-bit)</p>
+                <ul>
+                    <li>PostgreSQL 18 inclus</li>
+                    <li>pgAdmin 4 inclus</li>
+                    <li>Node.js 18 inclus</li>
+                    <li>Service Windows automatique</li>
+                    <li>Raccourcis bureau + menu Démarrer</li>
+                </ul>
+            </div>
+
+            <div class="deploy-card">
+                <div class="os-icon">🐧</div>
+                <h3>Linux</h3>
+                <div class="size">Archive : 1.89 MB</div>
+                <p style="color: var(--text-light); font-size: 14px;">Ubuntu 20.04+ / Debian 11+ / Mint 20+</p>
+                <ul>
+                    <li>Script d'installation automatique</li>
+                    <li>Service systemd</li>
+                    <li>Utilisateur dédié sécurisé</li>
+                    <li>Package .deb fourni</li>
+                    <li>5 scripts de maintenance</li>
+                </ul>
+            </div>
+
+            <div class="deploy-card">
+                <div class="os-icon">📦</div>
+                <h3>Accès Web</h3>
+                <div class="size">Depuis tout navigateur</div>
+                <p style="color: var(--text-light); font-size: 14px;">Chrome, Firefox, Edge, Safari</p>
+                <ul>
+                    <li>Interface responsive</li>
+                    <li>Compatible mobile et tablette</li>
+                    <li>Aucune installation côté client</li>
+                    <li>Accès multi-utilisateurs</li>
+                    <li>Session sécurisée JWT</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TECH STACK
+     ═══════════════════════════════════════════ -->
+<section class="tech-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Technologies utilisées</h2>
+            <div class="accent"></div>
+            <p>Une stack moderne et éprouvée pour la performance et la fiabilité</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-icon">⚛️</div>
+                <div class="tech-name">React 18</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🟢</div>
+                <div class="tech-name">Node.js 18</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🐘</div>
+                <div class="tech-name">PostgreSQL 18</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🧠</div>
+                <div class="tech-name">TensorFlow.js</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🎨</div>
+                <div class="tech-name">TailwindCSS</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">⚡</div>
+                <div class="tech-name">Vite</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🔒</div>
+                <div class="tech-name">JWT + bcrypt</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">📊</div>
+                <div class="tech-name">Recharts</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">📄</div>
+                <div class="tech-name">PDFKit</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">📧</div>
+                <div class="tech-name">Nodemailer</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🎭</div>
+                <div class="tech-name">face-api.js</div>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">🔧</div>
+                <div class="tech-name">Express.js</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PRICING
+     ═══════════════════════════════════════════ -->
+<section class="pricing-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Ce qui est inclus</h2>
+            <div class="accent"></div>
+            <p>Une solution clé en main avec tout le nécessaire</p>
+        </div>
+
+        <div class="pricing-card">
+            <div class="pricing-header">
+                <h3>Licence Smart Attendance System</h3>
+                <p class="subtitle">Version complète - Toutes fonctionnalités</p>
+            </div>
+            <div class="pricing-body">
+                <ul>
+                    <li>Installateur Windows complet (639 MB)</li>
+                    <li>Archive Linux + package Debian</li>
+                    <li>Licence valide 12 mois</li>
+                    <li>Période d'essai gratuite de 30 jours</li>
+                    <li>Reconnaissance faciale illimitée</li>
+                    <li>Nombre d'employés illimité</li>
+                    <li>Génération de bulletins PDF</li>
+                    <li>Exports Excel / CSV / PDF</li>
+                    <li>Notifications email (5 comptes SMTP)</li>
+                    <li>Configuration réseau in-app</li>
+                    <li>Documentation complète (4 guides)</li>
+                    <li>Scripts de maintenance (20+)</li>
+                    <li>Sauvegarde et restauration</li>
+                    <li>Mises à jour gratuites</li>
+                    <li>Support technique 6 mois inclus</li>
+                    <li>Formation à distance (2h)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION TÉLÉCHARGEMENT (bas de page)
+     ═══════════════════════════════════════════ -->
+<section>
+    <div class="container">
+        <div class="download-section">
+            <h2><i class="fas fa-rocket me-2"></i> Télécharger Smart Attendance System</h2>
+            <p>📦 Installateurs complets Windows + Linux + Documentation</p>
+            <div class="download-buttons-row">
+                <button type="button" class="btn-download-drive" onclick="openZipPasswordModal()">
+                    <i class="fas fa-lock"></i> Télécharger (Drive)
+                </button>
+                <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20des%20informations%20sur%20Smart%20Attendance%20System.%0A%0ANom%20%3A%20%0AEntreprise%20%3A%20%0ANb%20employ%C3%A9s%20%3A%20%0A%0AMerci%20!" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="btn-whatsapp-sa">
+                    <i class="fab fa-whatsapp"></i> Demander via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA / CONTACT
+     ═══════════════════════════════════════════ -->
+<section class="cta-section" id="contact">
+    <div class="container">
+        <h2>Prêt à moderniser votre gestion des présences ?</h2>
+        <p>
+            Contactez-nous dès aujourd'hui pour une démonstration gratuite
+            ou pour recevoir une offre personnalisée adaptée à votre entreprise.
+        </p>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="icon">🌐</span>
+                <span>https://Elec-connect.tn</span>
+            </div>
+            <div class="contact-item">
+                <span class="icon">📧</span>
+                <span>iot.sahnoun@gmail.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="icon">📞</span>
+                <span>+216 29 328 870</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
+<footer>
+    <div class="container">
+        <p>
+            © 2026 <strong>Smart Attendance System</strong> — Tous droits réservés.
+            <br>
+            Version 2.0.0 | Solution professionnelle de gestion des présences
+        </p>
+    </div>
+</footer>
+
+<!-- ============================================ -->
+<!-- MODAL MOT DE PASSE -->
+<!-- ============================================ -->
+<div class="zip-password-modal" id="zipPasswordModal">
+    <div class="zip-password-content">
+        <div class="lock-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <h3>Accès protégé</h3>
+        <p class="subtitle">
+            Veuillez entrer le mot de passe pour télécharger<br>
+            <strong>Smart Attendance System</strong>
+        </p>
+
+        <input 
+            type="password" 
+            class="zip-password-input" 
+            id="zipPasswordInput" 
+            placeholder="••••••••••••"
+            autocomplete="off"
+            autofocus
+        >
+
+        <div class="zip-password-error" id="zipPasswordError">
+            <i class="fas fa-exclamation-triangle"></i>
+            Mot de passe incorrect
+        </div>
+
+        <div class="zip-password-buttons">
+            <button type="button" class="zip-password-btn zip-password-submit" onclick="validateZipPassword()">
+                <i class="fas fa-check"></i> Valider
+            </button>
+            <button type="button" class="zip-password-btn zip-password-cancel" onclick="closeZipPasswordModal()">
+                <i class="fas fa-times"></i> Annuler
+            </button>
+        </div>
+
+        <div class="zip-password-hint">
+            <i class="fas fa-question-circle"></i>
+            Pas encore de mot de passe ?<br>
+            <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20le%20mot%20de%20passe%20pour%20t%C3%A9l%C3%A9charger%20Smart%20Attendance%20System.%0A%0ANom%20%3A%20%0AEntreprise%20%3A%20%0A%0AMerci%20!" 
+               target="_blank" rel="noopener">
+                Demandez-le via WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    // CONFIGURATION
+    // ============================================================
+    // 🔑 Mot de passe pour télécharger
+    const ZIP_PASSWORD = "Elec-Connect18011978s";
+
+    // 🔗 Lien de téléchargement direct (Google Drive)
+    const ZIP_DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=1y1jl1d1ee_tKAQFJ_PxCEOyLAVE_IZ76";
+
+    // ============================================================
+    // OUVERTURE DU MODAL
+    // ============================================================
+    function openZipPasswordModal() {
+        const modal = document.getElementById('zipPasswordModal');
+        const input = document.getElementById('zipPasswordInput');
+        const error = document.getElementById('zipPasswordError');
+
+        modal.classList.add('active');
+        input.value = '';
+        input.focus();
+        error.classList.remove('show');
+    }
+
+    // ============================================================
+    // FERMETURE DU MODAL
+    // ============================================================
+    function closeZipPasswordModal() {
+        document.getElementById('zipPasswordModal').classList.remove('active');
+    }
+
+    // ============================================================
+    // VALIDATION DU MOT DE PASSE
+    // ============================================================
+    function validateZipPassword() {
+        const input = document.getElementById('zipPasswordInput');
+        const error = document.getElementById('zipPasswordError');
+        const password = input.value.trim();
+
+        if (password === ZIP_PASSWORD) {
+            error.classList.remove('show');
+            closeZipPasswordModal();
+            window.location.href = ZIP_DOWNLOAD_URL;
+            console.log('✅ Téléchargement Smart Attendance déclenché');
+        } else {
+            error.classList.add('show');
+            input.value = '';
+            input.focus();
+            input.style.animation = 'none';
+            setTimeout(() => {
+                input.style.animation = 'shakeError 0.5s ease-in-out';
+            }, 10);
+        }
+    }
+
+    // ============================================================
+    // ÉVÉNEMENTS
+    // ============================================================
+    document.getElementById('zipPasswordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            validateZipPassword();
+        }
+    });
+
+    document.getElementById('zipPasswordModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeZipPasswordModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('zipPasswordModal');
+            if (modal.classList.contains('active')) {
+                closeZipPasswordModal();
+            }
+        }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
