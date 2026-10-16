@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting AI — Divisez par 10 votre temps de comptabilité | Elec-Connect</title>
+    <meta name="description" content="Accounting AI : extraction automatique de factures, comptabilité IA, multi-entreprises. Téléchargez gratuitement pour Windows 10/11.">
+    <meta name="keywords" content="Accounting AI, comptabilité IA, extraction factures, logiciel comptable Tunisie, Elec-Connect">
+    <link rel="canonical" href="https://elec-connect.tn/projets-connectes/accounting-ai/accounting-ai.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BOUTON RETOUR
+           ═══════════════════════════════════════════════════════════ */
+        .back-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,.85);
+            border: 2px solid rgba(37,99,235,.5);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .back-btn:hover {
+            background: rgba(37,99,235,.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(37,99,235,.8);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════════════════════════ */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 100px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid #2563eb;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(37,99,235,.2), transparent 70%);
+            pointer-events: none;
+        }
+        .hero-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 40px rgba(37,99,235,.5);
+            font-size: 3rem;
+            animation: heroFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes heroFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #fff, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(37,99,235,.4);
+            transition: all .3s ease;
+        }
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37,99,235,.6);
+            color: white;
+        }
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(37,211,102,.4);
+            transition: all .3s ease;
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37,211,102,.6);
+            color: white;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           CONTAINER
+           ═══════════════════════════════════════════════════════════ */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           CARD
+           ═══════════════════════════════════════════════════════════ */
+        .card {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid rgba(37,99,235,.3);
+            margin-bottom: 30px;
+            transition: all .3s ease;
+        }
+        .card:hover {
+            border-color: rgba(37,99,235,.6);
+            box-shadow: 0 15px 50px rgba(37,99,235,.2);
+        }
+        .card h3 {
+            color: #10b981;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(37,99,235,.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .card p {
+            color: #bbb;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .card ul li {
+            color: #ccc;
+            padding: 8px 0 8px 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FEATURES GRID
+           ═══════════════════════════════════════════════════════════ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .feature-mini {
+            background: rgba(37,99,235,.08);
+            border: 1px solid rgba(37,99,235,.25);
+            padding: 18px;
+            border-radius: 12px;
+            transition: all .3s ease;
+        }
+        .feature-mini:hover {
+            background: rgba(37,99,235,.15);
+            border-color: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37,99,235,.2);
+        }
+        .feature-mini .fi-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .feature-mini h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        .feature-mini p {
+            color: #999;
+            font-size: .85rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           DOWNLOAD SECTION
+           ═══════════════════════════════════════════════════════════ */
+        .download-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, rgba(37,99,235,.15), rgba(16,185,129,.1));
+            border-radius: 20px;
+            border: 2px solid rgba(37,99,235,.4);
+            margin-top: 20px;
+        }
+        .download-section h2 {
+            color: #10b981;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .download-section p {
+            color: #ccc;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        .download-section .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(37,99,235,.5);
+            transition: all .3s ease;
+        }
+        .download-section .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37,99,235,.7);
+            color: white;
+        }
+        .download-section .download-note {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.1);
+            color: #999;
+            font-size: .9rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════ */
+        .page-footer {
+            background: #0a0a0a;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(37,99,235,.3);
+            color: #666;
+            font-size: .9rem;
+        }
+        .page-footer a {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-footer a:hover { text-decoration: underline; }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .back-btn { width: 42px; height: 42px; top: 12px; left: 12px; }
+            .hero { padding: 90px 15px 45px; }
+            .hero-icon { width: 85px; height: 85px; font-size: 2.3rem; }
+            .card { padding: 25px 20px; }
+            .card h3 { font-size: 1.2rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .download-section { padding: 30px 20px; }
+            .download-section h2 { font-size: 1.4rem; }
+            .download-section .download-btn { padding: 14px 28px; font-size: .95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOUTON RETOUR -->
+    <a href="../projets-connectes.html" class="back-btn" title="Retour aux projets">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-icon">🧾</div>
+        <h1>Accounting AI</h1>
+        <p>
+            L'IA au service de votre comptabilité. Extraction automatique de factures,
+            détection de doublons, écritures comptables — le tout en quelques secondes.
+        </p>
+        <div class="hero-buttons">
+            <a href="https://drive.google.com/uc?export=download&id=1BGU3p194chepDgMeXS_0bSdf-2gR7OIy"
+               target="_blank"
+               rel="noopener"
+               class="btn-download">
+                <i class="fas fa-download"></i> Télécharger gratuitement
+            </a>
+            <a href="https://wa.me/21629328870?text=Bonjour%2C%0A%0AJe%20souhaite%20obtenir%20des%20informations%20sur%20Accounting%20AI.%0A%0ANom%20%3A%20%0AEntreprise%20%3A%20%0A%0AMerci%20!"
+               target="_blank"
+               rel="noopener"
+               class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTAINER -->
+    <div class="container">
+
+        <!-- DESCRIPTION -->
+        <div class="card">
+            <h3><i class="fas fa-info-circle"></i> 📝 Description</h3>
+            <p>
+                <strong>Accounting AI</strong> est une solution comptable complète propulsée par
+                l'intelligence artificielle. Elle automatise le traitement des factures,
+                génère les écritures comptables, détecte les doublons et vous fait économiser
+                jusqu'à <strong>90% de votre temps de saisie</strong>.
+            </p>
+            <p>
+                Idéal pour les comptables, experts-comptables et dirigeants de PME
+                souhaitant automatiser leur gestion comptable sans effort.
+            </p>
+        </div>
+
+        <!-- NOUVEAUTÉS -->
+        <div class="card">
+            <h3><i class="fas fa-star"></i> ✨ Nouveautés v1.0</h3>
+            <ul>
+                <li><strong>Extraction IA Groq Llama 3.3</strong> — 99% de précision</li>
+                <li><strong>Multi-entreprises</strong> — Gérez plusieurs sociétés</li>
+                <li><strong>Détection de doublons</strong> — Fini les paiements en double</li>
+                <li><strong>Comptabilité automatique</strong> — Écritures, balance, TVA</li>
+                <li><strong>Réception email automatique</strong> — Factures par email traitées</li>
+                <li><strong>Assistant IA conversationnel</strong> — Posez vos questions</li>
+                <li><strong>Exports Excel / PDF</strong> — Rapports professionnels</li>
+                <li><strong>Installation locale</strong> — Vos données vous appartiennent</li>
+            </ul>
+        </div>
+
+        <!-- FONCTIONNALITÉS -->
+        <div class="card">
+            <h3><i class="fas fa-gamepad"></i> 🎮 Fonctionnalités</h3>
+            <div class="features-grid">
+                <div class="feature-mini">
+                    <span class="fi-icon">🤖</span>
+                    <h4>Extraction IA</h4>
+                    <p>Extraction automatique des champs en 5 secondes</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="fi-icon">🛡️</span>
+                    <h4>Détection doublons</h4>
+                    <p>Alerte automatique sur les factures en double</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="fi-icon">📊</span>
+                    <h4>Comptabilité auto</h4>
+                    <p>Écritures, balance, TVA calculées en temps réel</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="fi-icon">📧</span>
+                    <h4>Réception email</h4>
+                    <p>Vos factures par email sont traitées automatiquement</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="fi-icon">💬</span>
+                    <h4>Assistant IA</h4>
+                    <p>Posez vos questions en langage naturel</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="fi-icon">🔒</span>
+                    <h4>Sécurité</h4>
+                    <p>Installation locale, 2FA, chiffrement</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="fi-icon">🏢</span>
+                    <h4>Multi-entreprises</h4>
+                    <p>Gérez plusieurs sociétés dans une seule app</p>
+                </div>
+                <div class="feature-mini">
+                    <span class="fi-icon">📄</span>
+                    <h4>Exports PDF/Excel</h4>
+                    <p>Rapports professionnels en 1 clic</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMUNICATION -->
+        <div class="card">
+            <h3><i class="fas fa-wifi"></i> 📡 Communication</h3>
+            <ul>
+                <li>Installation locale sur votre PC (Windows 10/11)</li>
+                <li>Aucune connexion Internet requise en fonctionnement normal</li>
+                <li>Extraction IA propulsée par Groq (API cloud)</li>
+                <li>Base de données locale (Supabase + Docker)</li>
+                <li>Vos données restent sur votre machine</li>
+            </ul>
+        </div>
+
+        <!-- PRÉREQUIS -->
+        <div class="card">
+            <h3><i class="fas fa-tools"></i> 🔧 Prérequis matériels</h3>
+            <ul>
+                <li>Windows 10 ou 11 (64 bits)</li>
+                <li>8 Go de RAM minimum</li>
+                <li>20 Go d'espace disque libre</li>
+                <li>Docker Desktop (installé automatiquement)</li>
+                <li>Node.js 18+ (installé automatiquement)</li>
+                <li>Git for Windows (installé automatiquement)</li>
+            </ul>
+        </div>
+
+        <!-- SÉCURITÉ -->
+        <div class="card">
+            <h3><i class="fas fa-shield-alt"></i> 🔐 Sécurité</h3>
+            <h4 style="color: #f1c40f; margin: 20px 0 10px;">🛡️ Protection des données :</h4>
+            <ul>
+                <li>Installation 100% locale (aucune donnée envoyée sur Internet)</li>
+                <li>Authentification à deux facteurs (2FA)</li>
+                <li>Chiffrement AES-256-GCM</li>
+                <li>Mots de passe hachés avec bcrypt</li>
+                <li>Conforme RGPD</li>
+                <li>Aucune collecte de données personnelles</li>
+            </ul>
+        </div>
+
+        <!-- AVANTAGES -->
+        <div class="card">
+            <h3><i class="fas fa-thumbs-up"></i> ✅ Avantages</h3>
+            <ul>
+                <li><strong>90% de temps économisé</strong> sur la saisie des factures</li>
+                <li><strong>Zéro erreur</strong> grâce à l'extraction IA</li>
+                <li><strong>Installation locale</strong> — Vos données restent chez vous</li>
+                <li><strong>Multi-entreprises</strong> — Gérez plusieurs sociétés</li>
+                <li><strong>Détection de doublons</strong> — Économisez de l'argent</li>
+                <li><strong>Assistant IA</strong> — Réponses instantanées à vos questions</li>
+                <li><strong>Exports professionnels</strong> — Excel, PDF en 1 clic</li>
+                <li><strong>14 jours gratuits</strong> — Sans carte bancaire</li>
+            </ul>
+        </div>
+
+        <!-- SECTION TÉLÉCHARGEMENT -->
+        <div class="download-section">
+            <h2><i class="fas fa-rocket"></i> Télécharger Accounting AI</h2>
+            <p>📦 Installeur Windows complet — Installation en 5 minutes</p>
+            <a href="https://drive.google.com/uc?export=download&id=1BGU3p194chepDgMeXS_0bSdf-2gR7OIy"
+               target="_blank"
+               rel="noopener"
+               class="download-btn">
+                <i class="fas fa-download"></i> Télécharger maintenant
+            </a>
+            <div class="download-note">
+                <p>📧 <a href="mailto:iot.sahnoun@gmail.com" style="color: #10b981;">iot.sahnoun@gmail.com</a></p>
+                <p style="margin-top: 8px;">📞 <a href="tel:+21629328870" style="color: #10b981;">+216 29 328 870</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+        <p>&copy; 2026 <a href="../../index.html">Elec-Connect</a> — Tous droits réservés</p>
+        <p style="margin-top: 10px;">
+            📞 <a href="tel:+21629328870">+216 29 328 870</a> |
+            ✉️ <a href="mailto:iot.sahnoun@gmail.com">iot.sahnoun@gmail.com</a>
+        </p>
+    </footer>
+
+</body>
+</html>
