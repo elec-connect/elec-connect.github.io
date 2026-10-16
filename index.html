@@ -326,11 +326,97 @@
         .divider { color: rgba(255,255,255,.5); }
         .connect { color: white; }
 
+                /* ===== BOUTON PLEINE LARGEUR - PROJETS RÉALISÉS AI ===== */
+                .full-width-ai-btn {
+            position: fixed;
+            top: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 16px 90px;          /* ⭐ AVANT : 12px 40px → AGRANDI */
+            background: linear-gradient(90deg, #5e06ed, #2563eb, #10b981, #2563eb, #5e06ed);
+            background-size: 300% 100%;
+            animation: aiGradientMove 6s linear infinite;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.15rem;           /* ⭐ AVANT : 1rem → AGRANDI */
+            letter-spacing: .5px;
+            border-radius: 50px;
+            border: 2px solid rgba(241,196,15,.5);
+            box-shadow: 0 6px 25px rgba(94,6,237,.5);
+            transition: all .3s ease;
+            text-shadow: 0 2px 6px rgba(0,0,0,.4);
+            overflow: hidden;
+            white-space: nowrap;
+            min-width: 460px;             /* ⭐ AJOUT : largeur minimale */
+            max-width: 90vw;
+        }
+
+        @keyframes aiGradientMove {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        .full-width-ai-btn i {
+            font-size: 1.15rem;
+            transition: transform .3s ease;
+        }
+
+        .full-width-ai-btn i:first-child {
+            animation: aiBrainPulse 2s infinite;
+        }
+
+        @keyframes aiBrainPulse {
+            0%,100% { transform: scale(1);    filter: drop-shadow(0 0 4px rgba(241,196,15,.6)); }
+            50%     { transform: scale(1.15); filter: drop-shadow(0 0 12px rgba(241,196,15,1)); }
+        }
+
+        .full-width-ai-btn:hover {
+            background-position: 100% 50%;
+            padding: 14px 45px;
+            box-shadow: 0 10px 40px rgba(94,6,237,.8);
+            border-color: #f1c40f;
+            letter-spacing: 1px;
+        }
+
+        .full-width-ai-btn:hover i:last-child {
+            transform: translateX(8px);
+        }
+
+        .full-width-ai-btn strong {
+            color: #f1c40f;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(241,196,15,.6);
+        }
+
+        /* Effet brillance qui traverse */
+        .full-width-ai-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+            animation: aiShine 4s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes aiShine {
+            0%   { left: -100%; }
+            50%  { left: 100%; }
+            100% { left: 100%; }
+        }
+
         /* ===== HERO ===== */
         .hero {
             position: relative; height: 100vh; min-height: 600px;
             display: flex; align-items: center; justify-content: center;
             color: white; text-align: center; overflow: hidden;
+            padding-top: 60px; /* compense le bouton fixe */
         }
         .video-background {
             position: absolute; top:0; left:0; width:100%; height:100%; z-index:0;
@@ -965,6 +1051,19 @@
             .projet-card h3 { font-size: 1.2rem; }
             .projet-card .icon-wrapper { width: 65px; height: 65px; }
             .projet-card .icon-wrapper i { font-size: 1.6rem; }
+            .full-width-ai-btn {
+                top: 70px;
+                padding: 11px 50px;
+                min-width: 320px;
+                max-width: 90vw;
+                font-size: .85rem;
+                gap: 8px;
+            }
+            .full-width-ai-btn i { font-size: .95rem; }
+            .full-width-ai-btn:hover {
+                padding: 12px 55px;
+                letter-spacing: .5px;
+            }
         }
         @media (max-width: 500px) {
             #ec-chat-window {
@@ -979,6 +1078,15 @@
             .offre-text { line-height: 1.1; }
             .offre-main { font-size: .8rem; }
             .offre-sub { font-size: .65rem; }
+            .full-width-ai-btn {
+                font-size: .75rem;
+                padding: 10px 30px;
+                gap: 6px;
+                top: 68px;
+                min-width: 260px;
+                max-width: 90vw;
+            }
+            .full-width-ai-btn i { font-size: .85rem; }
         }
 
         @keyframes slideInFromLeft {
@@ -1077,6 +1185,13 @@
                 <span class="connect">Connect</span>
             </a>
         </div>
+
+        <!-- ⭐ NOUVEAU BOUTON PLEINE LARGEUR - PROJETS RÉALISÉS AI -->
+        <a href="projets-connectes/projets-connectes.html" class="full-width-ai-btn" aria-label="Nos projets réalisés AI" title="Nos projets réalisés AI">
+            <i class="fas fa-brain"></i>
+            <span>Nos projets réalisés <strong>AI</strong></span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
 
         <div class="particles" id="particles"></div>
 
