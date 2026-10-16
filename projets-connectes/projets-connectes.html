@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mes Projets Connectés - Elec-Connect Tunisie. Applications mobiles IoT et systèmes industriels : Contrôle Pompe ESP8266, CAR CONTROL véhicule, Virtual Admin IA locale et Régulation Température.">
-    <meta name="keywords" content="projets connectés, IoT, ESP8266, contrôle pompe, car control, virtual admin, régulation température, PT100, PID, application mobile, Tunisie">
-    <title>Mes Projets Connectés - Elec-Connect</title>
+    <meta name="description" content="Nos Projets Connectés - Elec-Connect Tunisie. Applications mobiles IoT et systèmes industriels : Contrôle Pompe ESP8266, CAR CONTROL véhicule, Virtual Admin IA locale, Régulation Température, Smart Attendance et Accounting AI.">
+    <meta name="keywords" content="projets connectés, IoT, ESP8266, contrôle pompe, car control, virtual admin, régulation température, PT100, PID, application mobile, Tunisie, accounting ai, comptabilité ia">
+    <title>Nos Projets Connectés - Elec-Connect</title>
 
     <link rel="canonical" href="https://elec-connect.tn/projets-connectes/projets-connectes.html">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -132,6 +132,10 @@
             background: linear-gradient(90deg, #4a6cf7, #f1c40f, #4a6cf7);
             background-size: 200% 100%;
         }
+        .projet-card.acc-card::before {
+            background: linear-gradient(90deg, #2563eb, #10b981, #2563eb);
+            background-size: 200% 100%;
+        }
         @keyframes gradientMove {
             0% { background-position: 0% 0%; }
             100% { background-position: 200% 0%; }
@@ -156,6 +160,10 @@
         .projet-card.sa-card:hover {
             border-color: #4a6cf7;
             box-shadow: 0 30px 70px rgba(74,108,247,.4);
+        }
+        .projet-card.acc-card:hover {
+            border-color: #10b981;
+            box-shadow: 0 30px 70px rgba(37,99,235,.4);
         }
         .projet-card .icon-wrapper {
             display: inline-flex;
@@ -189,6 +197,10 @@
             background: linear-gradient(135deg, #4a6cf7, #6b8aff);
             box-shadow: 0 10px 30px rgba(74,108,247,.5);
         }
+        .projet-card.acc-card .icon-wrapper {
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            box-shadow: 0 10px 30px rgba(37,99,235,.5);
+        }
         .projet-card h3 {
             color: #f1c40f;
             margin-bottom: 15px;
@@ -198,8 +210,13 @@
         .projet-card.va-card h3 { color: #60a5fa; }
         .projet-card.temp-card h3 { color: #63b3ed; }
         .projet-card.sa-card h3 { color: #6b8aff; }
+        .projet-card.acc-card h3 { color: #10b981; }
         .badge-attendance {
            background: linear-gradient(135deg, #4a6cf7, #6b8aff);
+           color: white;
+        }
+        .badge-accounting {
+           background: linear-gradient(135deg, #2563eb, #10b981);
            color: white;
         }
         .projet-card > p {
@@ -267,6 +284,10 @@
             background: linear-gradient(135deg, #3182ce, #63b3ed);
             color: white;
         }
+        .badge-green {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+        }
 
         /* CTA BUTTONS */
         .projet-card .cta-buttons {
@@ -324,6 +345,15 @@
             border-color: #5e06ed;
             transform: translateY(-3px);
         }
+        .btn-accounting-download {
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            color: white;
+            box-shadow: 0 6px 20px rgba(37,99,235,.4);
+        }
+        .btn-accounting-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37,99,235,.6);
+        }
 
         /* FOOTER */
         .page-footer {
@@ -362,8 +392,8 @@
 
     <!-- HEADER -->
     <header class="page-header">
-        <h1><i class="fas fa-microchip"></i> Mes Projets Connectés</h1>
-        <p>Découvrez mes applications mobiles IoT et systèmes industriels — pilotage de pompe, contrôle de véhicule, gestion administrative avec IA locale et régulation thermique.</p>
+        <h1><i class="fas fa-microchip"></i> Nos Projets Connectés</h1>
+        <p>Découvrez nos applications mobiles IoT et systèmes industriels — pilotage de pompe, contrôle de véhicule, gestion administrative avec IA locale, régulation thermique, gestion des présences et comptabilité IA.</p>
     </header>
 
     <!-- PROJETS GRID -->
@@ -483,6 +513,32 @@
                 </div>
                 <div class="cta-buttons">
                     <a href="smart-attendance/smart-attendance-details.html" class="btn-privacy-main">
+                        <i class="fas fa-info-circle"></i> Détails
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARTE 6 : ACCOUNTING AI -->
+            <div class="projet-card acc-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Accounting AI</h3>
+                <p>
+                    Solution comptable propulsée par l'IA. Extraction automatique de factures,
+                    détection de doublons, écritures comptables, multi-entreprises et
+                    assistant conversationnel. Installation locale Windows.
+                </p>
+                <div class="badges">
+                    <span class="badge-item badge-version"><i class="fas fa-check-circle"></i> v1.0</span>
+                    <span class="badge-item badge-green"><i class="fas fa-robot"></i> IA Groq Llama 3.3</span>
+                    <span class="badge-item badge-blue"><i class="fab fa-windows"></i> Windows 10/11</span>
+                </div>
+                <div class="cta-buttons">
+                    <a href="https://drive.google.com/uc?export=download&id=1BGU3p194chepDgMeXS_0bSdf-2gR7OIy" target="_blank" rel="noopener" class="btn-accounting-download">
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                    <a href="accounting-ai/accounting-ai.html" class="btn-privacy-main">
                         <i class="fas fa-info-circle"></i> Détails
                     </a>
                 </div>
