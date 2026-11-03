@@ -263,34 +263,6 @@
             border: 2px solid #0a0a0a;
             animation: pulse-glow 2s infinite;
         }
-        .projet-card.sa-card::before {
-    background: linear-gradient(90deg, #4a6cf7, #f1c40f, #4a6cf7);
-    background-size: 200% 100%;
-}
-.projet-card.sa-card:hover {
-    border-color: #4a6cf7;
-    box-shadow: 0 30px 70px rgba(74,108,247,.4);
-}
-.projet-card.sa-card .icon-wrapper {
-    background: linear-gradient(135deg, #4a6cf7, #6b8aff);
-    box-shadow: 0 10px 30px rgba(74,108,247,.5);
-}
-.projet-card.sa-card h3 { color: #6b8aff; }
-
-        /* ⭐ CARTE ACCOUNTING AI */
-        .projet-card.acc-card::before {
-            background: linear-gradient(90deg, #2563eb, #10b981, #2563eb);
-            background-size: 200% 100%;
-        }
-        .projet-card.acc-card:hover {
-            border-color: #10b981;
-            box-shadow: 0 30px 70px rgba(37,99,235,.4);
-        }
-        .projet-card.acc-card .icon-wrapper {
-            background: linear-gradient(135deg, #2563eb, #10b981);
-            box-shadow: 0 10px 30px rgba(37,99,235,.5);
-        }
-        .projet-card.acc-card h3 { color: #10b981; }
 
         .blog-link { position: relative; }
         .blog-link a {
@@ -326,8 +298,8 @@
         .divider { color: rgba(255,255,255,.5); }
         .connect { color: white; }
 
-                /* ===== BOUTON PLEINE LARGEUR - PROJETS RÉALISÉS AI ===== */
-                .full-width-ai-btn {
+        /* ===== BOUTON PLEINE LARGEUR - PROJETS RÉALISÉS AI ===== */
+        .full-width-ai-btn {
             position: fixed;
             top: 85px;
             left: 50%;
@@ -337,14 +309,14 @@
             align-items: center;
             justify-content: center;
             gap: 14px;
-            padding: 16px 90px;          /* ⭐ AVANT : 12px 40px → AGRANDI */
+            padding: 16px 90px;
             background: linear-gradient(90deg, #5e06ed, #2563eb, #10b981, #2563eb, #5e06ed);
             background-size: 300% 100%;
             animation: aiGradientMove 6s linear infinite;
             color: white;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.15rem;           /* ⭐ AVANT : 1rem → AGRANDI */
+            font-size: 1.15rem;
             letter-spacing: .5px;
             border-radius: 50px;
             border: 2px solid rgba(241,196,15,.5);
@@ -353,7 +325,7 @@
             text-shadow: 0 2px 6px rgba(0,0,0,.4);
             overflow: hidden;
             white-space: nowrap;
-            min-width: 460px;             /* ⭐ AJOUT : largeur minimale */
+            min-width: 460px;
             max-width: 90vw;
         }
 
@@ -394,7 +366,6 @@
             text-shadow: 0 0 10px rgba(241,196,15,.6);
         }
 
-        /* Effet brillance qui traverse */
         .full-width-ai-btn::before {
             content: '';
             position: absolute;
@@ -416,7 +387,7 @@
             position: relative; height: 100vh; min-height: 600px;
             display: flex; align-items: center; justify-content: center;
             color: white; text-align: center; overflow: hidden;
-            padding-top: 60px; /* compense le bouton fixe */
+            padding-top: 60px;
         }
         .video-background {
             position: absolute; top:0; left:0; width:100%; height:100%; z-index:0;
@@ -541,11 +512,11 @@
             gap: 22px;
             max-width: 1300px;
             margin: 0 auto;
-      }
+        }
 
-@media (max-width: 768px) {
-    .projets-grid-5 { grid-template-columns: 1fr; gap: 20px; }
-}
+        @media (max-width: 768px) {
+            .projets-grid-5 { grid-template-columns: 1fr; gap: 20px; }
+        }
 
         /* ===== CARTE PROJET ===== */
         .projet-card {
@@ -582,6 +553,18 @@
             background: linear-gradient(90deg, #3182ce, #f1c40f, #3182ce);
             background-size: 200% 100%;
         }
+        .projet-card.sa-card::before {
+            background: linear-gradient(90deg, #4a6cf7, #f1c40f, #4a6cf7);
+            background-size: 200% 100%;
+        }
+        .projet-card.acc-card::before {
+            background: linear-gradient(90deg, #2563eb, #10b981, #2563eb);
+            background-size: 200% 100%;
+        }
+        .projet-card.moteur-card::before {
+            background: linear-gradient(90deg, #4caf50, #ab47bc, #f57c00, #4caf50);
+            background-size: 200% 100%;
+        }
         @keyframes gradientMove {
             0% { background-position: 0% 0%; }
             100% { background-position: 200% 0%; }
@@ -602,6 +585,18 @@
         .projet-card.temp-card:hover {
             border-color: #3182ce;
             box-shadow: 0 30px 70px rgba(49,130,206,.4);
+        }
+        .projet-card.sa-card:hover {
+            border-color: #4a6cf7;
+            box-shadow: 0 30px 70px rgba(74,108,247,.4);
+        }
+        .projet-card.acc-card:hover {
+            border-color: #10b981;
+            box-shadow: 0 30px 70px rgba(37,99,235,.4);
+        }
+        .projet-card.moteur-card:hover {
+            border-color: #4caf50;
+            box-shadow: 0 30px 70px rgba(76,175,80,.45);
         }
         .projet-card .icon-wrapper {
             display: inline-flex;
@@ -627,6 +622,18 @@
             background: linear-gradient(135deg, #1a365d, #3182ce);
             box-shadow: 0 10px 30px rgba(26,54,93,.5);
         }
+        .projet-card.sa-card .icon-wrapper {
+            background: linear-gradient(135deg, #4a6cf7, #6b8aff);
+            box-shadow: 0 10px 30px rgba(74,108,247,.5);
+        }
+        .projet-card.acc-card .icon-wrapper {
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            box-shadow: 0 10px 30px rgba(37,99,235,.5);
+        }
+        .projet-card.moteur-card .icon-wrapper {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            box-shadow: 0 10px 30px rgba(76,175,80,.5);
+        }
         .projet-card .icon-wrapper i {
             font-size: 1.9rem;
             color: white;
@@ -639,6 +646,9 @@
         .projet-card.car-card h3 { color: #e74c3c; }
         .projet-card.va-card h3 { color: #60a5fa; }
         .projet-card.temp-card h3 { color: #63b3ed; }
+        .projet-card.sa-card h3 { color: #6b8aff; }
+        .projet-card.acc-card h3 { color: #10b981; }
+        .projet-card.moteur-card h3 { color: #4caf50; }
         .projet-card > p {
             color: #bbb;
             font-size: .88rem;
@@ -1186,7 +1196,7 @@
             </a>
         </div>
 
-        <!-- ⭐ NOUVEAU BOUTON PLEINE LARGEUR - PROJETS RÉALISÉS AI -->
+        <!-- BOUTON PLEINE LARGEUR - PROJETS RÉALISÉS AI -->
         <a href="projets-connectes/projets-connectes.html" class="full-width-ai-btn" aria-label="Nos projets réalisés AI" title="Nos projets réalisés AI">
             <i class="fas fa-brain"></i>
             <span>Nos projets réalisés <strong>AI</strong></span>
@@ -1226,7 +1236,7 @@
     <section class="projets-connectes-section">
         <h2><i class="fas fa-microchip"></i> Nos Projets Connectés</h2>
         <p class="section-subtitle">
-            Découvrez nos applications et systèmes innovants — pilotage de pompe, contrôle de véhicule, gestion administrative avec IA locale et régulation industrielle.
+            Découvrez nos applications et systèmes innovants — pilotage de pompe, contrôle de véhicule, gestion administrative avec IA locale, régulation industrielle, reconnaissance faciale, comptabilité IA et surveillance prédictive industrielle.
         </p>
 
         <div class="projets-grid-5">
@@ -1291,7 +1301,7 @@
                 </p>
             </a>
 
-            <!-- ⭐ CARTE 6 : ACCOUNTING AI -->
+            <!-- CARTE 6 : ACCOUNTING AI -->
             <a href="projets-connectes/accounting-ai/accounting-ai.html" class="projet-card acc-card">
                 <div class="icon-wrapper">
                     <i class="fas fa-calculator"></i>
@@ -1301,6 +1311,18 @@
                     Solution comptable propulsée par l'IA. Extraction automatique de factures,
                     détection de doublons, écritures comptables, multi-entreprises et
                     assistant conversationnel.
+                </p>
+            </a>
+
+            <!-- CARTE 7 : MOTEUR IA -->
+            <a href="projets-connectes/moteur-ia/moteur-ia-details.html" class="projet-card moteur-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <h3>Moteur IA</h3>
+                <p>
+                    Surveillance prédictive industrielle par IA. Détection de surchauffe,
+                    surintensité et vibration anormale. Compatible Siemens S7-1200 / S7-1500.
                 </p>
             </a>
 
@@ -1337,6 +1359,7 @@
                     <li><a href="projets-connectes/controle-temperature/controle-temperature-details.html"><i class="fas fa-temperature-high"></i> Régulation Température</a></li>
                     <li><a href="projets-connectes/smart-attendance/smart-attendance-details.html"><i class="fas fa-user-check"></i> Smart Attendance</a></li>
                     <li><a href="projets-connectes/accounting-ai/accounting-ai.html"><i class="fas fa-calculator"></i> Accounting AI</a></li>
+                    <li><a href="projets-connectes/moteur-ia/moteur-ia-details.html"><i class="fas fa-industry"></i> Moteur IA</a></li>
                     <li><a href="contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                     <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
                 </ul>
@@ -1428,6 +1451,7 @@
                         <button data-q="Contrôle Pompe">Contrôle Pompe</button>
                         <button data-q="CAR CONTROL">CAR CONTROL</button>
                         <button data-q="Régulation Température">Régulation Température</button>
+                        <button data-q="Moteur IA">Moteur IA</button>
                     </div>
                 </div>
 
@@ -1814,11 +1838,12 @@
                 { keywords: ['delai','délai','temps','duree','durée','long','rapide','vite','jours'], answer: "Pour une installation standard : <strong>2 à 5 jours</strong>." },
                 { keywords: ['bonjour','salut','hello','bonsoir','coucou'], answer: "Bonjour ! 😊 Comment puis-je vous aider ?" },
                 { keywords: ['merci','thanks','top','super'], answer: "Avec plaisir ! 🙏" },
-                { keywords: ['realisation','réalisation','projet','travaux','portfolio','galerie','application','app'], answer: "Découvrez mes projets : 💧 <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Contrôle Pompe</a>, 🚗 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>CAR CONTROL</a>, 🏢 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Virtual Admin</a>, 🌡️ <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Régulation Température</a>" },
+                { keywords: ['realisation','réalisation','projet','travaux','portfolio','galerie','application','app'], answer: "Découvrez mes projets : 💧 <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Contrôle Pompe</a>, 🚗 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>CAR CONTROL</a>, 🏢 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Virtual Admin</a>, 🌡️ <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Régulation Température</a>, 🏭 <a href='projets-connectes/moteur-ia/moteur-ia-details.html'>Moteur IA</a>" },
                 { keywords: ['pompe','controle pompe','contrôle pompe','esp8266','water'], answer: "💧 <strong>Contrôle Pompe v5.0</strong> — Application ESP8266 pour piloter votre pompe. <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Détails</a> | <a href='https://play.google.com/apps/testing/com.sahnoun.pompe' target='_blank'>Test fermé</a>" },
                 { keywords: ['voiture','car','vehicule','véhicule','car control','demarrage','démarrage','contact','ign','central','urgence'], answer: "🚗 <strong>CAR CONTROL v3.0</strong> — Contrôle sécurisé du véhicule (Contact, IGN, Démarrage, Verrouillage centralisé).<br>📱 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>Télécharger sur Google Play</a>" },
                 { keywords: ['virtual admin','virtual','admin','gestion','facture','devis','stock','ia locale','ollama'], answer: "🏢 <strong>Virtual Admin v5.1</strong> — Gestion administrative avec IA locale (factures, devis, stock, chat).<br>📄 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Détails</a>" },
                 { keywords: ['temperature','température','regulation','régulation','pid','pt100','industriel','automate','plc','four','chauffage'], answer: "🌡️ <strong>Régulation Température</strong> — Système industriel de régulation thermique avec capteurs PT100, actionneurs et automate programmable. Multi-PLC.<br>📄 <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Détails</a>" },
+                { keywords: ['moteur ia','moteur','moteurs','maintenance','predictive','prédictive','siemens','s7-1200','s7-1500','opc ua','surchauffe','surintensite','surintensité','vibration','anomalie','industriel','panne','pannes'], answer: "🏭 <strong>Moteur IA v1.0</strong> — Surveillance prédictive industrielle par IA. Détection surchauffe, surintensité, vibration. Compatible Siemens S7-1200/S7-1500 via OPC UA.<br>📄 <a href='projets-connectes/moteur-ia/moteur-ia-details.html'>Détails</a> | <a href='https://drive.google.com/uc?export=download&id=1xxy4R28RvU2jvmGT1j9v3N8FkMlPsKzB' target='_blank'>Télécharger</a>" },
                 { keywords: ['play store','google play','playstore'], answer: "📱 Téléchargez <strong>CAR CONTROL</strong> sur Google Play :<br><a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>Cliquez ici</a>" },
                 { keywords: ['apk','telecharger apk','télécharger apk','download apk'], answer: "📱 Pour Contrôle Pompe : <a href='https://play.google.com/apps/testing/com.sahnoun.pompe' target='_blank'>Test fermé Google Play</a>" },
                 { keywords: ['خدمات','خدمة','أعمال','نشاط','تخصص','تقدمون'], answer: "نقدمو :<br>• تركيب منازل ذكية<br>• كهرباء ذكية<br>• صيانة<br>• devis مجاني<br><br>📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" },
@@ -1829,7 +1854,7 @@
                 { keywords: ['عنوان','مكان','موقع','أين','منطقة'], answer: "في <strong>جمال (5020)</strong>، تونس." },
                 { keywords: ['مرحبا','أهلا','السلام','صباح','مساء'], answer: "أهلا و سهلا ! 😊 كيفاش نجم نعاونك ؟" },
                 { keywords: ['شكرا','يعطيك','ممتاز','رائع'], answer: "بكل فرح ! 🙏" },
-                { keywords: ['تطبيق','تطبيقات','ابليكاسيون','تحميل'], answer: "📱 عندنا 4 مشاريع :<br>💧 <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Contrôle Pompe</a><br>🚗 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>CAR CONTROL</a><br>🏢 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Virtual Admin</a><br>🌡️ <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Régulation Température</a>" },
+                { keywords: ['تطبيق','تطبيقات','ابليكاسيون','تحميل'], answer: "📱 عندنا 4 مشاريع :<br>💧 <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>Contrôle Pompe</a><br>🚗 <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>CAR CONTROL</a><br>🏢 <a href='projets-connectes/virtual-admin/virtual-admin-details.html'>Virtual Admin</a><br>🌡️ <a href='projets-connectes/controle-temperature/controle-temperature-details.html'>Régulation Température</a><br>🏭 <a href='projets-connectes/moteur-ia/moteur-ia-details.html'>Moteur IA</a>" },
                 { keywords: ['بومبة','بومبا','pompe','ماء'], answer: "💧 <strong>Contrôle Pompe v5.0</strong> : <a href='projets-connectes/controle-pompe/controle-pompe-details.html'>تفاصيل</a> | <a href='https://play.google.com/apps/testing/com.sahnoun.pompe' target='_blank'>Test fermé</a>" },
                 { keywords: ['كار','طوموبيل','سيارة','كراهبة'], answer: "🚗 <strong>CAR CONTROL v3.0</strong> : <a href='https://play.google.com/store/apps/details?id=com.voiture.control' target='_blank'>تحميل من Google Play</a>" },
                 { keywords: ['chnowa','chneya','chnou','شنوة','شنية'], answer: "نقدمو :<br>• تركيب منازل ذكية<br>• كهرباء ذكية<br>• صيانة<br>📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" },
@@ -1842,7 +1867,7 @@
                 { keywords: ['fammech','fama','فما','promo','promos'], answer: "🎁 عندنا عرض خاص -15% !<br>📞 <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>" }
             ];
 
-            const FALLBACK = "ما فهمتش بالضبط 🤔<br>جرب : تطبيقاتنا، كونترول بومبة، كار كنترول، regulation température<br>أو <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>.<br><small>Je n'ai pas compris. Essayez : applications, contrôle pompe, car control, virtual admin, régulation température.</small>";
+            const FALLBACK = "ما فهمتش بالضبط 🤔<br>جرب : تطبيقاتنا، كونترول بومبة، كار كنترول، regulation température، moteur IA<br>أو <a href='tel:+21629328870' class='ec-phone'>+216 29 328 870</a>.<br><small>Je n'ai pas compris. Essayez : applications, contrôle pompe, car control, virtual admin, régulation température, moteur IA.</small>";
 
             function getLocalAnswer(text) {
                 const t = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
