@@ -140,6 +140,10 @@
             background: linear-gradient(90deg, #4caf50, #ab47bc, #f57c00, #4caf50);
             background-size: 200% 100%;
         }
+        .projet-card.huilerie-card::before {
+            background: linear-gradient(90deg, #d4a017, #8b4513, #d4a017);
+            background-size: 200% 100%;
+        }
         @keyframes gradientMove {
             0% { background-position: 0% 0%; }
             100% { background-position: 200% 0%; }
@@ -173,6 +177,15 @@
             border-color: #4caf50;
             box-shadow: 0 30px 70px rgba(76,175,80,.45);
         }
+        .projet-card.huilerie-card:hover {
+            border-color: #d4a017;
+            box-shadow: 0 30px 70px rgba(212,160,23,.45);
+        }
+        .projet-card.huilerie-card .icon-wrapper {
+            background: linear-gradient(135deg, #d4a017, #8b4513);
+            box-shadow: 0 10px 30px rgba(212,160,23,.5);
+        }
+        .projet-card.huilerie-card h3 { color: #d4a017; }
         .projet-card .icon-wrapper {
             display: inline-flex;
             align-items: center;
@@ -602,6 +615,24 @@
                     </a>
                 </div>
             </div>
+
+            <!-- CARTE 8 : HUILERIE CONNECTÉE -->
+            <a href="huilerie/huilerie-details.html" class="projet-card huilerie-card" style="text-decoration:none;">
+            <div class="icon-wrapper">
+                 <i class="fas fa-seedling"></i>
+            </div>
+            <h3>Huilerie Connectée</h3>
+            <div class="badges">
+                 <span class="badge-item badge-version"><i class="fas fa-code-branch"></i> v1.0</span>
+                 <span class="badge-item badge-beta"><i class="fas fa-flask"></i> BETA</span>
+                 <span class="badge-item badge-rgpd"><i class="fas fa-shield-alt"></i> RGPD</span>
+            </div>
+            <p>
+                Supervision d'huilerie : température d'extraction, contrôle des presses,
+                gestion des stocks et alertes en temps réel via ESP8266 et interface web.
+                Suivi de production et rapports automatiques.
+            </p>
+            </a>
 
         </div>
     </div>
