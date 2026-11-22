@@ -565,6 +565,10 @@
             background: linear-gradient(90deg, #4caf50, #ab47bc, #f57c00, #4caf50);
             background-size: 200% 100%;
         }
+        .projet-card.huilerie-card::before {
+            background: linear-gradient(90deg, #d4a017, #8b4513, #d4a017);
+            background-size: 200% 100%;
+    }
         @keyframes gradientMove {
             0% { background-position: 0% 0%; }
             100% { background-position: 200% 0%; }
@@ -598,6 +602,15 @@
             border-color: #4caf50;
             box-shadow: 0 30px 70px rgba(76,175,80,.45);
         }
+        .projet-card.huilerie-card:hover {
+            border-color: #d4a017;
+            box-shadow: 0 30px 70px rgba(212,160,23,.45);
+        }
+        .projet-card.huilerie-card .icon-wrapper {
+            background: linear-gradient(135deg, #d4a017, #8b4513);
+            box-shadow: 0 10px 30px rgba(212,160,23,.5);
+        }
+        .projet-card.huilerie-card h3 { color: #d4a017; }
         .projet-card .icon-wrapper {
             display: inline-flex;
             align-items: center;
@@ -1326,6 +1339,19 @@
                 </p>
             </a>
 
+            <!-- CARTE 8 : HUILERIE CONNECTÉE -->
+            <a href="projets-connectes/huilerie/huilerie-details.html" class="projet-card huilerie-card">
+               <div class="icon-wrapper">
+                   <i class="fas fa-seedling"></i>
+               </div>
+               <h3>Huilerie Connectée</h3>
+               <p>
+                    Système de supervision d'huilerie : suivi température d'extraction,
+                    contrôle des presses, gestion des stocks d'huile et alertes en temps réel
+                    via ESP8266 et interface web.
+               </p>
+            </a>
+
         </div>
 
         <div class="projets-cta">
@@ -1360,6 +1386,7 @@
                     <li><a href="projets-connectes/smart-attendance/smart-attendance-details.html"><i class="fas fa-user-check"></i> Smart Attendance</a></li>
                     <li><a href="projets-connectes/accounting-ai/accounting-ai.html"><i class="fas fa-calculator"></i> Accounting AI</a></li>
                     <li><a href="projets-connectes/moteur-ia/moteur-ia-details.html"><i class="fas fa-industry"></i> Moteur IA</a></li>
+                    <li><a href="projets-connectes/huilerie/huilerie-details.html"><i class="fas fa-seedling"></i> Huilerie Connectée</a></li>
                     <li><a href="contact/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                     <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
                 </ul>
