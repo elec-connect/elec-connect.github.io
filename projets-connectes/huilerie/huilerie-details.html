@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Huilerie Connectée v1.0 - Supervision d'huilerie par Elec-Connect Tunisie : température d'extraction, contrôle des presses, gestion des stocks, alertes temps réel via ESP8266.">
+    <meta name="keywords" content="huilerie connectée, huile d'olive, ESP8266, IoT, Tunisie, supervision, température, presse, domotique industrielle">
+    <title>Huilerie Connectée v1.0 - Elec-Connect</title>
+
+    <link rel="canonical" href="https://elec-connect.tn/projets-connectes/huilerie/huilerie-details.html">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== BOUTON RETOUR ===== */
+        .back-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,.85);
+            border: 2px solid rgba(94,6,237,.5);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background: rgba(94,6,237,.9);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(94,6,237,.8);
+        }
+
+        /* ===== HERO ===== */
+        .detail-hero {
+            position: relative;
+            padding: 120px 20px 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a0a 50%, #0a0a0a 100%);
+            border-bottom: 3px solid #d4a017;
+            overflow: hidden;
+        }
+        .detail-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 40%, rgba(212,160,23,.2), transparent 70%);
+            pointer-events: none;
+        }
+        .hero-icon {
+            width: 130px; height: 130px;
+            background: linear-gradient(135deg, #d4a017, #8b4513);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 50px rgba(212,160,23,.6);
+            animation: floatIcon 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes floatIcon {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero-icon i { font-size: 3.5rem; color: white; }
+        .detail-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(45deg, #fff, #d4a017);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            font-weight: 800;
+        }
+        .detail-hero .subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            max-width: 750px;
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        .badge-item {
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: .85rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge-version { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
+        .badge-beta { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
+        .badge-rgpd { background: rgba(241,196,15,.15); color: #f1c40f; border: 1px solid rgba(241,196,15,.4); }
+        .badge-free { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
+        .badge-honey { background: linear-gradient(135deg, #d4a017, #b8860b); color: white; }
+
+        /* ===== CONTAINER ===== */
+        .detail-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .detail-section {
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(212,160,23,.25);
+            transition: all .3s ease;
+        }
+        .detail-section:hover {
+            border-color: rgba(212,160,23,.6);
+            box-shadow: 0 15px 40px rgba(212,160,23,.15);
+        }
+        .detail-section h2 {
+            color: #d4a017;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid rgba(212,160,23,.3);
+            padding-bottom: 12px;
+        }
+        .detail-section h2 i {
+            background: linear-gradient(135deg, #d4a017, #8b4513);
+            width: 45px; height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .detail-section p {
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* ===== FEATURES ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .feature-item {
+            background: rgba(212,160,23,.08);
+            border: 1px solid rgba(212,160,23,.3);
+            border-radius: 14px;
+            padding: 20px;
+            transition: all .3s ease;
+        }
+        .feature-item:hover {
+            background: rgba(212,160,23,.15);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(212,160,23,.2);
+        }
+        .feature-item i {
+            color: #d4a017;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .feature-item h3 {
+            color: #fff;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+        .feature-item p {
+            color: #aaa;
+            font-size: .9rem;
+            margin: 0;
+        }
+
+        /* ===== LISTES TECHNIQUES ===== */
+        .tech-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        .tech-list li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,.03);
+            border-left: 4px solid #d4a017;
+            border-radius: 6px;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all .2s ease;
+        }
+        .tech-list li:hover {
+            background: rgba(212,160,23,.1);
+            padding-left: 20px;
+        }
+        .tech-list li i {
+            color: #d4a017;
+            font-size: 1rem;
+            width: 20px;
+        }
+
+        /* ===== ARCHITECTURE ===== */
+        .architecture {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .arch-box {
+            background: linear-gradient(135deg, #2a1a0a, #1a1a1a);
+            border: 2px solid rgba(212,160,23,.4);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all .3s ease;
+        }
+        .arch-box:hover {
+            border-color: #d4a017;
+            transform: scale(1.03);
+        }
+        .arch-box i {
+            font-size: 2rem;
+            color: #d4a017;
+            margin-bottom: 10px;
+        }
+        .arch-box strong {
+            display: block;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .arch-box span {
+            color: #aaa;
+            font-size: .85rem;
+        }
+
+        /* ===== BOUTONS ===== */
+        .actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all .3s ease;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a017, #b8860b);
+            color: white;
+            box-shadow: 0 5px 20px rgba(212,160,23,.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212,160,23,.7);
+        }
+        .btn-outline {
+            background: rgba(255,255,255,.05);
+            color: white;
+            border: 2px solid rgba(212,160,23,.5);
+        }
+        .btn-outline:hover {
+            background: rgba(212,160,23,.2);
+            border-color: #d4a017;
+            transform: translateY(-3px);
+        }
+
+        /* ===== GALERIE ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #2a1a0a, #1a1a1a);
+            border: 2px solid rgba(212,160,23,.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4a017;
+            font-size: 2.5rem;
+            transition: all .3s ease;
+        }
+        .gallery-item:hover {
+            border-color: #d4a017;
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(212,160,23,.3);
+        }
+
+        /* ===== FOOTER ===== */
+        .detail-footer {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 3px solid #d4a017;
+            margin-top: 60px;
+        }
+        .detail-footer p {
+            color: #888;
+            font-size: .9rem;
+            margin-bottom: 10px;
+        }
+        .detail-footer a {
+            color: #d4a017;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .detail-footer a:hover { text-decoration: underline; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .back-btn { top: 10px; left: 10px; width: 42px; height: 42px; }
+            .detail-hero { padding: 90px 15px 60px; }
+            .hero-icon { width: 100px; height: 100px; }
+            .hero-icon i { font-size: 2.5rem; }
+            .detail-container { padding: 40px 15px; }
+            .detail-section { padding: 25px 20px; }
+            .detail-section h2 { font-size: 1.4rem; }
+            .actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOUTON RETOUR -->
+    <a href="../projets-connectes.html" class="back-btn" aria-label="Retour aux projets" title="Retour">
+        <i class="fas fa-arrow-left fa-lg"></i>
+    </a>
+
+    <!-- HERO -->
+    <header class="detail-hero">
+        <div class="hero-icon">
+            <i class="fas fa-seedling"></i>
+        </div>
+        <h1>Huilerie Connectée</h1>
+        <p class="subtitle">
+            Supervision intelligente de votre huilerie — température d'extraction, contrôle des presses,
+            gestion des stocks et alertes temps réel, pilotée depuis votre smartphone.
+        </p>
+        <div class="hero-badges">
+            <span class="badge-item badge-version"><i class="fas fa-code-branch"></i> v1.0</span>
+            <span class="badge-item badge-beta"><i class="fas fa-flask"></i> BETA</span>
+            <span class="badge-item badge-honey"><i class="fas fa-seedling"></i> ESP8266</span>
+            <span class="badge-item badge-rgpd"><i class="fas fa-shield-alt"></i> RGPD</span>
+            <span class="badge-item badge-free"><i class="fas fa-check"></i> Gratuit</span>
+        </div>
+    </header>
+
+    <!-- CONTENU -->
+    <main class="detail-container">
+
+        <!-- DESCRIPTION -->
+        <section class="detail-section">
+            <h2><i class="fas fa-info-circle"></i> Présentation</h2>
+            <p>
+                <strong>Huilerie Connectée v1.0</strong> est une solution IoT complète conçue pour les
+                huileries modernes. Basée sur un microcontrôleur <strong>ESP8266</strong>, elle permet
+                de surveiller et contrôler l'ensemble du processus d'extraction d'huile d'olive
+                en temps réel, depuis n'importe où via une interface web et mobile.
+            </p>
+            <p>
+                Idéale pour les petites et moyennes exploitations tunisiennes, la solution combine
+                capteurs de température, relais de puissance, et une interface intuitive pour
+                optimiser le rendement tout en réduisant la consommation énergétique.
+            </p>
+        </section>
+
+        <!-- FONCTIONNALITÉS -->
+        <section class="detail-section">
+            <h2><i class="fas fa-star"></i> Fonctionnalités principales</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-temperature-high"></i>
+                    <h3>Température d'extraction</h3>
+                    <p>Suivi en continu via capteurs DS18B20/PT100 avec alertes de seuil.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Contrôle des presses</h3>
+                    <p>Marche/arrêt à distance, programmation horaire et arrêt d'urgence.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-boxes"></i>
+                    <h3>Gestion des stocks</h3>
+                    <p>Comptage des litres produits, suivi des lots et historique de production.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <h3>Alertes temps réel</h3>
+                    <p>Notifications push/email en cas d'anomalie (surchauffe, panne, arrêt).</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Interface mobile</h3>
+                    <p>Contrôle depuis smartphone, tablette ou PC — local ou distant.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Rapports automatiques</h3>
+                    <p>Statistiques journalières, hebdomadaires et mensuelles exportables.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARCHITECTURE -->
+        <section class="detail-section">
+            <h2><i class="fas fa-sitemap"></i> Architecture du système</h2>
+            <p>
+                Une architecture modulaire et évolutive, du capteur à l'utilisateur final.
+            </p>
+            <div class="architecture">
+                <div class="arch-box">
+                    <i class="fas fa-microchip"></i>
+                    <strong>ESP8266</strong>
+                    <span>Microcontrôleur WiFi</span>
+                </div>
+                <div class="arch-box">
+                    <i class="fas fa-thermometer-half"></i>
+                    <strong>Capteurs</strong>
+                    <span>DS18B20 / PT100</span>
+                </div>
+                <div class="arch-box">
+                    <i class="fas fa-toggle-on"></i>
+                    <strong>Relais</strong>
+                    <span>Contrôle presses 220V</span>
+                </div>
+                <div class="arch-box">
+                    <i class="fas fa-server"></i>
+                    <strong>Serveur Web</strong>
+                    <span>Interface locale / cloud</span>
+                </div>
+                <div class="arch-box">
+                    <i class="fas fa-mobile-alt"></i>
+                    <strong>App Mobile</strong>
+                    <span>Android / iOS</span>
+                </div>
+                <div class="arch-box">
+                    <i class="fas fa-cloud"></i>
+                    <strong>Cloud</strong>
+                    <span>Historique + alertes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPÉCIFICATIONS TECHNIQUES -->
+        <section class="detail-section">
+            <h2><i class="fas fa-tools"></i> Spécifications techniques</h2>
+            <ul class="tech-list">
+                <li><i class="fas fa-microchip"></i> Microcontrôleur : <strong>ESP8266 (NodeMCU / Wemos D1)</strong></li>
+                <li><i class="fas fa-thermometer-half"></i> Capteurs : <strong>DS18B20</strong> (précision ±0.5°C) ou <strong>PT100</strong> (haute précision)</li>
+                <li><i class="fas fa-plug"></i> Relais : <strong>4 canaux 220V / 10A</strong> (presses, pompes, moteurs)</li>
+                <li><i class="fas fa-wifi"></i> Connectivité : <strong>WiFi 802.11 b/g/n</strong> + mode AP pour configuration</li>
+                <li><i class="fas fa-shield-alt"></i> Sécurité : <strong>Authentification par mot de passe</strong> + HTTPS</li>
+                <li><i class="fas fa-battery-full"></i> Alimentation : <strong>5V DC / 2A</strong> (adaptateur fourni)</li>
+                <li><i class="fas fa-database"></i> Stockage : <strong>EEPROM</strong> (config) + <strong>SD card</strong> optionnelle (historique)</li>
+                <li><i class="fas fa-code"></i> Firmware : <strong>Arduino IDE</strong> + bibliothèques ESP8266WebServer / PubSubClient</li>
+            </ul>
+        </section>
+
+        <!-- CAPTURES / APERÇU -->
+        <section class="detail-section">
+            <h2><i class="fas fa-images"></i> Aperçu de l'interface</h2>
+            <p>
+                Une interface claire et intuitive, accessible depuis n'importe quel navigateur.
+            </p>
+            <div class="gallery">
+                <div class="gallery-item"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="gallery-item"><i class="fas fa-chart-bar"></i></div>
+                <div class="gallery-item"><i class="fas fa-sliders-h"></i></div>
+                <div class="gallery-item"><i class="fas fa-bell"></i></div>
+            </div>
+            <p style="text-align:center; margin-top:15px; font-size:.9rem; color:#888;">
+                <i class="fas fa-info-circle"></i> Captures d'écran à venir — version BETA en cours de test.
+            </p>
+        </section>
+
+        <!-- SÉCURITÉ / RGPD -->
+        <section class="detail-section">
+            <h2><i class="fas fa-shield-alt"></i> Sécurité & Conformité</h2>
+            <ul class="tech-list">
+                <li><i class="fas fa-lock"></i> Mot de passe administrateur obligatoire</li>
+                <li><i class="fas fa-user-shield"></i> Aucune donnée personnelle transmise à des tiers</li>
+                <li><i class="fas fa-server"></i> Hébergement local ou cloud souverain (option)</li>
+                <li><i class="fas fa-file-shield"></i> Conforme au <strong>RGPD</strong> et à la loi tunisienne n°2004-63</li>
+                <li><i class="fas fa-redo"></i> Mises à jour OTA (Over-The-Air) sécurisées</li>
+            </ul>
+        </section>
+
+        <!-- ACTIONS -->
+        <div class="actions">
+            <a href="tel:+21629328870" class="btn btn-primary">
+                <i class="fas fa-phone"></i> Nous appeler
+            </a>
+            <a href="mailto:Iot.sahnoun@gmail.com?subject=Demande%20d'information%20-%20Huilerie%20Connect%C3%A9e" class="btn btn-primary">
+                <i class="fas fa-envelope"></i> Demander une démo
+            </a>
+            <a href="../projets-connectes.html" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Tous nos projets
+            </a>
+            <a href="../../contact/contact.html" class="btn btn-outline">
+                <i class="fas fa-comments"></i> Contact
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="detail-footer">
+        <p>
+            <i class="fas fa-seedling" style="color:#d4a017;"></i>
+            <strong>Huilerie Connectée v1.0</strong> — Elec-Connect Tunisie
+        </p>
+        <p>
+            <i class="fas fa-map-marker-alt"></i> 01, Rue Manfalouti, Jemmel 5020, Tunisie
+            &nbsp;|&nbsp;
+            <a href="tel:+21629328870">+216 29 328 870</a>
+            &nbsp;|&nbsp;
+            <a href="mailto:Iot.sahnoun@gmail.com">Iot.sahnoun@gmail.com</a>
+        </p>
+        <p style="margin-top:15px; font-size:.8rem;">
+            &copy; 2024 Électricité Connectée — Tous droits réservés
+        </p>
+    </footer>
+
+</body>
+</html>
